@@ -3,3 +3,4 @@ hello how are you doing today?
 welcome world!
 this is so cool!
 we need to give this in soon:)
+stage0 final commit
