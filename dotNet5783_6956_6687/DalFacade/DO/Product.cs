@@ -9,5 +9,5 @@ public struct Product
     public double Price { get; set; }//the price of the product
     public string Category { get; set; }//we chenged from category to string
     public int InStock { get; set; } //amount of products in stock   
-
+    hi
 }
