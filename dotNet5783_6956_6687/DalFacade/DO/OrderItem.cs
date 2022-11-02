@@ -1,11 +1,32 @@
-﻿namespace DO;
+﻿using System.Xml.Linq;
+
+namespace DO;
 /// <summary>
 /// structure for orderitems
 /// </summary>
 public struct OrderItem
 {
+    /// <summary>
+    /// the product id
+    /// </summary>
     public int ProductID { get; set; }
+    /// <summary>
+    /// the order id
+    /// </summary>
     public int OrderID { get; set; }
+    /// <summary>
+    /// the price of product
+    /// </summary>
     public double Price { get; set; }
+    /// <summary>
+    /// the amount od the product
+    /// </summary>
     public int Amount { get; set; }
+
+    public override string ToString() => $@"
+    Product ID={ProductID}
+    Order ID={OrderID}
+    Price= {Price}
+    Amount={Amount}
+    ";
 }
