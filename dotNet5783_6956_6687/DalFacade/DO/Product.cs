@@ -23,12 +23,12 @@ public struct Product
     /// <summary>
     /// amount of products in stock
     /// </summary>
-    public int InStock { get; set; }    
+    public int InStock { get; set; }
 
-    public string Name { get; set; }//the products name
-    public int ID { get; set; }//the products id
-    public double Price { get; set; }//the price of the product
-    public string Category { get; set; }//we chenged from category to string
-    public int InStock { get; set; } //amount of products in stock   
-    hi
+    public override string ToString() => $@"
+Product ID={ID}: {Name}, 
+category - {Category}
+Price: {Price}
+Amount in stock: {InStock}
+";
 }
