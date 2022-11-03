@@ -32,9 +32,17 @@ internal static class DataSource
     /// </summary>
     /// <param name="productlist"></param>
     /// <param name="p1"></param>
-    private static void addProduct(ref List<Product> productlist, Product p1)
+    private static void addProduct(ref List<Product> productlist, string name, int id , double price, string category , int instock)
     {
-        productlist.Add(p1);
+        //productlist.Add(p1);
+        Product newproduct = new Product();
+        newproduct.ID = id; 
+        newproduct.Name = name;
+        newproduct.Price = price;
+        newproduct.Category = category;
+        newproduct.InStock= instock;
+        productlist.Add(newproduct);
+
     }
     private static void s_Initialize()
     {
