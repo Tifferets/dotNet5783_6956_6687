@@ -12,9 +12,10 @@ internal static class DataSource
     internal static List<Product> Productlist = new List<Product>();
 
     static string[] customerAddress = { "beit shemesh", "jlm", "Beitar","hebron","tel aviv", "beit shemesh", "jlm", "Beitar", "hebron", "tel aviv" };
-    static string[] customerName = { "sara", "rachelli","tifferet","gitty","ahuva", "aryeh","moshe","shaya","david",  };
-    static string[] customerEmail = { "sara@gmail.com", "rachelli@gmail.com" , "tifferet@gmail.com" , "gitty@gmail.com" , "ahuva@gmail.com", "aryeh@gmail.com", "moshe@gmail.com", "shaya@gmail.com", "david@gmail.com" };
-    static string[] productName = { "gray puppy","black cat", "small cat", "gold fish","clown fish","small rabbit", "koi fish", "gray cat "};
+    static string[] customerName = { "sara", "rachelli","tifferet","gitty","ahuva", "aryeh","moshe","shaya","david","yehoda"  };
+    static string[] customerEmail = { "sara@gmail.com", "rachelli@gmail.com" , "tifferet@gmail.com" , "gitty@gmail.com" , "ahuva@gmail.com", "aryeh@gmail.com", "moshe@gmail.com", "shaya@gmail.com", "david@gmail.com", "yehoda@gmail.com" };
+    
+    static string[] productName = { "gray puppy","black cat", "small cat", "gold fish","clown fish","small rabbit", "koi fish", "gray cat ", "German Shepherd","bulldog","Golden retriver" ,"large rabbit"," Parrot" , "Lovebird", "Dove","rex rabbit", "small cat","Large Cat","small Dog","Large Dog" };
     static double[] productPrice = { 200, 200,155,90, 10, 15, 50,150,145, };
     static string[] productCategory = { "dog", "cat", "cat", "fish","fish","rabbit", "fish","cat" };
     static int[] productInStock = { 1, 2,5 ,4,7,1,7,6,3,8,4};
@@ -88,8 +89,10 @@ internal static class DataSource
             OrderItem orderItem = new OrderItem();
             orderItem.Price = productPrice[i];
             orderItem.Amount = orderItemAmount[i];
-            orderItem.ProductID =  
-            //addOrderItem(orderItem);
+            Random r=new Random();
+            orderItem.ProductID = r.Next(500000, 500020);
+            orderItem.OrderID = r.Next(100000, 100010);
+            
         }
     }
     internal static class config
