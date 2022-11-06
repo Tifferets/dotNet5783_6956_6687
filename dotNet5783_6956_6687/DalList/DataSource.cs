@@ -5,6 +5,10 @@ namespace Dal;
 
 internal static class DataSource
 {
+    internal static class Config 
+    {
+        
+    }
     public static readonly int random;// not sure about random number...
     internal static List<Order> Orderlist = new List<Order>();
     internal static List<OrderItem> OrderItemList = new List<OrderItem>();
