@@ -11,14 +11,14 @@ internal static class DataSource
     internal static List<OrderItem> OrderItemList = new List<OrderItem>();
     internal static List<Product> Productlist = new List<Product>();
 
-    static string[] customerAddress = { "beit shemesh", "jlm" };
-    static string[] customerName = { "sara", "rachelli" };
-    static string[] customerEmail = { "sara@gmail.com", "rachelli@gmail.com" };
-    static string[] productName = { "gray puppy", "cute cat" };
-    static double[] productPrice = { 20, 30 };
-    static string[] productCategory = { "dog", "cat" };
-    static int[] productInStock = { 1, 2 };
-    static int[] orderItemAmount = { 1, 2 };
+    static string[] customerAddress = { "beit shemesh", "jlm", "Beitar","hebron","tel aviv", "beit shemesh", "jlm", "Beitar", "hebron", "tel aviv" };
+    static string[] customerName = { "sara", "rachelli","tifferet","gitty","ahuva", "aryeh","moshe","shaya","david",  };
+    static string[] customerEmail = { "sara@gmail.com", "rachelli@gmail.com" , "tifferet@gmail.com" , "gitty@gmail.com" , "ahuva@gmail.com", "aryeh@gmail.com", "moshe@gmail.com", "shaya@gmail.com", "david@gmail.com" };
+    static string[] productName = { "gray puppy","black cat", "small cat", "gold fish","clown fish","small rabbit", "koi fish", "gray cat "};
+    static double[] productPrice = { 200, 200,155,90, 10, 15, 50,150,145, };
+    static string[] productCategory = { "dog", "cat", "cat", "fish","fish","rabbit", "fish","cat" };
+    static int[] productInStock = { 1, 2,5 ,4,7,1,7,6,3,8,4};
+    static int[] orderItemAmount = { 1, 2,4, 4 ,2, 2,6 ,5,6  };
 
 
     /// <summary>
@@ -58,7 +58,7 @@ internal static class DataSource
     }
     private static void s_Initialize()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i <10 ; i++)
         {
             Order order = new Order();
             order.CustomerAddress = customerAddress[i];
@@ -70,10 +70,9 @@ internal static class DataSource
             order.DeliveryDate = order.ShipDate + ts;
             order.ID = config.GetOrderID;
             Orderlist.Add(order);
-            //order.ID = 
-            //addOrder(order);
+           
         }
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 20; i++)
         {
             Product product = new Product();
             product.Name = productName[i];
