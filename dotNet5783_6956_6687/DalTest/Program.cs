@@ -1,6 +1,9 @@
 ﻿using Dal;
-
+using DO;
 using System;
+using System.Data.Common;
+using DalList;
+
 namespace DalTest
 {
     partial class program
@@ -30,13 +33,24 @@ namespace DalTest
             int choice2 = Console.Read();
             if(choice1== 1)
                  {
-                    switch (choice1)
+                    switch (choice1)//for order
                      {
                     case 1:
-                        break;
+                            Console.WriteLine("Enter customers name,email,address:");
+                            string name = Console.ReadLine();
+                            string email = Console.ReadLine();
+                            string address = Console.ReadLine();
+                            Order order = new Order();
+                            order.CustomerName = name;
+                            order.CustomerEmail = email;
+                            order.CustomerAddress=address;  
+                           // Da
+
+                            break;
                     case 2:
                         break;
                     case 3:
+                            foreach(Order item in )
                         break;
                     case 4:
                         break;
