@@ -89,7 +89,7 @@ internal static class DataSource
             OrderItem orderItem = new OrderItem();
             orderItem.Price = productPrice[i];
             orderItem.Amount = orderItemAmount[i];
-            orderItem.ProductID = 
+            orderItem.ProductID =  
             //addOrderItem(orderItem);
         }
     }
