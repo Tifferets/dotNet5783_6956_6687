@@ -5,7 +5,7 @@ namespace Dal;
 public class DalOrderItem
 {
     /// <summary>
-    /// gets an id and adds to list, 
+    /// method gets an order item  and adds to list and returns the id
     /// </summary>
     /// <param name="orderItem"></param>
     /// <returns></returns>
@@ -20,7 +20,7 @@ public class DalOrderItem
         }
         Random r1 = new Random();
         Random r2 = new Random();
-        orderItem.ProductID = r1.Next(300000, 300020);
+        orderItem.ProductID = r1.Next(300000, 300020);//generates the ids
         orderItem.OrderID = r2.Next(100000, 100010);
 
         DataSource.OrderItemList.Add(orderItem);
@@ -44,6 +44,10 @@ public class DalOrderItem
         throw new Exception("order item does not exist");
        
     }
+    /// <summary>
+    /// method gets an order item id and delets the right oder item
+    /// </summary>
+    /// <param name="orderItemid"></param>
     public void Delete(int orderItemid)
     {
         foreach (OrderItem item in DataSource.OrderItemList)//goes through the list looking for the order.
@@ -55,6 +59,10 @@ public class DalOrderItem
             }
         }
     }
+    /// <summary>
+    /// method gets an order item and updates its details
+    /// </summary>
+    /// <param name="orderItem"></param>
     public void Update(OrderItem orderItem)
     {
         int count = 0;
@@ -68,5 +76,9 @@ public class DalOrderItem
             }
         }
     }
+    /// <summary>
+    /// method returns the list 
+    /// </summary>
+    /// <returns></returns>
     public List<OrderItem> GetAll() => DataSource.OrderItemList;
 }

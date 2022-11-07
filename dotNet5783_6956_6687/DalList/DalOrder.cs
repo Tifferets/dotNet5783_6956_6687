@@ -18,7 +18,7 @@ public class DalOrder
        return order.ID;
     }
     /// <summary>
-    /// method gets an order ID and prints renurns the order it belongs to
+    /// method gets an order ID and renurns the order it belongs to
     /// </summary>
     /// <param name="orderID"></param>
     /// <returns></returns>
@@ -34,6 +34,10 @@ public class DalOrder
            throw new Exception("order does not exist");
        
     }
+    /// <summary>
+    /// method gets an order ID and delets the right order
+    /// </summary>
+    /// <param name="orderID"></param>
     public void Delete(int orderID)
     {
         foreach (Order item in DataSource.Orderlist)//goes through the list looking for the order.
@@ -45,6 +49,10 @@ public class DalOrder
             }
         }
     }
+    /// <summary>
+    /// method gets an order and updates its details
+    /// </summary>
+    /// <param name="order"></param>
     public void Update(Order order)
     {
         int count = 0;
@@ -58,6 +66,10 @@ public class DalOrder
             }
         }
     }
+    /// <summary>
+    /// method returns the list 
+    /// </summary>
+    /// <returns></returns>
     public List<Order> GetAll() => DataSource.Orderlist;
 
 }
