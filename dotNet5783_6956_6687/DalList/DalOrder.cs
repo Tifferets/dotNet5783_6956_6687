@@ -6,6 +6,11 @@ namespace Dal;
 
 public class DalOrder
 {
+    /// <summary>
+    /// gets an id and adds to list
+    /// </summary>
+    /// <param name="order"></param>
+    /// <returns></returns>
     public int Add(Order order)
     {
        order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class

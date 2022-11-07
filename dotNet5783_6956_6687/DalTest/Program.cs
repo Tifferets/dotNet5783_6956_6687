@@ -15,17 +15,15 @@ namespace DalTest
         
         static void Main(string[] args)
         {
-
-            Console.WriteLine(@" 
-0: exit
-1: Order
-2: Order Item 
-3: Product
+            Console.WriteLine(@"Please Enter:
+0: To Exit
+1: For Order
+2: For Order Item 
+3: For Product
              ");
 
-            int choice1;
+            int choice1, choice2;
             int.TryParse(Console.ReadLine(), out choice1);
-
             while (choice1 != 0)
             {
                 try {
@@ -35,14 +33,14 @@ namespace DalTest
 3.Show List
 4.Update 
 5.Delete ");
-                    int choice2;
+                    
                     int.TryParse(Console.ReadLine(), out choice2);
                     if (choice1 == 1)
                     {
                         switch (choice2)//for order
                         {
                             case 1:
-                                Console.WriteLine("Enter customers name,email,address,order time, shipping date and delivery time:");
+                                Console.WriteLine("Enter customers name,email,address,order time, shipping date and delivery time(dd,mm,yy):");
                                 string name = Console.ReadLine();
                                 string email = Console.ReadLine();
                                 string address = Console.ReadLine();
@@ -60,8 +58,8 @@ namespace DalTest
                                 order.OrderDate = orderTime;
                                 order.ShipDate = shipping;
                                 order.DeliveryDate= delivery;
+
                                 order.ID= dalOrder.Add(order);
-                           
 
                                 break;
                             case 2:
@@ -158,26 +156,30 @@ namespace DalTest
                                 throw new Exception("ERROR");
                         }
                     }
-                    if (choice1 == 3)// pro
+                    if (choice1 == 3)// product
                     {
                         switch (choice2)
                         {
                             case 1://add
                                 Product product = new Product();
-                                Console.WriteLine("Enter product name");
+                                Console.WriteLine("Enter product name,category, price and amount");
                                 product.Name = Console.ReadLine();
-                                Console.WriteLine("Enter product Category");
-                                product.Category = Console.ReadLine();
-                                Console.WriteLine("Enter product Price");
-                                product.Price = Console.Read();
-                                Console.WriteLine("Enter product amount");
-                                product.InStock = Console.Read();
-                               product.ID= dalProduct.Add(product);
+                                string Category1 = Console.ReadLine();
+                                Category category = (Category)Enum.Parse(typeof(Category), Category1);
+                                double price;
+                                double.TryParse(Console.ReadLine(), out price);
+                                int inStock;
+                                int.TryParse(Console.ReadLine(), out inStock);
+                                product.Price = price;
+                                product.InStock = inStock;
+                                product.Category = category;
+                                product.ID = dalProduct.Add(product);
 
                                 break;
                             case 2:
                                 Console.WriteLine("Enter ID");
-                                int id = Console.Read();
+                                int id;
+                                int.TryParse(Console.ReadLine(), out id);
                                 Console.WriteLine(dalProduct.Get(id));
 
                                 break;
@@ -191,20 +193,24 @@ namespace DalTest
 
                             case 4:
                                 Product product1 = new Product();
-                                Console.WriteLine("Enter product name");
+                                Console.WriteLine("Enter Product ID");
+                                int.TryParse(Console.ReadLine(), out id);
+                                Console.WriteLine("Enter product name,category, price and amount");
                                 product1.Name = Console.ReadLine();
-                                Console.WriteLine("Enter product Category");
-                                product1.Category = Console.ReadLine();
-                                Console.WriteLine("Enter product Price");
-                                product1.Price = Console.Read();
-                                Console.WriteLine("Enter product amount");
-                                product1.InStock = Console.Read();
+                                string Category2 = Console.ReadLine();
+                                Category category4 = (Category)Enum.Parse(typeof(Category), Category2);
+                                double.TryParse(Console.ReadLine(), out price);
+                                int.TryParse(Console.ReadLine(), out inStock);
+                                product1.Price = price;
+                                product1.InStock = inStock;
+                                product1.Category = category4;
+                                product1.ID = id;
                                 dalProduct.Update(product1);
                                 break;
                             case 5:
                                 Console.WriteLine("Enter ID");
-                                int id1 = Console.Read();
-                                dalProduct.Delete(id1);
+                                int.TryParse(Console.ReadLine(), out id);
+                                dalProduct.Delete(id);
                                 break;
 
                             default:
@@ -216,15 +222,15 @@ namespace DalTest
                 {
                     Console.WriteLine(ex);
                 }
-
-                Console.WriteLine(@" 
-0: exit
-1: Order
-2: Order Item 
-3: Product
+                Console.WriteLine(@"Please Enter:
+0: To Exit
+1: For Order
+2: For Order Item 
+3: For Product
              ");
                 int.TryParse(Console.ReadLine(), out choice1);
             }
+            Console.WriteLine("Good Bye");
 
         }
     } 

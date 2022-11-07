@@ -32,9 +32,12 @@ public struct Order
     /// the date the order was delivered
     /// </summary>
     public DateTime? DeliveryDate { get; set; }
-
+    /// <summary>
+    /// to string to print all details
+    /// </summary>
+    /// <returns></returns>
     public override string ToString() => $@"
-Order ID: {ID},
+Order ID: {ID}
 Customers name: {CustomerName}
 Customers email:{CustomerEmail}
 Customers address:{CustomerAddress}

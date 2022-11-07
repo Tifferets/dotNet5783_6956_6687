@@ -4,6 +4,12 @@ namespace Dal;
 
 public class DalOrderItem
 {
+    /// <summary>
+    /// gets an id and adds to list, 
+    /// </summary>
+    /// <param name="orderItem"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public int Add(OrderItem orderItem)
     {
         orderItem.OrderItemID = DataSource.config.GetOrderItemId;
@@ -12,10 +18,10 @@ public class DalOrderItem
             if(item.OrderItemID == orderItem.OrderItemID)
                 throw new Exception("OrderItem already exist");
         }
-        Random r1 = new Random();
-        Random r2 = new Random();
-        orderItem.ProductID = r1.Next(500000, 500020);
-        orderItem.OrderID = r2.Next(100000, 100010);
+        //Random r1 = new Random();
+        //Random r2 = new Random();
+        //orderItem.ProductID = r1.Next(500000, 500020);
+        //orderItem.OrderID = r2.Next(100000, 100010);
         
         DataSource.OrderItemList.Add(orderItem);
         return orderItem.OrderItemID;

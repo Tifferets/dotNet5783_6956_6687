@@ -9,7 +9,7 @@ public class DalProduct
         foreach(Product item in DataSource.Productlist)
         {
             if(item.ID == product.ID)
-                
+                throw new Exception("Product already exist");
         }
         DataSource.Productlist.Add(product);
         return product.ID;

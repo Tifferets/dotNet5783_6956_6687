@@ -55,7 +55,7 @@ internal static class DataSource
     /// </summary>
     private static void s_Initialize()
     {
-        
+        // Order
         for (int i = 0; i <20 ; i++)//adds 20 orders to the list
         {
             Order order = new Order();
@@ -79,13 +79,13 @@ internal static class DataSource
                 order.ShipDate = DateTime.MinValue;
             Orderlist.Add(order);
            
-        }
+        }// Product
         for (int i = 0; i < 10; i++)//adds ten products 
         {
             Product product = new Product();
             do
             {
-                product.ID = rand.Next(300000, 399999);
+                product.ID = 300000 + i;
             }
             while (Productlist.Exists(x => x.ID == product.ID));//makes sure there isn one with the same number
             product.Name = productName[i];//adds a name
@@ -104,6 +104,7 @@ internal static class DataSource
             Productlist.Add(product);
            
         }
+        //OterItem
         for(int j=0; j < 20; j++)
         { 
             for (int i = 0; i < 2; i++)//different number of products in order

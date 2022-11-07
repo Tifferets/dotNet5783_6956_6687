@@ -26,7 +26,10 @@ public struct OrderItem
     /// the amount od the product
     /// </summary>
     public int? Amount { get; set; }
-
+    /// <summary>
+    /// to string to print all details
+    /// </summary>
+    /// <returns></returns>
     public override string ToString() => $@"
     Order Item ID ={OrderItemID}
     Product ID={ProductID}
