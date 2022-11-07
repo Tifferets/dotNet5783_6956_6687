@@ -13,7 +13,6 @@ namespace DalTest
         private static DalOrderItem dalOrderItem = new DalOrderItem();//a dalOrderItem instance
         private static DalProduct dalProduct = new DalProduct();//a dalProduct instance
         
-
         static void Main(string[] args)
         {
             Console.WriteLine(@"Please Enter:
