@@ -106,12 +106,12 @@ namespace DalTest
                         switch (choice2)
                         {
                             case 1:
+                                OrderItem orderItem = new OrderItem();
                                 Console.WriteLine("Enter Order Item Price and amount :");
                                 double price;
                                 double.TryParse(Console.ReadLine(), out price);
                                 int amount;
                                 int.TryParse(Console.ReadLine(), out amount);
-                                OrderItem orderItem = new OrderItem();
                                 orderItem.Price = price;
                                 orderItem.Amount = amount;
                                 orderItem.OrderItemID= dalOrderItem.Add(orderItem);
