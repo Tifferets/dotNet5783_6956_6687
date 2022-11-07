@@ -6,7 +6,12 @@ public class DalProduct
 {
     public int Add(Product product)
     {
-        product.ID = DataSource.config.GetProductID;//gets a generated id from data source inner class
+        foreach(Product item in DataSource.Productlist)
+        {
+            if(item.ID == product.ID)
+                
+        }
+        DataSource.Productlist.Add(product);
         return product.ID;
     }
     public Product Get(int productID)
@@ -47,4 +52,6 @@ public class DalProduct
             }
         }
     }
+    public List<Product> GetAll()=> DataSource.Productlist; 
+    
 }

@@ -6,27 +6,31 @@ public class DalOrderItem
 {
     public int Add(OrderItem orderItem)
     {
-        foreach(OrderItem item in DataSource.OrderItemList)
+        orderItem.OrderItemID = DataSource.config.GetOrderItemId;
+        foreach (OrderItem item in DataSource.OrderItemList)
         {
             if(item.OrderItemID == orderItem.OrderItemID)
                 throw new Exception("OrderItem already exist");
         }
-        //product.ID = DataSource.config.GetProductID;//gets a generated id from data source inner class
+        Random r1 = new Random();
+        Random r2 = new Random();
+        orderItem.ProductID = r1.Next(500000, 500020);
+        orderItem.OrderID = r2.Next(100000, 100010);
+        
+        DataSource.OrderItemList.Add(orderItem);
         return orderItem.OrderItemID;
     }
     public OrderItem Get(int orderitemid)
     {
-        //try
-        //{
+        
         foreach (OrderItem item in DataSource.OrderItemList)//goes through the list looking for the order.
         {
             if (item.OrderItemID == orderitemid )
                 return item;
         }
 
-        throw new Exception("Product does not exist");
-        // }
-        // catch(Exception ex)   { Console.WriteLine(ex); }
+        throw new Exception("order item does not exist");
+       
     }
     public void Delete(int orderItemid)
     {
@@ -52,4 +56,5 @@ public class DalOrderItem
             }
         }
     }
+    public List<OrderItem> GetAll() => DataSource.OrderItemList;
 }

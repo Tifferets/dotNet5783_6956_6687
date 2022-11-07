@@ -2,6 +2,7 @@
 /// <summary>
 /// class for enums
 /// </summary>
-public enum Enums
+public enum Category
 {
+  Dog, Cat, Parrot, Rabbit 
 }

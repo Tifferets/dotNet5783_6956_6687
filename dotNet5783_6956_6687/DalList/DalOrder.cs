@@ -9,21 +9,19 @@ public class DalOrder
     public int Add(Order order)
     {
        order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
-        return order.ID;
+       DataSource.Orderlist.Add(order);//not recursion
+       return order.ID;
     }
     public Order Get(int orderID)
     {
-        //try
-        //{
-           foreach( Order item in DataSource.Orderlist)//goes through the list looking for the order.
+       
+           foreach(Order item in DataSource.Orderlist)//goes through the list looking for the order.
            {
                 if(item.ID == orderID)  
                     return item;
            }
+           throw new Exception("order does not exist");
        
-        throw new Exception("order does not exist");
-       // }
-       // catch(Exception ex)   { Console.WriteLine(ex); }
     }
     public void Delete(int orderID)
     {
@@ -49,5 +47,6 @@ public class DalOrder
             }
         }
     }
-    
+    public List<Order> GetAll() => DataSource.Orderlist;
+
 }

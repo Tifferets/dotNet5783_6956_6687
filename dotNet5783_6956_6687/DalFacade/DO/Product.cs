@@ -19,7 +19,7 @@ public struct Product
     /// <summary>
     /// the category of the product -we chenged from category to string
     /// </summary>
-    public string? Category { get; set; }
+    public Category? Category { get; set; }
     /// <summary>
     /// amount of products in stock
     /// </summary>
