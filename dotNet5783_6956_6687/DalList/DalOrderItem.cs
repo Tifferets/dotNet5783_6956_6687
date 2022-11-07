@@ -18,14 +18,20 @@ public class DalOrderItem
             if(item.OrderItemID == orderItem.OrderItemID)
                 throw new Exception("OrderItem already exist");
         }
-        //Random r1 = new Random();
-        //Random r2 = new Random();
-        //orderItem.ProductID = r1.Next(500000, 500020);
-        //orderItem.OrderID = r2.Next(100000, 100010);
-        
+        Random r1 = new Random();
+        Random r2 = new Random();
+        orderItem.ProductID = r1.Next(300000, 300020);
+        orderItem.OrderID = r2.Next(100000, 100010);
+
         DataSource.OrderItemList.Add(orderItem);
         return orderItem.OrderItemID;
     }
+    /// <summary>
+    /// method gets an order item ID and prints renurns the order item  it belongs to
+    /// </summary>
+    /// <param name="orderitemid"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public OrderItem Get(int orderitemid)
     {
         

@@ -7,7 +7,7 @@ namespace Dal;
 public class DalOrder
 {
     /// <summary>
-    /// gets an id and adds to list
+    /// method that gets an order,then id from config and adds to the list
     /// </summary>
     /// <param name="order"></param>
     /// <returns></returns>
@@ -17,6 +17,12 @@ public class DalOrder
        DataSource.Orderlist.Add(order);//not recursion
        return order.ID;
     }
+    /// <summary>
+    /// method gets an order ID and prints renurns the order it belongs to
+    /// </summary>
+    /// <param name="orderID"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public Order Get(int orderID)
     {
        
