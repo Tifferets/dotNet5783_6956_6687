@@ -6,7 +6,7 @@ namespace Dal;
 
 internal static class DataSource
 {
-    public static readonly int random;// not sure about random number...
+   // public static readonly int random;// not sure about random number...
     internal static List<Order> Orderlist = new List<Order>();
     internal static List<OrderItem> OrderItemList = new List<OrderItem>();
     internal static List<Product> Productlist = new List<Product>();
@@ -90,8 +90,12 @@ internal static class DataSource
             orderItem.Price = productPrice[i];
             orderItem.Amount = orderItemAmount[i];
             Random r=new Random();
+            Random r2 = new Random();
+            Random r3 = new Random();
             orderItem.ProductID = r.Next(500000, 500020);
-            orderItem.OrderID = r.Next(100000, 100010);
+            orderItem.OrderID = r2.Next(100000, 100010);
+            orderItem.OrderItemID = r3.Next(200000, 200040);
+
             
         }
     }
@@ -101,6 +105,8 @@ internal static class DataSource
         static int productID = 500000;
         public static int GetOrderID { get => orderID++; }
         public static int GetProductID { get => productID++; }
+        static int orderItemId = 200000;
+        public static int GetOrderItemId { get => orderItemId++; }
 
 
     }
