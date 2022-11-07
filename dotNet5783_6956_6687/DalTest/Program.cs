@@ -22,9 +22,11 @@ namespace DalTest
 3: Product
              ");
 
-            //  int choice1 = Console.Read();
-            //choice1=  int.Parse(choice1);
-            int choice1 = 1;
+
+
+            int choice1;
+            int.TryParse(Console.ReadLine(), out choice1);
+
             while (choice1 != 0)
             {
                 try {
@@ -34,8 +36,8 @@ namespace DalTest
             3.Show List
             4.Update 
             5.Delete ");
-                    int choice2 = Console.Read();
-                    Console.WriteLine(choice2);
+                    int choice2;
+                    int.TryParse(Console.ReadLine(), out choice2);
                     if (choice1 == 1)
                     {
                         switch (choice2)//for order
@@ -183,7 +185,7 @@ namespace DalTest
                 }
 
 
-                choice1 = Console.Read();
+                int.TryParse(Console.ReadLine(), out choice1);
             }
 
         }
