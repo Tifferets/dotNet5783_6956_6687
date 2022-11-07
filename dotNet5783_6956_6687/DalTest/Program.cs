@@ -7,12 +7,13 @@ using System.Linq.Expressions;
 
 namespace DalTest
 {
-    partial class program
+    partial class program//the main where we check it works
     {
-        private static DalOrder dalOrder = new DalOrder();
-        private static DalProduct dalProduct = new DalProduct();
-        private static DalOrderItem dalOrderItem = new DalOrderItem();
+        private static DalOrder dalOrder = new DalOrder();//a dalOrder instance
+        private static DalOrderItem dalOrderItem = new DalOrderItem();//a dalOrderItem instance
+        private static DalProduct dalProduct = new DalProduct();//a dalProduct instance
         
+
         static void Main(string[] args)
         {
             Console.WriteLine(@"Please Enter:
@@ -231,7 +232,7 @@ namespace DalTest
                 int.TryParse(Console.ReadLine(), out choice1);
             }
             Console.WriteLine("Good Bye");
-
+            return;
         }
     } 
     
