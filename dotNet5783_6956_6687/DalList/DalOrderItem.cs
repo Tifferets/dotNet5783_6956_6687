@@ -1,8 +1,10 @@
 ﻿using DO;
+using DalApi;
+using System.Runtime.Serialization;
 
 namespace Dal;
 
-public class DalOrderItem
+internal class DalOrderItem:IOrderItem
 {
     /// <summary>
     /// method gets an order item  and adds to list and returns the id
