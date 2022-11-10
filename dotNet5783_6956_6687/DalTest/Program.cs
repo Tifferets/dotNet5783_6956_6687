@@ -4,6 +4,7 @@ using System;
 using System.Data.Common;
 using DalList;
 using System.Linq.Expressions;
+using DalApi;
 
 namespace DalTest
 {
@@ -167,14 +168,20 @@ namespace DalTest
                                 Console.WriteLine("Enter product name,category, price and amount");
                                 product.Name = Console.ReadLine();
                                 string Category1 = Console.ReadLine();
-                                Category category = (Category)Enum.Parse(typeof(Category), Category1);
+                               // try
+                               // {
+                                    Category category = (Category)Enum.Parse(typeof(Category), Category1);
+                                    product.Category = category;
+                                   // throw new Exception("aaa");
+                              //  }
+                               // catch (doesNotExist ex) { throw new Exception("aaa"); }
                                 double price;
                                 double.TryParse(Console.ReadLine(), out price);
                                 int inStock;
                                 int.TryParse(Console.ReadLine(), out inStock);
                                 product.Price = price;
                                 product.InStock = inStock;
-                                product.Category = category;
+                                
                                 product.ID = dalProduct.Add(product);
 
                                 break;
@@ -240,6 +247,9 @@ namespace DalTest
     
 
 }
+
+
+//exceptions add to the file
 
 
 
