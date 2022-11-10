@@ -127,10 +127,8 @@ internal static class DataSource
     internal static class config
     {
         static int orderID = 100000;
-       // static int productID = 500000;
         static int orderItemId = 200000;
         public static int GetOrderID { get => orderID++; }
-        //public static int GetProductID { get => productID++; }
         public static int GetOrderItemId { get => orderItemId++; }
 
 

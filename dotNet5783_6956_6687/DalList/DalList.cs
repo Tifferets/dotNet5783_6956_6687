@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace DalApi
+using DalApi;
+namespace Dal
 {
-    public interface IProduct
-    {
+    sealed public class DalList:  IDal
+    { 
+
     }
 }
