@@ -4,6 +4,12 @@ namespace Dal;
 
 public class DalProduct
 {
+    /// <summary>
+    /// method that gets a product, adds to the list
+    /// </summary>
+    /// <param name="product"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public int Add(Product product)
     {
         foreach(Product item in DataSource.Productlist)
@@ -14,6 +20,12 @@ public class DalProduct
         DataSource.Productlist.Add(product);
         return product.ID;
     }
+    /// <summary>
+    /// method gets a product ID and renurns the product it belongs to
+    /// </summary>
+    /// <param name="productID"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public Product Get(int productID)
     {
         //try
@@ -28,6 +40,10 @@ public class DalProduct
         // }
         // catch(Exception ex)   { Console.WriteLine(ex); }
     }
+    /// <summary>
+    /// ethod gets a product ID and delets the right orde
+    /// </summary>
+    /// <param name="productID"></param>
     public void Delete(int productID)
     {
         foreach (Product item in DataSource.Productlist)//goes through the list looking for the order.
@@ -39,6 +55,10 @@ public class DalProduct
             }
         }
     }
+    /// <summary>
+    /// method gets a product and updates its details
+    /// </summary>
+    /// <param name="product"></param>
     public void Update(Product product)
     {
         int count = 0;
@@ -52,6 +72,10 @@ public class DalProduct
             }
         }
     }
+    /// <summary>
+    /// method returns the list 
+    /// </summary>
+    /// <returns></returns>
     public List<Product> GetAll()=> DataSource.Productlist; 
     
 }
