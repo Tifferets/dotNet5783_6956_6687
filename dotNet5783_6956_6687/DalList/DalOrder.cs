@@ -3,7 +3,6 @@ using System.Xml;
 using DalApi;
 using DO;
 
-
 namespace Dal;
 
 internal class DalOrder: IOrder

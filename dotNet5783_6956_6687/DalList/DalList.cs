@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DalApi;
 namespace Dal
 {
-    sealed public class DalList:  IDal
+    sealed public class DalList
     { 
 
     }
