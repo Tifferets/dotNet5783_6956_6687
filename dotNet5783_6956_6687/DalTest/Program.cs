@@ -1,22 +1,18 @@
 ﻿using Dal;
 using DO;
-using System;
-using System.Data.Common;
-using DalList;
-using System.Linq.Expressions;
 using DalApi;
-using DalList;
 
 
 
 namespace DalTest;
 
-partial class program//the main where we check it works
+
+class program//the main where we check it works
 {
     private static DalOrder dalOrder = new DalOrder();//a dalOrder instance
     private static DalOrderItem dalOrderItem = new DalOrderItem();//a dalOrderItem instance
     private static DalProduct dalProduct = new DalProduct();//a dalProduct instance
-    IDal dal = new DalList.DalList();
+    IDal dal = new DalList.DalList();//?? 
     //private static IDal idal;
     static void Main(string[] args)
     {

@@ -70,6 +70,6 @@ public class DalOrder: IOrder
     /// method returns the list 
     /// </summary>
     /// <returns></returns>
-    public List<Order> GetAll() => DataSource.Orderlist;
+    public IEnumerable<Order> GetAll() => DataSource.Orderlist;//changed to IEnumerable!!!!!!!!!!!!!
 
 }

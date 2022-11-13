@@ -78,6 +78,6 @@ public class DalProduct: IProduct
     /// method returns the list 
     /// </summary>
     /// <returns></returns>
-    public List<Product> GetAll()=> DataSource.Productlist; 
-    
+    public IEnumerable<Product> GetAll()=> DataSource.Productlist;//changed to IEnumerable!!!!!!!!!!!!! 
+
 }

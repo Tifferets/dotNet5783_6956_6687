@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Dal;
 
-public class DalOrderItem:IOrderItem
+public class DalOrderItem:IOrderItem // internal?
 {
     /// <summary>
     /// method gets an order item  and adds to list and returns the id
@@ -82,5 +82,5 @@ public class DalOrderItem:IOrderItem
     /// method returns the list 
     /// </summary>
     /// <returns></returns>
-    public List<OrderItem> GetAll() => DataSource.OrderItemList;
+    public IEnumerable<OrderItem> GetAll() => DataSource.OrderItemList;//changed to IEnumerable!!!!!!!!!!!!!
 }
