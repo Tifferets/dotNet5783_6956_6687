@@ -1,7 +1,4 @@
-﻿
-
-namespace BO;
-
+﻿namespace BO;
 public class Order
 {
 }
