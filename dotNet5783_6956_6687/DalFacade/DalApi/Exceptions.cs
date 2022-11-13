@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+namespace DalApi;
 
-namespace DalApi
+public class doesNotExist:Exception
 {
-    public class doesNotExist:Exception
-    {
-        doesNotExist( Exception ex) { Console.WriteLine("does Not Exist"); }
-    }
+    doesNotExist( Exception ex) { Console.WriteLine("does Not Exist"); }
+}
+public class error : Exception
+{
+    error(Exception ex) { Console.WriteLine("ERROR"); }
 }
