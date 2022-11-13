@@ -6,6 +6,7 @@ using DalList;
 using System.Linq.Expressions;
 using DalApi;
 
+
 namespace DalTest;
 
 partial class program//the main where we check it works
@@ -59,7 +60,7 @@ partial class program//the main where we check it works
                             order.OrderDate = orderTime;
                             order.ShipDate = shipping;
                             order.DeliveryDate= delivery;
-
+                            order.ID =
                             order.ID= dalOrder.Add(order);//adds the order to the list and returns its id
                             break;
                         case 2://Show order Using ID
