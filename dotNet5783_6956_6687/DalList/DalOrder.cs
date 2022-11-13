@@ -1,11 +1,10 @@
-﻿using System.ComponentModel;
-using System.Xml;
+﻿
 using DalApi;
 using DO;
 
 namespace Dal;
 
-internal class DalOrder: IOrder
+public class DalOrder: IOrder
 {
     /// <summary>
     /// method that gets an order,then id from config and adds to the list

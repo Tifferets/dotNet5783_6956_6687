@@ -4,7 +4,7 @@ using DO;
 
 namespace Dal;
 
-internal class DalProduct: IProduct
+public class DalProduct: IProduct
 {
     /// <summary>
     /// method that gets a product, adds to the list
