@@ -2,16 +2,13 @@
 using DO;
 using DalApi;
 using DalList;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Dal;
 
 public class program//the main where we check it works
 {
-    //private static DalOrder dalOrder = new DalOrder();//a dalOrder instance
-    //private static DalOrderItem dalOrderItem = new DalOrderItem();//a dalOrderItem instance
-    //private static DalProduct dalProduct = new DalProduct();//a dalProduct instance
     private static IDal dalList = new DalList();
-    //private static IDal idal;
     static void Main(string[] args)
     {
         Console.WriteLine(@"Please Enter:
@@ -23,10 +20,9 @@ public class program//the main where we check it works
 
         int choice1, choice2;
         int.TryParse(Console.ReadLine(), out choice1);
-        while (choice1 != 0)//they want to continue
+        while (choice1 >0 && choice1<4)//they want to continue
         {
-            try {
-                Console.WriteLine(@" 
+               Console.WriteLine(@" 
 1.Add
 2.Show Using ID
 3.Show List
@@ -34,6 +30,7 @@ public class program//the main where we check it works
 5.Delete ");
                 
                 int.TryParse(Console.ReadLine(), out choice2);
+                
                 if (choice1 == 1)//order
                 {
                     switch (choice2)//for order
@@ -165,11 +162,15 @@ public class program//the main where we check it works
                             Console.WriteLine("Enter product name,category, price and amount");
                             product.Name = Console.ReadLine();
                             string Category1 = Console.ReadLine();
-                           // try
-                           // {
+                            try
+                            {
                                 Category category = (Category)Enum.Parse(typeof(Category), Category1);
                                 product.Category = category;
-                               // throw new Exception("aaa");
+                            }
+                            catch  { throw new doesNotExistException("aaa"); }
+                            
+                            
+                               
                           //  }
                            // catch (doesNotExist ex) { throw new Exception("aaa"); }
                             double price;
@@ -221,14 +222,15 @@ public class program//the main where we check it works
                             break;
 
                         default:
-                            throw new Exception("ERROR");
+                            throw new errorException("ERROR");
                     }
+             
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+
+                //if(choice1!=0 &&choice1!=)
+            
+            throw new errorException("ERROR");
+
             Console.WriteLine(@"Please Enter:
 0: To Exit
 1: For Order
@@ -237,7 +239,13 @@ public class program//the main where we check it works
              ");
             int.TryParse(Console.ReadLine(), out choice1);//get a new option for choice1
         }
-        Console.WriteLine("Good Bye");//ends the program
+        if (choice1 == 0)
+        {
+            Console.WriteLine("Good Bye");//ends the program
+            return;
+        }
+        else
+            throw new errorException("ERROR");
         return;
     }
 } 
