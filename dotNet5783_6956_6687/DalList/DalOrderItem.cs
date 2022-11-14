@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Dal;
 
-public class DalOrderItem:IOrderItem // internal?
+internal class DalOrderItem:IOrderItem // internal?
 {
     /// <summary>
     /// method gets an order item  and adds to list and returns the id

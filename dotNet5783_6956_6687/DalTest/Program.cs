@@ -1,18 +1,16 @@
 ﻿using Dal;
 using DO;
 using DalApi;
+using DalList;
 
+namespace Dal;
 
-
-namespace DalTest;
-
-
-class program//the main where we check it works
+public class program//the main where we check it works
 {
-    private static DalOrder dalOrder = new DalOrder();//a dalOrder instance
-    private static DalOrderItem dalOrderItem = new DalOrderItem();//a dalOrderItem instance
-    private static DalProduct dalProduct = new DalProduct();//a dalProduct instance
-    IDal dal = new DalList.DalList();//?? 
+    //private static DalOrder dalOrder = new DalOrder();//a dalOrder instance
+    //private static DalOrderItem dalOrderItem = new DalOrderItem();//a dalOrderItem instance
+    //private static DalProduct dalProduct = new DalProduct();//a dalProduct instance
+    private static IDal dalList = new DalList();
     //private static IDal idal;
     static void Main(string[] args)
     {
@@ -59,17 +57,16 @@ class program//the main where we check it works
                             order.OrderDate = orderTime;
                             order.ShipDate = shipping;
                             order.DeliveryDate= delivery;
-                            order.ID =
-                            order.ID= dalOrder.Add(order);//adds the order to the list and returns its id
+                            order.ID = dalList.order.Add(order);//adds the order to the list and returns its id
                             break;
                         case 2://Show order Using ID
                             Console.WriteLine("Enter ID");
                             int id;
                             int.TryParse(Console.ReadLine(), out id);
-                            Console.WriteLine(dalOrder.Get(id));
+                            Console.WriteLine(dalList.order.Get(id));
                             break;
                         case 3://Show List of order
-                            foreach (Order item in dalOrder.GetAll())//goes throught he whole list of orders
+                            foreach (Order item in dalList.order.GetAll())//goes throught he whole list of orders
                             {
                                 Console.WriteLine(item);
                             }
@@ -78,7 +75,7 @@ class program//the main where we check it works
                             Console.WriteLine("Enter ID");
                             int id1;
                             int.TryParse(Console.ReadLine(), out id1);
-                            Console.WriteLine(dalOrder.Get(id1));//prints the order before update
+                            Console.WriteLine(dalList.order.Get(id1));//prints the order before update
                             Console.WriteLine("Enter customers name,email,address:");
                             string name1 = Console.ReadLine();
                             string email1 = Console.ReadLine();
@@ -89,12 +86,12 @@ class program//the main where we check it works
                             order1.CustomerName = name1;
                             order1.CustomerEmail = email1;
                             order1.CustomerAddress = address1;
-                            dalOrder.Update(order1);
+                            dalList.order.Update(order1);
                             break;
                         case 5://delete order
                             Console.WriteLine("Enter ID");
                             int.TryParse(Console.ReadLine(), out id1);
-                            dalOrder.Delete(id1);//delets the order
+                            dalList.order.Delete(id1);//delets the order
                             break;
                         default:
                             throw new Exception("ERROR");
@@ -115,17 +112,17 @@ class program//the main where we check it works
                             int.TryParse(Console.ReadLine(), out amount);
                             orderItem.Price = price;
                             orderItem.Amount = amount;
-                            orderItem.OrderItemID= dalOrderItem.Add(orderItem);//adds the orderitem
+                            orderItem.OrderItemID= dalList.orderItem.Add(orderItem);//adds the orderitem
                             break;
 
                         case 2://Show orderItem Using ID
                             Console.WriteLine("Enter ID");
                             int id;
                             int.TryParse(Console.ReadLine(), out id);
-                            Console.WriteLine(dalOrderItem.Get(id));
+                            Console.WriteLine(dalList.orderItem.Get(id));
                             break;
                         case 3://Show List of orderItem
-                            foreach (OrderItem item in dalOrderItem.GetAll())//goes through the whole list of orderItems
+                            foreach (OrderItem item in dalList.orderItem.GetAll())//goes through the whole list of orderItems
                             {
                                 Console.WriteLine(item);
                             }
@@ -137,7 +134,7 @@ class program//the main where we check it works
                             int.TryParse(Console.ReadLine(), out id1);
                             int.TryParse(Console.ReadLine(), out id2);
                             int.TryParse(Console.ReadLine(), out id3);
-                            Console.WriteLine(dalOrderItem.Get(id1));//prints the orderItem before update
+                            Console.WriteLine(dalList.orderItem.Get(id1));//prints the orderItem before update
                             Console.WriteLine("Enter Order Item Price and amount :");
                             double.TryParse(Console.ReadLine(), out price);
                             int.TryParse(Console.ReadLine(), out amount);
@@ -147,12 +144,12 @@ class program//the main where we check it works
                             orderItem1.OrderItemID = id1;
                             orderItem1.ProductID = id3;
                             orderItem1.OrderID = id2;
-                            dalOrderItem.Update(orderItem1);
+                            dalList.orderItem.Update(orderItem1);
                             break;
                         case 5://delete orderItem
                             Console.WriteLine("Enter ID");
                             int.TryParse(Console.ReadLine(), out id);
-                            dalOrderItem.Delete(id);
+                            dalList.orderItem.Delete(id);
                             break;
                         default:
 
@@ -182,18 +179,18 @@ class program//the main where we check it works
                             product.Price = price;
                             product.InStock = inStock;
                             
-                            product.ID = dalProduct.Add(product);
+                            product.ID = dalList.product.Add(product);
 
                             break;
                         case 2://Show product Using ID
                             Console.WriteLine("Enter ID");
                             int id;
                             int.TryParse(Console.ReadLine(), out id);
-                            Console.WriteLine(dalProduct.Get(id));
+                            Console.WriteLine(dalList.orderItem.Get(id));
 
                             break;
                         case 3://Show List of product
-                            foreach (Product item in dalProduct.GetAll())//goes through the whole list and prints all the products
+                            foreach (Product item in dalList.product.GetAll())//goes through the whole list and prints all the products
                             {
                                 Console.WriteLine(item);
                             }
@@ -204,7 +201,7 @@ class program//the main where we check it works
                             Product product1 = new Product();
                             Console.WriteLine("Enter Product ID");
                             int.TryParse(Console.ReadLine(), out id);
-                            Console.WriteLine(dalProduct.Get(id));//prints the product before update
+                            Console.WriteLine(dalList.orderItem.Get(id));//prints the product before update
                             Console.WriteLine("Enter product name,category, price and amount");
                             product1.Name = Console.ReadLine();
                             string Category2 = Console.ReadLine();
@@ -215,12 +212,12 @@ class program//the main where we check it works
                             product1.InStock = inStock;
                             product1.Category = category4;
                             product1.ID = id;
-                            dalProduct.Update(product1);//updats the product
+                            dalList.product.Update(product1);//updats the product
                             break;
                         case 5://delete product
                             Console.WriteLine("Enter ID");
                             int.TryParse(Console.ReadLine(), out id);//gets an id from the user
-                            dalProduct.Delete(id);//delets the product
+                            dalList.product.Delete(id);//delets the product
                             break;
 
                         default:
