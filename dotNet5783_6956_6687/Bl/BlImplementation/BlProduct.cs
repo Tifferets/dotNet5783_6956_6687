@@ -1,8 +1,11 @@
 ﻿using BlApi;
+using DalApi;
 
-namespace BlImplementation
+namespace BlImplementation;
+
+internal class BlProduct:IProduct
 {
-    internal class BlProduct
-    {
-    }
+    private static IDal dalList = new DalList();
+
+
 }
