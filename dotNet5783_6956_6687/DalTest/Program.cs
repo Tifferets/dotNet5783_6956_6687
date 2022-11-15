@@ -91,7 +91,7 @@ public class program//the main where we check it works
                             dalList.order.Delete(id1);//delets the order
                             break;
                         default:
-                            throw new Exception("ERROR");
+                            throw new error("error");
 
 
                     }
