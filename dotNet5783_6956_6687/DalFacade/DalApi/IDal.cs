@@ -2,7 +2,7 @@
 
 public interface IDal
 {
-    IOrder order { get; }
-    IOrderItem orderItem { get; }
-    IProduct product { get; }
+    public IOrder order { get; }
+    public IOrderItem orderItem { get; }
+    public IProduct product { get; }
 }
