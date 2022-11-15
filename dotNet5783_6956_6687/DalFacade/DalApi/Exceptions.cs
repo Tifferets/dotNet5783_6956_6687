@@ -18,3 +18,4 @@ public class errorException : Exception
     public errorException(string ms) : base(ms) { }
     override public string ToString() => "ERROR";
 }
+
