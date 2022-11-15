@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BlApi
 {
-    internal class Product
+    public class Product
     {
+
     }
 }
