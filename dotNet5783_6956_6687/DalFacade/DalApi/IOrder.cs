@@ -1,8 +1,7 @@
-﻿
-
+﻿using DO;
 namespace DalApi;
 
-public interface IOrder
+public interface IOrder:ICrud<Order>
 {
     
 }

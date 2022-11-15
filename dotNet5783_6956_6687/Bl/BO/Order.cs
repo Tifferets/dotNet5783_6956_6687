@@ -1,7 +1,4 @@
-﻿
-
-namespace BO;
-
+﻿namespace BO;
 public class Order
 {
     public int ID { get; set; } 

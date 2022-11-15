@@ -1,7 +1,4 @@
-﻿
-using DalApi;
-using DO;
-
+﻿using DalApi;
 namespace Dal;
 
 sealed public class DalList : IDal

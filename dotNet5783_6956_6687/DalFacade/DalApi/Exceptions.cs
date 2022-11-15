@@ -1,11 +1,19 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace DalApi;
 
-public class doesNotExist:Exception
+ [Serializable]
+public class doesNotExistException:Exception
 {
-    doesNotExist( Exception ex) { Console.WriteLine("does Not Exist"); }
+    public doesNotExistException(string ms):base(ms) { }
+    override public string ToString() => "does not exist";
 }
-public class error : Exception
+public class errorException : Exception
 {
-    error(Exception ex) { Console.WriteLine("ERROR"); }
+    public errorException(string ms) : base(ms) { }
+    override public string ToString() => "ERROR";
 }

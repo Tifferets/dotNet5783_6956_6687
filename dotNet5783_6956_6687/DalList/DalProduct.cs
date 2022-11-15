@@ -1,10 +1,8 @@
 ﻿using DalApi;
 using DO;
-
-
 namespace Dal;
 
-public class DalProduct: IProduct
+internal class DalProduct: IProduct
 {
     /// <summary>
     /// method that gets a product, adds to the list
@@ -78,6 +76,6 @@ public class DalProduct: IProduct
     /// method returns the list 
     /// </summary>
     /// <returns></returns>
-    public List<Product> GetAll()=> DataSource.Productlist; 
-    
+    public IEnumerable<Product> GetAll()=> DataSource.Productlist;//changed to IEnumerable!!!!!!!!!!!!! 
+
 }

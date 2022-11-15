@@ -1,10 +1,9 @@
-﻿
-using DalApi;
+﻿using DalApi;
 using DO;
 
 namespace Dal;
 
-public class DalOrder: IOrder
+internal class DalOrder: IOrder
 {
     /// <summary>
     /// method that gets an order,then id from config and adds to the list
@@ -70,6 +69,6 @@ public class DalOrder: IOrder
     /// method returns the list 
     /// </summary>
     /// <returns></returns>
-    public List<Order> GetAll() => DataSource.Orderlist;
+    public IEnumerable<Order> GetAll() => DataSource.Orderlist;//changed to IEnumerable!!!!!!!!!!!!!
 
 }
