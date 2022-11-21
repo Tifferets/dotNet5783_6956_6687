@@ -12,4 +12,9 @@ public class errorException : Exception
     public errorException(string ms) : base(ms) { }
     override public string ToString() => "ERROR";
 }
+public class WrongIdException : Exception
+{
+    public WrongIdException(string ms) : base(ms) { }
+    override public string ToString() => "ERROR";
+}
 

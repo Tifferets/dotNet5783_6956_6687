@@ -1,8 +1,10 @@
 ﻿using BlApi;
+using DalApi;
 
-namespace BlImplementation
+namespace BlImplementation;
+
+internal class BlOrder:IOrder
 {
-    internal class BlOrder
-    {
-    }
+    private static IDal dalList = new DalList();
 }
+

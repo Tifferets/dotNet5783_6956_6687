@@ -64,7 +64,7 @@ internal static class DataSource
             order.CustomerAddress = customerAddress[rand.Next(0, 10)];//generats random location
             order.CustomerEmail = order.CustomerName + "@gmail.com";//creates email address
             order.OrderDate = DateTime.Now.Add(new TimeSpan(rand.Next(-360, 0), 0, 0, 0));//time in last year till 2 months ago
-                if(i < 16)//80% have a ship date
+            if(i < 16)//80% have a ship date
             { 
                 order.ShipDate = order.OrderDate.Value.Add(new TimeSpan(rand.Next(1, 7), 0, 0, 0));
             }
@@ -130,7 +130,6 @@ internal static class DataSource
         static int orderItemId = 200000;
         public static int GetOrderID { get => orderID++; }
         public static int GetOrderItemId { get => orderItemId++; }
-
 
     }
 }
