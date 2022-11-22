@@ -168,11 +168,7 @@ public class program//the main where we check it works
                                 product.Category = category;
                             }
                             catch  { throw new doesNotExistException("aaa"); }
-                            
-                            
-                               
-                          //  }
-                           // catch (doesNotExist ex) { throw new Exception("aaa"); }
+                       
                             double price;
                             double.TryParse(Console.ReadLine(), out price);
                             int inStock;
