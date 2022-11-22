@@ -43,7 +43,7 @@ internal class BoCart : ICart
     public Cart UpdateCart(Cart cart, int productId, int newAmount)
     {
         foreach(BoCart.dalList.orderItem item in BoCart.dalList.)
-        {
+{
             if(item)
         }
     }
