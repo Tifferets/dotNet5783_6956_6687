@@ -13,19 +13,19 @@ internal class ProductForList
     /// <summary>
     /// the name of the item
     /// </summary>
-    public string Name { get; set; }
+    public string? Name { get; set; }
     /// <summary>
     /// the price of the item
     /// </summary>
-    public double Price { get; set; }
+    public double? Price { get; set; }
     /// <summary>
     /// the category the item belongs in
     /// </summary>
-    public Category Category { get; set; }
+    public Category? Category { get; set; }
     /// <summary>
     /// the amount of 1 item
     /// </summary>
-    public int Amount { get; set; }
+    public int? Amount { get; set; }
     /// <summary>
     /// true if it exists in the stock,false if it doesnt exist
     /// </summary>
