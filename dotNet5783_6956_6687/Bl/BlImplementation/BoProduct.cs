@@ -3,7 +3,9 @@ using DalApi;
 
 namespace BlImplementation;
 
-internal class BlCart:ICart
+internal class BoProduct:IProduct
 {
     private static IDal dalList = new DalList();
+
+
 }
