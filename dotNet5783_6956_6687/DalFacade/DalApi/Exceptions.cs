@@ -4,17 +4,17 @@ namespace DalApi;
  [Serializable]
 public class doesNotExistException:Exception
 {
-    public doesNotExistException(string ms):base(ms) { }
+    public doesNotExistException():base() { }
     override public string ToString() => "does not exist";
 }
 public class errorException : Exception
 {
-    public errorException(string ms) : base(ms) { }
+    public errorException() : base() { }
     override public string ToString() => "ERROR";
 }
 public class WrongIdException : Exception
 {
-    public WrongIdException(string ms) : base(ms) { }
-    override public string ToString() => "ERROR";
+    public WrongIdException() : base() { }
+    override public string ToString() => "Wrong ID";
 }
 

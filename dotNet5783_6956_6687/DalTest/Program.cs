@@ -91,7 +91,7 @@ public class program//the main where we check it works
                             dalList.order.Delete(id1);//delets the order
                             break;
                         default:
-                           throw new errorException("ERROR");
+                           throw new errorException();
 
 
                     }
@@ -150,7 +150,7 @@ public class program//the main where we check it works
                             break;
                         default:
 
-                            throw new errorException("ERROR");
+                            throw new errorException();
                     }
                 }
                 if (choice1 == 3)// product
@@ -167,7 +167,7 @@ public class program//the main where we check it works
                                 Category category = (Category)Enum.Parse(typeof(Category), Category1);
                                 product.Category = category;
                             }
-                            catch  { throw new doesNotExistException("aaa"); }
+                            catch  { throw new doesNotExistException(); }
                        
                             double price;
                             double.TryParse(Console.ReadLine(), out price);
@@ -218,14 +218,12 @@ public class program//the main where we check it works
                             break;
 
                         default:
-                            throw new errorException("ERROR");
+                            throw new errorException();
                     }
              
                 }
-
-                //if(choice1!=0 &&choice1!=)
             
-            throw new errorException("ERROR");
+            //throw new errorException();
 
             Console.WriteLine(@"Please Enter:
 0: To Exit
@@ -241,7 +239,7 @@ public class program//the main where we check it works
             return;
         }
         else
-            throw new errorException("ERROR");
+            throw new errorException();
         return;
     }
 } 

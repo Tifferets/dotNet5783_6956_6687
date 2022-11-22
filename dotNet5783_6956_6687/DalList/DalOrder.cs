@@ -39,14 +39,15 @@ internal class DalOrder: IOrder
     /// <param name="orderID"></param>
     public void Delete(int orderID)
     {
-        foreach (Order item in DataSource.Orderlist)//goes through the list looking for the order.
-        {
-            if (item.ID == orderID)
-            { 
-                DataSource.Orderlist.Remove(item);
-                break; 
+            foreach (Order item in DataSource.Orderlist)//goes through the list looking for the order.
+            {
+                if (item.ID == orderID)
+                {
+                    DataSource.Orderlist.Remove(item);
+                    break;
+                }
             }
-        }
+
     }
     /// <summary>
     /// method gets an order and updates its details
