@@ -17,4 +17,9 @@ public class WrongIdException : Exception
     public WrongIdException() : base() { }
     override public string ToString() => "Wrong ID";
 }
+public class CantDeleteException : Exception
+{
+    public CantDeleteException() : base() { }
+    override public string ToString() => "can't delete this product";
+}
 

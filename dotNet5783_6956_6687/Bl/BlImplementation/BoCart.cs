@@ -17,23 +17,28 @@ internal class BoCart : ICart
     {
         if (productId < 300000 || productId > 499999)
             throw new WrongIDException();
-        BO.OrderItem? p = new BO.OrderItem() ;
+        BO.OrderItem? p = new BO.OrderItem();
+        // IEnumerable<BO.OrderItem> carts = new IEnumerable<BO.OrderItem>();
         foreach (DO.Product item in dalList.product.GetAll())
         {
             if (item.ID == productId)
-            { 
-                p.ProductID=item.ID;
+            {
+                p.ProductID = item.ID;
                 p.Price = item.Price;
                 p.Name = item.Name;
+             //   p.Amount =
                 break;
             }
-        } 
-        cart.Items.ProductID = productId;
-        cart.Items.Amount = 0;
-        cart.Items.Price = p.Price;
-        cart.Items.
-        return cart;
+        }
+
+
+        //cart.Items.ProductID = productId;
+        //cart.Items.Amount = 0;
+        //cart.Items.Price = p.Price;
+        //cart.Items.
+        //return cart;
     }
+}
     /// <summary>
     /// update an amount of a product in the cart
     /// </summary>
@@ -42,10 +47,8 @@ internal class BoCart : ICart
     /// <param name="newAmount"></param>
     public Cart UpdateCart(Cart cart, int productId, int newAmount)
     {
-        foreach(BoCart.dalList.orderItem item in BoCart.dalList.)
-{
-            if(item)
-        }
+      //  foreach(BoCart.dalList.orderItem item in BoCart.dalList.)
+
     }
     /// <summary>
     /// the function confirms the cart get, gets the cart and the customers info
@@ -54,5 +57,8 @@ internal class BoCart : ICart
     /// <param name="name"></param>
     /// <param name="address"></param>
     /// <param name="email"></param>
-    public void confirmCart(Cart cart, string name, string address, string email);
+    public void confirmCart(Cart cart, string name, string address, string email)
+{
+
+}
 }

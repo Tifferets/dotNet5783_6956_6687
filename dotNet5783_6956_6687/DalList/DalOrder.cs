@@ -70,6 +70,10 @@ internal class DalOrder: IOrder
     /// method returns the list 
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<Order> GetAll() => DataSource.Orderlist;//changed to IEnumerable!!!!!!!!!!!!!
-
+    public IEnumerable<Order> GetAll() => DataSource.Orderlist;
+    /// <summary>
+    /// returns list of all order items
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerable<OrderItem> GetAllOrderItems() => DataSource.OrderItemList;
 }

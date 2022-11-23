@@ -88,7 +88,14 @@ internal class BoProduct:IProduct
                     throw new BO.alreadyExistException();
                 }
             }
-            dalList.product.Add(convert(product));
+            try
+            {
+                dalList.product.Add(convert(product));
+            }
+            catch
+            {
+                throw new BO.WrongDataException();
+            }
         }
         else
             throw new BO.WrongDataException();
@@ -128,9 +135,18 @@ internal class BoProduct:IProduct
     /// <param name="Id"></param>
     public void DeletProduct(int Id)//???
     {
-        foreach (DO.Order item in dalList.order.GetAll())
+        IEnumerable<DO.Order> orderList = dalList.order.GetAll();
+        foreach (DO.Order item in orderList )
         {
-            
+            IEnumerable<DO.OrderItem> orderItemList = dalList.orderItem.GetAll();
+            foreach(DO.OrderItem oitem in orderItemList)
+            {
+                if(item.ID == Id)
+                {
+                    throw new BO.CantDeleteException();
+                }
+            }
+
         }
     }
     /// <summary>
@@ -139,11 +155,28 @@ internal class BoProduct:IProduct
     /// <param name="product"></param>
     public void UpdateProduct(BO.Product product)
     {
-        if(checkDataIsGood(product))
-        {
-           
-           // dalList.product.Update(convert(product));   
-        }
+        IEnumerable<DO.Product> productList = dalList.product.GetAll();
+        DO.Product? p1 = null;
+        if (checkDataIsGood(product))
+        //{
+        //    foreach (DO.Product item in productList)
+        //    {
+        //        if(item.ID == product.Id)
+        //        {
+        //            p1 = item;
+        //            break;
+        //        }
+        //    }
+        //    p1 =convert(product);
+        //    foreach (DO.Product item in productList)
+        //    {
+        //        if (item.ID == product.Id)
+        //        {
+        //            item = p1;
+        //            break;
+        //        }
+        //    }
+       // }
     }
 
 

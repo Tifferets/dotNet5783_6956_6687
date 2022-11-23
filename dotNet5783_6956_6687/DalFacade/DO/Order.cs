@@ -31,7 +31,7 @@ public struct Order
     /// <summary>
     /// the date the order was delivered
     /// </summary>
-    public DateTime? DeliveryDate { get; set; }
+    public DateTime? DeliveryDate { get; set; }   
     /// <summary>
     /// to string to print all details
     /// </summary>
