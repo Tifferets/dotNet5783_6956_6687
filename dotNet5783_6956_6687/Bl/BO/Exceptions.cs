@@ -28,3 +28,18 @@ public class WrongDataException : Exception
     public WrongDataException() : base() { }
     override public string ToString() => "Data not right";
 }
+public class CantDeleteException : Exception
+{
+    public CantDeleteException() : base() { }
+    override public string ToString() => "can't delete this product";
+}
+public class CantUpDateException : Exception
+{
+    public CantUpDateException() : base() { }
+    override public string ToString() => "can't update this product";
+}
+public class CantGetException : Exception
+{
+    public CantGetException() : base() { }
+    override public string ToString() => "can't get this product";
+}

@@ -8,7 +8,7 @@ internal class OrderForList
     /// <summary>
     /// the customers name
     /// </summary>
-    public string CustomerName { get; set; }
+    public string? CustomerName { get; set; }
     /// <summary>
     /// the Orderforlists id name
     /// </summary>
@@ -16,15 +16,17 @@ internal class OrderForList
     /// <summary>
     /// the status of the Orderforlists
     /// </summary>
-    public OrderStatus Status { get; set; }
+    public OrderStatus? Status { get; set; }
     /// <summary>
     /// the amount of items in the Orderforlists
     /// </summary>
-    public int AmountOfItems { get; set; }
+    public int? AmountOfItems { get; set; }
     /// <summary>
     /// the total price of the Orderforlists
     /// </summary>
-    public double TotalPrice { get; set; }
+    public double? TotalPrice { get; set; }
+
+
     public override string ToString() => $@"
 Name: {CustomerName}
 ID:{ID}

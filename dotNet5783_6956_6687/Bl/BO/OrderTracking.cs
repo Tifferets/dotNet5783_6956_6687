@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace BO;
 
-internal class OrderTracking
+internal class OrderTracking//missing something
 {
     public int ID { get; set; }
     /// <summary>

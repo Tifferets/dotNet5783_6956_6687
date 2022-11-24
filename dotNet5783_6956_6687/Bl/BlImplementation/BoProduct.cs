@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using System.Linq.Expressions;
 namespace BlImplementation;
 
 internal class BoProduct:IProduct
@@ -13,14 +14,22 @@ internal class BoProduct:IProduct
     public IEnumerable<BO.ProductForList> GetProducts()
     {
         IEnumerable<BO.ProductForList> productsList = new List<BO.ProductForList>();
-        return from item in dalList.product.GetAll()
-               select new BO.ProductForList()
-               {
-                   ID = item.ID,
-                   Name = item.Name,
-                   Price = item.Price,
-                   Category = (BO.Category)item.Category,
-               };
+        try
+        {
+            return from item in dalList.product.GetAll()
+                   select new BO.ProductForList()
+                   {
+                       ID = item.ID,
+                       Name = item.Name,
+                       Price = item.Price,
+                       Category = (BO.Category)item.Category,
+                   };
+        }
+        catch
+        {
+            throw new BO.errorException();
+        }
+        
     }
 
     /// <summary>
@@ -32,9 +41,11 @@ internal class BoProduct:IProduct
     {
         if (Id >= 300000 && Id < 400000)
         {
-            BO.Product product = new BO.Product();
-            foreach (DO.Product item in dalList.product.GetAll())
-               {
+            try
+            {
+                BO.Product product = new BO.Product();
+                foreach (DO.Product item in dalList.product.GetAll())
+                {
                     if (item.ID == Id)
                     {
                         product.Id = Id;
@@ -44,9 +55,14 @@ internal class BoProduct:IProduct
                     }
                 }
                 return product;
+            }
+            catch
+            {
+                throw new BO.CantGetException();
+            }
         }
         else
-           throw new BO.doesNotExistException(); 
+            throw new BO.doesNotExistException(); 
     }
     /// <summary>
     /// gets id, if its positive gets product item from system, builds a product and returnds it, throws exception if cant get the product item from system
@@ -71,7 +87,10 @@ internal class BoProduct:IProduct
             return productItem;
         }
         else
-            throw new BO.doesNotExistException();
+        {
+            throw new BO.doesNotExistException(); 
+        }
+
     }
     /// <summary>
     /// function adds a product, checks if the data is right and adds the product to the system if it can otherwise throws exeption
@@ -133,12 +152,12 @@ internal class BoProduct:IProduct
     /// delete a product, gets id checks that it isnt in anybodys cart if it isnt it delets it and if it is, it throws an exception 
     /// </summary>
     /// <param name="Id"></param>
-    public void DeletProduct(int Id)//???
+    public void DeletProduct(int Id)
     {
         IEnumerable<DO.Order> orderList = dalList.order.GetAll();
         foreach (DO.Order item in orderList )
         {
-            IEnumerable<DO.OrderItem> orderItemList = dalList.orderItem.GetAll();
+            IEnumerable<DO.OrderItem> orderItemList = dalList.order.GetAllOrderItems();
             foreach(DO.OrderItem oitem in orderItemList)
             {
                 if(item.ID == Id)
@@ -148,6 +167,14 @@ internal class BoProduct:IProduct
             }
 
         }
+        try
+        {
+            dalList.product.Delete(Id);
+        }
+        catch
+        {
+            throw new BO.CantDeleteException();
+        }
     }
     /// <summary>
     /// updates product, gets product checks if the data is right adds to the system if not throws exception
@@ -155,28 +182,23 @@ internal class BoProduct:IProduct
     /// <param name="product"></param>
     public void UpdateProduct(BO.Product product)
     {
-        IEnumerable<DO.Product> productList = dalList.product.GetAll();
-        DO.Product? p1 = null;
+        //IEnumerable<DO.Product> productList = dalList.product.GetAll();
         if (checkDataIsGood(product))
-        //{
-        //    foreach (DO.Product item in productList)
-        //    {
-        //        if(item.ID == product.Id)
-        //        {
-        //            p1 = item;
-        //            break;
-        //        }
-        //    }
-        //    p1 =convert(product);
-        //    foreach (DO.Product item in productList)
-        //    {
-        //        if (item.ID == product.Id)
-        //        {
-        //            item = p1;
-        //            break;
-        //        }
-        //    }
-       // }
+        {
+            try
+            {
+                dalList.product.Update(convert(product));
+            }
+            catch
+            {
+                throw new BO.CantUpDateException();
+            }
+        }
+        else
+        {
+            throw new BO.CantUpDateException();
+        }
+        
     }
 
 
