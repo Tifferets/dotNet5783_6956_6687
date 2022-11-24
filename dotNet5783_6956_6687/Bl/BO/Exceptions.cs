@@ -1,6 +1,4 @@
-﻿
-
-namespace BO;
+﻿namespace BO;
 
 [Serializable]
 public class doesNotExistException : Exception
@@ -11,7 +9,7 @@ public class doesNotExistException : Exception
 public class alreadyExistException : Exception
 {
     public alreadyExistException() : base() { }
-    override public string ToString() => "already not exist";
+    override public string ToString() => "already exists";
 }
 public class errorException : Exception
 {
@@ -21,7 +19,7 @@ public class errorException : Exception
 public class WrongIDException : Exception
 {
     public WrongIDException() : base() { }
-    override public string ToString() => "ERROR";
+    override public string ToString() => "Wrong ID";
 }
 public class WrongDataException : Exception
 {
@@ -42,4 +40,9 @@ public class CantGetException : Exception
 {
     public CantGetException() : base() { }
     override public string ToString() => "can't get this product";
+}
+public class NoMoreInStockException : Exception
+{//used in cart
+    public NoMoreInStockException() : base() { }
+    override public string ToString() => "No more in stock or doesn't exist in stock";
 }
