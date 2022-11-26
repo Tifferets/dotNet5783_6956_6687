@@ -12,16 +12,29 @@ internal class BoOrder:IOrder
     /// <returns></returns>
     public IEnumerable<BO.OrderForList> GetOrderList()
     {
-        IEnumerable<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();
+        List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();//list of orderForList
         try
         {
             foreach(DO.Order item in dalList.order.GetAll())
             {
-                foreach(DO.OrderItem oitem in dalList.order.GetAllOrderItems())
+                
+                BO.OrderForList ofl = new BO.OrderForList();
+                ofl.ID= item.ID;
+                ofl.CustomerName= item.CustomerName;
+                ofl.Status= BO.OrderStatus.shipped;
+                double? price = 0;
+                int amount = 0;
+                foreach(DO.OrderItem oitem in dalList.order.GetAllOrderItems())//loop to count the amount of products and total price
                 {
-                    
+                    amount++;
+                    price += oitem.Price;
                 }
+                ofl.TotalPrice = price;
+                ofl.AmountOfItems = amount;
+                OrderForlist.Add(ofl);
             }
+            IEnumerable<BO.OrderForList> orderForLists = OrderForlist;//list to return
+            return orderForLists;
         }
         catch
         {
@@ -40,16 +53,11 @@ internal class BoOrder:IOrder
             try
             {
                 BO.Order newOrder = new BO.Order();
-                foreach(DO.Order item in dalList.order.GetAll())
+                foreach(DO.Order item in dalList.order.GetAll())//loop to go over all the orders
                 {
-                    if(item.ID == orderId)
+                    if(item.ID == orderId)//checking if the id is the same
                     {
-                        item.
-                        newOrder.CustomerName = item.CustomerName;
-                        newOrder.CustomerAddress = item.CustomerAddress;
-                        newOrder.CustomerEmail = item.CustomerEmail;
-                        newOrder.OrderDate = item.OrderDate;
-                        newOrder.PaymentDate= item.
+                    
 
                     }
                 }
