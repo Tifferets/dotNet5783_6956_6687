@@ -1,6 +1,7 @@
 ﻿namespace BO;
 
 [Serializable]
+
 public class doesNotExistException : Exception
 {
     public doesNotExistException() : base() { }

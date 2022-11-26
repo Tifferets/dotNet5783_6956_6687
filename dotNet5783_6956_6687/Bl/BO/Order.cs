@@ -34,10 +34,6 @@ public class Order
     /// </summary>
     public OrderStatus? Status { get; set; }
     /// <summary>
-    /// Payment Date -BO
-    /// </summary>
-    public DateTime? PaymentDate { get; set; }
-    /// <summary>
     /// list of Order Item_BO
     /// </summary>
     public IEnumerable<OrderItem>? Items { get; set; }
@@ -46,7 +42,7 @@ public class Order
     /// </summary>
     public double? TotalPrice { get; set; }
 
- public override string ToString() => $@"
+    public override string ToString() => $@"
 Order ID: {ID}
 Customers name: {CustomerName}
 Customers email:{CustomerEmail}
