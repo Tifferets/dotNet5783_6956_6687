@@ -158,7 +158,7 @@ internal class Program
                     string Category = Console.ReadLine();
                     try
                     {
-                        Category category = (Category)BO.Enum.Parse(typeof(Category), Category);
+                        Category category = (Category)BO.Enum.Parse(typeof(Category), Category);//converting to enum type
                         product1.Category = category;
                     }
                     catch
@@ -172,13 +172,14 @@ internal class Program
                     int.TryParse(Console.ReadLine(), out inStock);
                     product1.Price = price;
                     product1.InStock = inStock;
-                    blList.Product.AddProduct(product1);
+                    blList.Product.AddProduct(product1);//adding the product 
                     break;
+
             case 5://To delete a product
                     Console.WriteLine("Enter product Id");
                     int id1;
                     int.TryParse(Console.ReadLine(), out id1);
-                    blList.Product.DeletProduct(id1);
+                    blList.Product.DeletProduct(id1);//deleting the product
                     break;
             case 6:
                     Console.WriteLine("Please enter product Id, name, amount in stock and category ");
@@ -201,7 +202,7 @@ internal class Program
                     int.TryParse(Console.ReadLine(), out inStock);
                     product2.Price = price;
                     product2.InStock = inStock;
-                    blList.Product.UpdateProduct(product2);
+                    blList.Product.UpdateProduct(product2);//updating the product
                     break;
             default:
                     throw new BO.errorException();
@@ -212,5 +213,5 @@ internal class Program
         return;
     else
         throw new BO.errorException();
-}
+    }
 }

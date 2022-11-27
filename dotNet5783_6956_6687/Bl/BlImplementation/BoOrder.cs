@@ -18,8 +18,10 @@ internal class BoOrder:IOrder
         try
         {
             foreach(DO.Order item in dalList.order.GetAll())
-            {
-                string status = OrderStatus(order);////make function
+            { 
+                BO.OrderTracking orderTracking = OrderStatus(item.ID);
+                string statusee = status(orderTracking);
+                BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), cat);//converting to enum type
                 double? price = 0;
                 int amount = 0;
                 foreach(DO.OrderItem oitem in dalList.order.GetAllOrderItems(item.ID))//loop to count the amount of products and total price
@@ -33,7 +35,7 @@ internal class BoOrder:IOrder
                     CustomerName = item.CustomerName,
                     AmountOfItems = amount,
                     TotalPrice = price,
-                    Status = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), status)//converting to enum
+                    Status = stauss,//converting to enum
                 });
                 
             }
@@ -192,10 +194,19 @@ internal class BoOrder:IOrder
 
     }
     /// <summary>
+    /// returns a string from a order status 
+    /// </summary>
+    /// <param name="orderTracking"></param>
+    /// <returns></returns>
+    private string status(BO.OrderTracking orderTracking)
+    {
+        return orderTracking.Status.ToString();
+    }
+    /// <summary>
     /// BONUS!!
     /// </summary>
     /// <param name="order"></param>
-    public void UpdateOrder(Order order);
+   // public void UpdateOrder(Order order);
 
 }
 

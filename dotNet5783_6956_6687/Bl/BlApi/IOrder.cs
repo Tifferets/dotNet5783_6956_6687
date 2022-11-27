@@ -7,7 +7,7 @@ public interface IOrder
     /// returns the list of orders- for the admin
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<Order> GetOrderList(); 
+    public IEnumerable<OrderForList> GetOrderList(); 
     /// <summary>
     /// returns an order -for admin and user
     /// </summary>
@@ -31,11 +31,11 @@ public interface IOrder
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
-    public IEnumerable<Order> OrderStatus(int orderId); 
+    public OrderTracking OrderStatus(int orderId); 
     /// <summary>
     /// BONUS!!
     /// </summary>
     /// <param name="order"></param>
-    public void UpdateOrder(Order order);
+    //public void UpdateOrder(Order order);
 
 }
