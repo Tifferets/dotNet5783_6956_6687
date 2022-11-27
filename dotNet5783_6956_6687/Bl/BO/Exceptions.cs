@@ -42,7 +42,17 @@ public class CantGetException : Exception
     override public string ToString() => "can't get this product";
 }
 public class NoMoreInStockException : Exception
-{//used in cart
+{//used in bocart
     public NoMoreInStockException() : base() { }
     override public string ToString() => "No more in stock or doesn't exist in stock";
+}
+public class MissingCustomersInfoException : Exception
+{//used in bocart
+    public MissingCustomersInfoException() : base() { }
+    override public string ToString() => "Missing customers Information";
+}
+public class WrongAmountException : Exception
+{//used in bocart
+    public WrongAmountException() : base() { }
+    override public string ToString() => "Wrong Amount";
 }
