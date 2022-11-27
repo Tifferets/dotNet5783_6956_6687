@@ -14,7 +14,7 @@ public class Product
     /// <summary>
     /// products price
     /// </summary>
-    public int? Price { get; set; }  
+    public double? Price { get; set; }  
     /// <summary>
     /// the amount of products in stock
     /// </summary>
