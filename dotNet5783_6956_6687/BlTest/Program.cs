@@ -139,6 +139,7 @@ internal class Program
                 case 6:
                     break;
                 default;
+
             }
         }
         if (choice1 == 0)
@@ -186,7 +187,10 @@ internal class Program
                       break;
                 }
             case 3://To get a products details- for customer
-
+                    Console.WriteLine("Enter product Id");
+                    int id2;
+                    int.TryParse(Console.ReadLine(), out id2);
+                    Console.WriteLine(blList.Product.GetProductItem(id2)); //retuns and prints the details
                     break;
             case 4:// To add a product
                     Console.WriteLine("Please enter product Id, name, amount in stock and category ");
