@@ -187,7 +187,7 @@ internal class BoProduct:IProduct
         {
             try
             {
-                dalList.product.Update(convert(product));
+                dalList.product.Update(convert(product));//trys to update te product
             }
             catch
             {
@@ -200,7 +200,4 @@ internal class BoProduct:IProduct
         }
         
     }
-
-
-
 }
