@@ -97,26 +97,27 @@ internal class Program
         {
 
         Console.WriteLine(@"Please Enter:
-0: back
-1: get a list of all the orders
-2: see an orders info
-3: update shipping date
-4: update delivery date
-5: see one orders status
-6: update order
+0: To back
+1: To get a list of all the orders
+2: To see an orders info
+3: To update shipping date
+4: To update delivery date
+5: To see an orders status
+6: To update order
 ");
         int choice1;
         int.TryParse(Console.ReadLine(), out choice1);
-        while (choice1 > 0 && choice1 < 4)
+        while (choice1 > 0 && choice1 < 6)
         {
             switch (choice1)
             {
                 case 1:
-                    IEnumerable<Order> lst = blList.Order.GetOrderList();
-                    foreach(Order item in lst)
+                    IEnumerable<OrderForList> lst = blList.Order.GetOrderList();//gets a list of Order for list
+                    foreach(OrderForList item in lst)//prints all of them
                         Console.WriteLine(item);
                     break;
                 case 2:
+
                     Console.WriteLine("enter orders id");
                     int id;
                     int.TryParse(Console.ReadLine(), out id);
@@ -134,12 +135,16 @@ internal class Program
                     int.TryParse(Console.ReadLine(), out id1);
                     Order order2 = blList.Order.UpdateDeliveryDate(id1);
                     break;
-                case 5:
+                case 5://To see an orders status
+                    Console.WriteLine("enter orders id");
+                    int.TryParse(Console.ReadLine(), out id1);
+                    Console.WriteLine(blList.Order.OrderStatus(id1));//prints order traking details
                     break;
-                case 6:
-                    break;
-                default;
+              //  case 6://To update order
 
+                  //  break;
+                default:
+                    throw new BO.errorException();
             }
         }
         if (choice1 == 0)
@@ -163,34 +168,32 @@ internal class Program
 ");
     int choice1;
     int.TryParse(Console.ReadLine(), out choice1);
-    while (choice1 > 0 && choice1 < 4)
+    while (choice1 > 0 && choice1 < 7)
     {
         switch (choice1)
         {
             case 0: 
                 return;//goes back to the 3 options 
             case 1://To get list of all the products
-                {
-                      foreach(BO.ProductForList item in blList.Product.GetListOfProducts())
+                     foreach(BO.ProductForList item in blList.Product.GetListOfProducts())
                         {
                             Console.WriteLine(item);//print all
                         }
                     break;
-                }
+
             case 2://To get a products details- for admin
-                {
+                
                       Console.WriteLine("Enter product Id");
                       int id;
                       int.TryParse(Console.ReadLine(), out id);
                       BO.Product product = blList.Product.GetProductbyID(id);//getting product info
                       Console.WriteLine(product);//printing product
                       break;
-                }
+                
             case 3://To get a products details- for customer
                     Console.WriteLine("Enter product Id");
-                    int id2;
-                    int.TryParse(Console.ReadLine(), out id2);
-                    Console.WriteLine(blList.Product.GetProductItem(id2)); //retuns and prints the details
+                    int.TryParse(Console.ReadLine(), out id);
+                    Console.WriteLine(blList.Product.GetProductItem(id)); //retuns and prints the details
                     break;
             case 4:// To add a product
                     Console.WriteLine("Please enter product Id, name, amount in stock and category ");
@@ -218,9 +221,8 @@ internal class Program
 
             case 5://To delete a product
                     Console.WriteLine("Enter product Id");
-                    int id1;
-                    int.TryParse(Console.ReadLine(), out id1);
-                    blList.Product.DeletProduct(id1);//deleting the product
+                    int.TryParse(Console.ReadLine(), out id);
+                    blList.Product.DeletProduct(id);//deleting the product
                     break;
             case 6:
                     Console.WriteLine("Please enter product Id, name, amount in stock and category ");
@@ -237,9 +239,7 @@ internal class Program
 
                         throw new BO.doesNotExistException();
                     }
-                    double price1;
                     double.TryParse(Console.ReadLine(), out price);
-                    int inStock1;
                     int.TryParse(Console.ReadLine(), out inStock);
                     product2.Price = price;
                     product2.InStock = inStock;
