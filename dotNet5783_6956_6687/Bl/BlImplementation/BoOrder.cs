@@ -161,7 +161,7 @@ internal class BoOrder:IOrder
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
-    public IEnumerable<BO.Order> OrderStatus(int orderId)
+    public BO.OrderTracking OrderStatus(int orderId)
     {
         try
         {
@@ -183,6 +183,7 @@ internal class BoOrder:IOrder
                 status=BO.OrderStatus.delivered;
             }
             BO.OrderTracking orderTracking= new BO.OrderTracking() { ID = orderId, Status= status , tracking=list};
+            return orderTracking;
         }
         catch
         {
