@@ -47,3 +47,18 @@ public class NoMoreInStockException : Exception
     public NoMoreInStockException() : base() { }
     override public string ToString() => "No more in stock or doesn't exist in stock";
 }
+public class AlreadyShippedException : Exception
+{
+    public AlreadyShippedException() : base() { }
+    override public string ToString() => "The order has already been shipped ";
+}
+public class AlreadyDeliverdException : Exception
+{
+    public AlreadyDeliverdException() : base() { }
+    override public string ToString() => "The order has already been deliverd ";
+}
+public class NotShippedException : Exception
+{
+    public NotShippedException() : base() { }
+    override public string ToString() => "The order wasn't shipped yet";
+}
