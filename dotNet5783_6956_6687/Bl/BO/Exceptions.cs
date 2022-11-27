@@ -72,3 +72,8 @@ public class WrongAmountException : Exception
     public WrongAmountException() : base() { }
     override public string ToString() => "Wrong Amount";
 }
+public class NoItemsInCartException : Exception
+{//used in bocart
+    public NoItemsInCartException() : base() { }
+    override public string ToString() => "No items in cart";
+}
