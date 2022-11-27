@@ -19,12 +19,15 @@ namespace BlTest
                 switch (choice)
                 {
                     case 0:
+                        Console.WriteLine("Good Bye and thanks for shopping");//ends the program
+                        return;
+                    case 1:
                         CartFunc();
                         break;
-                    case 1:
+                    case 2:
                         OrderFunc();
                         break;
-                    case 2:
+                    case 3:
                         ProductFunc();
                         break;
                     default
@@ -32,8 +35,7 @@ namespace BlTest
             }
             if (choice == 0)
             { 
-                Console.WriteLine("Good Bye");//ends the program
-                return; 
+                
             }
 
         }
@@ -41,7 +43,7 @@ namespace BlTest
     public static void CartFunc()
     {
         Console.WriteLine(@"Please Enter:
-0: end
+0: back
 1: add a product to the cart
 2: update an amount of a product
 3: confirm cart
