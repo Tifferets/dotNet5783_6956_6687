@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Xml.Linq;
 namespace BO;
-internal class OrderTracking//missing something
+public class OrderTracking//missing something
 {
     public int ID { get; set; }
     /// <summary>
