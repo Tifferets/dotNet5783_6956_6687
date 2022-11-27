@@ -2,15 +2,19 @@
 using BO;
 using DalApi;
 using Bl;
+//using BoCart;
 
 namespace BL;
 
 internal class Program
 {
     private static BlApi.IBl blList = new BlImplementation.Bl();
+    internal static List<Cart> carts = new List<Cart>();
+   // internal static List<OrderItem> OrderItemList = new List<OrderItem>();
+   // internal static List<Product> Productlist = new List<Product>();
     static void Main(string[] args)
     {
-
+        
     Console.WriteLine(@"Please Enter:
 0: To Exit
 1: For Cart
@@ -42,7 +46,7 @@ internal class Program
                 
             }
 
-        }
+    }
    
     public static void CartFunc()
     {
@@ -63,9 +67,20 @@ internal class Program
                     Console.WriteLine("enter product ID");
                     int id;
                     int.TryParse(Console.ReadLine(), out id);
-                    addPro
+                    Cart cart = new Cart();
+                    blList.Cart.AddProductToCart(cart, id);
+
                         break;
                     case 2:
+                    Console.WriteLine("enter cart id, product id and new amount ");
+                    int cartid,productid,newAmount;
+                    int.TryParse(Console.ReadLine(), out cartid);
+                    int.TryParse(Console.ReadLine(), out productid);
+                    int.TryParse(Console.ReadLine(), out newAmount);
+                    foreach(OrderItem item in cart.Items)
+                    {
+                        if(item.Items)
+                    }
                         break;
                     case 3:
                         break;
@@ -75,16 +90,19 @@ internal class Program
             if (choice1 == 0)
                 return;
             else
-                throw new errorException();
+                throw new BO.errorException();
         }
     public static void OrderFunc() 
         {
 
         Console.WriteLine(@"Please Enter:
-0: end
-1: add a product to the cart
-2: update an amount of a product
-3: confirm cart
+0: back
+1: get a list of all the orders
+2: see an orders info
+3: update shipping date
+4: update delivery date
+5: see one orders status
+6: update order
 ");
         int choice1;
         int.TryParse(Console.ReadLine(), out choice1);
@@ -93,10 +111,31 @@ internal class Program
             switch (choice1)
             {
                 case 1:
+                    IEnumerable<Order> lst = blList.Order.GetOrderList();
+                    foreach(Order item in lst)
+                        Console.WriteLine(item);
                     break;
                 case 2:
+                    Console.WriteLine("enter orders id");
+                    int id;
+                    int.TryParse(Console.ReadLine(), out id);
+                    Order order =blList.Order.GetOrderInfo(id);
+                    Console.WriteLine(order);
                     break;
                 case 3:
+                    Console.WriteLine("enter orders id");
+                    int id1;
+                    int.TryParse(Console.ReadLine(), out id1);
+                    Order order1 = blList.Order.UpdateShippingDate(id1);
+                    break;
+                case 4:
+                    Console.WriteLine("enter orders id");
+                    int.TryParse(Console.ReadLine(), out id1);
+                    Order order2 = blList.Order.UpdateDeliveryDate(id1);
+                    break;
+                case 5:
+                    break;
+                case 6:
                     break;
                 default;
             }
@@ -104,7 +143,7 @@ internal class Program
         if (choice1 == 0)
             return;
         else
-            throw new errorException();
+            throw new BO.errorException();
     }
 }
 
@@ -147,5 +186,5 @@ public static void ProductFunc()
     if (choice1 == 0)
         return;
     else
-        throw new errorException();
+        throw new BO.errorException();
 }

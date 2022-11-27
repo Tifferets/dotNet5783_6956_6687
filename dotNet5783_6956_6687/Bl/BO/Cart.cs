@@ -1,5 +1,5 @@
 ﻿namespace BO;
-internal class Cart
+public class Cart
 {/// <summary>
 /// the customers name
 /// </summary>
