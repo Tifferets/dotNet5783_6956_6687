@@ -1,4 +1,6 @@
 ﻿using BlApi;
+using BO;
+
 namespace BlImplementation;
 
 internal class BoProduct:IProduct
@@ -204,42 +206,34 @@ internal class BoProduct:IProduct
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public BO.ProductItem GetProductItem(int id)
+    public BO.ProductItem GetProductItem(int id)//didnt get CART CAUSE DIDNT SEE USE FOR IT
     {
-        if(id >= 300000)
+        if (id < 300000)
         {
-            foreach (DO.Product item in dalList.product.GetAll())
+            throw new BO.errorException();
+        }
+        try
+        {
+            DO.Product product = dalList.product.Get(id);
+            bool flag = false;
+            if (product.InStock > 0)
             {
-                if (item.ID == id)
-                {
-                    bool flag = false;
-                    if (item.InStock > 0)
-                    {
-                        flag = true;
-                    }
-                    try
-                    {
-                        return new BO.ProductItem()
-                        {
-                            ID = item.ID,
-                            Name = item.Name,
-                            Price = item.Price,
-                            Category = (BO.Category)BO.Enum.Parse(typeof(BO.Category), item.Category),
-                            Amount = item.InStock,
-                            Instock = flag,
-                        };
-                    }
-                    catch
-                    {
-                        throw new BO.errorException();
-                    }
-                }
+                flag = true;
             }
+            BO.ProductItem productItem = new BO.ProductItem()
+            {
+                ID = product.ID,
+                Name = product.Name,
+                Price = product.Price,
+                Category = (BO.Category)product.Category,
+                Amount = product.InStock,
+                Instock = flag
+            };
+            return productItem;
         }
-        else
+        catch
         {
-            throw new BO.WrongIDException();
+            throw new BO.errorException();
         }
-       
     }
 }
