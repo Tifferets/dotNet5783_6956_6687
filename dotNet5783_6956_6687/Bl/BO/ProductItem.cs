@@ -1,6 +1,6 @@
 ﻿namespace BO;
 
-internal class ProductItem
+public class ProductItem
 {
     /// <summary>
     /// the product items name
@@ -23,7 +23,7 @@ internal class ProductItem
     /// </summary>
     public int? Amount { get; set; }
     /// <summary>
-    /// true if the product item is in stock
+    /// number if the product item is in stock
     /// </summary>
     public bool? Instock{get;set;}
 public override string ToString() => $@"

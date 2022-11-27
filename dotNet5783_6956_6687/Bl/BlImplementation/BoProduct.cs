@@ -1,5 +1,4 @@
 ﻿using BlApi;
-using System.Linq.Expressions;
 namespace BlImplementation;
 
 internal class BoProduct:IProduct
@@ -11,7 +10,7 @@ internal class BoProduct:IProduct
     /// </summary>
     /// <returns></returns>
 
-    public IEnumerable<BO.ProductForList> GetProducts()
+    public IEnumerable<BO.ProductForList> GetListOfProducts()
     {
         IEnumerable<BO.ProductForList> productsList = new List<BO.ProductForList>();//list of all products from DO
         try
@@ -37,7 +36,7 @@ internal class BoProduct:IProduct
     /// </summary>
     /// <param name="Id"></param>
     /// <returns></returns>
-    public BO.Product ProductBuild(int Id)
+    public BO.Product GetProductbyID(int Id)
     {
         if (Id >= 300000 && Id < 400000)
         {
@@ -199,5 +198,48 @@ internal class BoProduct:IProduct
             throw new BO.CantUpDateException();
         }
         
+    }
+    /// <summary>
+    /// function returns a product item 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public BO.ProductItem GetProductItem(int id)
+    {
+        if(id >= 300000)
+        {
+            foreach (DO.Product item in dalList.product.GetAll())
+            {
+                if (item.ID == id)
+                {
+                    bool flag = false;
+                    if (item.InStock > 0)
+                    {
+                        flag = true;
+                    }
+                    try
+                    {
+                        return new BO.ProductItem()
+                        {
+                            ID = item.ID,
+                            Name = item.Name,
+                            Price = item.Price,
+                            Category = (BO.Category)BO.Enum.Parse(typeof(BO.Category), item.Category),
+                            Amount = item.InStock,
+                            Instock = flag,
+                        };
+                    }
+                    catch
+                    {
+                        throw new BO.errorException();
+                    }
+                }
+            }
+        }
+        else
+        {
+            throw new BO.WrongIDException();
+        }
+       
     }
 }

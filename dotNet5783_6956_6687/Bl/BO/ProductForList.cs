@@ -4,7 +4,7 @@ namespace BO;
 /// <summary>
 /// a list of all the items
 /// </summary>
-internal class ProductForList
+public class ProductForList
 {
     /// <summary>
     /// item id

@@ -7,13 +7,13 @@ public interface IProduct
     /// gets list of products(from system) builds ProductForList and returns it
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<ProductForList> GetProducts();
+    public IEnumerable<ProductForList> GetListOfProducts();
     /// <summary>
     /// gets id, if its positive gets product from system, builds a product and returnds it, throws exception if cant get the product from system
     /// </summary>
     /// <param name="Id"></param>
     /// <returns></returns>
-    public Product ProductBuild(int Id);
+    public Product GetProductbyID(int Id);
     /// <summary>
     /// gets id, if its positive gets product item from system, builds a product and returnds it, throws exception if cant get the product item from system
     /// </summary>
@@ -35,4 +35,10 @@ public interface IProduct
     /// </summary>
     /// <param name="product"></param>
     public void UpdateProduct(Product product);
+    /// <summary>
+    /// function returns a product item 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public ProductItem GetProductItem(int id); 
 }

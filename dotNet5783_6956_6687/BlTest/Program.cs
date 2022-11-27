@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using Dal;
 using BO;
 using DalApi;
 using Bl;
@@ -145,9 +146,9 @@ internal class Program
         else
             throw new BO.errorException();
     }
-}
 
-public static void ProductFunc() 
+
+    public static void ProductFunc() 
 {
     Console.WriteLine(@"Please Enter:
 0: To end program
@@ -165,26 +166,87 @@ public static void ProductFunc()
     {
         switch (choice1)
         {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
+            case 0: 
+                return;//goes back to the 3 options 
+            case 1://To get list of all the products
+                {
+                      foreach(BO.ProductForList item in blList.Product.GetListOfProducts())
+                        {
+                            Console.WriteLine(item);//print all
+                        }
+                    break;
+                }
+            case 2://To get a products details- for admin
+                {
+                      Console.WriteLine("Enter product Id");
+                      int id;
+                      int.TryParse(Console.ReadLine(), out id);
+                      BO.Product product = blList.Product.GetProductbyID(id);//getting product info
+                      Console.WriteLine(product);//printing product
+                      break;
+                }
+            case 3://To get a products details- for customer
+
+                    break;
+            case 4:// To add a product
+                    Console.WriteLine("Please enter product Id, name, amount in stock and category ");
+                    BO.Product product1 = new BO.Product();
+                    product1.Name = Console.ReadLine();
+                    string Category = Console.ReadLine();
+                    try
+                    {
+                        Category category = (Category)BO.Enum.Parse(typeof(Category), Category);
+                        product1.Category = category;
+                    }
+                    catch
+                    { 
+
+                        throw new BO.doesNotExistException(); 
+                    }
+                    double price;
+                    double.TryParse(Console.ReadLine(), out price);
+                    int inStock;
+                    int.TryParse(Console.ReadLine(), out inStock);
+                    product1.Price = price;
+                    product1.InStock = inStock;
+                    blList.Product.AddProduct(product1);
+                    break;
+            case 5://To delete a product
+                    Console.WriteLine("Enter product Id");
+                    int id1;
+                    int.TryParse(Console.ReadLine(), out id1);
+                    blList.Product.DeletProduct(id1);
+                    break;
             case 6:
-                break;
+                    Console.WriteLine("Please enter product Id, name, amount in stock and category ");
+                    BO.Product product2 = new BO.Product();
+                    product2.Name = Console.ReadLine();
+                    string Category1 = Console.ReadLine();
+                    try
+                    {
+                        Category category = (Category)BO.Enum.Parse(typeof(Category), Category1);
+                        product2.Category = category;
+                    }
+                    catch
+                    {
+
+                        throw new BO.doesNotExistException();
+                    }
+                    double price1;
+                    double.TryParse(Console.ReadLine(), out price);
+                    int inStock1;
+                    int.TryParse(Console.ReadLine(), out inStock);
+                    product2.Price = price;
+                    product2.InStock = inStock;
+                    blList.Product.UpdateProduct(product2);
+                    break;
             default:
+                    throw new BO.errorException();
                 break;
         }   
     }
     if (choice1 == 0)
         return;
     else
-        throw new BO.errorException();
+        throw new errorException();
 }

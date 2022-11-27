@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace BO;
 
-internal class OrderForList
+public class OrderForList
 {
     /// <summary>
     /// the customers name
