@@ -1,10 +1,12 @@
 ﻿using BlApi;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BlImplementation;
 
 internal class BoOrder:IOrder
 {
     private static DalApi.IDal dalList = new Dal.DalList();
+    private BO.OrderStatus ordered;
 
     /// <summary>
     /// returns the list of orders- for the admin
@@ -17,28 +19,23 @@ internal class BoOrder:IOrder
         {
             foreach(DO.Order item in dalList.order.GetAll())
             {
-                
-                BO.OrderForList ofl = new BO.OrderForList();
-                ofl.ID= item.ID;
-                ofl.CustomerName= item.CustomerName;
-                if(item.ShipDate <= DateTime.Now)// ?????????????
-                {
-                    //ofl.Status = BO.OrderStatus.shipped;
-                }
-                else if(item.ShipDate > DateTime.Now)
-                {
-
-                }
+                string status = OrderStatus(order);////make function
                 double? price = 0;
                 int amount = 0;
-                foreach(DO.OrderItem oitem in dalList.order.GetAllOrderItems())//loop to count the amount of products and total price
+                foreach(DO.OrderItem oitem in dalList.order.GetAllOrderItems(item.ID))//loop to count the amount of products and total price
                 {
                     amount++;
                     price += oitem.Price;
                 }
-                ofl.TotalPrice = price;
-                ofl.AmountOfItems = amount;
-                OrderForlist.Add(ofl);
+                OrderForlist.Add(new BO.OrderForList
+                {
+                    ID = item.ID,
+                    CustomerName = item.CustomerName,
+                    AmountOfItems = amount,
+                    TotalPrice = price,
+                    Status = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), status)//converting to enum
+                });
+                
             }
             IEnumerable<BO.OrderForList> orderForLists = OrderForlist;//list to return
             return orderForLists;
@@ -49,7 +46,7 @@ internal class BoOrder:IOrder
         }
     }
     /// <summary>
-    /// returns an order -for admin and user
+    /// gets an order id, returns an order - for admin and user
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
@@ -59,36 +56,40 @@ internal class BoOrder:IOrder
         {
             try
             {
-                BO.Order order = new BO.Order();
-                foreach(DO.Order item in dalList.order.GetAll())//loop to go over all the orders
+                DO.Order order = dalList.order.Get(orderId);
+                double? totalprice = 0;
+                int? oiamount = 0; 
+                List<BO.OrderItem> orderitemList = new List<BO.OrderItem>();//list of orderitems
+                IEnumerable<DO.OrderItem> oitms = dalList.order.GetAllOrderItems(orderId);//list od orderitems of this order
+                foreach(DO.OrderItem item in oitms)//going over all the order items dor this order
                 {
-                    if(item.ID == orderId)//checking if the id is the same
+                    totalprice += item.Price* item.Amount;//the total price of the items
+                    oiamount=item.Amount;//amount of items
+                    DO.Product product= dalList.product.Get(item.ProductID);//the product
+                    orderitemList.Add(new BO.OrderItem     //adding to the list
                     {
-                        order.ID = item.ID;
-                        order.CustomerName = item.CustomerName;
-                        order.CustomerAddress = item.CustomerAddress;   
-                        order.CustomerEmail= item.CustomerEmail;
-                        order.OrderDate = item.OrderDate;
-                        order.ShipDate = item.ShipDate;
-                        order.DeliveryDate=item.DeliveryDate;
-                        List<BO.OrderItem> orderitems = new List<BO.OrderItem>();
-                        double? totalprice = 0;
-                        foreach(DO.OrderItem oitem in dalList.order.GetAllOrderItems())//getting a list of all the orderitems
-                        {
-                            BO.OrderItem oi= new BO.OrderItem(); 
-                            oi.ID = oitem.OrderID;
-                            oi.Price = oitem.Price;
-                            oi.ProductID = oitem.ProductID;
-                            oi.Amount= oitem.Amount;
-                            oi.TotalPrice = oitem.Price * oitem.Amount;
-                            orderitems.Add(oi);//adding to list
-                            totalprice += oi.TotalPrice;
-                        }
-                        order.Items = orderitems;
-                        order.TotalPrice=totalprice;
-                    }
+                        ID = item.OrderItemID,
+                        ProductID = item.ProductID,
+                        Name = product.Name,
+                        Price = item.Price,
+                        Amount = item.Amount,
+                        TotalPrice = item.Price * item.Amount,
+
+                    });
                 }
-                return order;
+                return new BO.Order
+                {
+                    ID = orderId,
+                    CustomerName = order.CustomerName,
+                    CustomerAddress = order.CustomerAddress,
+                    CustomerEmail = order.CustomerEmail,
+                    OrderDate = order.OrderDate,
+                    ShipDate = order.ShipDate,
+                    DeliveryDate = order.DeliveryDate,
+                    Status = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), OrderStatus(order)),//converting to enum
+                    Items = orderitemList.ToList(),
+                    TotalPrice = totalprice,
+                };
             }
             catch
             {
@@ -104,59 +105,20 @@ internal class BoOrder:IOrder
     /// <returns></returns>
     public BO.Order UpdateShippingDate(int orderId)
     {
-        DO.Order order= new DO.Order();
-        foreach (DO.Order item in dalList.order.GetAll())
+        if (orderId < 100000)
         {
-            if(item.ID == orderId)
-            {
-                if(item.ShipDate < DateTime.Now )
-                {
-                   order = item;
-                }
-            }
-        }
-        order.ShipDate = DateTime.Now;//updates the DO order to 
-        try
-        {
-            dalList.order.Update(order);//updating to the DO
-        }
-        catch
-        {
-            throw new BO.errorException();
-        }
-        BO.Order order1 = new BO.Order();
-        foreach (DO.Order item in dalList.order.GetAll())//loop to go over all the orders
-        {
-            if (item.ID == orderId)//checking if the id is the same
-            {
-                order1.ID = item.ID;
-                order1.CustomerName = item.CustomerName;
-                order1.CustomerAddress = item.CustomerAddress;
-                order1.CustomerEmail = item.CustomerEmail;
-                order1.OrderDate = item.OrderDate;
-                order1.ShipDate = DateTime.Now;
-                order1.DeliveryDate = item.DeliveryDate;
-                List<BO.OrderItem> orderitems = new List<BO.OrderItem>();
-                double? totalprice = 0;
-                foreach (DO.OrderItem oitem in dalList.order.GetAllOrderItems())//getting a list of all the orderitems
-                {
-                    BO.OrderItem oi = new BO.OrderItem();
-                    oi.ID = oitem.OrderID;
-                    oi.Price = oitem.Price;
-                    oi.ProductID = oitem.ProductID;
-                    oi.Amount = oitem.Amount;
-                    oi.TotalPrice = oitem.Price * oitem.Amount;
-                    orderitems.Add(oi);//adding to list
-                    totalprice += oi.TotalPrice;
-                }
-                order1.Items = orderitems;
-                order1.TotalPrice = totalprice;
-                order1.Status = BO.OrderStatus.shipped;
-            }
+            throw new BO.WrongIDException();
         }
         try
         {
-            return order1;
+            DO.Order order = dalList.order.Get(orderId);//the order we want
+            if (order.ShipDate != DateTime.MinValue)//never got changed
+            {
+                throw new BO.AlreadyShippedException();
+            }
+            order.ShipDate = DateTime.Now;
+            dalList.order.Update(order);
+            return GetOrderInfo(orderId);
         }
         catch
         {
@@ -168,16 +130,66 @@ internal class BoOrder:IOrder
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
-    public Order UpdateDeliveryDate(int orderId)
+    public BO.Order UpdateDeliveryDate(int orderId)
     {
-
+        if (orderId < 100000)
+        {
+            throw new BO.WrongIDException();
+        }
+        try
+        {
+            DO.Order order = dalList.order.Get(orderId);//the order we want
+            if (order.ShipDate == DateTime.MinValue)//never got changed
+            {
+                throw new BO.NotShippedException();
+            }
+            if (order.DeliveryDate != DateTime.MinValue)//never got changed
+            {
+                throw new BO.AlreadyShippedException();
+            }
+            order.DeliveryDate = DateTime.Now;
+            dalList.order.Update(order);
+            return GetOrderInfo(orderId);
+        }
+        catch
+        {
+            throw new BO.errorException();
+        }
     }
     /// <summary>
     /// the function gets an order id and returns the status of the order- for admin
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
-    public IEnumerable<Order> OrderStatus(int orderId);
+    public IEnumerable<BO.Order> OrderStatus(int orderId)
+    {
+        try
+        {
+            DO.Order order = dalList.order.Get(orderId);
+            List<Tuple<BO.OrderStatus,DateTime>> list = new List<Tuple<BO.OrderStatus,DateTime>>();
+            BO.OrderStatus status = BO.OrderStatus.ordered;
+            if(order.OrderDate !=DateTime.MinValue)
+            {
+                list.Add(Tuple.Create(BO.OrderStatus.ordered,order.OrderDate));
+            }
+            if (order.ShipDate != DateTime.MinValue)
+            {
+                list.Add(Tuple.Create(BO.OrderStatus.shipped, order.ShipDate));
+                status=BO.OrderStatus.shipped;
+            }
+            if (order.DeliveryDate != DateTime.MinValue)
+            {
+                list.Add(Tuple.Create(BO.OrderStatus.delivered, order.DeliveryDate));
+                status=BO.OrderStatus.delivered;
+            }
+            BO.OrderTracking orderTracking= new BO.OrderTracking() { ID = orderId, Status= status , tracking=list};
+        }
+        catch
+        {
+            throw new BO.errorException();
+        }
+
+    }
     /// <summary>
     /// BONUS!!
     /// </summary>

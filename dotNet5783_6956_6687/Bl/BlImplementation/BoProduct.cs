@@ -154,13 +154,13 @@ internal class BoProduct:IProduct
     /// <param name="Id"></param>
     public void DeletProduct(int Id)
     {
-        IEnumerable<DO.Order> orderList = dalList.order.GetAll();
-        foreach (DO.Order item in orderList )
+        IEnumerable<DO.Order> orderList = dalList.order.GetAll();//list of do.order
+        foreach (DO.Order item in orderList )//going over the list
         {
-            IEnumerable<DO.OrderItem> orderItemList = dalList.order.GetAllOrderItems();
-            foreach(DO.OrderItem oitem in orderItemList)
+            IEnumerable<DO.OrderItem> orderItemList = dalList.order.GetAllOrderItems(item.ID);//gets a list of all order items for the order
+            foreach(DO.OrderItem oitem in orderItemList)//
             {
-                if(item.ID == Id)
+                if(oitem.ProductID == Id)//checks if the product is in the orderitem
                 {
                     throw new BO.CantDeleteException();
                 }
