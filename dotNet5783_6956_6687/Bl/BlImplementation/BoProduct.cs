@@ -7,16 +7,16 @@ internal class BoProduct:IProduct
     private static DalApi.IDal dalList = new Dal.DalList();
 
     /// <summary>
-    /// gets list of products(frum system) builds ProductForList and returns it
+    /// gets list of products(from system) builds ProductForList and returns it
     /// </summary>
     /// <returns></returns>
 
     public IEnumerable<BO.ProductForList> GetProducts()
     {
-        IEnumerable<BO.ProductForList> productsList = new List<BO.ProductForList>();
+        IEnumerable<BO.ProductForList> productsList = new List<BO.ProductForList>();//list of all products from DO
         try
         {
-            return from item in dalList.product.GetAll()
+            return from item in dalList.product.GetAll()//returns all the products descriptevly
                    select new BO.ProductForList()
                    {
                        ID = item.ID,
@@ -124,7 +124,7 @@ internal class BoProduct:IProduct
     /// </summary>
     /// <param name="product"></param>
     /// <returns></returns>
-    public bool checkDataIsGood(BO.Product product)
+    private bool checkDataIsGood(BO.Product product)
     {
         if(product.Id >=300000 && product.Id < 400000)
         {
@@ -138,7 +138,7 @@ internal class BoProduct:IProduct
     /// </summary>
     /// <param name="p1"></param>
     /// <returns></returns>
-    public DO.Product convert(BO.Product p1)
+    private DO.Product convert(BO.Product p1)
     {
         DO.Product product=new DO.Product();
         product.ID=p1.Id;

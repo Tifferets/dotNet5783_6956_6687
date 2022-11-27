@@ -4,7 +4,7 @@ namespace BlApi;
 public interface IProduct
 {
     /// <summary>
-    /// gets list of products(frum system) builds ProductForList and returns it
+    /// gets list of products(from system) builds ProductForList and returns it
     /// </summary>
     /// <returns></returns>
     public IEnumerable<ProductForList> GetProducts();

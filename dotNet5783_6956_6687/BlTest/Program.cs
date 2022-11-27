@@ -1,18 +1,17 @@
 ﻿using BlApi;
 using BO;
-using DalList;
-using Dal;
-using System.Runtime.CompilerServices;
+using DalApi;
+using Bl;
 
-namespace BlTest;
+namespace BL;
+
+internal class Program
 {
-    internal class Program
+    private static BlApi.IBl blList = new BlImplementation.Bl();
+    static void Main(string[] args)
     {
-       static void Main(string[] args)
-        {
-            //private static IBl blList = new DalList();
 
-            Console.WriteLine(@"Please Enter:
+    Console.WriteLine(@"Please Enter:
 0: To Exit
 1: For Cart
 2: For Order
@@ -81,33 +80,72 @@ namespace BlTest;
     public static void OrderFunc() 
         {
 
-            Console.WriteLine(@"Please Enter:
+        Console.WriteLine(@"Please Enter:
 0: end
 1: add a product to the cart
 2: update an amount of a product
 3: confirm cart
 ");
-            int choice1;
-            int.TryParse(Console.ReadLine(), out choice1);
-            while (choice1 > 0 && choice1 < 4)
+        int choice1;
+        int.TryParse(Console.ReadLine(), out choice1);
+        while (choice1 > 0 && choice1 < 4)
+        {
+            switch (choice1)
             {
-                switch (choice1)
-                {
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    default;
-                }
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                default;
             }
-            if (choice1 == 0)
-                return;
-            else
-                throw new errorException();
         }
+        if (choice1 == 0)
+            return;
+        else
+            throw new errorException();
     }
-    public static void ProductFunc() { }
+}
+
+public static void ProductFunc() 
+{
+    Console.WriteLine(@"Please Enter:
+0: To end program
+1: To get list of all the products
+2: To get a products details- for admin
+3: To get a products details- for customer
+4: To add a product
+5: To delete a product
+6: To update a product
+
+");
+    int choice1;
+    int.TryParse(Console.ReadLine(), out choice1);
+    while (choice1 > 0 && choice1 < 4)
+    {
+        switch (choice1)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            default:
+                break;
+        }   
     }
+    if (choice1 == 0)
+        return;
+    else
+        throw new errorException();
 }
