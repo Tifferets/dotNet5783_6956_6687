@@ -1,11 +1,16 @@
-﻿using BO;
+﻿using BlApi;
+using BO;
+using DalList;
+using Dal;
+using System.Runtime.CompilerServices;
 
-namespace BlTest
+namespace BlTest;
 {
     internal class Program
     {
-        static void Main(string[] args)
+       static void Main(string[] args)
         {
+            //private static IBl blList = new DalList();
 
             Console.WriteLine(@"Please Enter:
 0: To Exit
@@ -55,6 +60,11 @@ namespace BlTest
                 switch (choice1)
                 {
                     case 1:
+                    //  BO.Cart cart = new BO.Cart();
+                    Console.WriteLine("enter product ID");
+                    int id;
+                    int.TryParse(Console.ReadLine(), out id);
+                    addPro
                         break;
                     case 2:
                         break;
