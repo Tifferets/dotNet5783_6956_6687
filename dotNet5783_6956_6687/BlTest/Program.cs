@@ -4,7 +4,7 @@ using BO;
 using DalApi;
 using Bl;
 //using BoCart;
-
+//do u see this??
 namespace BL;
 
 internal class Program
@@ -135,7 +135,7 @@ internal class Program
             {
                 case 1:
                     IEnumerable<OrderForList> lst = blList.Order.GetOrderList();//gets a list of Order for list
-                    foreach(Order item in lst)//prints all of them
+                    foreach(OrderForList item in lst)//prints all of them
                         Console.WriteLine(item);
                     break;
                 case 2:
@@ -271,7 +271,6 @@ public static void ProductFunc()
                     }
                     catch
                     {
-
                         throw new BO.doesNotExistException();
                     }
                     double.TryParse(Console.ReadLine(), out price);

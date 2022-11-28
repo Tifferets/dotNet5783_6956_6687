@@ -122,9 +122,15 @@ internal class BoCart : ICart
     /// <param name="email"></param>
     public void confirmCart(Cart cart, string name, string address, string email)
     {
-        if (name == null || address == null || CheckEmail(email)==false)//makes sure all the customers info is correct
-            throw new MissingCustomersInfoException();
-        foreach(OrderItem item in cart.Items)
+        try
+        {
+            if (name == null || address == null || CheckEmail(email) == false)//makes sure all the customers info is correct
+                throw new MissingCustomersInfoException();
+            if (cart.Items == null)
+                throw new BO.NoItemsInCartException();
+        
+
+        foreach (OrderItem item in cart.Items)
         {
             if (item.Amount < 0)
                 throw new WrongAmountException();
@@ -159,10 +165,10 @@ internal class BoCart : ICart
             id = dalList.order.Add(order);
         }
         catch (Exception ms)
-        { 
-            throw new BO.errorException(); 
+        {
+            throw new BO.errorException();
         }
-        foreach(OrderItem item in cart.Items)//goes through all the orderitems in cart
+        foreach (OrderItem item in cart.Items)//goes through all the orderitems in cart
         {
             DO.OrderItem orderItem = new DO.OrderItem()//creats a new order item
             {
@@ -173,9 +179,9 @@ internal class BoCart : ICart
                 ProductID = item.ProductID,
             };
             //List<DO.Product> lst=new List<DO.Product>();
-            foreach(DO.Product p in dalList.product.GetAll())//goes through all the products in do
+            foreach (DO.Product p in dalList.product.GetAll())//goes through all the products in do
             {
-                
+
                 if (p.ID == item.ProductID)//if its the product then change the amount in stock
                 {
                     DO.Product product = new DO.Product()
@@ -189,7 +195,13 @@ internal class BoCart : ICart
                     dalList.product.Update(p);
                     //lst.Add(product);//adds the changed product to the list 
                 }
-            }        
+            }
+        }
+    }
+    catch (Exception e)
+        {
+            Console.WriteLine(e);
+            //Console.WriteLine("aaa");
         }
     }
     private bool CheckEmail(string email)
