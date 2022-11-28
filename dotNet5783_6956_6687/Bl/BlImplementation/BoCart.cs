@@ -15,53 +15,59 @@ internal class BoCart : ICart
     /// <returns></returns>
     public Cart AddProductToCart(Cart cart, int productId)
     {
-        bool flag=false;
+        bool flag = false;
         if (productId < 300000 || productId > 499999)
             throw new WrongIDException();
-        foreach (BO.OrderItem item in cart.Items)//goes through all the items in the cart
-        {
-            if (item.ProductID == productId)//if the product already exists in the cart
+        try { foreach (BO.OrderItem item in cart.Items)//goes through all the items in the cart
             {
-                flag = true;
-
-                foreach (DO.Product item1 in dalList.product.GetAll())//goes through all the products that exist in general
+                if (item.ProductID == productId)//if the product already exists in the cart
                 {
-                    if (item1.ID == productId && item1.InStock>0)//if it exists and has aenough in stock
+                    flag = true;
+
+                    foreach (DO.Product item1 in dalList.product.GetAll())//goes through all the products that exist in general
                     {
-                        item.Amount = item.Amount + 1;//addes 1 more of the product to the cart
-                        item.TotalPrice = item.TotalPrice + item.Price;
-                        cart.TotalPrice = item.TotalPrice;
-                        break;
+                        if (item1.ID == productId && item1.InStock > 0)//if it exists and has aenough in stock
+                        {
+                            item.Amount = item.Amount + 1;//addes 1 more of the product to the cart
+                            item.TotalPrice = item.TotalPrice + item.Price;
+                            cart.TotalPrice = item.TotalPrice;
+                            break;
+                        }
+                        else
+                            throw new NoMoreInStockException();
+                    }
+                    break;
+                }
+            }
+            if (flag == false)//if the product does not exists in the cart
+            {
+                foreach (DO.Product item in dalList.product.GetAll())//goes through all the products that exist in general
+                {
+                    if (item.ID == productId && item.InStock > 0)//if it exists and has aenough in stock
+                    {
+                        BO.OrderItem newItem = new BO.OrderItem()
+                        {
+                            ProductID = productId,
+                            ID = item.ID,
+                            Name = item.Name,
+                            Price = item.Price,
+                            TotalPrice = item.Price,
+                            Amount = 1
+                        };
+                        cart.TotalPrice = newItem.TotalPrice + cart.TotalPrice;
                     }
                     else
                         throw new NoMoreInStockException();
                 }
-                break;
             }
+            return cart;
         }
-        if (flag == false)//if the product does not exists in the cart
+        catch
         {
-            foreach (DO.Product item in dalList.product.GetAll())//goes through all the products that exist in general
-            {
-                if (item.ID == productId && item.InStock > 0)//if it exists and has aenough in stock
-                {
-                    BO.OrderItem newItem = new BO.OrderItem()
-                    {
-                        ProductID = productId,
-                        ID = item.ID,
-                        Name = item.Name,
-                        Price = item.Price,
-                        TotalPrice = item.Price,
-                        Amount = 1
-                    };
-                    cart.TotalPrice = newItem.TotalPrice + cart.TotalPrice;
-                }
-                else 
-                    throw new NoMoreInStockException();
-            }
+            throw new BO.errorException();
         }
-        return cart;
     }
+
 
     /// <summary>
     /// update an amount of a product in the cart

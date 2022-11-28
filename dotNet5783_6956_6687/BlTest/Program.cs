@@ -69,9 +69,13 @@ internal class Program
                     //  BO.Cart cart = new BO.Cart();
                     Console.WriteLine("enter product ID");
                     int id;
-                    int.TryParse(Console.ReadLine(), out id);
-                    Cart cart = new Cart();
-                    blList.Cart.AddProductToCart(cart, id);
+                    int.TryParse(Console.ReadLine(), out id);  //print all of the products
+                    Cart cart = new Cart()
+                    {
+                        Items = new List<BO.OrderItem>(),
+
+                    };
+                    cart= blList.Cart.AddProductToCart(cart, id);
 
                     break;
                 case 2:
@@ -156,6 +160,7 @@ internal class Program
                 default:
                     throw new BO.errorException();
             }
+            int.TryParse(Console.ReadLine(), out choice1);
         }
         if (choice1 == 0)
             return;
@@ -258,8 +263,9 @@ internal class Program
             default:
                     throw new BO.errorException();
                 break;
-        }   
-    }
+        }
+            int.TryParse(Console.ReadLine(), out choice1);
+        }
     if (choice1 == 0)
         return;
     else

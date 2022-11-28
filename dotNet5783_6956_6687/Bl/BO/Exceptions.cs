@@ -14,8 +14,11 @@ public class alreadyExistException : Exception
 }
 public class errorException : Exception
 {
-    public errorException() : base() { }
-    override public string ToString() => "ERROR";
+    public override string Message => "ERROR";
+    public override  string ToString()
+    {
+        return Message;
+    }
 }
 public class WrongIDException : Exception
 {

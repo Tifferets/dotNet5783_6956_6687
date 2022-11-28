@@ -37,15 +37,14 @@ internal class BoOrder:IOrder
                     TotalPrice = price,
                     Status = stauss,//converting to enum
                 });
-                
             }
             IEnumerable<BO.OrderForList> orderForLists = OrderForlist;//list to return
             return orderForLists;
         }
-        //catch
-        //{
-        //    throw new BO.errorException();
-        //}
+        catch(Exception ex)
+        {
+            throw new BO.errorException();
+        }
     }
     /// <summary>
     /// gets an order id, returns an order - for admin and user

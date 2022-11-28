@@ -56,7 +56,7 @@ internal static class DataSource
     private static void s_Initialize()
     {
         // Order
-        for (int i = 0; i <20 ; i++)//adds 20 orders to the list
+        for (int i = 0; i <10 ; i++)//adds 20 orders to the list
         {
             Order order = new Order();
             order.ID = config.GetOrderID;
