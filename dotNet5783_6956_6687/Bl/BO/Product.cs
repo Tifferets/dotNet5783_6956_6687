@@ -30,6 +30,7 @@ Name: {Name}
 category : {Category}
 Price: {Price}
 Amount in stock: {InStock}
+
 ";
 }
 

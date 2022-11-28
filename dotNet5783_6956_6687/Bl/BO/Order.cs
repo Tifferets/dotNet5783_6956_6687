@@ -52,8 +52,8 @@ Shipping date: {ShipDate}
 Delivery date:{DeliveryDate}
 Stasus:{Status}
 Items:{string.Join('\n',Items)}
-
 Total price:{TotalPrice}
+
 ";
 }
 //Payment date:{PaymentDate}

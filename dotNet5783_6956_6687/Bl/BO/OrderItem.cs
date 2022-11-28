@@ -32,11 +32,12 @@ public class OrderItem  //?????
     /// </summary>
     /// <returns></returns>
  public override string ToString() => $@"
-Order Item ID {ID}
+Order Item ID: {ID}
 Name: {Name}
-Product ID={ProductID}
-Price= {Price}
-Amount={Amount}
-Total price{TotalPrice}
+Product ID: {ProductID}
+Price: {Price}
+Amount: {Amount}
+Total price: {TotalPrice}
+
     ";
 }

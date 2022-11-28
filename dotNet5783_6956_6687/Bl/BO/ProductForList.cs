@@ -32,11 +32,11 @@ public class ProductForList
     public bool InStock { get; set; }
 
 public override string ToString() => $@"
-ID:{ID}
-Name:{Name}
+ID: {ID}
+Name: {Name}
 Price: {Price}
-Category:{Category}
-Amount={Amount}
+Category: {Category}
+Amount: {Amount}
 In stock? {InStock}
 ";
 }

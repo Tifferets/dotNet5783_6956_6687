@@ -28,8 +28,9 @@ public class Cart
 Customers name: {CustomerName}
 Customers email:{CustomerEmail}
 Customers address:{CustomerAddress} 
-Items: {Items}
+Items: {string.Join('\n', Items)}
 Total price: {TotalPrice}
+
 ";
 }
 

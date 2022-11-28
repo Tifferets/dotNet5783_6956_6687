@@ -27,8 +27,8 @@ public class ProductItem
     /// </summary>
     public bool? Instock{get;set;}
 public override string ToString() => $@"
-Name: {Name}
 ID: {ID}
+Name: {Name}
 Price: {Price}
 Category: {Category}
 Amount: {Amount}

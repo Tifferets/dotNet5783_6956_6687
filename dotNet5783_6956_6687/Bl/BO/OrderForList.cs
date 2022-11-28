@@ -28,10 +28,11 @@ public class OrderForList
 
 
     public override string ToString() => $@"
-Name: {CustomerName}
 ID:{ID}
+Name: {CustomerName}
 Status: {Status}
 Amount of items:{AmountOfItems}
 Total price:{TotalPrice}
+
 ";
 }
