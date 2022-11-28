@@ -24,23 +24,35 @@ internal class Program
 ");
         int choice;
         int.TryParse(Console.ReadLine(), out choice);
-        while (choice > -1 && choice < 4) {
-            switch (choice)
+        while (choice > -1 && choice < 4)
+        {
+            try
             {
+                switch (choice)
+            {
+                 
                 case 0:
                     Console.WriteLine("Good Bye and thanks for shopping");//ends the program
-                    return;
+                return;
                 case 1:
                     CartFunc();
-                    break;
+                break;
                 case 2:
                     OrderFunc();
-                    break;
+                break;
                 case 3:
                     ProductFunc();
-                    break;
+                break;
                 default: throw new BO.errorException();
             }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+
             Console.WriteLine(@"Please Enter:
 0: To Exit
 1: For Cart
@@ -134,9 +146,9 @@ internal class Program
             switch (choice1)
             {
                 case 1:
-                    IEnumerable<OrderForList> lst = blList.Order.GetOrderList();//gets a list of Order for list
-                    foreach(Order item in lst)//prints all of them
-                        Console.WriteLine(item);
+                    //IEnumerable<OrderForList> lst = blList.Order.GetOrderList();//gets a list of Order for list
+                    //foreach(Order item in lst)//prints all of them
+                    //Console.WriteLine(item);
                     break;
                 case 2:
 
@@ -260,14 +272,16 @@ public static void ProductFunc()
                     blList.Product.DeletProduct(id);//deleting the product
                     break;
             case 6:
-                    Console.WriteLine("Please enter product Id, name, amount in stock and category ");
-                    BO.Product product2 = new BO.Product();
-                    product2.Name = Console.ReadLine();
-                    string Category1 = Console.ReadLine();
+                    Console.WriteLine("Please enter product Id, name,category, amount in stock and price");
+                    int.TryParse(Console.ReadLine(), out id);
+                    product1 = new BO.Product();
+                    product1.Id = id;
+                    product1.Name = Console.ReadLine();
+                    Category = Console.ReadLine();
                     try
                     {
-                        Category category = (Category)BO.Enum.Parse(typeof(Category), Category1);
-                        product2.Category = category;
+                        Category category = (Category)BO.Enum.Parse(typeof(Category), Category);//converting to enum type
+                        product1.Category = category;
                     }
                     catch
                     {
@@ -276,9 +290,9 @@ public static void ProductFunc()
                     }
                     double.TryParse(Console.ReadLine(), out price);
                     int.TryParse(Console.ReadLine(), out inStock);
-                    product2.Price = price;
-                    product2.InStock = inStock;
-                    blList.Product.UpdateProduct(product2);//updating the product
+                    product1.Price = price;
+                    product1.InStock = inStock;
+                    blList.Product.UpdateProduct(product1);//updating the product
                     break;
             default:
                     throw new BO.errorException();

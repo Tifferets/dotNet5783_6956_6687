@@ -30,7 +30,7 @@ internal class BoProduct:IProduct
             }
              return products;
         }
-        catch
+        catch(Exception ex)
         {
             throw new BO.errorException();
         }
@@ -113,18 +113,18 @@ internal class BoProduct:IProduct
                     throw new BO.alreadyExistException();
                 }
             }
-            // try
+             try
             {
                 dalList.product.Add(convert(product));
             }
-            //    catch
-            //    {
-            //        throw new BO.WrongDataException();
-            //    }
-            //}
-            //else
-            //    throw new BO.WrongDataException();
+            catch
+            {
+                throw new BO.WrongDataException();
+            }
         }
+        else
+            throw new BO.WrongDataException();
+   
     }
     /// <summary>
     /// function that gets a product and checks if its data is all correct returns true
@@ -161,26 +161,32 @@ internal class BoProduct:IProduct
     /// <param name="Id"></param>
     public void DeletProduct(int Id)
     {
-        IEnumerable<DO.Order> orderList = dalList.order.GetAll();//list of do.order
-        foreach (DO.Order item in orderList )//going over the list
+        if (Id >= 300000 && Id < 400000)
         {
-            IEnumerable<DO.OrderItem> orderItemList = dalList.order.GetAllOrderItems(item.ID);//gets a list of all order items for the order
-            foreach(DO.OrderItem oitem in orderItemList)//
+            IEnumerable<DO.Order> orderList = dalList.order.GetAll();//list of do.order
+            foreach (DO.Order item in orderList)//going over the list
             {
-                if(oitem.ProductID == Id)//checks if the product is in the orderitem
+                IEnumerable<DO.OrderItem> orderItemList = dalList.order.GetAllOrderItems(item.ID);//gets a list of all order items for the order
+                foreach (DO.OrderItem oitem in orderItemList)//
                 {
-                    throw new BO.CantDeleteException();
+                    if (oitem.ProductID == Id)//checks if the product is in the orderitem
+                    {
+                        throw new BO.CantDeleteException();
+                    }
                 }
             }
-
+            try
+            {
+                dalList.product.Delete(Id);
+            }
+            catch(Exception ex)
+            {
+                throw new BO.CantDeleteException();
+            }
         }
-        try
-        {
-            dalList.product.Delete(Id);
-        }
-        catch
-        {
-            throw new BO.CantDeleteException();
+        else
+        { 
+            throw new BO.WrongIDException();
         }
     }
     /// <summary>
