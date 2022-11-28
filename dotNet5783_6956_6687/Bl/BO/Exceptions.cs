@@ -22,9 +22,17 @@ public class errorException : Exception
 }
 public class WrongIDException : Exception
 {
-    public WrongIDException() : base() { }
-    override public string ToString() => "Wrong ID";
+    public override string Message => "Wrong ID";
+    public override string ToString()
+    {
+        return Message;
+    }
 }
+//public class WrongIDException : Exception
+//{
+//    public WrongIDException() : base() { }
+//    override public string ToString() => "Wrong ID";
+//}
 public class WrongDataException : Exception
 {
     public WrongDataException() : base() { }
