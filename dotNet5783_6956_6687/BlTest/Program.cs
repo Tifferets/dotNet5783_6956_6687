@@ -24,7 +24,7 @@ internal class Program
 ");
             int choice;
             int.TryParse(Console.ReadLine(), out choice);
-            while (choice > 0 && choice < 4) {
+            while (choice >-1 && choice < 4) {
                 switch (choice)
                 {
                     case 0:
@@ -39,14 +39,9 @@ internal class Program
                     case 3:
                         ProductFunc();
                         break;
-                    default
+                default: throw new BO.errorException();
                 }
             }
-            if (choice == 0)
-            { 
-                
-            }
-
     }
    
     public static void CartFunc()
@@ -78,15 +73,22 @@ internal class Program
                     int.TryParse(Console.ReadLine(), out cartid);
                     int.TryParse(Console.ReadLine(), out productid);
                     int.TryParse(Console.ReadLine(), out newAmount);
-                    foreach(OrderItem item in cart.Items)
-                    {
-                        if(item.Items)
-                    }
-                        break;
+                    Cart cart1 = new Cart();
+                    cart1 = blList.Cart.UpdateAmountOfProductInCart(cart1, productid, newAmount);
+
+                    break;
                     case 3:
-                        break;
-                    default;
-                }
+                    Console.WriteLine("enter customers name,adrees and email");
+                    string name=Console.ReadLine();
+                    string address = Console.ReadLine();
+                    string email =Console.ReadLine();
+                    Cart cart2 = new Cart();
+                    blList.Cart.confirmCart(cart2,name,address,email);
+
+                    break;
+                default:
+                    throw new BO.errorException();
+            }
             }
             if (choice1 == 0)
                 return;
@@ -168,7 +170,7 @@ internal class Program
 ");
     int choice1;
     int.TryParse(Console.ReadLine(), out choice1);
-    while (choice1 > 0 && choice1 < 7)
+    while (choice1 >= 0 && choice1 < 7)
     {
         switch (choice1)
         {
