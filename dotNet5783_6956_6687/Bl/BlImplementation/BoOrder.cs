@@ -15,7 +15,7 @@ internal class BoOrder:IOrder
     public IEnumerable<BO.OrderForList> GetOrderList()
     {
         List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();//list of orderForList
-       // try
+       try
         {
             foreach(DO.Order item in dalList.order.GetAll())
             { 
@@ -100,6 +100,7 @@ internal class BoOrder:IOrder
                 throw new BO.WrongIDException();
             }
         }
+        
         throw new BO.WrongIDException();
     }
     /// <summary>
@@ -109,11 +110,11 @@ internal class BoOrder:IOrder
     /// <returns></returns>
     public BO.Order UpdateShippingDate(int orderId)
     {
-        if (orderId < 100000)
+        if (orderId < 100000 || orderId >= 200000)
         {
             throw new BO.WrongIDException();
         }
-        try
+        //try
         {
             DO.Order order = dalList.order.Get(orderId);//the order we want
             if (order.ShipDate != DateTime.MinValue)//never got changed
@@ -124,10 +125,10 @@ internal class BoOrder:IOrder
             dalList.order.Update(order);
             return GetOrderInfo(orderId);
         }
-        catch
-        {
-            throw new BO.errorException();
-        }
+        //catch
+        //{
+        //    throw new BO.errorException();
+        //}
     }
     /// <summary>
     /// updates the delivery date - for the admin

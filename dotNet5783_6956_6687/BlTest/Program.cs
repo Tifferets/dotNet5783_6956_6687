@@ -100,11 +100,19 @@ internal class Program
                 default:
                     throw new BO.errorException();
             }
+            Console.WriteLine(@"Please Enter:
+0: back
+1: add a product to the cart
+2: update an amount of a product
+3: confirm cart
+");
+            int.TryParse(Console.ReadLine(), out choice1);
         }
         if (choice1 == 0)
             return;
         else
             throw new BO.errorException();
+
     }
 
     public static void OrderFunc() 
@@ -127,7 +135,7 @@ internal class Program
             {
                 case 1:
                     IEnumerable<OrderForList> lst = blList.Order.GetOrderList();//gets a list of Order for list
-                    foreach(OrderForList item in lst)//prints all of them
+                    foreach(Order item in lst)//prints all of them
                         Console.WriteLine(item);
                     break;
                 case 2:
@@ -160,6 +168,16 @@ internal class Program
                 default:
                     throw new BO.errorException();
             }
+           
+            Console.WriteLine(@"Please Enter:
+0: To back
+1: To get a list of all the orders
+2: To see an orders info
+3: To update shipping date
+4: To update delivery date
+5: To see an orders status
+6: To update order
+");
             int.TryParse(Console.ReadLine(), out choice1);
         }
         if (choice1 == 0)
@@ -169,7 +187,7 @@ internal class Program
     }
 
 
-    public static void ProductFunc() 
+public static void ProductFunc() 
 {
     Console.WriteLine(@"Please Enter:
 0: To end program
@@ -264,11 +282,21 @@ internal class Program
                     throw new BO.errorException();
                 break;
         }
+            Console.WriteLine(@"Please Enter:
+0: To end program
+1: To get list of all the products
+2: To get a products details- for admin
+3: To get a products details- for customer
+4: To add a product
+5: To delete a product
+6: To update a product
+
+");
             int.TryParse(Console.ReadLine(), out choice1);
-        }
+    }
     if (choice1 == 0)
         return;
-    else
-        throw new BO.errorException();
+   // else
+      //  throw new BO.errorException();
     }
 }
