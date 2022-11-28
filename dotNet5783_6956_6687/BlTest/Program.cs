@@ -9,7 +9,7 @@ namespace BL;
 internal class Program
 {
     private static BlApi.IBl blList = new BlImplementation.Bl();
-    internal static List<Cart> carts = new List<Cart>();
+    //internal static List<Cart> carts = new List<Cart>();
     static void Main(string[] args)
     {
 
@@ -59,7 +59,10 @@ internal class Program
             int.TryParse(Console.ReadLine(), out choice);
         }    
     }
-
+    /// <summary>
+    /// fuction that uses all the cart functions 
+    /// </summary>
+    /// <exception cref="BO.errorException"></exception>
     public static void CartFunc()
     {
 
@@ -87,8 +90,8 @@ internal class Program
                 case 1:
                     Console.WriteLine("enter product ID");
                     int id;
-                    int.TryParse(Console.ReadLine(), out id);  //print all of the products
-                    cart= blList.Cart.AddProductToCart(cart, id);
+                    int.TryParse(Console.ReadLine(), out id);  
+                    cart= blList.Cart.AddProductToCart(cart, id);//adds a product to the cart
 
                     break;
                 case 2:
@@ -97,8 +100,7 @@ internal class Program
                     string name = Console.ReadLine();//we dont relly need this its a way to identidy the cart but we only have one cart so we wont us it 
                     int.TryParse(Console.ReadLine(), out productid);
                     int.TryParse(Console.ReadLine(), out newAmount);
-                    cart = blList.Cart.UpdateAmountOfProductInCart(cart, productid, newAmount);
-
+                    cart = blList.Cart.UpdateAmountOfProductInCart(cart, productid, newAmount);//updates an amount of the product in the cart
                     break;
                 case 3:
                     Console.WriteLine("enter customers name,adrees and email");
@@ -112,10 +114,10 @@ internal class Program
                     throw new BO.errorException();
             }
             Console.WriteLine(@"Please Enter:
-0: back
-1: add a product to the cart
-2: update an amount of a product
-3: confirm cart
+0: To go back to main menu
+1: To add a product to the cart
+2: To update an amount of a product
+3: To confirm cart
 ");
             int.TryParse(Console.ReadLine(), out choice1);
         }
@@ -125,12 +127,15 @@ internal class Program
             throw new BO.errorException();
 
     }
-
+    /// <summary>
+    /// function to use all the order functions
+    /// </summary>
+    /// <exception cref="BO.errorException"></exception>
     public static void OrderFunc() 
     {
 
         Console.WriteLine(@"Please Enter:
-0: To back
+0: To go back to main menu
 1: To get a list of all the orders
 2: To see an orders info
 3: To update shipping date
@@ -145,7 +150,7 @@ internal class Program
             switch (choice1)
             {
                 case 1:
-                    foreach (BO.OrderForList item in blList.Order.GetOrderList())
+                    foreach (BO.OrderForList item in blList.Order.GetOrderList())//gets all orders in order list- no date
                     {
                         Console.WriteLine(item);//print all
                     }
@@ -155,28 +160,25 @@ internal class Program
                     Console.WriteLine("enter orders id");
                     int id;
                     int.TryParse(Console.ReadLine(), out id);
-                    Order order =blList.Order.GetOrderInfo(id);
+                    Order order =blList.Order.GetOrderInfo(id);//gets order info for the admin
                     Console.WriteLine(order);
                     break;
                 case 3:
                     Console.WriteLine("enter orders id");
                     int id1;
                     int.TryParse(Console.ReadLine(), out id1);
-                    Order order1 = blList.Order.UpdateShippingDate(id1);
+                    Order order1 = blList.Order.UpdateShippingDate(id1);// updates order shipping date
                     break;
                 case 4:
                     Console.WriteLine("enter orders id");
                     int.TryParse(Console.ReadLine(), out id1);
-                    Order order2 = blList.Order.UpdateDeliveryDate(id1);
+                    Order order2 = blList.Order.UpdateDeliveryDate(id1);//updates order dilivery date
                     break;
                 case 5://To see an orders status
                     Console.WriteLine("enter orders id");
                     int.TryParse(Console.ReadLine(), out id1);
                     Console.WriteLine(blList.Order.OrderStatus(id1));//prints order traking details
                     break;
-              //  case 6://To update order
-
-                  //  break;
                 default:
                     throw new BO.errorException();
             }
@@ -194,11 +196,13 @@ internal class Program
         }
         if (choice1 == 0)
             return;
-        //else
-          //  throw new BO.errorException();
     }
 
-
+    /// <summary>
+    /// function to use all the product functions
+    /// </summary>
+    /// <exception cref="BO.doesNotExistException"></exception>
+    /// <exception cref="BO.errorException"></exception>
 public static void ProductFunc() 
 {
     Console.WriteLine(@"Please Enter:
@@ -311,7 +315,5 @@ public static void ProductFunc()
     }
     if (choice1 == 0)
         return;
-   // else
-      //  throw new BO.errorException();
     }
 }
