@@ -25,6 +25,8 @@ internal class Program
             int choice;
             int.TryParse(Console.ReadLine(), out choice);
             while (choice >-1 && choice < 4) {
+            try
+            {
                 switch (choice)
                 {
                     case 0:
@@ -39,8 +41,13 @@ internal class Program
                     case 3:
                         ProductFunc();
                         break;
-                default: throw new BO.errorException();
+                    default: throw new BO.errorException();
                 }
+            } 
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
             }
     }
    
@@ -62,9 +69,13 @@ internal class Program
                     //  BO.Cart cart = new BO.Cart();
                     Console.WriteLine("enter product ID");
                     int id;
-                    int.TryParse(Console.ReadLine(), out id);
-                    Cart cart = new Cart();
-                    blList.Cart.AddProductToCart(cart, id);
+                    int.TryParse(Console.ReadLine(), out id);  //print all of the products
+                    Cart cart = new Cart()
+                    {
+                        Items = new List<BO.OrderItem>(),
+
+                    };
+                    cart= blList.Cart.AddProductToCart(cart, id);
 
                         break;
                     case 2:
@@ -89,7 +100,8 @@ internal class Program
                 default:
                     throw new BO.errorException();
             }
-            }
+            int.TryParse(Console.ReadLine(), out choice1);
+        }
             if (choice1 == 0)
                 return;
             else
@@ -148,6 +160,7 @@ internal class Program
                 default:
                     throw new BO.errorException();
             }
+            int.TryParse(Console.ReadLine(), out choice1);
         }
         if (choice1 == 0)
             return;
@@ -250,8 +263,9 @@ internal class Program
             default:
                     throw new BO.errorException();
                 break;
-        }   
-    }
+        }
+            int.TryParse(Console.ReadLine(), out choice1);
+        }
     if (choice1 == 0)
         return;
     else
