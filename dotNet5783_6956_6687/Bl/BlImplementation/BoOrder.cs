@@ -175,16 +175,16 @@ internal class BoOrder:IOrder
             BO.OrderStatus status = BO.OrderStatus.ordered;
             if(order.OrderDate !=DateTime.MinValue)
             {
-                list.Add(Tuple.Create(BO.OrderStatus.ordered,order.OrderDate));
+                list.Add(Tuple.Create(BO.OrderStatus.ordered,(DateTime)order.OrderDate));
             }
             if (order.ShipDate != DateTime.MinValue)
             {
-                list.Add(Tuple.Create(BO.OrderStatus.shipped, order.ShipDate));
+                list.Add(Tuple.Create(BO.OrderStatus.shipped, (DateTime)order.ShipDate));
                 status=BO.OrderStatus.shipped;
             }
             if (order.DeliveryDate != DateTime.MinValue)
             {
-                list.Add(Tuple.Create(BO.OrderStatus.delivered, order.DeliveryDate));
+                list.Add(Tuple.Create(BO.OrderStatus.delivered, (DateTime)order.DeliveryDate));
                 status=BO.OrderStatus.delivered;
             }
             BO.OrderTracking orderTracking= new BO.OrderTracking() { ID = orderId, Status= status , tracking=list};
