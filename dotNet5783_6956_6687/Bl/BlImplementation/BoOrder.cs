@@ -114,7 +114,7 @@ internal class BoOrder:IOrder
         {
             throw new BO.WrongIDException();
         }
-        //try
+        try
         {
             DO.Order order = dalList.order.Get(orderId);//the order we want
             if (order.ShipDate != DateTime.MinValue)//never got changed
@@ -125,10 +125,10 @@ internal class BoOrder:IOrder
             dalList.order.Update(order);
             return GetOrderInfo(orderId);
         }
-        //catch
-        //{
-        //    throw new BO.errorException();
-        //}
+        catch
+        {
+            throw new BO.errorException();
+        }
     }
     /// <summary>
     /// updates the delivery date - for the admin
