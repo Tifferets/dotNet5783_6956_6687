@@ -14,17 +14,21 @@ internal class BoProduct:IProduct
 
     public IEnumerable<BO.ProductForList> GetListOfProducts()
     {
-        IEnumerable<BO.ProductForList> productsList = new List<BO.ProductForList>();//list of all products from DO
+        //IEnumerable<BO.ProductForList> productsList = new List<BO.ProductForList>();//list of all products from DO
+        List<BO.ProductForList> products = new List<BO.ProductForList>();
         try
         {
-            return from item in dalList.product.GetAll()//returns all the products descriptevly
-                   select new BO.ProductForList()
-                   {
-                       ID = item.ID,
-                       Name = item.Name,
-                       Price = item.Price,
-                       Category = (BO.Category)item.Category,
-                   };
+             foreach(DO.Product item in dalList.product.GetAll())
+            {
+                bool flag = false;
+                if(item.InStock>0)
+                {
+                    flag=true;
+                }
+                BO.ProductForList productForList = new BO.ProductForList() { ID = item.ID, Name= item.Name, InStock=flag, Amount=item.InStock, Price=item.Price, Category = (BO.Category)item.Category };
+                products.Add(productForList);
+            }
+             return products;
         }
         catch
         {
@@ -53,6 +57,7 @@ internal class BoProduct:IProduct
                         product.Name = item.Name;
                         product.Category = (BO.Category)item.Category;
                         product.InStock = item.InStock;
+                        product.Price = item.Price;
                     }
                 }
                 return product;
@@ -108,17 +113,18 @@ internal class BoProduct:IProduct
                     throw new BO.alreadyExistException();
                 }
             }
-            try
+            // try
             {
                 dalList.product.Add(convert(product));
             }
-            catch
-            {
-                throw new BO.WrongDataException();
-            }
+            //    catch
+            //    {
+            //        throw new BO.WrongDataException();
+            //    }
+            //}
+            //else
+            //    throw new BO.WrongDataException();
         }
-        else
-            throw new BO.WrongDataException();
     }
     /// <summary>
     /// function that gets a product and checks if its data is all correct returns true
@@ -129,7 +135,7 @@ internal class BoProduct:IProduct
     {
         if(product.Id >=300000 && product.Id < 400000)
         {
-            if(product.Name != null && product.Price>0 && product.InStock >= 0)
+            if(product.Name != null && product.Price > 0 && product.InStock >= 0)
                 return true;
         }
         return false;

@@ -229,8 +229,10 @@ public static void ProductFunc()
                     Console.WriteLine(blList.Product.GetProductItem(id)); //retuns and prints the details
                     break;
             case 4:// To add a product
-                    Console.WriteLine("Please enter product Id, name, amount in stock and category ");
+                    Console.WriteLine("Please enter product Id, name,category, amount in stock and price");
+                    int.TryParse(Console.ReadLine(), out id);
                     BO.Product product1 = new BO.Product();
+                    product1.Id=id;
                     product1.Name = Console.ReadLine();
                     string Category = Console.ReadLine();
                     try
