@@ -145,6 +145,13 @@ internal class Program
 ");
         int choice1;
         int.TryParse(Console.ReadLine(), out choice1);
+        List<BO.OrderItem> orderItems = new List<BO.OrderItem>() { new OrderItem { ID = 200000, Name = "Big dog", Price = 63, ProductID = 300007, Amount = 4, TotalPrice = 63 * 4, } };
+        Order order1 = new Order()
+        {
+            ID= 100000, CustomerAddress= "tel aviv", CustomerEmail= "yael@gmail.com", CustomerName="yael",
+            DeliveryDate= DateTime.MinValue, OrderDate= DateTime.MinValue, ShipDate = DateTime.MinValue, 
+            Items= orderItems,
+        };
         while (choice1 > 0 && choice1 < 6)
         {
             switch (choice1)
@@ -167,12 +174,12 @@ internal class Program
                     Console.WriteLine("enter orders id");
                     int id1;
                     int.TryParse(Console.ReadLine(), out id1);
-                    Order order1 = blList.Order.UpdateShippingDate(id1);// updates order shipping date
+                    order1 = blList.Order.UpdateShippingDate(order1.ID);// updates order shipping date
                     break;
                 case 4:
                     Console.WriteLine("enter orders id");
                     int.TryParse(Console.ReadLine(), out id1);
-                    Order order2 = blList.Order.UpdateDeliveryDate(id1);//updates order dilivery date
+                    order1 = blList.Order.UpdateDeliveryDate(order1.ID);//updates order dilivery date
                     break;
                 case 5://To see an orders status
                     Console.WriteLine("enter orders id");
