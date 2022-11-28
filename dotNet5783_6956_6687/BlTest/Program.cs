@@ -3,6 +3,7 @@ using Dal;
 using BO;
 using DalApi;
 using Bl;
+using System.Numerics;
 //using BoCart;
 
 namespace BL;
@@ -30,10 +31,10 @@ internal class Program
             {
                 switch (choice)
             {
-                 
                 case 0:
                     Console.WriteLine("Good Bye and thanks for shopping");//ends the program
                 return;
+
                 case 1:
                     CartFunc();
                 break;
@@ -65,6 +66,16 @@ internal class Program
 
     public static void CartFunc()
     {
+
+        List<BO.OrderItem> orderItems = new List<BO.OrderItem>() { new OrderItem { ID = 200000, Name = "Big dog", Price = 30, ProductID = 300000, Amount = 5, TotalPrice = 30*5, } };
+        Cart cart = new Cart()//card to check the main with
+        {
+            Items = orderItems,
+            CustomerAddress= "beit shemesh",
+            CustomerEmail = "customer@gmail.com",
+            CustomerName= "customer",
+            TotalPrice= 30*5,
+        };
         Console.WriteLine(@"Please Enter:
 0: back
 1: add a product to the cart
@@ -78,15 +89,9 @@ internal class Program
             switch (choice1)
             {
                 case 1:
-                    //  BO.Cart cart = new BO.Cart();
                     Console.WriteLine("enter product ID");
                     int id;
                     int.TryParse(Console.ReadLine(), out id);  //print all of the products
-                    Cart cart = new Cart()
-                    {
-                        Items = new List<BO.OrderItem>(),
-
-                    };
                     cart= blList.Cart.AddProductToCart(cart, id);
 
                     break;
@@ -96,8 +101,7 @@ internal class Program
                     int.TryParse(Console.ReadLine(), out cartid);
                     int.TryParse(Console.ReadLine(), out productid);
                     int.TryParse(Console.ReadLine(), out newAmount);
-                    Cart cart1 = new Cart();
-                    cart1 = blList.Cart.UpdateAmountOfProductInCart(cart1, productid, newAmount);
+                    cart = blList.Cart.UpdateAmountOfProductInCart(cart, productid, newAmount);
 
                     break;
                 case 3:
@@ -105,8 +109,7 @@ internal class Program
                     string name = Console.ReadLine();
                     string address = Console.ReadLine();
                     string email = Console.ReadLine();
-                    Cart cart2 = new Cart();
-                    blList.Cart.confirmCart(cart2, name, address, email);
+                    blList.Cart.confirmCart(cart, name, address, email);
 
                     break;
                 default:
