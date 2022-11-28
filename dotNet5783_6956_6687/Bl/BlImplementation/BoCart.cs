@@ -124,24 +124,26 @@ internal class BoCart : ICart
     /// <param name="email"></param>
     public void confirmCart(Cart cart, string name, string address, string email)
     {
+        bool checkIfWorked = true;
         try
         {
             if (name == null || address == null || CheckEmail(email) == false)//makes sure all the customers info is correct
                 throw new MissingCustomersInfoException();
             if (cart.Items == null)
                 throw new BO.NoItemsInCartException();
-        
 
-        foreach (OrderItem item in cart.Items)
+            bool flag = false;
+
+            foreach (OrderItem item in cart.Items)
         {
             if (item.Amount < 0)
                 throw new WrongAmountException();
-            bool flag = false;
+           
             foreach (DO.Product item1 in dalList.product.GetAll())//goes through all the product looking for the product in the cart
             {
                 if (item1.ID == item.ProductID)
                 {
-                    if (item1.InStock <= item.Amount)//if the product exists but its not in stock
+                    if (item1.InStock < item.Amount)//if the product exists but its not in stock
                         throw new NoMoreInStockException();
                     else
                         flag = true;
@@ -151,56 +153,64 @@ internal class BoCart : ICart
             if (flag == false)//if we didnt find the product in general then throw
                 throw new NoMoreInStockException();
         }
-        DO.Order order = new DO.Order()
-        {
-            CustomerAddress = address,
-            CustomerEmail = email,
-            CustomerName = name,
-            OrderDate = DateTime.Now,
-            DeliveryDate = DateTime.Now,
-            ShipDate = DateTime.Now,
-        };
-        int id;
-        try
-        {
-           id= dalList.order.Add(order);
-        }
-        catch (Exception ms)
-        {
-            throw new BO.errorException();
-        }
-        foreach (OrderItem item in cart.Items)//goes through all the orderitems in cart
-        {
-            DO.OrderItem orderItem = new DO.OrderItem()//creats a new order item
+            if (flag == true)
             {
-                Amount = item.Amount,
-                OrderID = id,
-                OrderItemID = item.ID,
-                Price = item.Price,
-                ProductID = item.ProductID,
-            };
-            foreach (DO.Product p in dalList.product.GetAll())//goes through all the products in do
-            {
-
-                if (p.ID == item.ProductID)//if its the product then change the amount in stock
+                DO.Order order = new DO.Order()
                 {
-                    DO.Product product = new DO.Product()
+                    CustomerAddress = address,
+                    CustomerEmail = email,
+                    CustomerName = name,
+                    OrderDate = DateTime.Now,
+                    DeliveryDate = DateTime.Now,
+                    ShipDate = DateTime.Now,
+                };
+                int id;
+                try
+                {
+                    id = dalList.order.Add(order);
+                }
+                catch (Exception ms)
+                {
+                    throw new BO.errorException();
+                }
+                foreach (OrderItem item in cart.Items)//goes through all the orderitems in cart
+                {
+                    //DO.OrderItem orderItem = new DO.OrderItem()//creats a new order item
+                    //{
+                    //    Amount = item.Amount,
+                    //    OrderID = id,
+                    //    OrderItemID = item.ID,
+                    //    Price = item.Price,
+                    //    ProductID = item.ProductID,
+                    //};
+                    foreach (DO.Product p in dalList.product.GetAll())//goes through all the products in do
                     {
-                        ID = p.ID,
-                        Price = p.Price,
-                        Name = p.Name,
-                        Category = p.Category,
-                        InStock = p.InStock - item.Amount,
-                    };
-                    dalList.product.Update(p);
+
+                        if (p.ID == item.ProductID)//if its the product then change the amount in stock
+                        {
+                            DO.Product product = new DO.Product()
+                            {
+                                ID = p.ID,
+                                Price = p.Price,
+                                Name = p.Name,
+                                Category = p.Category,
+                                InStock = p.InStock - item.Amount,
+                            };
+                            dalList.product.Update(p);
+                            break;
+                        }
+                    }
                 }
             }
-        }
     }
+    
     catch (Exception e)
         {
             Console.WriteLine(e);
+            checkIfWorked = false;
         }
+        if(checkIfWorked==true)
+            Console.WriteLine("cart confirmed");
     }
     private bool CheckEmail(string email)
     {//returns true if the email is proper else returns false

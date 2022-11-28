@@ -103,12 +103,12 @@ internal class Program
                     cart = blList.Cart.UpdateAmountOfProductInCart(cart, productid, newAmount);//updates an amount of the product in the cart
                     break;
                 case 3:
-                    Console.WriteLine("enter customers name,adrees and email");
+                    Console.WriteLine("enter customers name,address and email");
                     name = Console.ReadLine();
                     string address = Console.ReadLine();
                     string email = Console.ReadLine();
                     blList.Cart.confirmCart(cart, name, address, email);
-
+                    
                     break;
                 default:
                     throw new BO.errorException();
@@ -317,3 +317,39 @@ public static void ProductFunc()
         return;
     }
 }
+/*
+ Please Enter:
+0: To Exit
+1: For Cart
+2: For Order
+3: For Product
+
+1
+Please Enter:
+0: back
+1: add a product to the cart
+2: update an amount of a product
+3: confirm cart
+
+3
+enter customers name,adrees and email
+aaa
+bbb
+ccc@
+cart confirmed
+Please Enter:
+0: To go back to main menu
+1: To add a product to the cart
+2: To update an amount of a product
+3: To confirm cart
+
+0
+Please Enter:
+0: To Exit
+1: For Cart
+2: For Order
+3: For Product
+
+0
+Good Bye and thanks for shopping
+ */
