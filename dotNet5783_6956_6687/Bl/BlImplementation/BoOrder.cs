@@ -21,7 +21,7 @@ internal class BoOrder:IOrder
             { 
                 BO.OrderTracking orderTracking = OrderStatus(item.ID);
                 string statusee = status(orderTracking);
-                BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), cat);//converting to enum type
+                BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
                 double? price = 0;
                 int amount = 0;
                 foreach(DO.OrderItem oitem in dalList.order.GetAllOrderItems(item.ID))//loop to count the amount of products and total price
@@ -79,6 +79,9 @@ internal class BoOrder:IOrder
 
                     });
                 }
+                BO.OrderTracking orderTracking = OrderStatus(orderId);
+                string statusee = status(orderTracking);
+                BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
                 return new BO.Order
                 {
                     ID = orderId,
@@ -88,7 +91,7 @@ internal class BoOrder:IOrder
                     OrderDate = order.OrderDate,
                     ShipDate = order.ShipDate,
                     DeliveryDate = order.DeliveryDate,
-                    Status = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), OrderStatus(order)),//converting to enum
+                    Status = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), stauss.ToString()),//converting to enum
                     Items = orderitemList.ToList(),
                     TotalPrice = totalprice,
                 };
