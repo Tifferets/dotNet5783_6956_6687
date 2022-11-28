@@ -4,16 +4,12 @@ using BO;
 using DalApi;
 using Bl;
 using System.Numerics;
-//using BoCart;
-//do u see this??
 namespace BL;
 
 internal class Program
 {
     private static BlApi.IBl blList = new BlImplementation.Bl();
     internal static List<Cart> carts = new List<Cart>();
-    // internal static List<OrderItem> OrderItemList = new List<OrderItem>();
-    // internal static List<Product> Productlist = new List<Product>();
     static void Main(string[] args)
     {
 
@@ -67,14 +63,14 @@ internal class Program
     public static void CartFunc()
     {
 
-        List<BO.OrderItem> orderItems = new List<BO.OrderItem>() { new OrderItem { ID = 200000, Name = "Big dog", Price = 30, ProductID = 300000, Amount = 5, TotalPrice = 30*5, } };
+        List<BO.OrderItem> orderItems = new List<BO.OrderItem>() { new OrderItem { ID = 200000, Name = "Big dog", Price = 63, ProductID = 300007, Amount = 4, TotalPrice = 63*4, } };
         Cart cart = new Cart()//card to check the main with
         {
             Items = orderItems,
             CustomerAddress= "beit shemesh",
             CustomerEmail = "customer@gmail.com",
             CustomerName= "customer",
-            TotalPrice= 30*5,
+            TotalPrice= 63*4,
         };
         Console.WriteLine(@"Please Enter:
 0: back
@@ -96,9 +92,9 @@ internal class Program
 
                     break;
                 case 2:
-                    Console.WriteLine("enter cart id, product id and new amount ");
-                    int cartid, productid, newAmount;
-                    int.TryParse(Console.ReadLine(), out cartid);
+                    Console.WriteLine("enter custemer name, product id and new amount ");
+                    int productid, newAmount;
+                    string name = Console.ReadLine();//we dont relly need this its a way to identidy the cart but we only have one cart so we wont us it 
                     int.TryParse(Console.ReadLine(), out productid);
                     int.TryParse(Console.ReadLine(), out newAmount);
                     cart = blList.Cart.UpdateAmountOfProductInCart(cart, productid, newAmount);
@@ -106,7 +102,7 @@ internal class Program
                     break;
                 case 3:
                     Console.WriteLine("enter customers name,adrees and email");
-                    string name = Console.ReadLine();
+                    name = Console.ReadLine();
                     string address = Console.ReadLine();
                     string email = Console.ReadLine();
                     blList.Cart.confirmCart(cart, name, address, email);
@@ -149,12 +145,13 @@ internal class Program
             switch (choice1)
             {
                 case 1:
-                    //IEnumerable<OrderForList> lst = blList.Order.GetOrderList();//gets a list of Order for list
-                    //foreach(Order item in lst)//prints all of them
-                    //Console.WriteLine(item);
+                    foreach (BO.OrderForList item in blList.Order.GetOrderList())
+                    {
+                        Console.WriteLine(item);//print all
+                    }
                     break;
-                case 2:
 
+                case 2:
                     Console.WriteLine("enter orders id");
                     int id;
                     int.TryParse(Console.ReadLine(), out id);

@@ -51,7 +51,8 @@ Order date: {OrderDate}
 Shipping date: {ShipDate}
 Delivery date:{DeliveryDate}
 Stasus:{Status}
-Items:{Items}
+Items:{string.Join('\n',Items)}
+
 Total price:{TotalPrice}
 ";
 }
