@@ -11,39 +11,46 @@ internal class Program
 {
     private static BlApi.IBl blList = new BlImplementation.Bl();
     internal static List<Cart> carts = new List<Cart>();
-   // internal static List<OrderItem> OrderItemList = new List<OrderItem>();
-   // internal static List<Product> Productlist = new List<Product>();
+    // internal static List<OrderItem> OrderItemList = new List<OrderItem>();
+    // internal static List<Product> Productlist = new List<Product>();
     static void Main(string[] args)
     {
-        
-    Console.WriteLine(@"Please Enter:
+
+        Console.WriteLine(@"Please Enter:
 0: To Exit
 1: For Cart
 2: For Order
 3: For Product
 ");
-            int choice;
-            int.TryParse(Console.ReadLine(), out choice);
-            while (choice >-1 && choice < 4) {
-                switch (choice)
-                {
-                    case 0:
-                        Console.WriteLine("Good Bye and thanks for shopping");//ends the program
-                        return;
-                    case 1:
-                        CartFunc();
-                        break;
-                    case 2:
-                        OrderFunc();
-                        break;
-                    case 3:
-                        ProductFunc();
-                        break;
+        int choice;
+        int.TryParse(Console.ReadLine(), out choice);
+        while (choice > -1 && choice < 4) {
+            switch (choice)
+            {
+                case 0:
+                    Console.WriteLine("Good Bye and thanks for shopping");//ends the program
+                    return;
+                case 1:
+                    CartFunc();
+                    break;
+                case 2:
+                    OrderFunc();
+                    break;
+                case 3:
+                    ProductFunc();
+                    break;
                 default: throw new BO.errorException();
-                }
             }
+            Console.WriteLine(@"Please Enter:
+0: To Exit
+1: For Cart
+2: For Order
+3: For Product
+");
+            int.TryParse(Console.ReadLine(), out choice);
+        }    
     }
-   
+
     public static void CartFunc()
     {
         Console.WriteLine(@"Please Enter:
@@ -52,13 +59,13 @@ internal class Program
 2: update an amount of a product
 3: confirm cart
 ");
-            int choice1;
-            int.TryParse(Console.ReadLine(), out choice1);
-            while (choice1 > 0 && choice1 < 4)
+        int choice1;
+        int.TryParse(Console.ReadLine(), out choice1);
+        while (choice1 > 0 && choice1 < 4)
+        {
+            switch (choice1)
             {
-                switch (choice1)
-                {
-                    case 1:
+                case 1:
                     //  BO.Cart cart = new BO.Cart();
                     Console.WriteLine("enter product ID");
                     int id;
@@ -66,10 +73,10 @@ internal class Program
                     Cart cart = new Cart();
                     blList.Cart.AddProductToCart(cart, id);
 
-                        break;
-                    case 2:
+                    break;
+                case 2:
                     Console.WriteLine("enter cart id, product id and new amount ");
-                    int cartid,productid,newAmount;
+                    int cartid, productid, newAmount;
                     int.TryParse(Console.ReadLine(), out cartid);
                     int.TryParse(Console.ReadLine(), out productid);
                     int.TryParse(Console.ReadLine(), out newAmount);
@@ -77,26 +84,27 @@ internal class Program
                     cart1 = blList.Cart.UpdateAmountOfProductInCart(cart1, productid, newAmount);
 
                     break;
-                    case 3:
+                case 3:
                     Console.WriteLine("enter customers name,adrees and email");
-                    string name=Console.ReadLine();
+                    string name = Console.ReadLine();
                     string address = Console.ReadLine();
-                    string email =Console.ReadLine();
+                    string email = Console.ReadLine();
                     Cart cart2 = new Cart();
-                    blList.Cart.confirmCart(cart2,name,address,email);
+                    blList.Cart.confirmCart(cart2, name, address, email);
 
                     break;
                 default:
                     throw new BO.errorException();
             }
-            }
-            if (choice1 == 0)
-                return;
-            else
-                throw new BO.errorException();
         }
+        if (choice1 == 0)
+            return;
+        else
+            throw new BO.errorException();
+    }
+
     public static void OrderFunc() 
-        {
+    {
 
         Console.WriteLine(@"Please Enter:
 0: To back
@@ -151,8 +159,8 @@ internal class Program
         }
         if (choice1 == 0)
             return;
-        else
-            throw new BO.errorException();
+        //else
+          //  throw new BO.errorException();
     }
 
 

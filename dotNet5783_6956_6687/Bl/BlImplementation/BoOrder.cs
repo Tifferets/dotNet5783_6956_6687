@@ -15,7 +15,7 @@ internal class BoOrder:IOrder
     public IEnumerable<BO.OrderForList> GetOrderList()
     {
         List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();//list of orderForList
-        try
+       // try
         {
             foreach(DO.Order item in dalList.order.GetAll())
             { 
@@ -42,10 +42,10 @@ internal class BoOrder:IOrder
             IEnumerable<BO.OrderForList> orderForLists = OrderForlist;//list to return
             return orderForLists;
         }
-        catch
-        {
-            throw new BO.errorException();
-        }
+        //catch
+        //{
+        //    throw new BO.errorException();
+        //}
     }
     /// <summary>
     /// gets an order id, returns an order - for admin and user
@@ -168,7 +168,7 @@ internal class BoOrder:IOrder
     /// <returns></returns>
     public BO.OrderTracking OrderStatus(int orderId)
     {
-        try
+        //try
         {
             DO.Order order = dalList.order.Get(orderId);
             List<Tuple<BO.OrderStatus,DateTime>> list = new List<Tuple<BO.OrderStatus,DateTime>>();
@@ -190,10 +190,10 @@ internal class BoOrder:IOrder
             BO.OrderTracking orderTracking= new BO.OrderTracking() { ID = orderId, Status= status , tracking=list};
             return orderTracking;
         }
-        catch
-        {
-            throw new BO.errorException();
-        }
+        //catch
+        //{
+        //    throw new BO.errorException();
+        //}
 
     }
     /// <summary>
