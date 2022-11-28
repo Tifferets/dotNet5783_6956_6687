@@ -5,7 +5,7 @@ using DalApi;
 using Bl;
 using System.Numerics;
 //using BoCart;
-
+//do u see this??
 namespace BL;
 
 internal class Program
@@ -288,7 +288,6 @@ public static void ProductFunc()
                     }
                     catch
                     {
-
                         throw new BO.doesNotExistException();
                     }
                     double.TryParse(Console.ReadLine(), out price);
