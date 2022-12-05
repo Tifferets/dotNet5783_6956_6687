@@ -163,7 +163,7 @@ internal class BoProduct:IProduct
     {
         if (Id >= 300000 && Id < 400000)
         {
-            IEnumerable<DO.Order> orderList = dalList.order.GetAll();//list of do.order
+            IEnumerable<DO.Order?> orderList = dalList.order.GetAll();//list of do.order
             foreach (DO.Order item in orderList)//going over the list
             {
                 IEnumerable<DO.OrderItem?> orderItemList = dalList.order.GetAllOrderItems(item.ID);//gets a list of all order items for the order

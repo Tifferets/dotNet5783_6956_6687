@@ -67,6 +67,19 @@ internal class DalOrder: IOrder
             }
         }
     }
+    public IEnumerable<OrderItem?> GetAll(int id)
+    {
+        List<OrderItem?> lst=new List<OrderItem?>();
+        foreach(OrderItem item in DataSource.OrderItemList)
+        {
+            if(item.OrderItemID == id)
+            {
+                lst.Add(item);
+            }
+        }
+        IEnumerable<OrderItem?> orderItems = lst;
+        return orderItems;
+    }
     /// <summary>
     /// method returns the list 
     /// </summary>

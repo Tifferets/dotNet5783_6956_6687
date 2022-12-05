@@ -69,14 +69,14 @@ internal static class DataSource
                 order.ShipDate = order.OrderDate.Value.Add(new TimeSpan(rand.Next(1, 7), 0, 0, 0));
             }
             else
-                order.ShipDate = DateTime.MinValue;
+                order.ShipDate =null;
 
             if (i <10 )//60% have a delivery date
             {
                 order.DeliveryDate = order.ShipDate.Value.Add(new TimeSpan(rand.Next(1, 2), 0, 0, 0));//from one to 2 days later
             }
             else
-                order.ShipDate = DateTime.MinValue;
+                order.ShipDate = null;
             Orderlist.Add(order);
            
         }// Product
