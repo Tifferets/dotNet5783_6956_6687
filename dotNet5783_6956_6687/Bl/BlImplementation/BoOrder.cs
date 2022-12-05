@@ -152,7 +152,7 @@ internal class BoOrder:IOrder
             {
                 throw new BO.AlreadyShippedException();
             }
-            order.DeliveryDate = DateTime.Now;
+            order.DeliveryDate ??= DateTime.Now;
             dalList.order.Update(order);
             return GetOrderInfo(orderId);
         }

@@ -107,18 +107,5 @@ internal class DalOrder: IOrder
         }
         return result;
     }
-    public Order? GetSingle(Func<Order?, bool>? func) => DataSource.Orderlist.First(func); // return an order with this id
-
-    //public int Add(Order? other)
-    //{
-    //    order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
-    //    DataSource.Orderlist.Add(order);//not recursion
-    //    return order.ID;
-    //    //throw new NotImplementedException();
-    //}
-
-    //Order? ICrud<Order?>.GetSingle(Func<Order?, bool>? func)
-    //{
-    //    throw new NotImplementedException();
-    //}
+   public Order? GetSingle(Func<Order?, bool>? func) => DataSource.Orderlist.First(func); // return an order with this id
 }
