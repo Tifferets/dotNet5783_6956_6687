@@ -12,7 +12,7 @@ internal class DalOrderItem:IOrderItem // internal?
     /// <param name="orderItem"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public int Add(OrderItem orderItem)
+    public int Add(OrderItem? orderItem)
     {
         orderItem.OrderItemID = DataSource.config.GetOrderItemId;
         foreach (OrderItem item in DataSource.OrderItemList)
