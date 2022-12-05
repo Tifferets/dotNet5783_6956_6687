@@ -14,10 +14,11 @@ internal class DalOrderItem:IOrderItem // internal?
     /// <exception cref="Exception"></exception>
     public int Add(OrderItem orderItem)
     {
+
         orderItem.OrderItemID = DataSource.config.GetOrderItemId;
         foreach (OrderItem item in DataSource.OrderItemList)
         {
-            if(item.OrderItemID == orderItem.OrderItemID)
+            if(item.OrderItemID == orderItem.Value.OrderItemID)
                 throw new Exception("OrderItem already exist");
         }
         Random r1 = new Random();
@@ -26,7 +27,7 @@ internal class DalOrderItem:IOrderItem // internal?
         orderItem.OrderID = r2.Next(100000, 100010);
 
         DataSource.OrderItemList.Add(orderItem);
-        return orderItem.OrderItemID;
+        return orderItem.Value.OrderItemID;
     }
     /// <summary>
     /// method gets an order item ID and prints renurns the order item  it belongs to

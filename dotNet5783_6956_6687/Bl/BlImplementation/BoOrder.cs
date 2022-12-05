@@ -116,8 +116,8 @@ internal class BoOrder:IOrder
         }
         try
         {
-            DO.Order? order = dalList.order.GetSingle(x => x.Value.ID == orderId);//the order we want
-            if (order?.ShipDate != null)//never got changed
+            DO.Order order = (DO.Order)dalList.order.GetSingle(x => x.Value.ID == orderId);//the order we want
+            if (order.ShipDate != null)//never got changed
             {
                 throw new BO.AlreadyShippedException();
             }
@@ -143,16 +143,16 @@ internal class BoOrder:IOrder
         }
         try
         {
-            DO.Order? order = dalList.order.GetSingle(x => x.Value.ID == orderId);//the order we want
-            if (order?.ShipDate == DateTime.MinValue)//never got changed
+            DO.Order order = (DO.Order)dalList.order.GetSingle(x => x.Value.ID == orderId);//the order we want
+            if (order.ShipDate == DateTime.MinValue)//never got changed
             {
                 throw new BO.NotShippedException();
             }
-            if (order?.DeliveryDate != DateTime.MinValue)//never got changed
+            if (order.DeliveryDate != DateTime.MinValue)//never got changed
             {
                 throw new BO.AlreadyShippedException();
             }
-            order.DeliveryDate ??= DateTime.Now;
+            order.DeliveryDate = DateTime.Now;
             dalList.order.Update(order);
             return GetOrderInfo(orderId);
         }
