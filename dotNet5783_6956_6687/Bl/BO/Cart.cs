@@ -15,11 +15,11 @@ public class Cart
     /// <summary>
     /// list of order items BO-cart
     /// </summary>
-    public IEnumerable<OrderItem>? Items { get; set; }  
+    public IEnumerable<OrderItem?>? Items { get; set; }  
     /// <summary>
     /// total price of cart BO-Cart
     /// </summary>
-    public double? TotalPrice { get; set; }
+    public double TotalPrice { get; set; }
     /// <summary>
     /// tostring BO-Cart
     /// </summary>

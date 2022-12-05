@@ -12,7 +12,7 @@ internal class BoOrder:IOrder
     /// returns the list of orders- for the admin
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<BO.OrderForList> GetOrderList()
+    public IEnumerable<BO.OrderForList?> GetOrderList()
     {
         List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();//list of orderForList
        try
@@ -22,7 +22,7 @@ internal class BoOrder:IOrder
                 BO.OrderTracking orderTracking = OrderStatus(item.ID);
                 string statusee = status(orderTracking);
                 BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
-                double? price = 0;
+                double price = 0;
                 int amount = 0;
                 foreach(DO.OrderItem oitem in dalList.order.GetAllOrderItems(item.ID))//loop to count the amount of products and total price
                 {
@@ -61,17 +61,17 @@ internal class BoOrder:IOrder
                 double? totalprice = 0;
                 int? oiamount = 0; 
                 List<BO.OrderItem> orderitemList = new List<BO.OrderItem>();//list of orderitems
-                IEnumerable<DO.OrderItem> oitms = dalList.order.GetAllOrderItems(orderId);//list od orderitems of this order
+                IEnumerable<DO.OrderItem?> oitms = dalList.order.GetAllOrderItems(orderId);//list od orderitems of this order
                 foreach(DO.OrderItem item in oitms)//going over all the order items dor this order
                 {
                     totalprice += item.Price* item.Amount;//the total price of the items
-                    oiamount=item.Amount;//amount of items
-                    DO.Product product= dalList.product.Get(item.ProductID);//the product
+                    oiamount = item.Amount;//amount of items
+                    DO.Product? product= dalList.product.Get(item.ProductID);//the product
                     orderitemList.Add(new BO.OrderItem     //adding to the list
                     {
                         ID = item.OrderItemID,
                         ProductID = item.ProductID,
-                        Name = product.Name,
+                        Name = product?.Name,
                         Price = item.Price,
                         Amount = item.Amount,
                         TotalPrice = item.Price * item.Amount,
@@ -170,21 +170,21 @@ internal class BoOrder:IOrder
     {
         //try
         {
-            DO.Order order = dalList.order.Get(orderId);
-            List<Tuple<BO.OrderStatus,DateTime>> list = new List<Tuple<BO.OrderStatus,DateTime>>();
-            BO.OrderStatus status = BO.OrderStatus.ordered;
-            if(order.OrderDate !=DateTime.MinValue)
+            DO.Order? order = dalList.order.Get(orderId);
+            List<Tuple<BO.OrderStatus?,DateTime?>?>? list = new List<Tuple<BO.OrderStatus?,DateTime?>?>();
+            BO.OrderStatus? status = BO.OrderStatus.ordered;
+            if(order?.OrderDate !=DateTime.MinValue)
             {
                 list.Add(Tuple.Create(BO.OrderStatus.ordered,(DateTime)order.OrderDate));
             }
-            if (order.ShipDate != DateTime.MinValue)
+            if (order?.ShipDate != DateTime.MinValue)
             {
                 list.Add(Tuple.Create(BO.OrderStatus.shipped, (DateTime)order.ShipDate));
                 status=BO.OrderStatus.shipped;
             }
-            if (order.DeliveryDate != DateTime.MinValue)
+            if (order?.DeliveryDate != DateTime.MinValue)
             {
-                list.Add(Tuple.Create(BO.OrderStatus.delivered, (DateTime)order.DeliveryDate));
+                list.Add(Tuple.Create(BO.OrderStatus.delivered, (DateTime?)order.DeliveryDate));
                 status=BO.OrderStatus.delivered;
             }
             BO.OrderTracking orderTracking= new BO.OrderTracking() { ID = orderId, Status= status , tracking=list};

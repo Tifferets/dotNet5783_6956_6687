@@ -12,7 +12,7 @@ internal class DalOrder: IOrder
     /// <returns></returns>
     public int Add(Order order)
     {
-       order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
+        order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
        DataSource.Orderlist.Add(order);//not recursion
        return order.ID;
     }
@@ -22,17 +22,17 @@ internal class DalOrder: IOrder
     /// <param name="orderID"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public Order Get(int orderID)
-    {
+    //public Order Get(int orderID)
+    //{
        
-           foreach(Order item in DataSource.Orderlist)//goes through the list looking for the order.
-           {
-                if(item.ID == orderID)  
-                    return item;
-           }
-           throw new Exception("order does not exist");
+    //       foreach(Order item in DataSource.Orderlist)//goes through the list looking for the order.
+    //       {
+    //            if(item.ID == orderID)  
+    //                return item;
+    //       }
+    //       throw new Exception("order does not exist");
        
-    }
+    //}
     /// <summary>
     /// method gets an order ID and delets the right order
     /// </summary>
@@ -53,13 +53,13 @@ internal class DalOrder: IOrder
     /// method gets an order and updates its details
     /// </summary>
     /// <param name="order"></param>
-    public void Update(Order order)
+    public void Update(Order? order)
     {
         int count = 0;
         foreach (Order item in DataSource.Orderlist)//goes through the list looking for the order.
         {
-            if (item.ID != order.ID) count++;
-            if (item.ID==order.ID)
+            if (item.ID != order.Value.ID) count++;
+            if (item.ID==order.Value.ID)
             {
                 DataSource.Orderlist[count] = order;
                 break; 
@@ -70,16 +70,16 @@ internal class DalOrder: IOrder
     /// method returns the list 
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<Order> GetAll() => DataSource.Orderlist;
+    public IEnumerable<Order?> GetAll() => DataSource.Orderlist;
     /// <summary>
     /// returns list of all order items with the id
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<OrderItem> GetAllOrderItems(int id) 
+    public IEnumerable<OrderItem?> GetAllOrderItems(int id) 
     {
     foreach(var item in DataSource.OrderItemList)
         {
-            if(item.OrderID == id)
+            if(item?.OrderID == id)
             {
                 yield return item;
             }

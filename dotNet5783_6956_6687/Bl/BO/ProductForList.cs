@@ -25,7 +25,7 @@ public class ProductForList
     /// <summary>
     /// the amount of 1 item
     /// </summary>
-    public int? Amount { get; set; }
+    public int Amount { get; set; }
     /// <summary>
     /// true if it exists in the stock,false if it doesnt exist
     /// </summary>

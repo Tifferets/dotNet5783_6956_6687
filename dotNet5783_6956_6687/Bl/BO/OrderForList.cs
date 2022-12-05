@@ -20,11 +20,11 @@ public class OrderForList
     /// <summary>
     /// the amount of items in the Orderforlists
     /// </summary>
-    public int? AmountOfItems { get; set; }
+    public int AmountOfItems { get; set; }
     /// <summary>
     /// the total price of the Orderforlists
     /// </summary>
-    public double? TotalPrice { get; set; }
+    public double TotalPrice { get; set; }
 
 
     public override string ToString() => $@"

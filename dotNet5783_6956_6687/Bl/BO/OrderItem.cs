@@ -14,15 +14,15 @@ public class OrderItem  //?????
     /// <summary>
     /// the name of the orderitem
     /// </summary>
-    public string Name { get; set; }
+    public string? Name { get; set; }
     /// <summary>
     /// the price of product
     /// </summary>
-    public double? Price { get; set; }
+    public double Price { get; set; }
     /// <summary>
     /// the amount od the product
     /// </summary>
-    public int? Amount { get; set; }
+    public int Amount { get; set; }
     /// <summary>
     /// the total amount of orderItem
     /// </summary>
