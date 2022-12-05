@@ -73,7 +73,7 @@ internal class BoCart : ICart
     /// <param name="cart"></param>
     /// <param name="productId"></param>
     /// <param name="newAmount"></param>
-    public Cart UpdateAmountOfProductInCart(Cart cart, int productId, int newAmount)
+    public Cart UpdateAmountOfProductInCart(Cart? cart, int productId, int newAmount)
     {
         if (cart.Items == null)
             throw new NoItemsInCartException();
@@ -82,7 +82,7 @@ internal class BoCart : ICart
             throw new BO.WrongIDException();
 
         int dif = 0;//the difference between the new amount and the old amount
-        List <BO.OrderItem> lst = new List<BO.OrderItem>();
+        List <BO.OrderItem?> lst = new List<BO.OrderItem>();
         foreach(OrderItem item in cart.Items)
         {
             lst.Add(item);//copies all the list in cart to the lst

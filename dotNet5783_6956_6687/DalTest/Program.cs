@@ -60,7 +60,7 @@ public class program//the main where we check it works
                             Console.WriteLine("Enter ID");
                             int id;
                             int.TryParse(Console.ReadLine(), out id);
-                            Console.WriteLine(dalList.order.Get(id));
+                            Console.WriteLine(dalList.order.GetSingle(x=>x.Value.ID==id));
                             break;
                         case 3://Show List of order
                             foreach (Order item in dalList.order.GetAll())//goes throught he whole list of orders
@@ -72,7 +72,7 @@ public class program//the main where we check it works
                             Console.WriteLine("Enter ID");
                             int id1;
                             int.TryParse(Console.ReadLine(), out id1);
-                            Console.WriteLine(dalList.order.Get(id1));//prints the order before update
+                            Console.WriteLine(dalList.order.GetSingle(x => x.Value.ID == id1));//prints the order before update
                             Console.WriteLine("Enter customers name,email,address:");
                             string name1 = Console.ReadLine();
                             string email1 = Console.ReadLine();

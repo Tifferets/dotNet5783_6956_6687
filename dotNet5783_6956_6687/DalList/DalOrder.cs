@@ -1,5 +1,6 @@
 ﻿using DalApi;
 using DO;
+using System.Linq;
 
 namespace Dal;
 
@@ -12,7 +13,7 @@ internal class DalOrder: IOrder
     /// <returns></returns>
     public int Add(Order order)
     {
-        order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
+       order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
        DataSource.Orderlist.Add(order);//not recursion
        return order.ID;
     }
@@ -70,19 +71,24 @@ internal class DalOrder: IOrder
     /// method returns the list 
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<Order?> GetAll() => DataSource.Orderlist;
+    //public IEnumerable<Order?> GetAll() => DataSource.Orderlist;
     /// <summary>
     /// returns list of all order items with the id
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<OrderItem?> GetAllOrderItems(int id) 
+    public IEnumerable<Order?> GetAll(Func<Order?, bool>? func) 
     {
-    foreach(var item in DataSource.OrderItemList)
+        if (func == null)
         {
-            if(item?.OrderID == id)
-            {
-                yield return item;
-            }
+            return DataSource.Orderlist;//if null retun te whole list
         }
+        List<Order?> result = new List<Order?>();
+        foreach (var item in DataSource.Orderlist)
+        {
+            if (func(item))//if the id is good
+                result.Add(item);//adds to list 
+        }
+        return result;
     }
+    Order? GetSingle(Func<Order?, bool>? func) => DataSource.Orderlist.First(func); // return an order with this id
 }
