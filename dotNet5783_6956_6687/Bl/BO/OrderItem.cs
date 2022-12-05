@@ -26,7 +26,7 @@ public class OrderItem  //?????
     /// <summary>
     /// the total amount of orderItem
     /// </summary>
-    public double? TotalPrice { get; set; }
+    public double TotalPrice { get; set; }
     /// <summary>
     /// to string to print all details
     /// </summary>
