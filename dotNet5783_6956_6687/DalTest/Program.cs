@@ -116,7 +116,7 @@ public class program//the main where we check it works
                             Console.WriteLine("Enter ID");
                             int id;
                             int.TryParse(Console.ReadLine(), out id);
-                            Console.WriteLine(dalList.orderItem.Get(id));
+                            Console.WriteLine(dalList.orderItem.GetSingle(x=> x.Value.OrderItemID== id));
                             break;
                         case 3://Show List of orderItem
                             foreach (OrderItem item in dalList.orderItem.GetAll())//goes through the whole list of orderItems
@@ -131,7 +131,7 @@ public class program//the main where we check it works
                             int.TryParse(Console.ReadLine(), out id1);
                             int.TryParse(Console.ReadLine(), out id2);
                             int.TryParse(Console.ReadLine(), out id3);
-                            Console.WriteLine(dalList.orderItem.Get(id1));//prints the orderItem before update
+                            Console.WriteLine(dalList.orderItem.GetSingle(x => x.Value.OrderItemID == id1));//prints the orderItem before update
                             Console.WriteLine("Enter Order Item Price and amount :");
                             double.TryParse(Console.ReadLine(), out price);
                             int.TryParse(Console.ReadLine(), out amount);
@@ -183,7 +183,7 @@ public class program//the main where we check it works
                             Console.WriteLine("Enter ID");
                             int id;
                             int.TryParse(Console.ReadLine(), out id);
-                            Console.WriteLine(dalList.orderItem.Get(id));
+                            Console.WriteLine(dalList.orderItem.GetSingle(x => x.Value.OrderItemID == id));
 
                             break;
                         case 3://Show List of product
@@ -198,7 +198,7 @@ public class program//the main where we check it works
                             Product product1 = new Product();
                             Console.WriteLine("Enter Product ID");
                             int.TryParse(Console.ReadLine(), out id);
-                            Console.WriteLine(dalList.orderItem.Get(id));//prints the product before update
+                            Console.WriteLine(dalList.orderItem.GetSingle(x => x.Value.OrderItemID == id));//prints the product before update
                             Console.WriteLine("Enter product name,category, price and amount");
                             product1.Name = Console.ReadLine();
                             string Category2 = Console.ReadLine();

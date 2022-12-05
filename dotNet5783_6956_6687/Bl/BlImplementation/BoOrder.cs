@@ -66,7 +66,7 @@ internal class BoOrder:IOrder
                 {
                     totalprice += item.Price* item.Amount;//the total price of the items
                     oiamount = item.Amount;//amount of items
-                    DO.Product? product= dalList.product.Get(item.ProductID);//the product
+                    DO.Product? product= dalList.product.GetSingle(x=> x.Value.ID ==item.ProductID);//the product by id 
                     orderitemList.Add(new BO.OrderItem     //adding to the list
                     {
                         ID = item.OrderItemID,
@@ -173,28 +173,23 @@ internal class BoOrder:IOrder
             DO.Order? order = dalList.order.GetSingle(x => x.Value.ID == orderId);
             List<Tuple<BO.OrderStatus?,DateTime?>?>? list = new List<Tuple<BO.OrderStatus?,DateTime?>?>();
             BO.OrderStatus? status = BO.OrderStatus.ordered;
-            if(order?.OrderDate !=DateTime.MinValue)
+            if (order?.OrderDate != DateTime.MinValue)
             {
-                list.Add(Tuple.Create(BO.OrderStatus.ordered,(DateTime)order.OrderDate));
+                list.Add(Tuple.Create(BO.OrderStatus.ordered, (DateTime)order.OrderDate));
             }
             if (order?.ShipDate != DateTime.MinValue)
             {
                 list.Add(Tuple.Create(BO.OrderStatus.shipped, (DateTime)order.ShipDate));
-                status=BO.OrderStatus.shipped;
+                status = BO.OrderStatus.shipped;
             }
             if (order?.DeliveryDate != DateTime.MinValue)
             {
                 list.Add(Tuple.Create(BO.OrderStatus.delivered, (DateTime?)order.DeliveryDate));
-                status=BO.OrderStatus.delivered;
+                status = BO.OrderStatus.delivered;
             }
-            BO.OrderTracking orderTracking= new BO.OrderTracking() { ID = orderId, Status= status , tracking=list};
+            BO.OrderTracking orderTracking = new BO.OrderTracking() { ID = orderId, Status = status, tracking = list };
             return orderTracking;
         }
-        //catch
-        //{
-        //    throw new BO.errorException();
-        //}
-
     }
     /// <summary>
     /// returns a string from a order status 

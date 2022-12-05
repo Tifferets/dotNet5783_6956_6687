@@ -82,5 +82,21 @@ internal class DalOrderItem:IOrderItem // internal?
     /// method returns the list 
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<OrderItem?> GetAll() => DataSource.OrderItemList;//changed to IEnumerable!!!!!!!!!!!!!
+    //public IEnumerable<OrderItem?> GetAll() => DataSource.OrderItemList;//changed to IEnumerable!!!!!!!!!!!!!
+    public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? func)
+    {
+        if (func == null)
+        {
+            return DataSource.OrderItemList;//if null retun te whole list
+        }
+        List<OrderItem?> result = new List<OrderItem?>();
+        foreach (var item in DataSource.OrderItemList)
+        {
+            if (func(item))//if the id is good
+                result.Add(item);//adds to list 
+        }
+        return result;
+    }
+    OrderItem? GetSingle(Func<OrderItem?, bool>? func) => DataSource.OrderItemList.First(func); // return a product with this id
+
 }

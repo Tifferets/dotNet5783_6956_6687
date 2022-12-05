@@ -12,5 +12,6 @@ public interface ICrud<T>
     int Add(T other);
     IEnumerable<T?> GetAll(Func<T?, bool>? select = null);
     T? GetSingle(Func<T?, bool>? func);
-    delegate bool func(T? item);
+
+   // delegate bool func(T? item);
 }
