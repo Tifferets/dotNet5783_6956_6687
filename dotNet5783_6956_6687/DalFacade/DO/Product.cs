@@ -15,7 +15,7 @@ public struct Product
     /// <summary>
     /// the price of the product
     /// </summary>
-    public double? Price { get; set; }
+    public double Price { get; set; }
     /// <summary>
     /// the category of the product -we chenged from category to string
     /// </summary>
@@ -23,7 +23,7 @@ public struct Product
     /// <summary>
     /// amount of products in stock
     /// </summary>
-    public int? InStock { get; set; }
+    public int InStock { get; set; }
     /// <summary>
     /// to string to print all details
     /// </summary>

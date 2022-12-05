@@ -34,18 +34,18 @@ internal class DalOrderItem:IOrderItem // internal?
     /// <param name="orderitemid"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public OrderItem Get(int orderitemid)
-    {
+    //public OrderItem Get(int orderitemid)
+    //{
         
-        foreach (OrderItem item in DataSource.OrderItemList)//goes through the list looking for the order.
-        {
-            if (item.OrderItemID == orderitemid )
-                return item;
-        }
+    //    foreach (OrderItem item in DataSource.OrderItemList)//goes through the list looking for the order.
+    //    {
+    //        if (item.OrderItemID == orderitemid )
+    //            return item;
+    //    }
 
-        throw new Exception("order item does not exist");
+    //    throw new Exception("order item does not exist");
        
-    }
+    //}
     /// <summary>
     /// method gets an order item id and delets the right oder item
     /// </summary>
@@ -65,13 +65,13 @@ internal class DalOrderItem:IOrderItem // internal?
     /// method gets an order item and updates its details
     /// </summary>
     /// <param name="orderItem"></param>
-    public void Update(OrderItem orderItem)
+    public void Update(OrderItem? orderItem)
     {
         int count = 0;
         foreach (OrderItem item in DataSource.OrderItemList)//goes through the list looking for the order.
         {
-            if (item.OrderItemID != orderItem.OrderItemID) count++;
-            if (item.OrderItemID == orderItem.OrderItemID)
+            if (item.OrderItemID != orderItem?.OrderItemID) count++;
+            if (item.OrderItemID == orderItem?.OrderItemID)
             {
                 DataSource.OrderItemList[count] = orderItem;
                 break;
@@ -82,5 +82,5 @@ internal class DalOrderItem:IOrderItem // internal?
     /// method returns the list 
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<OrderItem> GetAll() => DataSource.OrderItemList;//changed to IEnumerable!!!!!!!!!!!!!
+    public IEnumerable<OrderItem?> GetAll() => DataSource.OrderItemList;//changed to IEnumerable!!!!!!!!!!!!!
 }

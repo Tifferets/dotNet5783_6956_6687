@@ -7,7 +7,7 @@ public interface IOrder
     /// returns the list of orders- for the admin
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<OrderForList> GetOrderList(); 
+    public IEnumerable<OrderForList?> GetOrderList(); 
     /// <summary>
     /// returns an order -for admin and user
     /// </summary>

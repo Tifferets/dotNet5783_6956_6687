@@ -7,9 +7,9 @@ namespace Dal;
 internal static class DataSource
 {
     public static readonly Random rand = new Random();//to generat random 
-    internal static List<Order> Orderlist = new List<Order>();
-    internal static List<OrderItem> OrderItemList = new List<OrderItem>();
-    internal static List<Product> Productlist = new List<Product>();
+    internal static List<Order?> Orderlist = new List<Order?>();
+    internal static List<OrderItem?> OrderItemList = new List<OrderItem?>();
+    internal static List<Product?> Productlist = new List<Product?>();
 
     static string[] customerAddress = { "beit shemesh", "jlm", "Beitar","hebron","tel aviv", "beit shemesh", "jlm", "Beitar", "hebron", "tel aviv" };
     static string[] customerName = { "sara", "rachelli", "tifferet", "gitty", "ahuva", "aryeh", "moshe", "shaya", "david", "yehoda" };
@@ -87,7 +87,7 @@ internal static class DataSource
             {
                 product.ID = 300000 + i;
             }
-            while (Productlist.Exists(x => x.ID == product.ID));//makes sure there isn one with the same number
+            while (Productlist.Exists(x => x?.ID == product.ID));//makes sure there isn one with the same number
             product.Name = productName[i];//adds a name
             product.Price = (double)rand.Next(10, 200);//randome price from range 
             product.Category = (Category)rand.Next(0, 4);
@@ -111,7 +111,7 @@ internal static class DataSource
             {
                 OrderItem orderItem = new OrderItem();
                 orderItem.OrderItemID = config.GetOrderItemId;//id
-                Product p = Productlist[rand.Next(0, 9)];//gives us a product
+                Product p = Productlist[rand.Next(0, 9)].Value;//gives us a product
                 orderItem.Price = p.Price;//same price as product
                 orderItem.Amount = (int)rand.Next(1,10);//randme amount
                 orderItem.ProductID = p.ID;

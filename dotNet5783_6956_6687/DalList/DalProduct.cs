@@ -1,8 +1,10 @@
 ﻿using DalApi;
 using DO;
+using System.Reflection;
+
 namespace Dal;
 
-internal class DalProduct: IProduct
+internal class DalProduct : IProduct
 {
     /// <summary>
     /// method that gets a product, adds to the list
@@ -12,9 +14,9 @@ internal class DalProduct: IProduct
     /// <exception cref="Exception"></exception>
     public int Add(Product product)
     {
-        foreach(Product item in DataSource.Productlist)
+        foreach (Product item in DataSource.Productlist)
         {
-            if(item.ID == product.ID)
+            if (item.ID == product.ID)
                 throw new Exception("Product already exist");
         }
         DataSource.Productlist.Add(product);
@@ -26,20 +28,20 @@ internal class DalProduct: IProduct
     /// <param name="productID"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public Product Get(int productID)
-    {
-        //try
-        //{
-        foreach (Product item in DataSource.Productlist)//goes through the list looking for the order.
-        {
-            if (item.ID == productID)
-                return item;
-        }
+    //public Product Get(int? productID)
+    //{
+    //    //try
+    //    //{
+    //    foreach (Product item in DataSource.Productlist)//goes through the list looking for the order.
+    //    {
+    //        if (item.ID == productID)
+    //            return item;
+    //    }
 
-        throw new Exception("Product does not exist");
-        // }
-        // catch(Exception ex)   { Console.WriteLine(ex); }
-    }
+    //    throw new Exception("Product does not exist");
+    //    // }
+    //    // catch(Exception ex)   { Console.WriteLine(ex); }
+    //}
     /// <summary>
     /// ethod gets a product ID and delets the right orde
     /// </summary>
@@ -72,10 +74,31 @@ internal class DalProduct: IProduct
             }
         }
     }
+
+    static bool isProduct(Product p)
+    {
+        return true;
+    }
+
     /// <summary>
     /// method returns the list 
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<Product> GetAll()=> DataSource.Productlist;//changed to IEnumerable!!!!!!!!!!!!! 
+    public IEnumerable<Product?> GetAll(Func<Product?, bool>? func)
+    {
+        if(func == null)
+        {
+            return DataSource.Productlist;//if null retun te whole list
+        }
+        List<Product?> result = new List<Product?>();
+        foreach(var item in DataSource.Productlist)
+        {
+            if(func(item))//if the id is good
+                result.Add(item);//adds to list 
+        }
+        return result;
+    }
+    Product? GetSingle(Func<Product?, bool>? func) => DataSource.Productlist.First(func); // return a product with this id
+
 
 }

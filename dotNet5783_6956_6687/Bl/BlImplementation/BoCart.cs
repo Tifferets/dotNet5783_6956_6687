@@ -81,7 +81,7 @@ internal class BoCart : ICart
         if (productId < 300000 || productId > 490000)
             throw new BO.WrongIDException();
 
-        int? dif = 0;//the difference between the new amount and the old amount
+        int dif = 0;//the difference between the new amount and the old amount
         List <BO.OrderItem> lst = new List<BO.OrderItem>();
         foreach(OrderItem item in cart.Items)
         {

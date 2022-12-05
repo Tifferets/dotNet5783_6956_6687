@@ -15,10 +15,10 @@ internal class BoProduct:IProduct
     public IEnumerable<BO.ProductForList> GetListOfProducts()
     {
         //IEnumerable<BO.ProductForList> productsList = new List<BO.ProductForList>();//list of all products from DO
-        List<BO.ProductForList> products = new List<BO.ProductForList>();
+        List<BO.ProductForList?> products = new List<BO.ProductForList>();
         try
         {
-             foreach(DO.Product item in dalList.product.GetAll())
+             foreach(DO.Product item in dalList.product.GetAll( Func<T?, bool> ?))
             {
                 bool flag = false;
                 if(item.InStock>0)
@@ -80,7 +80,7 @@ internal class BoProduct:IProduct
         if (Id >= 300000 && Id < 400000)
         {
             BO.ProductItem productItem = new BO.ProductItem();
-            foreach (DO.Product item in dalList.product.GetAll())
+            foreach (DO.Product item in dalList.product.GetAll(Func<T?, bool> ?))
             {
                 if (item.ID == Id)
                 {
@@ -151,7 +151,7 @@ internal class BoProduct:IProduct
         product.ID=p1.Id;
         product.Name=p1.Name;
         product.Price=p1.Price;
-        product.InStock=p1.InStock;
+        product.InStock = p1.InStock;
         product.Category= (DO.Category)p1.Category;
         return product;
     }
@@ -166,7 +166,7 @@ internal class BoProduct:IProduct
             IEnumerable<DO.Order> orderList = dalList.order.GetAll();//list of do.order
             foreach (DO.Order item in orderList)//going over the list
             {
-                IEnumerable<DO.OrderItem> orderItemList = dalList.order.GetAllOrderItems(item.ID);//gets a list of all order items for the order
+                IEnumerable<DO.OrderItem?> orderItemList = dalList.order.GetAllOrderItems(item.ID);//gets a list of all order items for the order
                 foreach (DO.OrderItem oitem in orderItemList)//
                 {
                     if (oitem.ProductID == Id)//checks if the product is in the orderitem
@@ -226,19 +226,19 @@ internal class BoProduct:IProduct
         }
         try
         {
-            DO.Product product = dalList.product.Get(id);
+            DO.Product? product = dalList.product.Get();
             bool flag = false;
-            if (product.InStock > 0)
+            if (product?.InStock > 0)
             {
                 flag = true;
             }
             BO.ProductItem productItem = new BO.ProductItem()
             {
-                ID = product.ID,
-                Name = product.Name,
-                Price = product.Price,
-                Category = (BO.Category)product.Category,
-                Amount = product.InStock,
+                ID = product.Value.ID,
+                Name = product?.Name,
+                Price = product.Value.Price,
+                Category = (BO.Category)product?.Category,
+                Amount = product.Value.InStock,
                 Instock = flag
             };
             return productItem;

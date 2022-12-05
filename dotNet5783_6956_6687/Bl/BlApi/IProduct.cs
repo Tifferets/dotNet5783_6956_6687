@@ -7,7 +7,7 @@ public interface IProduct
     /// gets list of products(from system) builds ProductForList and returns it
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<ProductForList> GetListOfProducts();
+    public IEnumerable<ProductForList?> GetListOfProducts();
     /// <summary>
     /// gets id, if its positive gets product from system, builds a product and returnds it, throws exception if cant get the product from system
     /// </summary>

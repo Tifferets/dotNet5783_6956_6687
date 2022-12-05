@@ -14,11 +14,11 @@ public class Product
     /// <summary>
     /// products price
     /// </summary>
-    public double? Price { get; set; }  
+    public double Price { get; set; }  
     /// <summary>
     /// the amount of products in stock
     /// </summary>
-    public int? InStock { get; set; } 
+    public int InStock { get; set; } 
     /// <summary>
     /// the category the product belongs to
     /// </summary>

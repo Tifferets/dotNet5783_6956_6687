@@ -13,7 +13,7 @@ public class ProductItem
     /// <summary>
     /// the product items price
     /// </summary>
-    public double? Price { get; set; }
+    public double Price { get; set; }
     /// <summary>
     /// the category of the product item
     /// </summary>
@@ -21,11 +21,11 @@ public class ProductItem
     /// <summary>
     /// the amount of product items 
     /// </summary>
-    public int? Amount { get; set; }
+    public int Amount { get; set; }
     /// <summary>
     /// number if the product item is in stock
     /// </summary>
-    public bool? Instock{get;set;}
+    public bool Instock{get;set;}
 public override string ToString() => $@"
 ID: {ID}
 Name: {Name}
