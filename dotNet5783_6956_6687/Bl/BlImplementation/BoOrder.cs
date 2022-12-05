@@ -57,7 +57,7 @@ internal class BoOrder:IOrder
         {
             try
             {
-                DO.Order order = dalList.order.Get(orderId);
+                DO.Order? order = dalList.order.GetSingle(x => x.Value.ID == orderId);
                 double? totalprice = 0;
                 int? oiamount = 0; 
                 List<BO.OrderItem> orderitemList = new List<BO.OrderItem>();//list of orderitems
