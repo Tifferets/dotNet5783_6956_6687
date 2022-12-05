@@ -12,15 +12,15 @@ internal class DalProduct : IProduct
     /// <param name="product"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public int Add(Product product)
+    public int Add(Product? product)
     {
         foreach (Product item in DataSource.Productlist)
         {
-            if (item.ID == product.ID)
+            if (item.ID == product.Value.ID)
                 throw new Exception("Product already exist");
         }
         DataSource.Productlist.Add(product);
-        return product.ID;
+        return product.Value.ID;
     }
     /// <summary>
     /// method gets a product ID and renurns the product it belongs to
@@ -61,13 +61,13 @@ internal class DalProduct : IProduct
     /// method gets a product and updates its details
     /// </summary>
     /// <param name="product"></param>
-    public void Update(Product product)
+    public void Update(Product? product)
     {
         int count = 0;
         foreach (Product item in DataSource.Productlist)//goes through the list looking for the order.
         {
-            if (item.ID != product.ID) count++;
-            if (item.ID == product.ID)
+            if (item.ID != product.Value.ID) count++;
+            if (item.ID == product.Value.ID)
             {
                 DataSource.Productlist[count] = product;
                 break;
