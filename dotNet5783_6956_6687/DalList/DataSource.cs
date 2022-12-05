@@ -6,7 +6,7 @@ namespace Dal;
 
 internal static class DataSource
 {
-    public static readonly Random rand = new Random();//to generat random 
+    internal static readonly Random rand = new Random();//to generat random 
     internal static List<Order?> Orderlist = new List<Order?>();
     internal static List<OrderItem?> OrderItemList = new List<OrderItem?>();
     internal static List<Product?> Productlist = new List<Product?>();
@@ -66,14 +66,14 @@ internal static class DataSource
             order.OrderDate = DateTime.Now.Add(new TimeSpan(rand.Next(-360, 0), 0, 0, 0));//time in last year till 2 months ago
             if(i < 16)//80% have a ship date
             { 
-                order.ShipDate = order.OrderDate.Value.Add(new TimeSpan(rand.Next(1, 7), 0, 0, 0));
+                order.ShipDate = order.OrderDate?.Add(new TimeSpan(rand.Next(1, 7), 0, 0, 0));
             }
             else
                 order.ShipDate =null;
 
             if (i <10 )//60% have a delivery date
             {
-                order.DeliveryDate = order.ShipDate.Value.Add(new TimeSpan(rand.Next(1, 2), 0, 0, 0));//from one to 2 days later
+                order.DeliveryDate = order.ShipDate?.Add(new TimeSpan(rand.Next(1, 2), 0, 0, 0));//from one to 2 days later
             }
             else
                 order.ShipDate = null;

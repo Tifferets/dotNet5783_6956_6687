@@ -55,13 +55,13 @@ internal class DalOrder: IOrder
     /// method gets an order and updates its details
     /// </summary>
     /// <param name="order"></param>
-    public void Update(Order? order)
+    public void Update(Order order)
     {
         int count = 0;
         foreach (Order item in DataSource.Orderlist)//goes through the list looking for the order.
         {
-            if (item.ID != order.Value.ID) count++;
-            if (item.ID==order.Value.ID)
+            if (item.ID != order.ID) count++;
+            if (item.ID==order.ID)
             {
                 DataSource.Orderlist[count] = order;
                 break; 
@@ -104,5 +104,7 @@ internal class DalOrder: IOrder
         }
         return result;
     }
-   public Order? GetSingle(Func<Order?, bool>? func) => DataSource.Orderlist.First(func); // return an order with this id
+   public Order? GetSingle(Func<Order?, bool>? func) => DataSource.Orderlist.FirstOrDefault(func); // return an order with this id
+
+    
 }

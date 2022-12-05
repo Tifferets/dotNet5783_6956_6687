@@ -8,7 +8,7 @@ public class OrderTracking//missing something
     /// the orders status
     /// </summary>
     public OrderStatus? Status { get; set; }
-    public List<Tuple<OrderStatus ?,DateTime?>?>? tracking { get; set; }    
+    public List<Tuple<OrderStatus,DateTime>> tracking { get; set; }    
     public override string ToString() => $@"
 ID:{ID}
 Status:{Status}

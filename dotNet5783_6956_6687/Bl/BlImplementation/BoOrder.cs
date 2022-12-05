@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
 namespace BlImplementation;
@@ -57,7 +58,7 @@ internal class BoOrder:IOrder
         {
             try
             {
-                DO.Order? order = dalList.order.GetSingle(x => x.Value.ID == orderId);
+                DO.Order? order = dalList.order.GetSingle(x => x?.ID == orderId);
                 double? totalprice = 0;
                 int? oiamount = 0; 
                 List<BO.OrderItem> orderitemList = new List<BO.OrderItem>();//list of orderitems
@@ -66,7 +67,7 @@ internal class BoOrder:IOrder
                 {
                     totalprice += item.Price* item.Amount;//the total price of the items
                     oiamount = item.Amount;//amount of items
-                    DO.Product? product= dalList.product.GetSingle(x=> x.Value.ID ==item.ProductID);//the product by id 
+                    DO.Product? product= dalList.product.GetSingle(x=> x?.ID ==item.ProductID);//the product by id 
                     orderitemList.Add(new BO.OrderItem     //adding to the list
                     {
                         ID = item.OrderItemID,
@@ -84,12 +85,12 @@ internal class BoOrder:IOrder
                 return new BO.Order
                 {
                     ID = orderId,
-                    CustomerName = order.Value.CustomerName,
-                    CustomerAddress = order.Value.CustomerAddress,
-                    CustomerEmail = order.Value.CustomerEmail,
-                    OrderDate = order.Value.OrderDate,
-                    ShipDate = order.Value.ShipDate,
-                    DeliveryDate = order.Value.DeliveryDate,
+                    CustomerName = order?.CustomerName,
+                    CustomerAddress = order?.CustomerAddress,
+                    CustomerEmail = order?.CustomerEmail,
+                    OrderDate = order?.OrderDate,
+                    ShipDate = order?.ShipDate,
+                    DeliveryDate = order?.DeliveryDate,
                     Status = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), stauss.ToString()),//converting to enum
                     Items = orderitemList.ToList(),
                     TotalPrice = totalprice,
@@ -116,7 +117,7 @@ internal class BoOrder:IOrder
         }
         try
         {
-            DO.Order order = (DO.Order)dalList.order.GetSingle(x => x.Value.ID == orderId);//the order we want
+            DO.Order order = (DO.Order)dalList.order.GetSingle(x => x?.ID == orderId);//the order we want
             if (order.ShipDate != null)//never got changed
             {
                 throw new BO.AlreadyShippedException();
@@ -143,12 +144,12 @@ internal class BoOrder:IOrder
         }
         try
         {
-            DO.Order order = (DO.Order)dalList.order.GetSingle(x => x.Value.ID == orderId);//the order we want
-            if (order.ShipDate == DateTime.MinValue)//never got changed
+            DO.Order order = (DO.Order)dalList.order.GetSingle(x => x?.ID == orderId);//the order we want
+            if (order.ShipDate == null)//never got changed
             {
                 throw new BO.NotShippedException();
             }
-            if (order.DeliveryDate != DateTime.MinValue)//never got changed
+            if (order.DeliveryDate != null)//never got changed
             {
                 throw new BO.AlreadyShippedException();
             }
@@ -170,19 +171,19 @@ internal class BoOrder:IOrder
     {
         //try
         {
-            DO.Order? order = dalList.order.GetSingle(x => x.Value.ID == orderId);
-            List<Tuple<BO.OrderStatus?,DateTime?>?>? list = new List<Tuple<BO.OrderStatus?,DateTime?>?>();
-            BO.OrderStatus? status = BO.OrderStatus.ordered;
-            if (order?.OrderDate != DateTime.MinValue)
+            DO.Order order = (DO.Order)dalList.order.GetSingle(x => x?.ID == orderId);
+            List<Tuple<BO.OrderStatus,DateTime>> list = new List<Tuple<BO.OrderStatus,DateTime>>();
+            BO.OrderStatus status = BO.OrderStatus.ordered;
+            if (order.OrderDate != null)
             {
                 list.Add(Tuple.Create(BO.OrderStatus.ordered, (DateTime)order.OrderDate));
             }
-            if (order?.ShipDate != DateTime.MinValue)
+            if (order.ShipDate != null)
             {
                 list.Add(Tuple.Create(BO.OrderStatus.shipped, (DateTime)order.ShipDate));
                 status = BO.OrderStatus.shipped;
             }
-            if (order?.DeliveryDate != DateTime.MinValue)
+            if (order.DeliveryDate != null)
             {
                 list.Add(Tuple.Create(BO.OrderStatus.delivered, (DateTime)order.DeliveryDate));
                 status = BO.OrderStatus.delivered;
