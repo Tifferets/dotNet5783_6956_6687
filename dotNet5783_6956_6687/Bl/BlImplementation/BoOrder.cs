@@ -84,12 +84,12 @@ internal class BoOrder:IOrder
                 return new BO.Order
                 {
                     ID = orderId,
-                    CustomerName = order.CustomerName,
-                    CustomerAddress = order.CustomerAddress,
-                    CustomerEmail = order.CustomerEmail,
-                    OrderDate = order.OrderDate,
-                    ShipDate = order.ShipDate,
-                    DeliveryDate = order.DeliveryDate,
+                    CustomerName = order.Value.CustomerName,
+                    CustomerAddress = order.Value.CustomerAddress,
+                    CustomerEmail = order.Value.CustomerEmail,
+                    OrderDate = order.Value.OrderDate,
+                    ShipDate = order.Value.ShipDate,
+                    DeliveryDate = order.Value.DeliveryDate,
                     Status = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), stauss.ToString()),//converting to enum
                     Items = orderitemList.ToList(),
                     TotalPrice = totalprice,

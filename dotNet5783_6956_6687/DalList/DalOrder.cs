@@ -11,14 +11,11 @@ internal class DalOrder: IOrder
     /// </summary>
     /// <param name="order"></param>
     /// <returns></returns>
-    public int Add(Order? order)
+    public int Add(Order order)
     {
-        if (order != null)
-        {
-            order.Value.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
+            order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
             DataSource.Orderlist.Add(order);//not recursion
             return order.ID;
-        }
     }
 
     /// <summary>
