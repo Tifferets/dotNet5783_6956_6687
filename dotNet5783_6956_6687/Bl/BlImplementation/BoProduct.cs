@@ -18,7 +18,7 @@ internal class BoProduct:IProduct
         List<BO.ProductForList?> products = new List<BO.ProductForList>();
         try
         {
-             foreach(DO.Product item in dalList.product.GetAll( Func<T?, bool> ?))
+             foreach(DO.Product item in dalList.product.GetAll())
             {
                 bool flag = false;
                 if(item.InStock>0)
@@ -80,7 +80,7 @@ internal class BoProduct:IProduct
         if (Id >= 300000 && Id < 400000)
         {
             BO.ProductItem productItem = new BO.ProductItem();
-            foreach (DO.Product item in dalList.product.GetAll(Func<T?, bool> ?))
+            foreach (DO.Product item in dalList.product.GetAll())
             {
                 if (item.ID == Id)
                 {
@@ -226,7 +226,7 @@ internal class BoProduct:IProduct
         }
         try
         {
-            DO.Product? product = dalList.product.Get();
+                       DO.Product? product = dalList.product.GetSingle(x=> x.Value.ID == id);//gets the first in the list 
             bool flag = false;
             if (product?.InStock > 0)
             {
