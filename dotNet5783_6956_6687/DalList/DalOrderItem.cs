@@ -97,6 +97,6 @@ internal class DalOrderItem:IOrderItem // internal?
         }
         return result;
     }
-    OrderItem? GetSingle(Func<OrderItem?, bool>? func) => DataSource.OrderItemList.First(func); // return a product with this id
+    public OrderItem? GetSingle(Func<OrderItem?, bool>? func) => DataSource.OrderItemList.First(func); // return a product with this id
 
 }

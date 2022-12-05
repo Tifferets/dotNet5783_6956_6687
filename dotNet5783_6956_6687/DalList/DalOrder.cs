@@ -67,7 +67,7 @@ internal class DalOrder: IOrder
             }
         }
     }
-    public IEnumerable<OrderItem?> GetAll(int id)
+    public IEnumerable<OrderItem?> GetAllOrderItems(int id)
     {
         List<OrderItem?> lst=new List<OrderItem?>();
         foreach(OrderItem item in DataSource.OrderItemList)
@@ -103,5 +103,5 @@ internal class DalOrder: IOrder
         }
         return result;
     }
-    Order? GetSingle(Func<Order?, bool>? func) => DataSource.Orderlist.First(func); // return an order with this id
+   public Order? GetSingle(Func<Order?, bool>? func) => DataSource.Orderlist.First(func); // return an order with this id
 }

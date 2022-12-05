@@ -98,7 +98,7 @@ internal class DalProduct : IProduct
         }
         return result;
     }
-    Product? GetSingle(Func<Product?, bool>? func) => DataSource.Productlist.First(func); // return a product with this id
+    public Product? GetSingle(Func<Product?, bool>? func) => DataSource.Productlist.First(func); // return a product with this id
 
 
 }
