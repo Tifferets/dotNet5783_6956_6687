@@ -14,7 +14,6 @@ internal class BoProduct:IProduct
 
     public IEnumerable<BO.ProductForList> GetListOfProducts()
     {
-        //IEnumerable<BO.ProductForList> productsList = new List<BO.ProductForList>();//list of all products from DO
         List<BO.ProductForList?> products = new List<BO.ProductForList>();
         try
         {
@@ -226,19 +225,19 @@ internal class BoProduct:IProduct
         }
         try
         {
-                       DO.Product? product = dalList.product.GetSingle(x=> x.Value.ID == id);//gets the first in the list 
+            DO.Product product = (DO.Product)dalList.product.GetSingle(x=> x?.ID == id);//gets the first in the list 
             bool flag = false;
-            if (product?.InStock > 0)
+            if (product.InStock > 0)
             {
                 flag = true;
             }
             BO.ProductItem productItem = new BO.ProductItem()
             {
-                ID = product.Value.ID,
-                Name = product?.Name,
-                Price = product.Value.Price,
-                Category = (BO.Category)product?.Category,
-                Amount = product.Value.InStock,
+                ID = product.ID,
+                Name = product.Name,
+                Price = product.Price,
+                Category = (BO.Category)product.Category,
+                Amount = product.InStock,
                 Instock = flag
             };
             return productItem;

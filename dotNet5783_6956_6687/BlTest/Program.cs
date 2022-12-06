@@ -9,7 +9,6 @@ namespace BL;
 internal class Program
 {
     private static BlApi.IBl blList = new BlImplementation.Bl();
-    //internal static List<Cart> carts = new List<Cart>();
     static void Main(string[] args)
     {
 
@@ -149,7 +148,7 @@ internal class Program
         Order order1 = new Order()
         {
             ID= 100000, CustomerAddress= "tel aviv", CustomerEmail= "yael@gmail.com", CustomerName="yael",
-            DeliveryDate= DateTime.MinValue, OrderDate= DateTime.MinValue, ShipDate = DateTime.MinValue, 
+            DeliveryDate= null, OrderDate= null, ShipDate = null, 
             Items= orderItems,
         };
         while (choice1 > 0 && choice1 < 6)
