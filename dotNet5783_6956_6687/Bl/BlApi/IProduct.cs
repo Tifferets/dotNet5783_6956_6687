@@ -40,5 +40,6 @@ public interface IProduct
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public ProductItem GetProductItem(int id); 
+    public ProductItem GetProductItem(int id);
+    public IEnumerable<BO.ProductForList> GetproductForListByCategory(BO.Category category);
 }
