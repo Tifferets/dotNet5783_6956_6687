@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Dal;
 
-internal class DalOrder: IOrder
+internal class DalOrder : IOrder
 {
     /// <summary>
     /// method that gets an order,then id from config and adds to the list
@@ -14,10 +14,10 @@ internal class DalOrder: IOrder
     public int Add(Order order)
     {
         //order.Value.ID = 33;
-            order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
-            DataSource.Orderlist.Add(order);//not recursion
-            return order.ID;
-        
+        order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
+        DataSource.Orderlist.Add(order);//not recursion
+        return order.ID;
+
     }
 
     /// <summary>
@@ -43,39 +43,39 @@ internal class DalOrder: IOrder
     /// <param name="orderID"></param>
     public void Delete(int orderID)
     {
-            foreach (Order item in DataSource.Orderlist)//goes through the list looking for the order.
+        foreach (Order item in DataSource.Orderlist)//goes through the list looking for the order.
+        {
+            if (item.ID == orderID)
             {
-                if (item.ID == orderID)
-                {
-                    DataSource.Orderlist.Remove(item);
-                    break;
-                }
+                DataSource.Orderlist.Remove(item);
+                break;
             }
+        }
 
     }
     /// <summary>
     /// method gets an order and updates its details
     /// </summary>
     /// <param name="order"></param>
-    public void Update(Order? order)
+    public void Update(Order order)
     {
         int count = 0;
         foreach (Order item in DataSource.Orderlist)//goes through the list looking for the order.
         {
-            if (item.ID != order.Value.ID) count++;
-            if (item.ID==order.Value.ID)
+            if (item.ID != order.ID) count++;
+            if (item.ID == order.ID)
             {
                 DataSource.Orderlist[count] = order;
-                break; 
+                break;
             }
         }
     }
     public IEnumerable<OrderItem?> GetAllOrderItems(int id)
     {
-        List<OrderItem?> lst=new List<OrderItem?>();
-        foreach(OrderItem item in DataSource.OrderItemList)
+        List<OrderItem?> lst = new List<OrderItem?>();
+        foreach (OrderItem item in DataSource.OrderItemList)
         {
-            if(item.OrderItemID == id)
+            if (item.OrderItemID == id)
             {
                 lst.Add(item);
             }
@@ -92,7 +92,7 @@ internal class DalOrder: IOrder
     /// returns list of all order items with the id
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<Order?> GetAll(Func<Order?, bool>? func) 
+    public IEnumerable<Order?> GetAll(Func<Order?, bool>? func)
     {
         if (func == null)
         {
@@ -106,10 +106,11 @@ internal class DalOrder: IOrder
         }
         return result;
     }
-   public Order? GetSingle(Func<Order?, bool>? func) => DataSource.Orderlist.First(func); // return an order with this id
+    public Order? GetSingle(Func<Order?, bool>? func) => DataSource.Orderlist.First(func); // return an order with this id
 
-    int ICrud<Order?>.Add(Order? other)
-    {
-        throw new NotImplementedException();
-    }
+    //public IEnumerable<Order> GetAll(Func<Order, bool>? select = null)
+    //{
+    //    throw new NotImplementedException();
+    //}
+
 }
