@@ -17,7 +17,7 @@ VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                
+
             </Grid.ColumnDefinitions >
         </Grid>
 
@@ -26,12 +26,15 @@ VerticalAlignment="Stretch" Width="auto">
             <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Grid.Column="1" SelectionChanged="categoryComboBox_SelectionChanged" />
 
         </Grid>
-        <ListView x:Name="ProductListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ProductListView_SelectionChanged">
+                                        <ListView x:Name="ProductListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ProductListView_SelectionChanged">
+                                        <ListView x:Name="ProductListView" Grid.Row="1" SelectionChanged="ProductListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
+            <Button x:Name="AddNewProduct_Button" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Width="500" Height="50"/>
+
         </ListView>
 
     </Grid>
