@@ -13,9 +13,11 @@ internal class DalOrder: IOrder
     /// <returns></returns>
     public int Add(Order order)
     {
+        //order.Value.ID = 33;
             order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
             DataSource.Orderlist.Add(order);//not recursion
             return order.ID;
+        
     }
 
     /// <summary>
@@ -26,14 +28,14 @@ internal class DalOrder: IOrder
     /// <exception cref="Exception"></exception>
     //public Order Get(int orderID)
     //{
-       
+
     //       foreach(Order item in DataSource.Orderlist)//goes through the list looking for the order.
     //       {
     //            if(item.ID == orderID)  
     //                return item;
     //       }
     //       throw new Exception("order does not exist");
-       
+
     //}
     /// <summary>
     /// method gets an order ID and delets the right order
