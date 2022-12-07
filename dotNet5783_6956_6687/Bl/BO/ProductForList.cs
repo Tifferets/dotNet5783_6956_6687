@@ -40,3 +40,15 @@ Amount: {Amount}
 In stock? {InStock}
 ";
 }
+
+/* <Label x:Name="Name_Label" Content="Name:" HorizontalAlignment="Left" Margin="205,266,0,0" VerticalAlignment="Top" Height="34" Width="42"/>
+    <Label x:Name="Category_Label" Content="Category:" HorizontalAlignment="Left" Margin="205,206,0,0"  VerticalAlignment="Top" Height="34" Width="84" RenderTransformOrigin="4.79,3.53"/>
+    <Label x:Name="Price_Label" Content="Price:" HorizontalAlignment="Left" Margin="205,314,0,0" VerticalAlignment="Top" Height="34" Width="42"/>
+    <Label x:Name="InStock_Label" Content="In Stock:" HorizontalAlignment="Left" Margin="205,362,0,0"  VerticalAlignment="Top" Height="34" Width="84"/>
+
+    <TextBox x:Name="Id_Textbox" HorizontalAlignment="Left" Margin="390,161,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+    <TextBox x:Name="Name_Textbox" HorizontalAlignment="Left" Margin="390,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+    <TextBox x:Name="Price_Textbox" HorizontalAlignment="Left" Margin="390,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+    <TextBox x:Name="InStock_Textbox" HorizontalAlignment="Left" Margin="390,370,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+    <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="390,201,0,0"  VerticalAlignment="Top" Width="120"/>
+*/

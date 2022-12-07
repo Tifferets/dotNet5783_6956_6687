@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using BlImplementation;
 using BO;
+using PL.PlProduct;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,5 +35,15 @@ namespace PL
             ProductListView.ItemsSource = bl.Product.GetproductForListByCategory((Category)Category_ComboBox.SelectedItem);
            // ProductListView.ItemsSource = bl.Product.GetListOfProducts();
         }
+
+        private void ProductListView_MouseDoubleClicked(object sender, SelectionChangedEventArgs e) 
+        {
+            ProductWindow productWindow = new ProductWindow();
+            productWindow.myData = (BO.ProductForList)ProductListView.SelectedItem;
+            productWindow.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow().Show();
+        
     }
 }
