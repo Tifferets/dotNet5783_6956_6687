@@ -3,7 +3,7 @@ using BO;
 
 namespace BlImplementation;
 
-internal class BoProduct:IProduct
+internal class BoProduct : IProduct
 {
     private static DalApi.IDal dalList = new Dal.DalList();
 
@@ -11,9 +11,35 @@ internal class BoProduct:IProduct
     /// gets list of products(from system) builds ProductForList and returns it
     /// </summary>
     /// <returns></returns>
-   
+    public IEnumerable<BO.ProductForList> GetproductForListByCategory(BO.Category category)
+    {
+        List<BO.ProductForList> products = new List<BO.ProductForList>();//new list
+        try
+        {
+            foreach (DO.Product item in dalList.product.GetAll())//goes over all products
+            {
+                if ((BO.Category)item.Category == category)//checks if the category is the same
+                {
+                    bool flag = false;//adds the product
+                    if (item.InStock > 0)
+                    {
+                        flag = true;
+                    }
+                    BO.ProductForList productForList = new BO.ProductForList() { ID = item.ID, Name = item.Name, InStock = flag, Amount = item.InStock, Price = item.Price, Category = (BO.Category)item.Category };
+                    products.Add(productForList);
+                }
+            }
+            return products;
+        }
+        catch (Exception ex)
+        {
+            throw new BO.errorException();
+        }
+    }
+
     public IEnumerable<BO.ProductForList> GetListOfProducts()
     {
+
         List<BO.ProductForList?> products = new List<BO.ProductForList>();
         try
         {
@@ -33,7 +59,8 @@ internal class BoProduct:IProduct
         {
             throw new BO.errorException();
         }
-       
+
+
     }
     public IEnumerable<BO.ProductForList> GetproductForListByCategory(BO.Category category)
     {
@@ -91,7 +118,7 @@ internal class BoProduct:IProduct
             }
         }
         else
-            throw new BO.doesNotExistException(); 
+            throw new BO.doesNotExistException();
     }
     /// <summary>
     /// gets id, if its positive gets product item from system, builds a product and returnds it, throws exception if cant get the product item from system
@@ -117,7 +144,7 @@ internal class BoProduct:IProduct
         }
         else
         {
-            throw new BO.doesNotExistException(); 
+            throw new BO.doesNotExistException();
         }
 
     }
@@ -136,7 +163,7 @@ internal class BoProduct:IProduct
                     throw new BO.alreadyExistException();
                 }
             }
-             try
+            try
             {
                 dalList.product.Add(convert(product));
             }
@@ -147,7 +174,7 @@ internal class BoProduct:IProduct
         }
         else
             throw new BO.WrongDataException();
-   
+
     }
     /// <summary>
     /// function that gets a product and checks if its data is all correct returns true
@@ -156,9 +183,9 @@ internal class BoProduct:IProduct
     /// <returns></returns>
     private bool checkDataIsGood(BO.Product product)
     {
-        if(product.Id >=300000 && product.Id < 400000)
+        if (product.Id >= 300000 && product.Id < 400000)
         {
-            if(product.Name != null && product.Price > 0 && product.InStock >= 0)
+            if (product.Name != null && product.Price > 0 && product.InStock >= 0)
                 return true;
         }
         return false;
@@ -170,12 +197,12 @@ internal class BoProduct:IProduct
     /// <returns></returns>
     private DO.Product convert(BO.Product p1)
     {
-        DO.Product product=new DO.Product();
-        product.ID=p1.Id;
-        product.Name=p1.Name;
-        product.Price=p1.Price;
+        DO.Product product = new DO.Product();
+        product.ID = p1.Id;
+        product.Name = p1.Name;
+        product.Price = p1.Price;
         product.InStock = p1.InStock;
-        product.Category= (DO.Category)p1.Category;
+        product.Category = (DO.Category)p1.Category;
         return product;
     }
     /// <summary> 
@@ -202,13 +229,13 @@ internal class BoProduct:IProduct
             {
                 dalList.product.Delete(Id);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new BO.CantDeleteException();
             }
         }
         else
-        { 
+        {
             throw new BO.WrongIDException();
         }
     }
@@ -234,7 +261,7 @@ internal class BoProduct:IProduct
         {
             throw new BO.CantUpDateException();
         }
-        
+
     }
     /// <summary>
     /// function returns a product item 
@@ -249,7 +276,7 @@ internal class BoProduct:IProduct
         }
         try
         {
-            DO.Product product = (DO.Product)dalList.product.GetSingle(x=> x?.ID == id);//gets the first in the list 
+            DO.Product product = (DO.Product)dalList.product.GetSingle(x => x?.ID == id);//gets the first in the list 
             bool flag = false;
             if (product.InStock > 0)
             {
