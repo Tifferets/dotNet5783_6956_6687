@@ -23,7 +23,7 @@ VerticalAlignment="Stretch" Width="auto">
         </Grid>
 
 
-        <ListView x:Name="ProductListView" Grid.Row="1"  d:ItemsSource="{d:SampleData ItemCount=5}" d:MouseDoubleClick="ProductListView_MouseDoubleClicked" >
+        <ListView x:Name="ProductListView" Grid.Row="1"  d:ItemsSource="{d:SampleData ItemCount=5}" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
