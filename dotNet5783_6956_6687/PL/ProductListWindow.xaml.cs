@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using BlImplementation;
 using BO;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL.PlProduct
+namespace PL
 {
     /// <summary>
     /// Interaction logic for ProductListWindow.xaml
@@ -26,22 +27,12 @@ namespace PL.PlProduct
         {
             InitializeComponent();
             ProductListView.ItemsSource = bl.Product.GetListOfProducts();//listveiws source from BO func getLstOfProducts
-            categoryComboBox.ItemsSource = Category.GetValues(typeof(BO.Category));//combobox source of info- categories
+            Category_ComboBox.ItemsSource = Category.GetValues(typeof(BO.Category));//combobox source of info- categories
         }
-
-        private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Category_Combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-        }
-
-        private void categoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ProductListView.ItemsSource = bl.Product.GetproductForListByCategory((Category)categoryComboBox.SelectedItem);
-            //Func<BO.Category, bool> func => {Category == categoryComboBox.SelectedItem};
-            //ProductListView.ItemsSource = bl.Product.GetListOfProducts(func);
-
-            ProductListView.ItemsSource = bl.Product.GetListOfProducts();
-
+            ProductListView.ItemsSource = bl.Product.GetproductForListByCategory((Category)Category_ComboBox.SelectedItem);
+           // ProductListView.ItemsSource = bl.Product.GetListOfProducts();
         }
     }
 }

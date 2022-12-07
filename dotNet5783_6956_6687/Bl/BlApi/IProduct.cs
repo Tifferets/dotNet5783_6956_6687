@@ -1,4 +1,6 @@
 ﻿using BO;
+using System.Collections;
+
 namespace BlApi;
 
 public interface IProduct
@@ -41,5 +43,5 @@ public interface IProduct
     /// <param name="id"></param>
     /// <returns></returns>
     public ProductItem GetProductItem(int id);
-    public IEnumerable<BO.ProductForList> GetproductForListByCategory(BO.Category category);
+    public IEnumerable<ProductForList?> GetproductForListByCategory(Category selectedItem);
 }

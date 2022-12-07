@@ -11,7 +11,7 @@ internal class BoProduct : IProduct
     /// gets list of products(from system) builds ProductForList and returns it
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<BO.ProductForList> GetproductForListByCategory(BO.Category category)
+    public IEnumerable<BO.ProductForList?> GetproductForListByCategory(BO.Category category)
     {
         List<BO.ProductForList> products = new List<BO.ProductForList>();//new list
         try
@@ -62,31 +62,7 @@ internal class BoProduct : IProduct
 
 
     }
-    public IEnumerable<BO.ProductForList> GetproductForListByCategory(BO.Category category)
-    {
-        List<BO.ProductForList> products = new List<BO.ProductForList>();//new list
-        try
-        {
-            foreach (DO.Product item in dalList.product.GetAll())//goes over all products
-            {
-                if ((BO.Category)item.Category == category)//checks if the category is the same
-                {
-                    bool flag = false;//adds the product
-                    if (item.InStock > 0)
-                    {
-                        flag = true;
-                    }
-                    BO.ProductForList productForList = new BO.ProductForList() { ID = item.ID, Name = item.Name, InStock = flag, Amount = item.InStock, Price = item.Price, Category = (BO.Category)item.Category };
-                    products.Add(productForList);
-                }
-            }
-            return products;
-        }
-        catch (Exception ex)
-        {
-            throw new BO.errorException();
-        }
-    }
+
     /// <summary>
     /// gets id, if its positive gets product from system, builds a product and returnds it, throws exception if cant get the product from system
     /// </summary>
