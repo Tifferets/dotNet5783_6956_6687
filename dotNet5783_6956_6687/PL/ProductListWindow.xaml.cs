@@ -15,7 +15,7 @@ namespace PL
     public partial class ProductListWindow : Window
     {
         private IBl bl = new BlImplementation.Bl();
-        public BO.ProductForList? myData { get; set; }
+        
         public ProductListWindow()
         {
             InitializeComponent();
@@ -28,15 +28,12 @@ namespace PL
             ProductListView.ItemsSource = bl.Product.GetproductForListByCategory((Category)Category_ComboBox.SelectedItem);
         }
 
-        //private void ProductListView_MouseDoubleClicked(object sender, SelectionChangedEventArgs e)
-        //{
-        //    ProductWindow productWindow = new ProductWindow();
-        //    myData = new BO.ProductForList();
-        //    myData = (BO.ProductForList)ProductListView.SelectedItem;
-        //    productWindow.myData = myData;
-        //    //  productWindow.myData.ID = (BO.ProductForList)ProductListView.SelectedItem;
-        //    productWindow.ShowDialog();
-        //}
+        private void ProductListView_MouseDoubleClicked(object sender, SelectionChangedEventArgs e)
+        {
+            ProductWindow productWindow = new ProductWindow();
+            productWindow.myData = (BO.ProductForList)ProductListView.SelectedItem;
+            productWindow.Show();
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow().Show();
 
@@ -50,6 +47,14 @@ namespace PL
             ProductWindow productWindow = new ProductWindow((BO.ProductForList)ProductListView.SelectedItem);
             productWindow.Show();
           
+        }
+
+        private void ProductListView_MouseDoubleClicked(object sender, MouseButtonEventArgs e)
+        {
+            //myData = (BO.ProductForList)ProductListView.SelectedItem
+            ProductWindow productWindow = new ProductWindow((BO.ProductForList)ProductListView.SelectedItem);         
+           // productWindow.myData = (BO.ProductForList)ProductListView.SelectedValue;
+            productWindow.ShowDialog();
         }
     }
 }
