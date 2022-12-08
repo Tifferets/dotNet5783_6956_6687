@@ -1,4 +1,6 @@
 ﻿using BlApi;
+using BO;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,26 +23,33 @@ namespace PL.PlProduct
     public partial class ProductWindow : Window
     {
         private IBl bl = new BlImplementation.Bl();
-        public BO.ProductForList? myData { get; set; }  
-        public ProductWindow()
+
+        public ProductWindow(ProductForList? myData)
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
-            if(myData !=null)//if came with info - from product list window
+            this.myData = myData;
+            if (myData != null)//if came with info - from product list window
             {
-                Id_Textbox.Text =myData.ID.ToString();
+                Id_Textbox.Text = myData.ID.ToString();
                 Name_Textbox.Text = myData.Name;
-                Price_Textbox.Text =myData.Price.ToString();
-                InStock_Textbox.Text =myData.InStock.ToString();
-                Category_ComboBox.SelectedItem =myData.Category;
+                Price_Textbox.Text = myData.Price.ToString();
+                InStock_Textbox.Text = myData.Amount.ToString();
+                Category_ComboBox.Text= myData.Category.ToString();
                 AddProduct_Button.Visibility = Visibility.Hidden;
             }
             else
             {
-                UpdateProduct_button.Visibility = Visibility.Hidden;    
+                UpdateProduct_button.Visibility = Visibility.Hidden;
             }
         }
 
+        public ProductWindow()
+        {
+            InitializeComponent();
+            Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
+        }
+        public BO.ProductForList myData { get; set; }
 
         private void AddProduct_Button_Click(object sender, RoutedEventArgs e)
         {//adds a product to the do

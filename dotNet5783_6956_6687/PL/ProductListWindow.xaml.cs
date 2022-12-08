@@ -28,15 +28,15 @@ namespace PL
             ProductListView.ItemsSource = bl.Product.GetproductForListByCategory((Category)Category_ComboBox.SelectedItem);
         }
 
-        private void ProductListView_MouseDoubleClicked(object sender, SelectionChangedEventArgs e)
-        {
-            ProductWindow productWindow = new ProductWindow();
-            myData = new BO.ProductForList();
-            myData = (BO.ProductForList)ProductListView.SelectedItem;
-            productWindow.myData = myData;
-      //  productWindow.myData.ID = (BO.ProductForList)ProductListView.SelectedItem;
-            productWindow.ShowDialog();
-        }
+        //private void ProductListView_MouseDoubleClicked(object sender, SelectionChangedEventArgs e)
+        //{
+        //    ProductWindow productWindow = new ProductWindow();
+        //    myData = new BO.ProductForList();
+        //    myData = (BO.ProductForList)ProductListView.SelectedItem;
+        //    productWindow.myData = myData;
+        //    //  productWindow.myData.ID = (BO.ProductForList)ProductListView.SelectedItem;
+        //    productWindow.ShowDialog();
+        //}
 
         private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow().Show();
 
@@ -44,10 +44,19 @@ namespace PL
         {
 
         }
-
+        
         private void ProductListView_MouseDoubleClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-
+            ProductWindow productWindow = new ProductWindow((BO.ProductForList)ProductListView.SelectedItem);
+           // productWindow.message = "u got this message";
+            productWindow.Show();
+            //ProductWindow productWindow = new ProductWindow();
+            //myData = new BO.ProductForList();
+            //myData = (BO.ProductForList)ProductListView.SelectedItem;
+            //productWindow.message = "u got this message";
+            //productWindow.myData = myData;
+            ////  productWindow.myData.ID = (BO.ProductForList)ProductListView.SelectedItem;
+            //productWindow.ShowDialog();
         }
     }
 }
