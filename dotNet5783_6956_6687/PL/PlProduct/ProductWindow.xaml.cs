@@ -26,13 +26,18 @@ namespace PL.PlProduct
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
-            if(myData !=null)//if came with info
+            if(myData !=null)//if came with info - from product list window
             {
                 Id_Textbox.Text =myData.ID.ToString();
                 Name_Textbox.Text = myData.Name;
                 Price_Textbox.Text =myData.Price.ToString();
                 InStock_Textbox.Text =myData.InStock.ToString();
                 Category_ComboBox.SelectedItem =myData.Category;
+               // AddProduct_Button.Visibility = false;//u camt see the add botten if we got here to update a product
+            }
+            else 
+            {
+                //UpdateProduct_button.Visibility = false;
             }
         }
 
@@ -41,15 +46,23 @@ namespace PL.PlProduct
         {//adds a product to the do
             BO.Product product = new BO.Product()
             {
-                    Id = int.Parse( Id_Textbox.Text),
-                    Name = Name_Textbox.Text,
-                    Price = double.Parse(Price_Textbox.Text),
-                    InStock = int.Parse(InStock_Textbox.Text),
-                    Category = (BO.Category)Category_ComboBox.SelectedItem
+                Id = int.Parse(Id_Textbox.Text),
+                Name = Name_Textbox.Text,
+                Price = double.Parse(Price_Textbox.Text),
+                InStock = int.Parse(InStock_Textbox.Text),
+                Category = (BO.Category)Category_ComboBox.SelectedItem
 
             };
-            bl.Product.AddProduct(product);//adds the product to the do
-        }
+            try
+            {
+                bl.Product.AddProduct(product);//adds the product to the do
+            }
+            catch
+            {
+                MessageBox.Show("Error adding product");
+            }
+           }
+
 
         private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

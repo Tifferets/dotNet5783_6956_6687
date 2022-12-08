@@ -20,10 +20,11 @@ VerticalAlignment="Stretch" Width="auto">
             </Grid.ColumnDefinitions >
             <Label Content="Category: " Grid.Column="0" />
             <ComboBox Name="Category_ComboBox" SelectionChanged="Category_Combobox_SelectionChanged" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1"/>
+            
         </Grid>
 
 
-        <ListView x:Name="ProductListView" Grid.Row="1"  d:ItemsSource="{d:SampleData ItemCount=5}" >
+        <ListView x:Name="ProductListView" Grid.Row="1"  d:ItemsSource="{d:SampleData ItemCount=5}" d:MouseDoubleClick="ProductListView_MouseDoubleClicked" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
