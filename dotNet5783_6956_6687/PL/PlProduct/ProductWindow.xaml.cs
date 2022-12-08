@@ -26,7 +26,7 @@ namespace PL.PlProduct
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
-            if(myData !=null)//if came with info
+            if(myData !=null)//if came with info - from product list window
             {
                 Id_Textbox.Text =myData.ID.ToString();
                 Name_Textbox.Text = myData.Name;
@@ -94,6 +94,7 @@ namespace PL.PlProduct
             }
 
         }
+
 
         private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

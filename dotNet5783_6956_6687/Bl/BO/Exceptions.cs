@@ -2,10 +2,14 @@
 
 [Serializable]
 
+
 public class doesNotExistException : Exception
 {
-    public doesNotExistException() : base() { }
-    override public string ToString() => "does not exist";
+    public override string Message => "does not exist";
+    public override string ToString()
+    {
+        return Message;
+    }
 }
 
 public class alreadyExistException : Exception
@@ -32,11 +36,7 @@ public class WrongIDException : Exception
         return Message;
     }
 }
-//public class WrongIDException : Exception
-//{
-//    public WrongIDException() : base() { }
-//    override public string ToString() => "Wrong ID";
-//}
+
 public class WrongDataException : Exception
 {
     public override string Message => "Data not right";
