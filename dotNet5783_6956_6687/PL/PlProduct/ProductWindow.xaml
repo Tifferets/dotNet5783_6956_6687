@@ -19,7 +19,7 @@
         <TextBox x:Name="InStock_Textbox" HorizontalAlignment="Left" Margin="352,253,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="352,84,0,0"  VerticalAlignment="Top" Width="120" SelectionChanged="Category_ComboBox_SelectionChanged"/>
         <Button x:Name="AddProduct_Button" Content="Add" HorizontalAlignment="Left" Margin="623,379,0,0" VerticalAlignment="Top" Click="AddProduct_Button_Click"/>
-        <Button x:Name="UpdateProduct_button" Content="Update" HorizontalAlignment="Left" Margin="500,379,0,0" VerticalAlignment="Top" Click="UpdateProduct_button_Click"/>
+        <Button x:Name="UpdateProduct_button" Content="Update" HorizontalAlignment="Left" Margin="498,379,0,0" VerticalAlignment="Top" Click="UpdateProduct_button_Click"/>
 
     </Grid>
 </Window>
