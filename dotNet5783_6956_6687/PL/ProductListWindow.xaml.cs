@@ -28,33 +28,31 @@ namespace PL
             ProductListView.ItemsSource = bl.Product.GetproductForListByCategory((Category)Category_ComboBox.SelectedItem);
         }
 
-        private void ProductListView_MouseDoubleClicked(object sender, SelectionChangedEventArgs e)
-        {
-            ProductWindow productWindow = new ProductWindow();
-            productWindow.myData = (BO.ProductForList)ProductListView.SelectedItem;
-            productWindow.Show();
-        }
+        //private void ProductListView_MouseDoubleClicked(object sender, SelectionChangedEventArgs e)
+        //{
+        //    ProductWindow productWindow = new ProductWindow();
+        //    productWindow.myData = (BO.ProductForList)ProductListView.SelectedItem;
+        //    productWindow.Show();
+        //    ProductListView.ItemsSource = bl.Product.GetListOfProducts();//listveiws source from BO func getLstOfProducts
+        //}
 
         private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow().Show();
-
-        private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
         
         private void ProductListView_MouseDoubleClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ProductWindow productWindow = new ProductWindow((BO.ProductForList)ProductListView.SelectedItem);
+           
             productWindow.Show();
-          
+            ProductListView.ItemsSource = bl.Product.GetListOfProducts();//listveiws source from BO func getLstOfProducts
+
         }
 
-        private void ProductListView_MouseDoubleClicked(object sender, MouseButtonEventArgs e)
-        {
-            //myData = (BO.ProductForList)ProductListView.SelectedItem
-            ProductWindow productWindow = new ProductWindow((BO.ProductForList)ProductListView.SelectedItem);         
-           // productWindow.myData = (BO.ProductForList)ProductListView.SelectedValue;
-            productWindow.ShowDialog();
-        }
+        //private void ProductListView_MouseDoubleClicked(object sender, MouseButtonEventArgs e)
+        //{
+        //    //myData = (BO.ProductForList)ProductListView.SelectedItem
+        //    ProductWindow productWindow = new ProductWindow((BO.ProductForList)ProductListView.SelectedItem);         
+        //   // productWindow.myData = (BO.ProductForList)ProductListView.SelectedValue;
+        //    productWindow.ShowDialog();
+        //}
     }
 }
