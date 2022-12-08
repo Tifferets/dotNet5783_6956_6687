@@ -24,7 +24,7 @@ namespace PL
     public partial class ProductListWindow : Window
     {
         private IBl bl = new BlImplementation.Bl();
-        public BO.ProductForList? myData { get; set; }
+        
         public ProductListWindow()
         {
             InitializeComponent();
@@ -48,8 +48,8 @@ namespace PL
         private void ProductListView_MouseDoubleClicked(object sender, MouseButtonEventArgs e)
         {
             //myData = (BO.ProductForList)ProductListView.SelectedItem
-            ProductWindow productWindow = new ProductWindow();
-            productWindow.myData = (BO.ProductForList)ProductListView.SelectedItem;
+            ProductWindow productWindow = new ProductWindow((BO.ProductForList)ProductListView.SelectedItem);         
+           // productWindow.myData = (BO.ProductForList)ProductListView.SelectedValue;
             productWindow.ShowDialog();
         }
     }

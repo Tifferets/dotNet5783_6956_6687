@@ -21,7 +21,7 @@ namespace PL.PlProduct
     public partial class ProductWindow : Window
     {
         private IBl bl = new BlImplementation.Bl();
-        public BO.ProductForList? myData { get; set; }  
+        
         public ProductWindow()
         {
             InitializeComponent();
@@ -40,7 +40,26 @@ namespace PL.PlProduct
                 UpdateProduct_button.Visibility = Visibility.Hidden;    
             }
         }
-
+        public ProductWindow(BO.ProductForList product)
+        {
+            InitializeComponent();
+            this.myData = product;
+            Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
+            if (myData != null)//if came with info
+            {
+                Id_Textbox.Text = myData.ID.ToString();
+                Name_Textbox.Text = myData.Name;
+                Price_Textbox.Text = myData.Price.ToString();
+                InStock_Textbox.Text = myData.Amount.ToString();
+                Category_ComboBox.Text = myData.Category.ToString();
+                AddProduct_Button.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                UpdateProduct_button.Visibility = Visibility.Hidden;
+            }
+        }
+        public BO.ProductForList? myData { get; set; }
 
         private void AddProduct_Button_Click(object sender, RoutedEventArgs e)
         {//adds a product to the do
