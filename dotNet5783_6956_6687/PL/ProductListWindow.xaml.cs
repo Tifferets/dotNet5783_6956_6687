@@ -26,7 +26,6 @@ namespace PL
         private void Category_Combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ProductListView.ItemsSource = bl.Product.GetproductForListByCategory((Category)Category_ComboBox.SelectedItem);
-            ProductListView.BringIntoView();
         }
 
         //private void ProductListView_MouseDoubleClicked(object sender, SelectionChangedEventArgs e)

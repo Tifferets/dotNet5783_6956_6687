@@ -99,7 +99,6 @@ namespace PL.PlProduct
                     Price = double.Parse(Price_Textbox.Text),
                     InStock = int.Parse(InStock_Textbox.Text),
                     Category = (BO.Category)Category_ComboBox.SelectedItem
-
                 };
                 try
                 {
