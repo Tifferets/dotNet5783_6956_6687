@@ -33,22 +33,47 @@ namespace PL.PlProduct
                 Price_Textbox.Text =myData.Price.ToString();
                 InStock_Textbox.Text =myData.InStock.ToString();
                 Category_ComboBox.SelectedItem =myData.Category;
+                AddProduct_Button.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                UpdateProduct_button.Visibility = Visibility.Hidden;    
             }
         }
 
 
         private void AddProduct_Button_Click(object sender, RoutedEventArgs e)
         {//adds a product to the do
-            BO.Product product = new BO.Product()
+         //if (Id_Textbox.Text == null || Category_ComboBox.SelectedItem == null || Price_Textbox.Text == null || InStock_Textbox.Text == null || Name_Textbox.Text == null)//if there is missing data
+
+            try
             {
-                    Id = int.Parse( Id_Textbox.Text),
+                BO.Product product = new BO.Product()
+                {
+                    Id = int.Parse(Id_Textbox.Text),
                     Name = Name_Textbox.Text,
                     Price = double.Parse(Price_Textbox.Text),
                     InStock = int.Parse(InStock_Textbox.Text),
                     Category = (BO.Category)Category_ComboBox.SelectedItem
 
-            };
-            bl.Product.AddProduct(product);//adds the product to the do
+                };
+                try
+                {
+                    bl.Product.AddProduct(product);//adds the product to the do
+                    MessageBox.Show("product added successfully");
+                    this.Close();
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            catch (Exception ex)//if missing any data
+            {
+                MessageBox.Show("Please add missing data");
+            }
+
         }
 
         private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
