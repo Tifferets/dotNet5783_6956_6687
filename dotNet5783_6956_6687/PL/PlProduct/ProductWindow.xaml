@@ -7,19 +7,19 @@
         mc:Ignorable="d"
         Title="ProductWindow" Height="450" Width="800">
     <Grid>
-        <Label x:Name= "ID_Label" Content= "ID:" HorizontalAlignment= "Left" Margin= "167,36,0,0" VerticalAlignment= "Top" Height= "34" Width= "42" RenderTransformOrigin ="1.055,-1.79"/>
-        <Label x:Name= "Name_Label" Content="Name:" HorizontalAlignment="Left" Margin="167,141,0,0" VerticalAlignment="Top" Height="34" Width="42"/>
-        <Label x:Name="Category_Label" Content="Category:" HorizontalAlignment="Left" Margin="167,89,0,0"  VerticalAlignment="Top" Height="34" Width="84" RenderTransformOrigin="4.79,3.53"/>
-        <Label x:Name="Price_Label" Content="Price:" HorizontalAlignment="Left" Margin="167,197,0,0" VerticalAlignment="Top" Height="34" Width="42"/>
-        <Label x:Name="InStock_Label" Content="In Stock:" HorizontalAlignment="Left" Margin="167,245,0,0"  VerticalAlignment="Top" Height="34" Width="84"/>
+        <Label x:Name= "ID_Label" Content= "ID:" Margin= "208,100,0,0" Width= "42" RenderTransformOrigin ="1.055,-1.79" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name= "Name_Label" Content="Name:" Margin="208,185,0,0" Width="64" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="Category_Label" Content="Category:" Margin="208,146,0,0" Width="84" RenderTransformOrigin="4.79,3.53" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="Price_Label" Content="Price:" Margin="208,227,0,0" Width="73" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="InStock_Label" Content="In Stock:" Margin="208,262,0,0" Width="84" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <TextBox x:Name="Id_Textbox" HorizontalAlignment="Left" Margin="352,44,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="Name_Textbox" HorizontalAlignment="Left" Margin="352,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="Price_Textbox" HorizontalAlignment="Left" Margin="352,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="InStock_Textbox" HorizontalAlignment="Left" Margin="352,253,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="352,84,0,0"  VerticalAlignment="Top" Width="120" SelectionChanged="Category_ComboBox_SelectionChanged"/>
-        <Button x:Name= "AddProduct_Button" Content= "Add" HorizontalAlignment= "Left" Margin= "623,379,0,0" VerticalAlignment= "Top" Click= "AddProduct_Button_Click" />
-        <Button x:Name="UpdateProduct_button" Content="Update" HorizontalAlignment="Left" Margin="498,379,0,0" VerticalAlignment="Top" Click="UpdateProduct_button_Click"/>
+        <TextBox x:Name="Id_Textbox" Margin="352,107,0,0"  TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.615"/>
+        <TextBox x:Name="Name_Textbox" Margin="352,192,0,0" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="Price_Textbox" Margin="352,234,0,0" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="InStock_Textbox" Margin="352,269,0,0"  TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ComboBox x:Name="Category_ComboBox" Margin="352,151,0,0" Width="120" SelectionChanged="Category_ComboBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name= "AddProduct_Button" Content= "Add" HorizontalAlignment= "Left" Margin= "530,342,0,0" VerticalAlignment= "Top" Click= "AddProduct_Button_Click" Height="38" Width="93" />
+        <Button x:Name="UpdateProduct_button" Content="Update" HorizontalAlignment="Left" Margin="412,342,0,0" VerticalAlignment="Top" Click="UpdateProduct_button_Click" Height="38" Width="90"/>
 
     </Grid>
 </Window>

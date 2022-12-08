@@ -33,9 +33,9 @@ public class ProductForList
 
 public override string ToString() => $@"
 ID: {ID}
+Category: {Category}
 Name: {Name}
 Price: {Price}
-Category: {Category}
 Amount: {Amount}
 In stock? {InStock}
 ";

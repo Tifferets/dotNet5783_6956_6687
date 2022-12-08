@@ -26,6 +26,7 @@ namespace PL
         private void Category_Combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ProductListView.ItemsSource = bl.Product.GetproductForListByCategory((Category)Category_ComboBox.SelectedItem);
+            ProductListView.BringIntoView();
         }
 
         //private void ProductListView_MouseDoubleClicked(object sender, SelectionChangedEventArgs e)
@@ -48,15 +49,8 @@ namespace PL
         private void ProductListView_MouseDoubleClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ProductWindow productWindow = new ProductWindow((BO.ProductForList)ProductListView.SelectedItem);
-           // productWindow.message = "u got this message";
             productWindow.Show();
-            //ProductWindow productWindow = new ProductWindow();
-            //myData = new BO.ProductForList();
-            //myData = (BO.ProductForList)ProductListView.SelectedItem;
-            //productWindow.message = "u got this message";
-            //productWindow.myData = myData;
-            ////  productWindow.myData.ID = (BO.ProductForList)ProductListView.SelectedItem;
-            //productWindow.ShowDialog();
+          
         }
     }
 }

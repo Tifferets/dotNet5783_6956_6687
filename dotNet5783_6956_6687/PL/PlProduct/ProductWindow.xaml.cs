@@ -38,18 +38,15 @@ namespace PL.PlProduct
                 Category_ComboBox.Text= myData.Category.ToString();
                 AddProduct_Button.Visibility = Visibility.Hidden;
             }
-            else
-            {
-                UpdateProduct_button.Visibility = Visibility.Hidden;
-            }
         }
 
         public ProductWindow()
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
+            UpdateProduct_button.Visibility = Visibility.Hidden;
         }
-        public BO.ProductForList myData { get; set; }
+        public BO.ProductForList? myData { get; set; }
 
         private void AddProduct_Button_Click(object sender, RoutedEventArgs e)
         {//adds a product to the do
@@ -93,7 +90,33 @@ namespace PL.PlProduct
 
         private void UpdateProduct_button_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                BO.Product product = new BO.Product()
+                {
+                    Id = int.Parse(Id_Textbox.Text),
+                    Name = Name_Textbox.Text,
+                    Price = double.Parse(Price_Textbox.Text),
+                    InStock = int.Parse(InStock_Textbox.Text),
+                    Category = (BO.Category)Category_ComboBox.SelectedItem
 
+                };
+                try
+                {
+                    bl.Product.UpdateProduct(product);//adds the product to the do
+                    MessageBox.Show("product updated successfully");
+                    this.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            catch (Exception ex)//if missing any data
+            {
+                MessageBox.Show("Please add missing data");
+            }
         }
     }
 }
