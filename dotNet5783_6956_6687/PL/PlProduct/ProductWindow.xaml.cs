@@ -83,7 +83,32 @@ namespace PL.PlProduct
 
         private void UpdateProduct_button_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                BO.Product product = new BO.Product()
+                {
+                    Id = int.Parse(Id_Textbox.Text),
+                    Name = Name_Textbox.Text,
+                    Price = double.Parse(Price_Textbox.Text),
+                    InStock = int.Parse(InStock_Textbox.Text),
+                    Category = (BO.Category)Category_ComboBox.SelectedItem
 
+                };
+                try
+                {
+                    bl.Product.UpdateProduct(product);//updates the product to the do
+                    MessageBox.Show("product updated successfully");
+                    this.Close();
+                }
+                catch(Exception ex)
+                {
+                     MessageBox.Show(ex.Message);
+                }
+            }
+            catch(Exception ex)//if couldnt creatde a  new product
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
