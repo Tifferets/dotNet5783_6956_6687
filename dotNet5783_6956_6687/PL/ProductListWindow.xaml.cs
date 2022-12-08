@@ -15,11 +15,13 @@ namespace PL
     public partial class ProductListWindow : Window
     {
         private IBl bl = new BlImplementation.Bl();
+
         public ProductListWindow()
         {
             InitializeComponent();
             ProductListView.ItemsSource = bl.Product.GetListOfProducts();//listveiws source from BO func getLstOfProducts
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(BO.Category));//combobox source of info- categories
+            
         }
         private void Category_Combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -34,6 +36,10 @@ namespace PL
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow().Show();
-        
+
+        private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

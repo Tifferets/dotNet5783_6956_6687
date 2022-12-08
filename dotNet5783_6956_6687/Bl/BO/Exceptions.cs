@@ -39,14 +39,21 @@ public class WrongIDException : Exception
 
 public class WrongDataException : Exception
 {
-    public WrongDataException() : base() { }
-    override public string ToString() => "Data not right";
+    public override string Message => "Data not right";
+    public override string ToString()
+    {
+        return Message;
+    }
 }
 public class CantDeleteException : Exception
 {
-    public CantDeleteException() : base() { }
-    override public string ToString() => "can't delete this product";
+    public override string Message => "can't delete this product";
+    public override string ToString()
+    {
+        return Message;
+    }
 }
+
 public class CantUpDateException : Exception
 {
     public CantUpDateException() : base() { }
