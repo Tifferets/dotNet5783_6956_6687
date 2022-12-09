@@ -137,12 +137,12 @@ namespace PL.PlProduct
             return !_regex.IsMatch(text);
         }
 
-        private void PreviewTextImputNoDec(object sender, TextCompositionEventArgs e)// for InStock- only lets to put numbers, without decimal 
+        private void PreviewTextImputNoDec(object sender, TextCompositionEventArgs e)// for InStock and id- only lets to put numbers, without decimal 
         {
             e.Handled = !IsTextAllowedDec(e.Text);
         }
         private static readonly Regex regex = new Regex("[^0-9]+"); //regex that matches disallowed text-only positive no decimal
-        private static bool IsTextAllowedDec(string text)// for in stock
+        private static bool IsTextAllowedDec(string text)// for in stock and id
         {
             return !regex.IsMatch(text);
         }
