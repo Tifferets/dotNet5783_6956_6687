@@ -23,26 +23,22 @@ namespace PL
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(BO.Category));//combobox source of info- categories
             
         }
-        private void Category_Combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Category_Combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)//combobox selection of category- changes listView to that category
         {
             ProductListView.ItemsSource = bl.Product.GetproductForListByCategory((Category)Category_ComboBox.SelectedItem);
         }
 
-        //private void ProductListView_MouseDoubleClicked(object sender, SelectionChangedEventArgs e)
-        //{
-        //    ProductWindow productWindow = new ProductWindow();
-        //    productWindow.myData = (BO.ProductForList)ProductListView.SelectedItem;
-        //    productWindow.Show();
-        //    ProductListView.ItemsSource = bl.Product.GetListOfProducts();//listveiws source from BO func getLstOfProducts
-        //}
-
-        private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow().Show();
-        
-        private void ProductListView_MouseDoubleClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)//botten to open add product 
         {
-            ProductWindow productWindow = new ProductWindow((BO.ProductForList)ProductListView.SelectedItem);
-           
-            productWindow.Show();
+            ProductWindow productWindow = new ProductWindow();
+            productWindow.ShowDialog();//botten to open add product 
+            ProductListView.ItemsSource = bl.Product.GetListOfProducts();//listveiws source from BO func getLstOfProducts
+        }
+        
+        private void ProductListView_MouseDoubleClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)//listView double tap to update product
+        {
+            ProductWindow productWindow = new ProductWindow((BO.ProductForList)ProductListView.SelectedItem);//opens other window with constructer that gets a product and puts the data in the textBoxes
+            productWindow.ShowDialog();
             ProductListView.ItemsSource = bl.Product.GetListOfProducts();//listveiws source from BO func getLstOfProducts
 
         }
