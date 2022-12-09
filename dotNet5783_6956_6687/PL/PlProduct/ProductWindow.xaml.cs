@@ -32,11 +32,12 @@ namespace PL.PlProduct
             if (myData != null)//if came with info - from product list window
             {
                 Id_Textbox.Text = myData.ID.ToString();
+                Id_Textbox.IsEnabled = false;// no accesses to chang the id
                 Name_Textbox.Text = myData.Name;
                 Price_Textbox.Text = myData.Price.ToString();
                 InStock_Textbox.Text = myData.Amount.ToString();
                 Category_ComboBox.Text= myData.Category.ToString();
-                AddProduct_Button.Visibility = Visibility.Hidden;
+                AddProduct_Button.Visibility = Visibility.Hidden;//add butten invisable
             }
         }
 
@@ -44,14 +45,12 @@ namespace PL.PlProduct
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
-            UpdateProduct_button.Visibility = Visibility.Hidden;
+            UpdateProduct_button.Visibility = Visibility.Hidden;//update butten invisable
         }
         public BO.ProductForList? myData { get; set; }
 
-        private void AddProduct_Button_Click(object sender, RoutedEventArgs e)
-        {//adds a product to the do
-         //if (Id_Textbox.Text == null || Category_ComboBox.SelectedItem == null || Price_Textbox.Text == null || InStock_Textbox.Text == null || Name_Textbox.Text == null)//if there is missing data
-
+        private void AddProduct_Button_Click(object sender, RoutedEventArgs e)//adds a product to the DO list
+        {
             try
             {
                 BO.Product product = new BO.Product()
@@ -117,5 +116,6 @@ namespace PL.PlProduct
                 MessageBox.Show("Please add missing data");
             }
         }
+
     }
 }
