@@ -39,7 +39,6 @@ internal class BoProduct : IProduct
 
     public IEnumerable<BO.ProductForList> GetListOfProducts()
     {
-
         List<BO.ProductForList?> products = new List<BO.ProductForList>();
         try
         {
