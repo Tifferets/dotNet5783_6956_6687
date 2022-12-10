@@ -47,6 +47,7 @@ namespace PL.PlProduct
             InitializeComponent();
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
             UpdateProduct_button.Visibility = Visibility.Hidden;//update butten invisable
+
         }
         public BO.ProductForList? myData { get; set; }
 
@@ -146,7 +147,7 @@ namespace PL.PlProduct
         {
             return !regex.IsMatch(text);
         }
-       
-       
+
+
     }
 }

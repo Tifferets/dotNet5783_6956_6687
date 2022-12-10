@@ -14,7 +14,7 @@ public class doesNotExistException : Exception
 
 public class alreadyExistException : Exception
 {
-    public override string Message => "already exists";
+    public override string Message => "This product already exists";
     public override string ToString()
     {
         return Message;
@@ -30,7 +30,7 @@ public class errorException : Exception
 }
 public class WrongIDException : Exception
 {
-    public override string Message => "Wrong ID";
+    public override string Message => "Wrong ID entered";
     public override string ToString()
     {
         return Message;
@@ -39,7 +39,7 @@ public class WrongIDException : Exception
 
 public class WrongDataException : Exception
 {
-    public override string Message => "Data not right";
+    public override string Message => "Data entered is not right";
     public override string ToString()
     {
         return Message;

@@ -30,7 +30,7 @@ VerticalAlignment="Stretch" Width="auto">
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content= "Add new Product" Grid.Row= "2" HorizontalAlignment= "Left" Margin= "556,5,0,5" Padding= "5" Click= "Button_Click" Width="239"/>
+        <Button Content= "Add new Product" Grid.Row= "2" HorizontalAlignment= "Left" Margin= "472,5,0,5" Padding= "5" Click= "Button_Click" Width="248"/>
 
     </Grid>
 </Window>

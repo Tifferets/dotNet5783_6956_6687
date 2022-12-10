@@ -13,7 +13,7 @@ internal static class DataSource
 
     static string[] customerAddress = { "beit shemesh", "jlm", "Beitar","hebron","tel aviv", "beit shemesh", "jlm", "Beitar", "hebron", "tel aviv" };
     static string[] customerName = { "sara", "rachelli", "tifferet", "gitty", "ahuva", "aryeh", "moshe", "shaya", "david", "yehoda" };
-    static string[] productName = { "Product 1", "Product 2", "Product 3", "Product 4", "Product 5", "Product 6", "Product 7", "Product 8", "Product 9", "Product 10" };
+    static string[] productName = { "Bull Dog", "British Shorthair", "Cockatiel", "Holland Lop", "Gold Fish", "golden retriever", "Persian Cat", "Cockatoo", "Lionhead Rabbit", " Betta" };
     
     /// <summary>
     /// method to add an order to the order list
@@ -90,7 +90,7 @@ internal static class DataSource
             while (Productlist.Exists(x => x?.ID == product.ID));//makes sure there isn one with the same number
             product.Name = productName[i];//adds a name
             product.Price = (double)rand.Next(10, 200);//randome price from range 
-            product.Category = (Category)rand.Next(0, 4);
+            product.Category = Category.Dog+(i%5);//assings in order 
 
             if (i > 1)//5% of products with no stock
             {

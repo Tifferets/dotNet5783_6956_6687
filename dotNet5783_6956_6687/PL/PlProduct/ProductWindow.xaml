@@ -13,13 +13,14 @@
         <Label x:Name="Price_Label" Content="Price:" Margin="208,227,0,0" Width="73" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label x:Name="InStock_Label" Content="In Stock:" Margin="208,262,0,0" Width="84" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <TextBox x:Name="Id_Textbox" Margin="352,107,0,0"  TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.615" MaxLength="6" PreviewTextInput="PreviewTextImputNoDec"/>
+        <TextBox x:Name="Id_Textbox" Margin="352,107,0,0"  TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.615" MaxLength="6" PreviewTextInput="PreviewTextImputNoDec" />
         <TextBox x:Name="Name_Textbox" Margin="352,192,0,0" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" PreviewTextInput="PreviewTextImputString"/>
         <TextBox x:Name="Price_Textbox" Margin="352,234,0,0" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" PreviewTextInput="PreviewTextImput" />
         <TextBox x:Name="InStock_Textbox" Margin="352,269,0,0"  TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" PreviewTextInput="PreviewTextImputNoDec"/>
         <ComboBox x:Name="Category_ComboBox" Margin="352,151,0,0" Width="120" SelectionChanged="Category_ComboBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button x:Name= "AddProduct_Button" Content= "Add" HorizontalAlignment= "Left" Margin= "530,342,0,0" VerticalAlignment= "Top" Click= "AddProduct_Button_Click" Height="38" Width="93" />
         <Button x:Name="UpdateProduct_button" Content="Update" HorizontalAlignment="Left" Margin="412,342,0,0" VerticalAlignment="Top" Click="UpdateProduct_button_Click" Height="38" Width="90"/>
+      
 
     </Grid>
 </Window>
