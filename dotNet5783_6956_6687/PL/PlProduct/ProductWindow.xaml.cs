@@ -26,7 +26,7 @@ namespace PL.PlProduct
     {
         private IBl bl = new BlImplementation.Bl();
 
-        public ProductWindow(ProductForList? myData)
+        public ProductWindow(ProductForList? myData)//gets value from selecting on te comboBox to update
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
@@ -34,7 +34,7 @@ namespace PL.PlProduct
             if (myData != null)//if came with info - from product list window
             {
                 Id_Textbox.Text = myData.ID.ToString();
-                Id_Textbox.IsEnabled = false;// no accesses to chang the id
+                Id_Textbox.IsEnabled = false;// no accesses to change the id
                 Name_Textbox.Text = myData.Name;
                 Price_Textbox.Text = myData.Price.ToString();
                 InStock_Textbox.Text = myData.Amount.ToString();
@@ -45,7 +45,7 @@ namespace PL.PlProduct
 
         public ProductWindow()
         {
-            InitializeComponent();
+           InitializeComponent();
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
             UpdateProduct_button.Visibility = Visibility.Hidden;//update butten invisable
 
@@ -61,7 +61,7 @@ namespace PL.PlProduct
                     MessageBox.Show("please select a category");
                     return;
                 }
-                BO.Product product = new BO.Product()
+                BO.Product product = new BO.Product()//creating a new product
                 {
                     Id = int.Parse(Id_Textbox.Text),
                     Name = Name_Textbox.Text,
@@ -75,7 +75,6 @@ namespace PL.PlProduct
                     bl.Product.AddProduct(product);//adds the product to the do
                     MessageBox.Show("product added successfully");
                     this.Close();
-                    
                 }
                 catch (Exception ex)
                 {
@@ -89,13 +88,7 @@ namespace PL.PlProduct
 
         }
 
-
-        private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void UpdateProduct_button_Click(object sender, RoutedEventArgs e)
+        private void UpdateProduct_button_Click(object sender, RoutedEventArgs e)//to pudate a product
         {
             try
             {
@@ -104,7 +97,7 @@ namespace PL.PlProduct
                     MessageBox.Show("Please enter a name");
                     return;
                 }
-                BO.Product product = new BO.Product()
+                BO.Product product = new BO.Product()//crating a new product
                 {
                     Id = int.Parse(Id_Textbox.Text),
                     Name = Name_Textbox.Text,

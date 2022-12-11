@@ -19,7 +19,7 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
             <Label Content="Category: " Grid.Column="0" />
-            <ComboBox Name="Category_ComboBox" SelectionChanged= "Category_Combobox_SelectionChanged" HorizontalAlignment= "Stretch" VerticalAlignment= "Stretch" Grid.Column= "1"/>
+            <ComboBox Name="Category_ComboBox" SelectionChanged= "Category_Combobox_SelectionChanged" HorizontalAlignment= "Stretch" VerticalAlignment= "Stretch" Grid.Column= "1" />
         </Grid>
 
 

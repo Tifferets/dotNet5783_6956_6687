@@ -22,6 +22,14 @@ public class InStockException : Exception
     }
 }
 
+    public class PriceNotGoodException : Exception
+{
+    public override string Message => "Price cannot be zero or negative ";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
 public class alreadyExistException : Exception
 {
     public override string Message => "This product already exists";

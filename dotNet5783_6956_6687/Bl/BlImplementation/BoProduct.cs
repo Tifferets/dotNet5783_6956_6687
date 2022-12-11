@@ -2,6 +2,7 @@
 using BO;
 using DalApi;
 
+
 namespace BlImplementation;
 
 internal class BoProduct : BlApi.IProduct
@@ -79,6 +80,7 @@ internal class BoProduct : BlApi.IProduct
                 {
                     if (item.ID == Id)
                     {
+
                         product.Id = Id;
                         product.Name = item.Name;
                         product.Category = (BO.Category)item.Category;
@@ -149,7 +151,7 @@ internal class BoProduct : BlApi.IProduct
         }
         else
         {
-            if (product.Id < 300000 || product.Id > 500000)
+            if (product.Id < 300000 || product.Id >= 400000)
                 throw new WrongIdException();
             if (product.Name == "" || product.Name == null)
             {
@@ -159,6 +161,8 @@ internal class BoProduct : BlApi.IProduct
             {
                 throw new InStockException();
             }
+            if(product.Price<=0 )
+            { throw new PriceNotGoodException(); }
         }
     }
     /// <summary>
