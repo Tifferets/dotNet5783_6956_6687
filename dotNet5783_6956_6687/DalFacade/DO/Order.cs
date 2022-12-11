@@ -31,19 +31,20 @@ public struct Order
     /// <summary>
     /// the date the order was delivered
     /// </summary>
-    public DateTime? DeliveryDate { get; set; }   
+    public DateTime? DeliveryDate { get; set; }
     /// <summary>
     /// to string to print all details
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $@"
-Order ID: {ID}
-Customers name: {CustomerName}
-Customers email:{CustomerEmail}
-Customers address:{CustomerAddress}
-Order date: {OrderDate}
-Shipping date: {ShipDate}
-Delivery date; {DeliveryDate}
-";
+    public override string ToString() => Extention.ToStringProperty(this);
+    //    public override string ToString() => $@"
+    //Order ID: {ID}
+    //Customers name: {CustomerName}
+    //Customers email:{CustomerEmail}
+    //Customers address:{CustomerAddress}
+    //Order date: {OrderDate}
+    //Shipping date: {ShipDate}
+    //Delivery date; {DeliveryDate}
+    //";
 
 }

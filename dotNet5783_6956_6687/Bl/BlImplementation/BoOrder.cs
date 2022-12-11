@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using BO;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
@@ -7,7 +8,7 @@ namespace BlImplementation;
 internal class BoOrder:IOrder
 {
     private static DalApi.IDal dalList = new Dal.DalList();
-    private BO.OrderStatus ordered;
+    //private BO.OrderStatus ordered;
 
     /// <summary>
     /// returns the list of orders- for the admin
@@ -91,7 +92,7 @@ internal class BoOrder:IOrder
                     OrderDate = order?.OrderDate,
                     ShipDate = order?.ShipDate,
                     DeliveryDate = order?.DeliveryDate,
-                    Status = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), stauss.ToString()),//converting to enum
+                    Status = (BO.OrderStatus)System.Enum.Parse(typeof(BO.OrderStatus), stauss.ToString()),//converting to enum
                     Items = orderitemList.ToList(),
                     TotalPrice = totalprice,
                 };
@@ -205,7 +206,51 @@ internal class BoOrder:IOrder
     /// BONUS!!
     /// </summary>
     /// <param name="order"></param>
-   // public void UpdateOrder(Order order);
+   //public BO.Order UpdateOrder(BO.Order order, int orderitemId,int newAmount)
+   // {
+   //     try
+   //     {
+   //        List<BO.OrderItem?> lst = new List<BO.OrderItem?>();
+   //         foreach (BO.OrderItem item in order.Items)
+   //         {
+   //             lst.Add(item);//list of all
+   //         }
+   //         int dif = 0; //the difference between the new amount
+   //         foreach (BO.OrderItem? item in order.Items)
+   //         {
+   //             if(item?.ID == orderitemId)
+   //             { 
+   //             if (newAmount == 0)
+   //                 {
+   //                     lst.Remove(item);//removes the orderitem from lst
+   //                     order.Items = lst;//updates the cart
+   //                     break;
+   //                 }
+   //                 if (newAmount > item.Amount)//wanted more
+   //                 {
+   //                   //  DO.Product pro= dalList.product.GetSingle(x=> x?.))
+   //                     dif = newAmount - item.Amount;
+   //                     order.TotalPrice = order.TotalPrice + dif * item.Price;
+   //                     item.Amount = newAmount;
+   //                     break;
+   //                 }
+   //                 if (newAmount < item.Amount)//wanted less
+   //                 {
+   //                     dif = newAmount - item.Amount;
+   //                     order.TotalPrice = order.TotalPrice - dif * item.Price;
+   //                     item.Amount = newAmount;
+   //                     break;
+   //                 }
+   //             }
+   //         }
+   //         return order;
+   //     }
+        
+   //     catch(Exception ex)
+   //     {
+
+   //     }
+   // }
 
 }
 

@@ -1,4 +1,6 @@
-﻿namespace BO;
+﻿using DO;
+
+namespace BO;
 
 public class ProductItem
 {
@@ -26,12 +28,13 @@ public class ProductItem
     /// number if the product item is in stock
     /// </summary>
     public bool Instock{get;set;}
-public override string ToString() => $@"
-ID: {ID}
-Name: {Name}
-Price: {Price}
-Category: {Category}
-Amount: {Amount}
-InStock? {Instock}
-";
+    public override string ToString() => Extention.ToStringProperty(this);
+    //public override string ToString() => $@"
+    //ID: {ID}
+    //Name: {Name}
+    //Price: {Price}
+    //Category: {Category}
+    //Amount: {Amount}
+    //InStock? {Instock}
+    //";
 }

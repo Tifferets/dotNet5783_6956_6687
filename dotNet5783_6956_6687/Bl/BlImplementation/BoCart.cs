@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using BO;
 using DalApi;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlImplementation;
 
@@ -75,45 +76,56 @@ internal class BoCart : ICart
     /// <param name="newAmount"></param>
     public Cart UpdateAmountOfProductInCart(Cart? cart, int productId, int newAmount)
     {
-        if (cart.Items == null)
-            throw new NoItemsInCartException();
-
-        if (productId < 300000 || productId > 490000)
-            throw new BO.WrongIDException();
-
-        int dif = 0;//the difference between the new amount and the old amount
-        List <BO.OrderItem?> lst = new List<BO.OrderItem>();
-        foreach(OrderItem item in cart.Items)
+        try
         {
-            lst.Add(item);//copies all the list in cart to the lst
-        }
-        foreach(BO.OrderItem item in cart.Items)
-        {
-            if(item.ProductID==productId)
+            if (cart?.Items == null)
+                throw new NoItemsInCartException();
+
+            if (productId < 300000 || productId > 490000)
+                throw new BO.WrongIDException();
+            if (cart.CustomerAddress == null || cart.CustomerAddress == " " || CheckEmail(cart.CustomerAddress) || cart.CustomerName == null || cart.CustomerName == " ")
             {
-                if (newAmount == 0) 
+                throw new BO.MissingCustomersInfoException();
+            }
+
+            int dif = 0; //the difference between the new amount and the old amount
+            List<BO.OrderItem?> lst = new List<BO.OrderItem?>();
+            foreach (OrderItem item in cart.Items)
+            {
+                lst.Add(item);//copies all the list in cart to the lst
+            }
+            foreach (BO.OrderItem item in cart.Items)
+            {
+                if (item.ProductID == productId)
                 {
-                    lst.Remove(item);//removes the orderitem from lst
-                    cart.Items = lst;//updates the cart
-                    break;
-                }
-                if (newAmount >item.Amount)//wanted more
-                {
-                    dif= newAmount-item.Amount;
-                    cart.TotalPrice = cart.TotalPrice + dif * item.Price;
-                    item.Amount = newAmount;
-                    break;
-                }
-                if (newAmount < item.Amount)//wanted less
-                {
-                    dif = newAmount - item.Amount;
-                    cart.TotalPrice = cart.TotalPrice - dif * item.Price;
-                    item.Amount = newAmount;
-                    break;
+                    if (newAmount == 0)
+                    {
+                        lst.Remove(item);//removes the orderitem from lst
+                        cart.Items = lst;//updates the cart
+                        break;
+                    }
+                    if (newAmount > item.Amount)//wanted more
+                    {
+                        dif = newAmount - item.Amount;
+                        cart.TotalPrice = cart.TotalPrice + dif * item.Price;
+                        item.Amount = newAmount;
+                        break;
+                    }
+                    if (newAmount < item.Amount)//wanted less
+                    {
+                        dif = newAmount - item.Amount;
+                        cart.TotalPrice = cart.TotalPrice - dif * item.Price;
+                        item.Amount = newAmount;
+                        break;
+                    }
                 }
             }
+            return cart;
         }
-        return cart;
+        catch(Exception ex)
+        {
+            throw new BO.CantUpDateException();
+        }
     }
     /// <summary>
     /// the function confirms the cart get, gets the cart and the customers info

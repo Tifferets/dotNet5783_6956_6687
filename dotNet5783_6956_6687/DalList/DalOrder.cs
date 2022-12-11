@@ -13,7 +13,6 @@ internal class DalOrder : IOrder
     /// <returns></returns>
     public int Add(Order order)
     {
-        //order.Value.ID = 33;
         order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
         DataSource.Orderlist.Add(order);//not recursion
         return order.ID;
@@ -70,7 +69,7 @@ internal class DalOrder : IOrder
             }
         }
     }
-    public IEnumerable<OrderItem?> GetAllOrderItems(int id)
+    public IEnumerable<OrderItem?> GetAllOrderItems(int id)//returns all the order items for the spicific order by its id
     {
         List<OrderItem?> lst = new List<OrderItem?>();
         foreach (OrderItem item in DataSource.OrderItemList)

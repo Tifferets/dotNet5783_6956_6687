@@ -32,7 +32,7 @@ public class Order
     /// <summary>
     /// Status- from Enum OrderStatus -BO
     /// </summary>
-    public OrderStatus? Status { get; set; }
+    public OrderStatus Status { get; set; }
     /// <summary>
     /// list of Order Item_BO
     /// </summary>

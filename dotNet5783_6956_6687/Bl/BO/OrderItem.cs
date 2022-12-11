@@ -1,4 +1,6 @@
 ﻿
+using DO;
+
 namespace BO;
 
 public class OrderItem  //?????
@@ -31,13 +33,5 @@ public class OrderItem  //?????
     /// to string to print all details
     /// </summary>
     /// <returns></returns>
- public override string ToString() => $@"
-Order Item ID: {ID}
-Name: {Name}
-Product ID: {ProductID}
-Price: {Price}
-Amount: {Amount}
-Total price: {TotalPrice}
-
-    ";
+    public override string ToString() => Extention.ToStringProperty(this);
 }

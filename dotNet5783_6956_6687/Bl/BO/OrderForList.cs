@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using DO;
+using System.Diagnostics;
 using System.Xml.Linq;
 
 namespace BO;
@@ -27,12 +28,5 @@ public class OrderForList
     public double TotalPrice { get; set; }
 
 
-    public override string ToString() => $@"
-ID:{ID}
-Name: {CustomerName}
-Status: {Status}
-Amount of items:{AmountOfItems}
-Total price:{TotalPrice}
-
-";
+    public override string ToString() => Extention.ToStringProperty(this);
 }

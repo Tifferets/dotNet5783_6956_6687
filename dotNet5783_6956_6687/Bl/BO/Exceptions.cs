@@ -1,4 +1,6 @@
-﻿namespace BO;
+﻿using System.Runtime.InteropServices;
+
+namespace BO;
 
 [Serializable]
 
@@ -6,6 +8,14 @@
 public class doesNotExistException : Exception
 {
     public override string Message => "does not exist";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
+public class InStockException : Exception
+{
+    public override string Message => "No amount in stock";
     public override string ToString()
     {
         return Message;
@@ -56,46 +66,77 @@ public class CantDeleteException : Exception
 
 public class CantUpDateException : Exception
 {
-    public CantUpDateException() : base() { }
-    override public string ToString() => "can't update this product";
+    public override string Message => "can't update this product";
+    public override string ToString()
+    {
+        return Message;
+    }
 }
+
 public class CantGetException : Exception
 {
-    public CantGetException() : base() { }
-    override public string ToString() => "can't get this product";
+    public override string Message => "can't get this product";
+    public override string ToString()
+    {
+        return Message;
+    }
 }
+
 public class NoMoreInStockException : Exception
-{//used in bocart
-    public NoMoreInStockException() : base() { }
-    override public string ToString() => "No more in stock or doesn't exist in stock";
+{
+    public override string Message => "No more in stock";
+    public override string ToString()
+    {
+        return Message;
+    }
 }
 public class AlreadyShippedException : Exception
 {
-    public AlreadyShippedException() : base() { }
-    override public string ToString() => "The order has already been shipped ";
+    public override string Message => "The order has already been shipped";
+    public override string ToString()
+    {
+        return Message;
+    }
 }
+
 public class AlreadyDeliverdException : Exception
 {
-    public AlreadyDeliverdException() : base() { }
-    override public string ToString() => "The order has already been deliverd ";
+    public override string Message => "The order has already been deliverd";
+    public override string ToString()
+    {
+        return Message;
+    }
 }
+
 public class NotShippedException : Exception
 {
-    public NotShippedException() : base() { }
-    override public string ToString() => "The order wasn't shipped yet";
+    public override string Message => "The order wasn't shipped yet";
+    public override string ToString()
+    {
+        return Message;
+    }
 }
 public class MissingCustomersInfoException : Exception
-{//used in bocart
-    public MissingCustomersInfoException() : base() { }
-    override public string ToString() => "Missing customers Information";
+{
+    public override string Message => "Missing customers Information";
+    public override string ToString()
+    {
+        return Message;
+    }
 }
 public class WrongAmountException : Exception
-{//used in bocart
-    public WrongAmountException() : base() { }
-    override public string ToString() => "Wrong Amount";
+{
+    public override string Message => "Wrong Amount";
+    public override string ToString()
+    {
+        return Message;
+    }
 }
 public class NoItemsInCartException : Exception
-{//used in bocart
-    public NoItemsInCartException() : base() { }
-    public override string ToString() => "No items in cart";
+{ 
+    public override string Message => "No items in cart";
+    public override string ToString()
+    {
+        return Message;
+    }
 }

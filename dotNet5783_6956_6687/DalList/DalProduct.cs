@@ -14,6 +14,12 @@ internal class DalProduct : IProduct
     /// <exception cref="Exception"></exception>
     public int Add(Product product)
     {
+        if (product.ID < 300000 || product.ID > 500000)
+            throw new WrongIdException();
+        if(product.Name =="" || product.Name == null)
+        {
+            throw new NoNameException();
+        }
         foreach (Product item in DataSource.Productlist)
         {
             if (item.ID == product.ID)
@@ -76,7 +82,7 @@ internal class DalProduct : IProduct
         }
     }
 
-    static bool isProduct(Product p)
+    private static bool isProduct(Product p)
     {
         return true;
     }

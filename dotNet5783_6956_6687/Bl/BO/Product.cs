@@ -24,14 +24,7 @@ public class Product
     /// </summary>
     public Category? Category { get; set; }
 
- public override string ToString() => $@"
-Product ID: {Id}
-Name: {Name}
-category : {Category}
-Price: {Price}
-Amount in stock: {InStock}
-
-";
+    public override string ToString() => Extention.ToStringProperty(this);
 }
 
 

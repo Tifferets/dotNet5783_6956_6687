@@ -21,7 +21,7 @@ public class ProductForList
     /// <summary>
     /// the category the item belongs in
     /// </summary>
-    public Category? Category { get; set; }
+    public Category Category { get; set; }
     /// <summary>
     /// the amount of 1 item
     /// </summary>
@@ -31,13 +31,6 @@ public class ProductForList
     /// </summary>
     public bool InStock { get; set; }
 
-public override string ToString() => $@"
-ID: {ID}
-Category: {Category}
-Name: {Name}
-Price: {Price}
-Amount: {Amount}
-In stock? {InStock}
-";
+public override string ToString() => Extention.ToStringProperty(this);
 }
 

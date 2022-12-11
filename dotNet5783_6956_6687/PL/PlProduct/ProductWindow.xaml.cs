@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup.Localizer;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -55,6 +56,11 @@ namespace PL.PlProduct
         {
             try
             {
+                if(Category_ComboBox.SelectedItem == null) //if they didnt enter a category 
+                {
+                    MessageBox.Show("please select a category");
+                    return;
+                }
                 BO.Product product = new BO.Product()
                 {
                     Id = int.Parse(Id_Textbox.Text),
@@ -78,7 +84,7 @@ namespace PL.PlProduct
             }
             catch (Exception ex)//if missing any data
             {
-                MessageBox.Show("Please add missing data");
+                MessageBox.Show("Please enter missing data");
             }
 
         }
@@ -93,6 +99,11 @@ namespace PL.PlProduct
         {
             try
             {
+                if (Name_Textbox.Text == "")//if there isnt a name entered
+                {
+                    MessageBox.Show("Please enter a name");
+                    return;
+                }
                 BO.Product product = new BO.Product()
                 {
                     Id = int.Parse(Id_Textbox.Text),
@@ -115,7 +126,7 @@ namespace PL.PlProduct
             }
             catch (Exception ex)//if missing any data
             {
-                MessageBox.Show("Please add missing data");
+                MessageBox.Show("Please enter missing data");
             }
         }
         private void PreviewTextImputString(object sender, TextCompositionEventArgs e)// for name -only lets to put letters 

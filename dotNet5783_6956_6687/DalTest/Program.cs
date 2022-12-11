@@ -1,7 +1,7 @@
 ﻿using Dal;
 using DO;
 using DalApi;
-using DalList;
+//using DalList;
 using System.Reflection.Metadata.Ecma335;
 
 namespace Dal;

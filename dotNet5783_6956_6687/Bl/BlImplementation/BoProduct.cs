@@ -1,9 +1,10 @@
 ﻿using BlApi;
 using BO;
+using DalApi;
 
 namespace BlImplementation;
 
-internal class BoProduct : IProduct
+internal class BoProduct : BlApi.IProduct
 {
     private static DalApi.IDal dalList = new Dal.DalList();
 
@@ -144,12 +145,21 @@ internal class BoProduct : IProduct
             }
             catch
             {
-                throw new BO.WrongDataException();
             }
         }
         else
-            throw new BO.WrongDataException();
-
+        {
+            if (product.Id < 300000 || product.Id > 500000)
+                throw new WrongIdException();
+            if (product.Name == "" || product.Name == null)
+            {
+                throw new NoNameException();
+            }
+            if(product.InStock<0 || product.InStock ==null)
+            {
+                throw new InStockException();
+            }
+        }
     }
     /// <summary>
     /// function that gets a product and checks if its data is all correct returns true
@@ -160,10 +170,10 @@ internal class BoProduct : IProduct
     {
         if (product.Id >= 300000 && product.Id < 400000)
         {
-            if (product.Name != null && product.Price > 0 && product.InStock >= 0)
+            if (product.Name != null && product.Name  != "" && product.Price > 0 && product.InStock >= 0)
                 return true;
         }
-        return false;
+       return false;
     }
     /// <summary>
     /// function to convert from BO to DO

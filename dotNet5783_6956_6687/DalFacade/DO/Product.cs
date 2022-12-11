@@ -28,11 +28,12 @@ public struct Product
     /// to string to print all details
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $@"
-Product ID: {ID}
-Name: {Name}
-category : {Category}
-Price: {Price}
-Amount in stock: {InStock}
-";
+    public override string ToString() => Extention.ToStringProperty(this);
+    //    public override string ToString() => $@"
+    //Product ID: {ID}
+    //Name: {Name}
+    //category : {Category}
+    //Price: {Price}
+    //Amount in stock: {InStock}
+    //";
 }
