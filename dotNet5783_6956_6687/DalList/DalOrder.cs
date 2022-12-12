@@ -105,7 +105,10 @@ internal class DalOrder : IOrder
         }
         return result;
     }
-   public Order? GetSingle(Func<Order?, bool>? func) => DataSource.Orderlist.FirstOrDefault(func); // return an order with this id
-
+    public Order? GetSingle(Func<Order?, bool>? func)
+    {
+            DataSource.Orderlist.FirstOrDefault(func); // return an order with this id
+      
+    }
     
 }
