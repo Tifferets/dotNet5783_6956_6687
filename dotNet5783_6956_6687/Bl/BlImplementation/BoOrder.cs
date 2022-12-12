@@ -7,8 +7,8 @@ namespace BlImplementation;
 
 internal class BoOrder:IOrder
 {
-    private static DalApi.IDal? dalList = DalApi.Factory.Get();
-
+    private static DalApi.IDal dalList = new Dal.DalList();
+    //private BO.OrderStatus ordered;
 
     /// <summary>
     /// returns the list of orders- for the admin

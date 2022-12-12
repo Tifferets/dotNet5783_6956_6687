@@ -1,4 +1,6 @@
 ﻿
+using DalApi;
+
 namespace BlApi;
 
 public interface IBl
