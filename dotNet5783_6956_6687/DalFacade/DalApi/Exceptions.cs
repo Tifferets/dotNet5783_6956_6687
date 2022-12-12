@@ -10,7 +10,14 @@ public class doesNotExistException : Exception
         return Message;
     }
 }
-
+public class NullException : Exception
+{
+    public override string Message => "Item was null";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
 public class CantDeleteException : Exception
 {
     public override string Message => "can't delete this product";

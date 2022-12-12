@@ -17,16 +17,16 @@ internal class BoOrder:IOrder
     public IEnumerable<BO.OrderForList?> GetOrderList()
     {
         List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();//list of orderForList
-       try
+        try
         {
-            foreach(DO.Order item in dalList.order.GetAll())
+            foreach(DO.Order item in (dalList.order.GetAll() ?? throw new BO.NullException()) )
             { 
                 BO.OrderTracking orderTracking = OrderStatus(item.ID);
                 string statusee = status(orderTracking);
                 BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
                 double price = 0;
                 int amount = 0;
-                foreach(DO.OrderItem oitem in dalList.order.GetAllOrderItems(item.ID))//loop to count the amount of products and total price
+                foreach(DO.OrderItem oitem in (dalList.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()))//loop to count the amount of products and total price
                 {
                     amount++;
                     price += oitem.Price;
@@ -43,7 +43,7 @@ internal class BoOrder:IOrder
             IEnumerable<BO.OrderForList> orderForLists = OrderForlist;//list to return
             return orderForLists;
         }
-        catch(Exception ex)
+        catch(Exception)
         {
             throw new BO.errorException();
         }
@@ -63,7 +63,7 @@ internal class BoOrder:IOrder
                 double? totalprice = 0;
                 int? oiamount = 0; 
                 List<BO.OrderItem> orderitemList = new List<BO.OrderItem>();//list of orderitems
-                IEnumerable<DO.OrderItem?> oitms = dalList.order.GetAllOrderItems(orderId);//list od orderitems of this order
+                IEnumerable<DO.OrderItem?> oitms = (dalList.order.GetAllOrderItems(orderId) ?? throw new BO.NullException());//list od orderitems of this order
                 foreach(DO.OrderItem item in oitms)//going over all the order items dor this order
                 {
                     totalprice += item.Price* item.Amount;//the total price of the items
@@ -198,7 +198,7 @@ internal class BoOrder:IOrder
     /// </summary>
     /// <param name="orderTracking"></param>
     /// <returns></returns>
-    private string status(BO.OrderTracking orderTracking)
+    private string? status(BO.OrderTracking orderTracking)
     {
         return orderTracking.Status.ToString();
     }

@@ -19,15 +19,15 @@ internal class BoCart : ICart
         bool flag = false;
         if (productId < 300000 || productId > 499999)//checking product id
             throw new WrongIDException();
-        foreach (BO.OrderItem item in cart.Items)//goes through all the items in the cart
+        foreach (BO.OrderItem? item in (cart.Items ?? throw new BO.NullException()))//goes through all the items in the cart
         {
-            if (item.ProductID == productId)//checking if the product already exists in the cart
+            if (item?.ProductID == productId)//checking if the product already exists in the cart
             {
                 flag = true;
 
-                foreach (DO.Product item1 in dalList.product.GetAll())//goes through all the products that exist in general
+                foreach (DO.Product? item1 in (dalList.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
                 {
-                    if (item1.ID == productId && item1.InStock > 0)//if it exists and has aenough in stock
+                    if (item1?.ID == productId && item1?.InStock > 0)//if it exists and has aenough in stock
                     {
                         item.Amount = item.Amount + 1;//addes 1 more of the product to the cart
                         item.TotalPrice = item.TotalPrice + item.Price;
@@ -42,7 +42,7 @@ internal class BoCart : ICart
         }
         if (flag == false)//if the product does not exists in the cart
         {
-            foreach (DO.Product item in dalList.product.GetAll())//goes through all the products that exist in general
+            foreach (DO.Product item in (dalList.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
             {
                 if (item.ID == productId)//if it exists and has aenough in stock
                 {
@@ -151,11 +151,11 @@ internal class BoCart : ICart
             if (item.Amount < 0)
                 throw new WrongAmountException();
            
-            foreach (DO.Product item1 in dalList.product.GetAll())//goes through all the product looking for the product in the cart
+            foreach (DO.Product? item1 in (dalList.product.GetAll() ?? throw new BO.NullException()))//goes through all the product looking for the product in the cart
             {
-                if (item1.ID == item.ProductID)
+                if (item1?.ID == item.ProductID)
                 {
-                    if (item1.InStock < item.Amount)//if the product exists but its not in stock
+                    if (item1?.InStock < item.Amount)//if the product exists but its not in stock
                         throw new NoMoreInStockException();
                     else
                         flag = true;
@@ -181,11 +181,11 @@ internal class BoCart : ICart
                 {
                     id = dalList.order.Add(order);
                 }
-                catch (Exception ms)
+                catch (Exception )
                 {
                     throw new BO.errorException();
                 }
-                foreach (OrderItem item in cart.Items)//goes through all the orderitems in cart
+                foreach (OrderItem? item in cart.Items)//goes through all the orderitems in cart
                 {
                     //DO.OrderItem orderItem = new DO.OrderItem()//creats a new order item
                     //{

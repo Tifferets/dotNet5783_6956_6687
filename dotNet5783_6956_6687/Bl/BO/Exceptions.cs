@@ -4,7 +4,14 @@ namespace BO;
 
 [Serializable]
 
-
+public class NullException : Exception
+{
+    public override string Message => "Item was null";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
 public class doesNotExistException : Exception
 {
     public override string Message => "does not exist";
