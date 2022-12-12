@@ -7,7 +7,7 @@ namespace BlImplementation;
 
 internal class BoCart : ICart
 {
-    private static DalApi.IDal dalList = new Dal.DalList();
+    private static DalApi.IDal? dalList = DalApi.Factory.Get();
     /// <summary>
     /// adds a product to the cart. if product is alredy in cart adds another to the amount and price, if not adds it
     /// </summary>

@@ -36,7 +36,7 @@ public class Order
     /// <summary>
     /// list of Order Item_BO
     /// </summary>
-    public IEnumerable<OrderItem?>? Items { get; set; }
+    public List<OrderItem> Items { get; set; }
     /// <summary>
     /// Total Price -BO
     /// </summary>

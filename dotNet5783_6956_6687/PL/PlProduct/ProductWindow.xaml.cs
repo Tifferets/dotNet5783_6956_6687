@@ -1,5 +1,4 @@
-﻿using BlApi;
-using BO;
+﻿using BO;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
@@ -24,7 +23,7 @@ namespace PL.PlProduct
     /// </summary>
     public partial class ProductWindow : Window
     {
-        private IBl bl = new BlImplementation.Bl();
+        private BlApi.IBl? bl = BlApi.Factory.Get();
 
         public ProductWindow(ProductForList? myData)//gets value from selecting on te comboBox to update
         {

@@ -8,7 +8,7 @@ namespace Dal;
 
 public class program//the main where we check it works
 {
-    private static IDal dalList = new DalList();
+    private static DalApi.IDal? dalList = DalApi.Factory.Get();
     static void Main(string[] args)
     {
         Console.WriteLine(@"Please Enter:

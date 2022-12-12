@@ -1,5 +1,4 @@
 ﻿using BlApi;
-using Dal;
 using BO;
 using DalApi;
 using System.Numerics;
@@ -7,7 +6,7 @@ namespace BL;
 
 internal class Program
 {
-    private static BlApi.IBl blList = new BlImplementation.Bl();
+    private static BlApi.IBl? blList = BlApi.Factory.Get();
     static void Main(string[] args)
     {
 

@@ -1,13 +1,10 @@
 ﻿using BlApi;
 using BO;
 using DalApi;
-
-
 namespace BlImplementation;
-
 internal class BoProduct : BlApi.IProduct
 {
-    private static DalApi.IDal dalList = new Dal.DalList();
+    private static DalApi.IDal? dalList = DalApi.Factory.Get();
 
     /// <summary>
     /// gets list of products(from system) builds ProductForList and returns it
@@ -18,7 +15,7 @@ internal class BoProduct : BlApi.IProduct
         List<BO.ProductForList> products = new List<BO.ProductForList>();//new list
         try
         {
-            foreach (DO.Product item in dalList.product.GetAll())//goes over all products
+            foreach (DO.Product item in dalList?.product.GetAll())//goes over all products
             {
                 if ((BO.Category)item.Category == category)//checks if the category is the same
                 {
