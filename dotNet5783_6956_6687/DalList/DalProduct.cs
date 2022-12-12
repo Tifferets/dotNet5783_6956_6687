@@ -20,9 +20,9 @@ internal class DalProduct : IProduct
         {
             throw new NoNameException();
         }
-        foreach (Product item in DataSource.Productlist)
+        foreach (Product? item in DataSource.Productlist ?? throw new NullException())
         {
-            if (item.ID == product.ID)
+            if (item?.ID == product.ID)
                 throw new Exception("Product already exist");
         }
         DataSource.Productlist.Add(product);
@@ -54,9 +54,9 @@ internal class DalProduct : IProduct
     /// <param name="productID"></param>
     public void Delete(int productID)
     {
-        foreach (Product item in DataSource.Productlist)//goes through the list looking for the order.
+        foreach (Product? item in DataSource.Productlist ?? throw new NullException())//goes through the list looking for the order.
         {
-            if (item.ID == productID)
+            if (item?.ID == productID)
             {
                 DataSource.Productlist.Remove(item);
                 break;
@@ -70,21 +70,16 @@ internal class DalProduct : IProduct
     public void Update(Product product)
     {
         int count = 0;
-        foreach (Product item in DataSource.Productlist)//goes through the list looking for the order.
+        foreach (Product? item in DataSource.Productlist ?? throw new NullException())//goes through the list looking for the order.
         {
-            if (item.ID != product.ID) 
+            if (item?.ID != product.ID) 
                 count++;
-            if (item.ID == product.ID)
+            if (item?.ID == product.ID)
             {
                 DataSource.Productlist[count] = product;
                 break;
             }
         }
-    }
-
-    private static bool isProduct(Product p)
-    {
-        return true;
     }
 
     /// <summary>
@@ -95,17 +90,17 @@ internal class DalProduct : IProduct
     {
         if(func == null)
         {
-            return DataSource.Productlist;//if null retun te whole list
+            return DataSource.Productlist ?? throw new NullException();//if null retun te whole list
         }
-        List<Product?> result = new List<Product?>();
-        foreach(var item in DataSource.Productlist)
+        List<Product?> result = new();//creating a list
+        foreach(var item in DataSource.Productlist ?? throw new NullException())
         {
             if(func(item))//if the id is good
                 result.Add(item);//adds to list 
         }
         return result;
     }
-    public Product? GetSingle(Func<Product?, bool>? func) => DataSource.Productlist.FirstOrDefault(func); // return a product with this id
+    public Product? GetSingle(Func<Product?, bool>? func) => DataSource.Productlist.FirstOrDefault(func ?? throw new NullException()); // return a product with this id
 
 
 }

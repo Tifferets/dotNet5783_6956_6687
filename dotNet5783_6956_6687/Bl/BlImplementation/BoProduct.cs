@@ -210,10 +210,10 @@ internal class BoProduct : BlApi.IProduct
     {
         if (Id >= 300000 && Id < 400000)
         {
-            IEnumerable<DO.Order?> orderList = (dalList.order.GetAll() ?? throw new NullException());//list of do.order
+            IEnumerable<DO.Order?> orderList = (dalList.order.GetAll() ?? throw new BO.NullException());//list of do.order
             foreach (DO.Order item in orderList)//going over the list
             {
-                IEnumerable<DO.OrderItem?> orderItemList = (dalList.order.GetAllOrderItems(item.ID) ?? throw new NullException()) ;//gets a list of all order items for the order
+                IEnumerable<DO.OrderItem?> orderItemList = (dalList.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()) ;//gets a list of all order items for the order
                 foreach (DO.OrderItem oitem in orderItemList)//
                 {
                     if (oitem.ProductID == Id)//checks if the product is in the orderitem
