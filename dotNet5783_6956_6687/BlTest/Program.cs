@@ -7,7 +7,7 @@ namespace BL;
 
 internal class Program
 {
-    private static BlApi.IBl blList = new BlImplementation.Bl();
+    private static BlApi.IBl? bl = BlApi.Factory.Get();
     static void Main(string[] args)
     {
 
@@ -89,23 +89,23 @@ internal class Program
                     Console.WriteLine("enter product ID");
                     int id;
                     int.TryParse(Console.ReadLine(), out id);  
-                    cart= blList.Cart.AddProductToCart(cart, id);//adds a product to the cart
+                    cart= bl?.Cart.AddProductToCart(cart, id) ?? throw new BO.NullException();//adds a product to the cart
 
                     break;
                 case 2:
                     Console.WriteLine("enter custemer name, product id and new amount ");
                     int productid, newAmount;
-                    string name = Console.ReadLine();//we dont relly need this its a way to identidy the cart but we only have one cart so we wont us it 
+                    string name = Console.ReadLine()!;//we dont relly need this its a way to identidy the cart but we only have one cart so we wont us it 
                     int.TryParse(Console.ReadLine(), out productid);
                     int.TryParse(Console.ReadLine(), out newAmount);
-                    cart = blList.Cart.UpdateAmountOfProductInCart(cart, productid, newAmount);//updates an amount of the product in the cart
+                    cart = bl?.Cart.UpdateAmountOfProductInCart(cart, productid, newAmount) ?? throw new BO.NullException();//updates an amount of the product in the cart
                     break;
                 case 3:
                     Console.WriteLine("enter customers name,address and email");
-                    name = Console.ReadLine();
-                    string address = Console.ReadLine();
-                    string email = Console.ReadLine();
-                    blList.Cart.confirmCart(cart, name, address, email);
+                    name = Console.ReadLine()!;
+                    string address = Console.ReadLine()!;
+                    string email = Console.ReadLine()!;
+                    bl?.Cart.confirmCart(cart, name, address, email);
                     
                     break;
                 default:
@@ -155,7 +155,7 @@ internal class Program
             switch (choice1)
             {
                 case 1:
-                    foreach (BO.OrderForList item in blList.Order.GetOrderList())//gets all orders in order list- no date
+                    foreach (BO.OrderForList? item in bl?.Order.GetOrderList() ?? throw new BO.NullException())//gets all orders in order list- no date
                     {
                         Console.WriteLine(item);//print all
                     }
@@ -165,24 +165,24 @@ internal class Program
                     Console.WriteLine("enter orders id");
                     int id;
                     int.TryParse(Console.ReadLine(), out id);
-                    Order order =blList.Order.GetOrderInfo(id);//gets order info for the admin
+                    Order order = bl?.Order.GetOrderInfo(id)?? throw new BO.NullException();//gets order info for the admin
                     Console.WriteLine(order);
                     break;
                 case 3:
                     Console.WriteLine("enter orders id");
                     int id1;
                     int.TryParse(Console.ReadLine(), out id1);
-                    order1 = blList.Order.UpdateShippingDate(order1.ID);// updates order shipping date
+                    order1 = bl?.Order.UpdateShippingDate(order1.ID) ?? throw new BO.NullException();// updates order shipping date
                     break;
                 case 4:
                     Console.WriteLine("enter orders id");
                     int.TryParse(Console.ReadLine(), out id1);
-                    order1 = blList.Order.UpdateDeliveryDate(order1.ID);//updates order dilivery date
+                    order1 = bl?.Order.UpdateDeliveryDate(order1.ID) ?? throw new BO.NullException();//updates order dilivery date
                     break;
                 case 5://To see an orders status
                     Console.WriteLine("enter orders id");
                     int.TryParse(Console.ReadLine(), out id1);
-                    Console.WriteLine(blList.Order.OrderStatus(id1));//prints order traking details
+                    Console.WriteLine(bl?.Order.OrderStatus(id1));//prints order traking details
                     break;
                 default:
                     throw new BO.errorException();
@@ -229,7 +229,7 @@ public static void ProductFunc()
             case 0: 
                 return;//goes back to the 3 options 
             case 1://To get list of all the products
-                     foreach(BO.ProductForList item in blList.Product.GetListOfProducts())
+                     foreach(BO.ProductForList? item in bl?.Product.GetListOfProducts() ?? throw new BO.NullException())
                         {
                             Console.WriteLine(item);//print all
                         }
@@ -240,14 +240,14 @@ public static void ProductFunc()
                       Console.WriteLine("Enter product Id");
                       int id;
                       int.TryParse(Console.ReadLine(), out id);
-                      BO.Product product = blList.Product.GetProductbyID(id);//getting product info
+                      BO.Product product = bl?.Product.GetProductbyID(id) ?? throw new BO.NullException();//getting product info
                       Console.WriteLine(product);//printing product
                       break;
                 
             case 3://To get a products details- for customer
                     Console.WriteLine("Enter product Id");
                     int.TryParse(Console.ReadLine(), out id);
-                    Console.WriteLine(blList.Product.GetProductItem(id)); //retuns and prints the details
+                    Console.WriteLine(bl?.Product.GetProductItem(id)); //retuns and prints the details
                     break;
             case 4:// To add a product
                     Console.WriteLine("Please enter product Id, name,category, amount in stock and price");
@@ -272,13 +272,13 @@ public static void ProductFunc()
                     int.TryParse(Console.ReadLine(), out inStock);
                     product1.Price = price;
                     product1.InStock = inStock;
-                    blList.Product.AddProduct(product1);//adding the product 
+                    bl?.Product.AddProduct(product1);//adding the product 
                     break;
 
             case 5://To delete a product
                     Console.WriteLine("Enter product Id");
                     int.TryParse(Console.ReadLine(), out id);
-                    blList.Product.DeletProduct(id);//deleting the product
+                    bl?.Product.DeletProduct(id);//deleting the product
                     break;
             case 6:
                     Console.WriteLine("Please enter product Id, name,category, amount in stock and price");
@@ -286,7 +286,7 @@ public static void ProductFunc()
                     product1 = new BO.Product();
                     product1.Id = id;
                     product1.Name = Console.ReadLine();
-                    Category = Console.ReadLine();
+                    Category = Console.ReadLine()!;
                     try
                     {
                         Category category = (Category)BO.Enum.Parse(typeof(Category), Category);//converting to enum type
@@ -300,11 +300,11 @@ public static void ProductFunc()
                     int.TryParse(Console.ReadLine(), out inStock);
                     product1.Price = price;
                     product1.InStock = inStock;
-                    blList.Product.UpdateProduct(product1);//updating the product
+                    bl?.Product.UpdateProduct(product1);//updating the product
                     break;
             default:
                     throw new BO.errorException();
-                break;
+                
         }
             Console.WriteLine(@"Please Enter:
 0: To end program

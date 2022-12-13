@@ -7,7 +7,7 @@ namespace BlImplementation;
 
 internal class BoCart : ICart
 {
-    private static DalApi.IDal dalList = new Dal.DalList();
+    private static DalApi.IDal? dal = DalApi.Factory.Get();
     /// <summary>
     /// adds a product to the cart. if product is alredy in cart adds another to the amount and price, if not adds it
     /// </summary>
@@ -25,7 +25,7 @@ internal class BoCart : ICart
             {
                 flag = true;
 
-                foreach (DO.Product? item1 in (dalList.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
+                foreach (DO.Product? item1 in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
                 {
                     if (item1?.ID == productId && item1?.InStock > 0)//if it exists and has aenough in stock
                     {
@@ -42,7 +42,7 @@ internal class BoCart : ICart
         }
         if (flag == false)//if the product does not exists in the cart
         {
-            foreach (DO.Product item in (dalList.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
+            foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
             {
                 if (item.ID == productId)//if it exists and has aenough in stock
                 {
@@ -151,7 +151,7 @@ internal class BoCart : ICart
             if (item.Amount < 0)
                 throw new WrongAmountException();
            
-            foreach (DO.Product? item1 in (dalList.product.GetAll() ?? throw new BO.NullException()))//goes through all the product looking for the product in the cart
+            foreach (DO.Product? item1 in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the product looking for the product in the cart
             {
                 if (item1?.ID == item.ProductID)
                 {
@@ -179,7 +179,7 @@ internal class BoCart : ICart
                 int id;
                 try
                 {
-                    id = dalList.order.Add(order);
+                    id = dal?.order.Add(order) ?? 0;
                 }
                 catch (Exception )
                 {
@@ -195,7 +195,7 @@ internal class BoCart : ICart
                     //    Price = item.Price,
                     //    ProductID = item.ProductID,
                     //};
-                    foreach (DO.Product p in dalList.product.GetAll())//goes through all the products in do
+                    foreach (DO.Product p in dal?.product.GetAll())//goes through all the products in do
                     {
 
                         if (p.ID == item.ProductID)//if its the product then change the amount in stock
@@ -208,7 +208,7 @@ internal class BoCart : ICart
                                 Category = p.Category,
                                 InStock = p.InStock - item.Amount,
                             };
-                            dalList.product.Update(p);
+                            dal?.product.Update(p);
                             break;
                         }
                     }

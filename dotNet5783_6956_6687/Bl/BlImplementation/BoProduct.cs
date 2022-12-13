@@ -7,7 +7,7 @@ namespace BlImplementation;
 
 internal class BoProduct : BlApi.IProduct
 {
-    private static DalApi.IDal dalList = new Dal.DalList();
+    private static DalApi.IDal? dal = DalApi.Factory.Get();
 
     /// <summary>
     /// gets list of products(from system) builds ProductForList and returns it
@@ -18,7 +18,7 @@ internal class BoProduct : BlApi.IProduct
         List<BO.ProductForList> products = new List<BO.ProductForList>();//new list
         try
         {
-            foreach (DO.Product item in (dalList.product.GetAll() ?? throw new BO.NullException()))//goes over all products
+            foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes over all products
             {
                 if ((BO.Category)item.Category == category)//checks if the category is the same
                 {
@@ -52,7 +52,7 @@ internal class BoProduct : BlApi.IProduct
         List<BO.ProductForList> products = new List<BO.ProductForList>();
         try
         {
-            foreach (DO.Product item in (dalList.product.GetAll() ?? throw new BO.NullException()))
+            foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
             {
                 bool flag = false;
                 if (item.InStock > 0)
@@ -84,7 +84,7 @@ internal class BoProduct : BlApi.IProduct
             try
             {
                 BO.Product product = new BO.Product();
-                foreach (DO.Product item in (dalList.product.GetAll() ?? throw new BO.NullException()))
+                foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
                 {
                     if (item.ID == Id)
                     {
@@ -116,7 +116,7 @@ internal class BoProduct : BlApi.IProduct
         if (Id >= 300000 && Id < 400000)
         {
             BO.ProductItem productItem = new BO.ProductItem();
-            foreach (DO.Product item in (dalList.product.GetAll() ?? throw new BO.NullException()))
+            foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
             {
                 if (item.ID == Id)
                 {
@@ -142,7 +142,7 @@ internal class BoProduct : BlApi.IProduct
     {
         if (checkDataIsGood(product))
         {
-            foreach (DO.Product item in (dalList.product.GetAll() ?? throw new BO.NullException()))
+            foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
             {
                 if (item.ID == product.Id)
                 {
@@ -151,7 +151,7 @@ internal class BoProduct : BlApi.IProduct
             }
             try
             {
-                dalList.product.Add(convert(product));
+                dal?.product.Add(convert(product));
             }
             catch
             {
@@ -210,10 +210,10 @@ internal class BoProduct : BlApi.IProduct
     {
         if (Id >= 300000 && Id < 400000)
         {
-            IEnumerable<DO.Order?> orderList = (dalList.order.GetAll() ?? throw new BO.NullException());//list of do.order
+            IEnumerable<DO.Order?> orderList = (dal?.order.GetAll() ?? throw new BO.NullException());//list of do.order
             foreach (DO.Order item in orderList)//going over the list
             {
-                IEnumerable<DO.OrderItem?> orderItemList = (dalList.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()) ;//gets a list of all order items for the order
+                IEnumerable<DO.OrderItem?> orderItemList = (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()) ;//gets a list of all order items for the order
                 foreach (DO.OrderItem oitem in orderItemList)//
                 {
                     if (oitem.ProductID == Id)//checks if the product is in the orderitem
@@ -224,7 +224,7 @@ internal class BoProduct : BlApi.IProduct
             }
             try
             {
-                dalList.product.Delete(Id);
+                dal?.product.Delete(Id);
             }
             catch (Exception )
             {
@@ -247,7 +247,7 @@ internal class BoProduct : BlApi.IProduct
         {
             try
             {
-                dalList.product.Update(convert(product));//trys to update te product
+                dal?.product.Update(convert(product));//trys to update te product
             }
             catch
             {
@@ -273,7 +273,7 @@ internal class BoProduct : BlApi.IProduct
         }
         try
         {
-            DO.Product product = (DO.Product)dalList.product.GetSingle(x => x?.ID == id);//gets the first in the list 
+            DO.Product product = (DO.Product)dal?.product.GetSingle(x => x?.ID == id);//gets the first in the list 
             bool flag = false;
             if (product.InStock > 0)
             {

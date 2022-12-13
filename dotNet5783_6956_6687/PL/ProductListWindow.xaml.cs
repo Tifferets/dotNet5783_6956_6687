@@ -1,5 +1,4 @@
-﻿using BlApi;
-using BO;
+﻿using BO;
 using PL.PlProduct;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,11 +13,11 @@ namespace PL
     /// </summary>
     public partial class ProductListWindow : Window
     {
-        private IBl bl = new BlImplementation.Bl();
+        private BlApi.IBl? bl = BlApi.Factory.Get();
         public ProductListWindow()
         {
             InitializeComponent();
-            ProductListView.ItemsSource = bl.Product.GetListOfProducts();//listveiws source from BO func getLstOfProducts
+            ProductListView.ItemsSource = bl?.Product.GetListOfProducts();//listveiws source from BO func getLstOfProducts
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
         }
         private void Category_Combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)//combobox selection of category- changes listView to that category

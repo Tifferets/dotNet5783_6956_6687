@@ -7,7 +7,7 @@ namespace BlImplementation;
 
 internal class BoOrder:IOrder
 {
-    private static DalApi.IDal dalList = new Dal.DalList();
+    private static DalApi.IDal? dal = DalApi.Factory.Get();
     //private BO.OrderStatus ordered;
 
     /// <summary>
@@ -19,14 +19,14 @@ internal class BoOrder:IOrder
         List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();//list of orderForList
         try
         {
-            foreach(DO.Order item in (dalList.order.GetAll() ?? throw new BO.NullException()) )
+            foreach(DO.Order item in (dal?.order.GetAll() ?? throw new BO.NullException()) )
             { 
                 BO.OrderTracking orderTracking = OrderStatus(item.ID);
-                string statusee = status(orderTracking);
+                string? statusee = status(orderTracking);
                 BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
                 double price = 0;
                 int amount = 0;
-                foreach(DO.OrderItem oitem in (dalList.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()))//loop to count the amount of products and total price
+                foreach(DO.OrderItem oitem in (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()))//loop to count the amount of products and total price
                 {
                     amount++;
                     price += oitem.Price;
@@ -59,16 +59,16 @@ internal class BoOrder:IOrder
         {
             try
             {
-                DO.Order? order = dalList.order.GetSingle(x => x?.ID == orderId);
+                DO.Order? order = dal?.order.GetSingle(x => x?.ID == orderId);
                 double? totalprice = 0;
                 int? oiamount = 0; 
                 List<BO.OrderItem> orderitemList = new List<BO.OrderItem>();//list of orderitems
-                IEnumerable<DO.OrderItem?> oitms = (dalList.order.GetAllOrderItems(orderId) ?? throw new BO.NullException());//list od orderitems of this order
+                IEnumerable<DO.OrderItem?> oitms = (dal?.order.GetAllOrderItems(orderId) ?? throw new BO.NullException());//list od orderitems of this order
                 foreach(DO.OrderItem item in oitms)//going over all the order items dor this order
                 {
                     totalprice += item.Price* item.Amount;//the total price of the items
                     oiamount = item.Amount;//amount of items
-                    DO.Product? product= dalList.product.GetSingle(x=> x?.ID ==item.ProductID);//the product by id 
+                    DO.Product? product= dal?.product.GetSingle(x=> x?.ID ==item.ProductID);//the product by id 
                     orderitemList.Add(new BO.OrderItem     //adding to the list
                     {
                         ID = item.OrderItemID,
@@ -118,13 +118,13 @@ internal class BoOrder:IOrder
         }
         try
         {
-            DO.Order order = (DO.Order)dalList.order.GetSingle(x => x?.ID == orderId);//the order we want
+            DO.Order order = (DO.Order)dal?.order.GetSingle(x => x?.ID == orderId);//the order we want
             if (order.ShipDate != null)//never got changed
             {
                 throw new BO.AlreadyShippedException();
             }
             order.ShipDate = DateTime.Now;// DateTime.Now;
-            dalList.order.Update(order);
+            dal?.order.Update(order);
             return GetOrderInfo(orderId);
         }
         catch
@@ -145,7 +145,7 @@ internal class BoOrder:IOrder
         }
         try
         {
-            DO.Order order = (DO.Order)dalList.order.GetSingle(x => x?.ID == orderId);//the order we want
+            DO.Order order = (DO.Order)dal?.order.GetSingle(x => x?.ID == orderId);//the order we want
             if (order.ShipDate == null)//never got changed
             {
                 throw new BO.NotShippedException();
@@ -155,7 +155,7 @@ internal class BoOrder:IOrder
                 throw new BO.AlreadyShippedException();
             }
             order.DeliveryDate = DateTime.Now;
-            dalList.order.Update(order);
+            dal?.order.Update(order);
             return GetOrderInfo(orderId);
         }
         catch
@@ -172,7 +172,7 @@ internal class BoOrder:IOrder
     {
         //try
         {
-            DO.Order order = (DO.Order)dalList.order.GetSingle(x => x?.ID == orderId);
+            DO.Order order = (DO.Order)dal?.order.GetSingle(x => x?.ID == orderId);
             List<Tuple<BO.OrderStatus,DateTime>> list = new List<Tuple<BO.OrderStatus,DateTime>>();
             BO.OrderStatus status = BO.OrderStatus.ordered;
             if (order.OrderDate != null)

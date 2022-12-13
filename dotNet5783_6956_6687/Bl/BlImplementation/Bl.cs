@@ -2,7 +2,7 @@
 
 namespace BlImplementation;
 
-public class Bl:IBl
+internal class Bl:IBl
 {
     public ICart Cart=> new BoCart();
     public IOrder Order => new BoOrder();
