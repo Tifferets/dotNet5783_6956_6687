@@ -198,10 +198,8 @@ internal class BoOrder:IOrder
     /// </summary>
     /// <param name="orderTracking"></param>
     /// <returns></returns>
-    private string? status(BO.OrderTracking orderTracking)
-    {
-        return orderTracking.Status.ToString();
-    }
+    private string? status(BO.OrderTracking orderTracking)=> orderTracking.Status.ToString();
+  
     /// <summary>
     /// BONUS!!
     /// </summary>

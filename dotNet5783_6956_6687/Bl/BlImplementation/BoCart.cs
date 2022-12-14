@@ -2,6 +2,7 @@
 using BO;
 using DalApi;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace BlImplementation;
 
@@ -16,6 +17,18 @@ internal class BoCart : ICart
     /// <returns></returns>
     public Cart AddProductToCart(Cart cart, int productId)
     {
+        BO.OrderItem? orderItem = cart.Items.FirstOrDefault(x => x.ProductID == productId);//orderItem is null if it doesnt exist in the cart
+        if (orderItem != null) //if it exists
+        {
+            //DO.Product? product = from item in dal.product.GetAll().ToList()
+            //                      where item?.ID == productId && item?.InStock > 0
+            //                      select item
+        }
+        else//if the product doesnt exist
+        {
+
+        }
+
         bool flag = false;
         if (productId < 300000 || productId > 499999)//checking product id
             throw new WrongIDException();
@@ -25,9 +38,10 @@ internal class BoCart : ICart
             {
                 flag = true;
 
+
                 foreach (DO.Product? item1 in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
                 {
-                    if (item1?.ID == productId && item1?.InStock > 0)//if it exists and has aenough in stock
+                    if (item1?.ID == productId && item1?.InStock > 0)//if it exists and has enough in stock
                     {
                         item.Amount = item.Amount + 1;//addes 1 more of the product to the cart
                         item.TotalPrice = item.TotalPrice + item.Price;
@@ -48,19 +62,21 @@ internal class BoCart : ICart
                 {
                     if (item.InStock > 0)
                     {
-                        BO.OrderItem newItem = new BO.OrderItem()
-                        {
-                            ProductID = productId,
-                            ID = item.ID,
-                            Name = item.Name,
-                            Price = item.Price,
-                            TotalPrice = item.Price,
-                            Amount = 1
-                        };
-                        cart.TotalPrice = newItem.TotalPrice + cart.TotalPrice;
+                        double price = item.Price;
+                        cart.TotalPrice = price + cart.TotalPrice;
+                        //BO.OrderItem newItem = new BO.OrderItem()//creats a new orderitem
+                        //{
+                        //    ProductID = productId,
+                        //    ID = item.ID,
+                        //    Name = item.Name,
+                        //    Price = item.Price,
+                        //    TotalPrice = item.Price,
+                        //    Amount = 1
+                        //};
+                        //cart.TotalPrice = newItem.TotalPrice + cart.TotalPrice;
                     }
                     else
-                        throw new NoMoreInStockException();
+                        throw new NoMoreInStockException();//if the product already exists in the cart but the amount is 0
                 }
 
             }
@@ -89,11 +105,9 @@ internal class BoCart : ICart
             }
 
             int dif = 0; //the difference between the new amount and the old amount
-            List<BO.OrderItem?> lst = new List<BO.OrderItem?>();
-            foreach (OrderItem? item in cart.Items)
-            {
-                lst.Add(item);//copies all the list in cart to the lst
-            }
+            List<BO.OrderItem?> lst = (from OrderItem? item in cart.Items
+                                       select item).ToList()//copies all the list in cart to the lst
+;
             foreach (BO.OrderItem? item in cart.Items)
             {
                 if (item?.ProductID == productId)
@@ -147,24 +161,24 @@ internal class BoCart : ICart
             bool flag = false;
 
             foreach (OrderItem? item in cart.Items?? throw new BO.NullException())
-        {
-            if (item?.Amount < 0)
-                throw new WrongAmountException();
-           
-            foreach (DO.Product? item1 in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the product looking for the product in the cart
             {
-                if (item1?.ID == item?.ProductID)
+                if (item?.Amount < 0)
+                    throw new WrongAmountException();
+
+                foreach (DO.Product? item1 in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the product looking for the product in the cart
                 {
-                    if (item1?.InStock < item?.Amount)//if the product exists but its not in stock
-                        throw new NoMoreInStockException();
-                    else
-                        flag = true;
-                    break;//move on to look for the next product
+                    if (item1?.ID == item?.ProductID)
+                    {
+                        if (item1?.InStock < item?.Amount)//if the product exists but its not in stock
+                            throw new NoMoreInStockException();
+                        else
+                            flag = true;
+                        break;//move on to look for the next product
+                    }
                 }
+                if (flag == false)//if we didnt find the product in general then throw
+                    throw new NoMoreInStockException();
             }
-            if (flag == false)//if we didnt find the product in general then throw
-                throw new NoMoreInStockException();
-        }
             if (flag == true)
             {
                 DO.Order order = new DO.Order()
@@ -215,13 +229,13 @@ internal class BoCart : ICart
                 }
             }
     }
-    
-    catch (Exception e)
+
+        catch (Exception e)
         {
             Console.WriteLine(e);
             checkIfWorked = false;
         }
-        if(checkIfWorked==true)
+        if (checkIfWorked == true)
             Console.WriteLine("cart confirmed");
     }
     private bool CheckEmail(string email)

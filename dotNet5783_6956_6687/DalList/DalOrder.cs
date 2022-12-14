@@ -42,6 +42,9 @@ internal class DalOrder : IOrder
     /// <param name="orderID"></param>
     public void Delete(int orderID)
     {
+        //DataSource.Orderlist = from item in DataSource.Orderlist
+        //                       where item.ID != orderID
+        //                       select item;
         foreach (Order? item in DataSource.Orderlist)//goes through the list looking for the order.
         {
             if (item?.ID == orderID)
@@ -58,6 +61,7 @@ internal class DalOrder : IOrder
     /// <param name="order"></param>
     public void Update(Order order)
     {
+        //OrderItem? or = DataSource.Orderlist.FirstOrDefault(x => x.
         int count = 0;
         foreach (Order? item in (DataSource.Orderlist ?? throw new NullException()))//goes through the list looking for the order.
         {
@@ -71,16 +75,19 @@ internal class DalOrder : IOrder
     }
     public IEnumerable<OrderItem?> GetAllOrderItems(int id)//returns all the order items for the spicific order by its id
     {
-        List<OrderItem?> lst = new List<OrderItem?>();
-        foreach (OrderItem? item in DataSource.OrderItemList ?? throw new NullException())
-        {
-            if (item?.OrderItemID == id)
-            {
-                lst.Add(item);
-            }
-        }
-        IEnumerable<OrderItem?> orderItems = lst;
-        return orderItems;
+        List<OrderItem?> lst = (from OrderItem? item in DataSource.OrderItemList ?? throw new NullException()
+                                where item?.OrderItemID == id
+                                select item).ToList();
+        //List<OrderItem?> lst = new List<OrderItem?>();
+        //foreach (OrderItem? item in DataSource.OrderItemList ?? throw new NullException())
+        //{
+        //    if (item?.OrderItemID == id)
+        //    {
+        //        lst.Add(item);
+        //    }
+        //}
+        //IEnumerable<OrderItem?> orderItems = lst;
+        return lst;
     }
     /// <summary>
     /// method returns the list 
@@ -97,13 +104,18 @@ internal class DalOrder : IOrder
         {
             return (DataSource.Orderlist ?? throw new NullException());//if null retun te whole list
         }
-        List<Order?> result = new List<Order?>();
-        foreach (var item in (DataSource.Orderlist ?? throw new NullException()))
-        {
-            if (func(item))//if the id is good
-                result.Add(item);//adds to list 
-        }
-        return result;
+
+        return (from item in (DataSource.Orderlist ?? throw new NullException())
+                where func(item)//if the id is good
+                select item).ToList()//adds to list 
+;
+        //List<Order?> result = new List<Order?>();
+        //foreach (var item in (DataSource.Orderlist ?? throw new NullException()))
+        //{
+        //    if (func(item))//if the id is good
+        //        result.Add(item);//adds to list 
+        //}
+        //return result;
     }
     public Order? GetSingle(Func<Order?, bool>? func)=> DataSource.Orderlist.FirstOrDefault((func ?? throw new NullException())); // return an order with this id
       
