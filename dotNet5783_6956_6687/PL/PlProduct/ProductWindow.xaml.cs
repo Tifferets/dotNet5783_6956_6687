@@ -72,7 +72,7 @@ namespace PL.PlProduct
                 };
                 try
                 {
-                    bl.Product.AddProduct(product);//adds the product to the do
+                    bl?.Product.AddProduct(product);//adds the product to the do
                     MessageBox.Show("product added successfully");
                     this.Close();
                 }
@@ -81,7 +81,7 @@ namespace PL.PlProduct
                     MessageBox.Show(ex.Message);
                 }
             }
-            catch (Exception ex)//if missing any data
+            catch (Exception)//if missing any data
             {
                 MessageBox.Show("Please enter missing data");
             }
@@ -107,7 +107,7 @@ namespace PL.PlProduct
                 };
                 try
                 {
-                    bl.Product.UpdateProduct(product);//adds the product to the do
+                    bl?.Product.UpdateProduct(product);//adds the product to the do
                     MessageBox.Show("product updated successfully");
                     this.Close();
 
@@ -117,7 +117,7 @@ namespace PL.PlProduct
                     MessageBox.Show(ex.Message);
                 }
             }
-            catch (Exception ex)//if missing any data
+            catch (Exception)//if missing any data
             {
                 MessageBox.Show("Please enter missing data");
             }

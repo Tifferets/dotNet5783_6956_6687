@@ -90,13 +90,13 @@ internal class BoCart : ICart
 
             int dif = 0; //the difference between the new amount and the old amount
             List<BO.OrderItem?> lst = new List<BO.OrderItem?>();
-            foreach (OrderItem item in cart.Items)
+            foreach (OrderItem? item in cart.Items)
             {
                 lst.Add(item);//copies all the list in cart to the lst
             }
-            foreach (BO.OrderItem item in cart.Items)
+            foreach (BO.OrderItem? item in cart.Items)
             {
-                if (item.ProductID == productId)
+                if (item?.ProductID == productId)
                 {
                     if (newAmount == 0)
                     {
@@ -122,7 +122,7 @@ internal class BoCart : ICart
             }
             return cart;
         }
-        catch(Exception ex)
+        catch(Exception )
         {
             throw new BO.CantUpDateException();
         }
@@ -146,16 +146,16 @@ internal class BoCart : ICart
 
             bool flag = false;
 
-            foreach (OrderItem item in cart.Items)
+            foreach (OrderItem? item in cart.Items?? throw new BO.NullException())
         {
-            if (item.Amount < 0)
+            if (item?.Amount < 0)
                 throw new WrongAmountException();
            
             foreach (DO.Product? item1 in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the product looking for the product in the cart
             {
-                if (item1?.ID == item.ProductID)
+                if (item1?.ID == item?.ProductID)
                 {
-                    if (item1?.InStock < item.Amount)//if the product exists but its not in stock
+                    if (item1?.InStock < item?.Amount)//if the product exists but its not in stock
                         throw new NoMoreInStockException();
                     else
                         flag = true;
@@ -195,10 +195,10 @@ internal class BoCart : ICart
                     //    Price = item.Price,
                     //    ProductID = item.ProductID,
                     //};
-                    foreach (DO.Product p in dal?.product.GetAll())//goes through all the products in do
+                    foreach (DO.Product p in dal?.product.GetAll()?? throw new BO.NullException())//goes through all the products in do
                     {
 
-                        if (p.ID == item.ProductID)//if its the product then change the amount in stock
+                        if (p.ID == item?.ProductID)//if its the product then change the amount in stock
                         {
                             DO.Product product = new DO.Product()
                             {
