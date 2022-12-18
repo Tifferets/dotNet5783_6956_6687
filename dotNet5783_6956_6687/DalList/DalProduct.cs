@@ -23,7 +23,7 @@ internal class DalProduct : IProduct
         {
             throw new NoNameException();
         }
-       if( DataSource.Productlist.Contains(product))//checks if the product already exists in the data source
+       if(DataSource.Productlist.Contains(product))//checks if the product already exists in the data source
         { throw new Exception("Product ID already exist"); }
         //foreach (Product? item in DataSource.Productlist ?? throw new NullException())
         //{
@@ -33,26 +33,6 @@ internal class DalProduct : IProduct
         DataSource.Productlist.Add(product);
         return product.ID;
     }
-    /// <summary>
-    /// method gets a product ID and renurns the product it belongs to
-    /// </summary>
-    /// <param name="productID"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    //public Product Get(int? productID)
-    //{
-    //    //try
-    //    //{
-    //    foreach (Product item in DataSource.Productlist)//goes through the list looking for the order.
-    //    {
-    //        if (item.ID == productID)
-    //            return item;
-    //    }
-
-    //    throw new Exception("Product does not exist");
-    //    // }
-    //    // catch(Exception ex)   { Console.WriteLine(ex); }
-    //}
     /// <summary>
     /// ethod gets a product ID and delets the right orde
     /// </summary>

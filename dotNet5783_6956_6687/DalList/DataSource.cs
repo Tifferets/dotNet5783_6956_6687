@@ -113,7 +113,7 @@ internal static class DataSource
                 orderItem.OrderItemID = config.GetOrderItemId;//id
                 Product p = Productlist[rand.Next(0, 9)].Value;//gives us a product
                 orderItem.Price = p.Price;//same price as product
-                orderItem.Amount = (int)rand.Next(1,10);//randme amount
+                orderItem.Amount = rand.Next(1,10);//random amount
                 orderItem.ProductID = p.ID;
                 orderItem.OrderID = 100000 + j;
                 OrderItemList.Add(orderItem);

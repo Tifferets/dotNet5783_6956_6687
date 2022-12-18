@@ -38,9 +38,9 @@ public class program//the main where we check it works
                     {
                         case 1://to add an order to the list
                             Console.WriteLine("Enter customers name,email,address,order time, shipping date and delivery time(dd,mm,yy):");
-                            string name = Console.ReadLine();
-                            string email = Console.ReadLine();
-                            string address = Console.ReadLine();
+                            string name = Console.ReadLine()!;
+                            string email = Console.ReadLine()!;
+                            string address = Console.ReadLine()!;
                             DateTime orderTime;
                             DateTime.TryParse(Console.ReadLine(), out orderTime);//orderTime =the date they put in
                             DateTime shipping;
@@ -64,10 +64,12 @@ public class program//the main where we check it works
                             Console.WriteLine(dal?.order.GetSingle(x=>x?.ID==id));
                             break;
                         case 3://Show List of order
-                            foreach (Order? item in (dal?.order.GetAll() ?? throw new NullException()))//goes throught he whole list of orders
-                            {
-                                Console.WriteLine(item);
-                            }
+                            var lst= (dal?.order.GetAll() ?? throw new NullException()).Select(x => x)/*.ToList()*/;
+                            Console.WriteLine(lst);
+                            //foreach (Order? item in (dal?.order.GetAll() ?? throw new NullException()))//goes throught he whole list of orders
+                            //{
+                            //    Console.WriteLine(item);
+                            //}
                             break;
                         case 4://update order
                             Console.WriteLine("Enter ID");
@@ -110,7 +112,7 @@ public class program//the main where we check it works
                             int.TryParse(Console.ReadLine(), out amount);
                             orderItem.Price = price;
                             orderItem.Amount = amount;
-                            orderItem.OrderItemID= dal?.orderItem.Add(orderItem) ?? 0 ;//adds the orderitem
+                            orderItem.OrderItemID = dal?.orderItem.Add(orderItem) ?? 0 ;//adds the orderitem
                             break;
 
                         case 2://Show orderItem Using ID
@@ -120,7 +122,7 @@ public class program//the main where we check it works
                             Console.WriteLine(dal?.orderItem.GetSingle(x=> x?.OrderItemID== id));
                             break;
                         case 3://Show List of orderItem
-                            foreach (OrderItem item in dal?.orderItem.GetAll())//goes through the whole list of orderItems
+                            foreach (OrderItem? item in dal?.orderItem.GetAll())//goes through the whole list of orderItems
                             {
                                 Console.WriteLine(item);
                             }
@@ -162,7 +164,7 @@ public class program//the main where we check it works
                             Product product = new Product();
                             Console.WriteLine("Enter product name,category, price and amount");
                             product.Name = Console.ReadLine();
-                            string Category1 = Console.ReadLine();
+                            string Category1 = Console.ReadLine()!;
                             try
                             {
                                 Category category = (Category)Enum.Parse(typeof(Category), Category1);
@@ -188,7 +190,7 @@ public class program//the main where we check it works
 
                             break;
                         case 3://Show List of product
-                            foreach (Product item in dal?.product.GetAll())//goes through the whole list and prints all the products
+                            foreach (Product? item in dal?.product.GetAll())//goes through the whole list and prints all the products
                             {
                                 Console.WriteLine(item);
                             }
@@ -202,7 +204,7 @@ public class program//the main where we check it works
                             Console.WriteLine(dal?.orderItem.GetSingle(x => x?.OrderItemID == id));//prints the product before update
                             Console.WriteLine("Enter product name,category, price and amount");
                             product1.Name = Console.ReadLine();
-                            string Category2 = Console.ReadLine();
+                            string Category2 = Console.ReadLine()!;
                             Category category4 = (Category)Enum.Parse(typeof(Category), Category2);
                             double.TryParse(Console.ReadLine(), out price);
                             int.TryParse(Console.ReadLine(), out inStock);
