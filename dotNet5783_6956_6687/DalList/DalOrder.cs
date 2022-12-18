@@ -42,18 +42,15 @@ internal class DalOrder : IOrder
     /// <param name="orderID"></param>
     public void Delete(int orderID)
     {
-        //DataSource.Orderlist = from item in DataSource.Orderlist
-        //                       where item.ID != orderID
-        //                       select item;
-        foreach (Order? item in DataSource.Orderlist)//goes through the list looking for the order.
-        {
-            if (item?.ID == orderID)
-            {
-                DataSource.Orderlist.Remove(item);
-                break;
-            }
-        }
-
+        DataSource.Orderlist.Remove(GetSingle(x=> x?.ID== orderID));
+        //foreach (Order? item in DataSource.Orderlist)//goes through the list looking for the order.
+        //{
+        //    if (item?.ID == orderID)
+        //    {
+        //        DataSource.Orderlist.Remove(item);
+        //        break;
+        //    }
+        //}
     }
     /// <summary>
     /// method gets an order and updates its details
@@ -61,17 +58,20 @@ internal class DalOrder : IOrder
     /// <param name="order"></param>
     public void Update(Order order)
     {
-        //OrderItem? or = DataSource.Orderlist.FirstOrDefault(x => x.
-        int count = 0;
-        foreach (Order? item in (DataSource.Orderlist ?? throw new NullException()))//goes through the list looking for the order.
-        {
-            if (item?.ID != order.ID) count++;
-            if (item?.ID==order.ID)
-            {
-                DataSource.Orderlist[count] = order;
-                break;
-            }
-        }
+        Delete(order.ID);
+
+        DataSource.Orderlist.Add(order);
+        DataSource.Orderlist = DataSource.Orderlist.OrderByDescending(x => -x?.ID).ToList();// sorts the list by small id to bigger id
+        //int count = 0;
+        //foreach (Order? item in (DataSource.Orderlist ?? throw new NullException()))//goes through the list looking for the order.
+        //{
+        //    if (item?.ID != order.ID) count++;
+        //    if (item?.ID==order.ID)
+        //    {
+        //        DataSource.Orderlist[count] = order;
+        //        break;
+        //    }
+        //}
     }
     public IEnumerable<OrderItem?> GetAllOrderItems(int id)//returns all the order items for the spicific order by its id
     {

@@ -64,13 +64,11 @@ public class program//the main where we check it works
                             Console.WriteLine(dal?.order.GetSingle(x=>x?.ID==id));
                             break;
                         case 3://Show List of order
-                            var lst= (dal?.order.GetAll() ?? throw new NullException()).Select(x => x)/*.ToList()*/;
-                            Console.WriteLine(lst);
-                            //foreach (Order? item in (dal?.order.GetAll() ?? throw new NullException()))//goes throught he whole list of orders
-                            //{
-                            //    Console.WriteLine(item);
-                            //}
-                            break;
+                                 foreach (Order? item in (dal?.order.GetAll() ?? throw new NullException()))//goes throught he whole list of orders
+                                 {
+                                     Console.WriteLine(item);
+                                 }
+                                    break;
                         case 4://update order
                             Console.WriteLine("Enter ID");
                             int id1;
@@ -122,11 +120,10 @@ public class program//the main where we check it works
                             Console.WriteLine(dal?.orderItem.GetSingle(x=> x?.OrderItemID== id));
                             break;
                         case 3://Show List of orderItem
-                            foreach (OrderItem? item in dal?.orderItem.GetAll())//goes through the whole list of orderItems
+                            foreach (OrderItem? item in dal?.orderItem.GetAll()?? throw new NullException())//goes through the whole list of orderItems
                             {
                                 Console.WriteLine(item);
                             }
-
                             break;
                         case 4://update orderItem
                             Console.WriteLine("Enter Order Item ID, order ID and Product ID");
@@ -190,7 +187,7 @@ public class program//the main where we check it works
 
                             break;
                         case 3://Show List of product
-                            foreach (Product? item in dal?.product.GetAll())//goes through the whole list and prints all the products
+                            foreach (Product? item in dal?.product.GetAll() ?? throw new NullException())//goes through the whole list and prints all the products
                             {
                                 Console.WriteLine(item);
                             }
