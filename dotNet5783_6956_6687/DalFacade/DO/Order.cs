@@ -37,14 +37,5 @@ public struct Order
     /// </summary>
     /// <returns></returns>
     public override string ToString() => Extention.ToStringProperty(this);
-    //    public override string ToString() => $@"
-    //Order ID: {ID}
-    //Customers name: {CustomerName}
-    //Customers email:{CustomerEmail}
-    //Customers address:{CustomerAddress}
-    //Order date: {OrderDate}
-    //Shipping date: {ShipDate}
-    //Delivery date; {DeliveryDate}
-    //";
 
 }

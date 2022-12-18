@@ -31,11 +31,5 @@ public struct OrderItem
     /// to string to print all details
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => Extention.ToStringProperty(this);// $@"
-    //Order Item ID ={OrderItemID}
-    //Product ID={ProductID}
-    //Order ID={OrderID}
-    //Price= {Price}
-    //Amount={Amount}
-    //";
+    public override string ToString() => Extention.ToStringProperty(this);
 }

@@ -1,6 +1,9 @@
 ﻿using DalApi;
 using DO;
 using System.Reflection;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography;
 
 namespace Dal;
 
@@ -20,11 +23,13 @@ internal class DalProduct : IProduct
         {
             throw new NoNameException();
         }
-        foreach (Product? item in DataSource.Productlist ?? throw new NullException())
-        {
-            if (item?.ID == product.ID)
-                throw new Exception("Product already exist");
-        }
+       if( DataSource.Productlist.Contains(product))//checks if the product already exists in the data source
+        { throw new Exception("Product ID already exist"); }
+        //foreach (Product? item in DataSource.Productlist ?? throw new NullException())
+        //{
+        //    if (item?.ID == product.ID)
+        //        throw new Exception("Product already exist");
+        //}
         DataSource.Productlist.Add(product);
         return product.ID;
     }
@@ -54,14 +59,15 @@ internal class DalProduct : IProduct
     /// <param name="productID"></param>
     public void Delete(int productID)
     {
-        foreach (Product? item in DataSource.Productlist ?? throw new NullException())//goes through the list looking for the order.
-        {
-            if (item?.ID == productID)
-            {
-                DataSource.Productlist.Remove(item);
-                break;
-            }
-        }
+        DataSource.Productlist.Remove(GetSingle(x=> x?.ID == productID));
+        //foreach (Product? item in DataSource.Productlist ?? throw new NullException())//goes through the list looking for the order.
+        //{
+        //    if (item?.ID == productID)
+        //    {
+        //        DataSource.Productlist.Remove(item);
+        //        break;
+        //    }
+        //}
     }
     /// <summary>
     /// method gets a product and updates its details
@@ -69,17 +75,21 @@ internal class DalProduct : IProduct
     /// <param name="product"></param>
     public void Update(Product product)
     {
-        int count = 0;
-        foreach (Product? item in DataSource.Productlist ?? throw new NullException())//goes through the list looking for the order.
-        {
-            if (item?.ID != product.ID) 
-                count++;
-            if (item?.ID == product.ID)
-            {
-                DataSource.Productlist[count] = product;
-                break;
-            }
-        }
+        Delete(product.ID);
+        
+        DataSource.Productlist.Add(product);
+        DataSource.Productlist= DataSource.Productlist.OrderByDescending(x=> -x?.ID ).ToList();// sorts the list by small id to bigger id
+        //int count = 0;
+        //foreach (Product? item in DataSource.Productlist ?? throw new NullException())//goes through the list looking for the order.
+        //{
+        //    if (item?.ID != product.ID) 
+        //        count++;
+        //    if (item?.ID == product.ID)
+        //    {
+        //        DataSource.Productlist[count] = product;
+        //        break;
+        //    }
+        //}
     }
 
     /// <summary>
@@ -92,12 +102,15 @@ internal class DalProduct : IProduct
         {
             return DataSource.Productlist ?? throw new NullException();//if null retun te whole list
         }
-        List<Product?> result = new();//creating a list
-        foreach(var item in DataSource.Productlist ?? throw new NullException())
-        {
-            if(func(item))//if the id is good
-                result.Add(item);//adds to list 
-        }
+        // List<Product?> result = new();//creating a list
+        var result = (from Product? item in DataSource.Productlist ?? throw new NullException()
+                      where func(item)
+                      select item);
+        //foreach (var item in DataSource.Productlist ?? throw new NullException())
+        //{
+        //    if(func(item))//if the id is good
+        //        result.Add(item);//adds to list 
+        //}
         return result;
     }
     public Product? GetSingle(Func<Product?, bool>? func) => DataSource.Productlist.FirstOrDefault(func ?? throw new NullException()); // return a product with this id

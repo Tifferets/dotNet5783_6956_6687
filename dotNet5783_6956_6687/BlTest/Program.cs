@@ -255,7 +255,7 @@ public static void ProductFunc()
                     BO.Product product1 = new BO.Product();
                     product1.Id=id;
                     product1.Name = Console.ReadLine();
-                    string Category = Console.ReadLine();
+                    string Category = Console.ReadLine()!;
                     try
                     {
                         Category category = (Category)BO.Enum.Parse(typeof(Category), Category);//converting to enum type
