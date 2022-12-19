@@ -4,8 +4,8 @@ namespace BlImplementation;
 
 internal class Bl:IBl
 {
-    public ICart Cart=> new BoCart();
-    public IOrder Order => new BoOrder();
-    public IProduct Product => new BoProduct();
+    public ICart Cart{ get; } = new BlImplementation.BoCart();
+    public IOrder Order { get; } = new BlImplementation.BoOrder();
+    public IProduct Product { get; } = new BlImplementation.BoProduct();
 
 }
