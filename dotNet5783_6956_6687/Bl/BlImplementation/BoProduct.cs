@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using BO;
 using DalApi;
+using DO;
 
 
 namespace BlImplementation;
@@ -8,38 +9,51 @@ namespace BlImplementation;
 internal class BoProduct : BlApi.IProduct
 {
     private static DalApi.IDal? dal = DalApi.Factory.Get();
-
     /// <summary>
     /// gets list of products(from system) builds ProductForList and returns it
     /// </summary>
     /// <returns></returns>
     public IEnumerable<BO.ProductForList?> GetproductForListByCategory(BO.Category category)
     {
-        List<BO.ProductForList> products = new List<BO.ProductForList>();//new list
+        //List<BO.ProductForList> products = new List<BO.ProductForList>();//new list
         try
         {
-            foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes over all products
-            {
-                if ((BO.Category)item.Category == category)//checks if the category is the same
-                {
-                    bool flag = false;//adds the product
-                    if (item.InStock > 0)
-                    {
-                        flag = true;
-                    }
-                    BO.ProductForList productForList = new BO.ProductForList()
-                    {
-                        ID = item.ID,
-                        Name = item.Name,
-                        InStock = flag,
-                        Amount = item.InStock,
-                        Price = item.Price,
-                        Category = (BO.Category)item.Category
-                    };
-                    products.Add(productForList);
-                }
-            }
-            return products;
+            var result = from item in (dal?.product.GetAll() ?? throw new BO.NullException())//gets a list of product and returns all that have the category
+                         where item.Value.Category == (DO.Category)category
+                         let gtz = item.Value.InStock > 0
+                         select new BO.ProductForList()
+                         {
+                             ID = (int)item?.ID,
+                             Name = item?.Name,
+                             InStock = gtz,
+                             Amount = (int)item?.InStock,
+                             Price = item?.Price,
+                             Category = (BO.Category)item?.Category
+                         };
+            
+            return result;
+            //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes over all products
+            //{
+            //    if ((BO.Category)item.Category == category)//checks if the category is the same
+            //    {
+            //        bool flag = false;//adds the product
+            //        if (item.InStock > 0)
+            //        {
+            //            flag = true;
+            //        }
+            //        BO.ProductForList productForList = new BO.ProductForList()
+            //        {
+            //            ID = item.ID,
+            //            Name = item.Name,
+            //            InStock = flag,
+            //            Amount = item.InStock,
+            //            Price = item.Price,
+            //            Category = (BO.Category)item.Category
+            //        };
+            //        products.Add(productForList);
+            //    }
+            //}
+            //return products;
         }
         catch (Exception)
         {
@@ -49,20 +63,33 @@ internal class BoProduct : BlApi.IProduct
 
     public IEnumerable<BO.ProductForList> GetListOfProducts()
     {
-        List<BO.ProductForList> products = new List<BO.ProductForList>();
+       // List<BO.ProductForList> products = new List<BO.ProductForList>();
         try
         {
-            foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
-            {
-                bool flag = false;
-                if (item.InStock > 0)
-                {
-                    flag = true;
-                }
-                BO.ProductForList productForList = new BO.ProductForList() { ID = item.ID, Name = item.Name, InStock = flag, Amount = item.InStock, Price = item.Price, Category = (BO.Category)item.Category };
-                products.Add(productForList);
-            }
-            return products;
+            var result = from item in (dal?.product.GetAll() ?? throw new BO.NullException())//gets a list of product and returns all that have the category
+                         let gtz = item.Value.InStock > 0
+                         select new BO.ProductForList()
+                         {
+                             ID = (int)item?.ID,
+                             Name = item?.Name,
+                             InStock = gtz,
+                             Amount = (int)item?.InStock,
+                             Price = item?.Price,
+                             Category = (BO.Category)item?.Category
+                         };
+
+            return result;
+            //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
+            //{
+            //    bool flag = false;
+            //    if (item.InStock > 0)
+            //    {
+            //        flag = true;
+            //    }
+            //    BO.ProductForList productForList = new BO.ProductForList() { ID = item.ID, Name = item.Name, InStock = flag, Amount = item.InStock, Price = item.Price, Category = (BO.Category)item.Category };
+            //    products.Add(productForList);
+            //}
+            //return products;
         }
         catch (Exception)
         {
@@ -88,7 +115,6 @@ internal class BoProduct : BlApi.IProduct
                 {
                     if (item.ID == Id)
                     {
-
                         product.Id = Id;
                         product.Name = item.Name;
                         product.Category = (BO.Category)item.Category;
@@ -115,7 +141,8 @@ internal class BoProduct : BlApi.IProduct
     {
         if (Id >= 300000 && Id < 400000)
         {
-            BO.ProductItem productItem = new BO.ProductItem();
+            //  var productItem =(dal?.product.GetAll() ?? throw new BO.NullException()).FirstOrDefault(x => x?.ID == Id);
+            BO.ProductItem productItem = new();
             foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
             {
                 if (item.ID == Id)

@@ -302,6 +302,7 @@ public static void ProductFunc()
                     product1.InStock = inStock;
                     bl?.Product.UpdateProduct(product1);//updating the product
                     break;
+                    
             default:
                     throw new BO.errorException();
                 
