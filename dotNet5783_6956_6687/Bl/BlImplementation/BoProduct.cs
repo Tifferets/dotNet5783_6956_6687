@@ -169,13 +169,15 @@ internal class BoProduct : BlApi.IProduct
     {
         if (checkDataIsGood(product))
         {
-            foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
-            {
-                if (item.ID == product.Id)
-                {
-                    throw new BO.alreadyExistException();
-                }
-            }
+            if(dal?.product.GetAll().Any(x=> x.Value.ID == product?.Id) == true )//checks if the id exsistes
+            { throw new BO.alreadyExistException(); }
+            //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
+            //{
+            //    if (item.ID == product.Id)
+            //    {
+            //        throw new BO.alreadyExistException();
+            //    }
+            //}
             try
             {
                 dal?.product.Add(convert(product));
@@ -238,6 +240,9 @@ internal class BoProduct : BlApi.IProduct
         if (Id >= 300000 && Id < 400000)
         {
             IEnumerable<DO.Order?> orderList = (dal?.order.GetAll() ?? throw new BO.NullException());//list of do.order
+            
+            //if (dal?.product.GetAll().Any(x => x.Value.ID == product?.Id) == true)//checks if the id exsistes
+            //{ throw new BO.alreadyExistException(); }
             foreach (DO.Order item in orderList)//going over the list
             {
                 IEnumerable<DO.OrderItem?> orderItemList = (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()) ;//gets a list of all order items for the order
