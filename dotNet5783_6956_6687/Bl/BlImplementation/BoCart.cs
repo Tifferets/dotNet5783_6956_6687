@@ -17,12 +17,21 @@ internal class BoCart : ICart
     /// <returns></returns>
     public Cart AddProductToCart(Cart cart, int productId)
     {
-        BO.OrderItem? orderItem = cart.Items.FirstOrDefault(x => x.ProductID == productId);//orderItem is null if it doesnt exist in the cart
-        if (orderItem != null) //if it exists
+        BO.OrderItem? orderItem = cart.Items.FirstOrDefault(x => x.ProductID == productId);//orderItem is null if the product doesnt exist in the cart
+        if (orderItem != null) //if the product exists
         {
-            //DO.Product? product = from item in dal.product.GetAll().ToList()
-            //                      where item?.ID == productId && item?.InStock > 0
-            //                      select item
+            BO.Product? p = dal.product.GetAll().FirstOrDefault(x => x.ID == productId);//p is the product that we want to add
+            if (p == null || p.InStock < orderItem.Amount) //if the product doesnt exist or there is not enough left
+                throw new BO.NoMoreInStockException();
+            else
+            {
+                orderItem.Amount = orderItem.Amount + 1;//updates the amount
+                orderItem.TotalPrice = orderItem.Price * orderItem.Amount;//updates the price
+                cart.TotalPrice = cart.TotalPrice + orderItem.Price;//updates the final price of the cart
+                cart.Items = cart.Items.Where(x => x.ProductID != productId);//take all the products but the product that we updated
+                cart.Items = cart.Items.Add(orderItem);//addes orderitem to the cart
+            }
+
         }
         else//if the product doesnt exist
         {

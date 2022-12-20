@@ -43,8 +43,11 @@ namespace PL
 
         private void ProductListView_MouseDoubleClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)//listView double tap to update product
         {
-            ProductWindow productWindow = new ProductWindow((BO.ProductForList)ProductListView.SelectedItem);//opens other window with constructer that gets a product and puts the data in the textBoxes
-            productWindow.ShowDialog();
+            if (ProductListView.SelectedIndex >= 0)//if double clicked a product then able to update it.(doesnt allow you to click the tittle
+            {
+                ProductWindow productWindow = new ProductWindow((BO.ProductForList)ProductListView.SelectedItem);//opens other window with constructer that gets a product and puts the data in the textBoxes
+                productWindow.ShowDialog();
+            }
             ProductListView.ItemsSource = bl?.Product.GetListOfProducts();//listveiws source from BO func getLstOfProducts
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
             Category_ComboBox.SelectedItem = null;//sets to null so that the comboBox will clear itself
