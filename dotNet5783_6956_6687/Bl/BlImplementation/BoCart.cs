@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using BO;
 using DalApi;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -28,8 +29,9 @@ internal class BoCart : ICart
                 orderItem.Amount = orderItem.Amount + 1;//updates the amount
                 orderItem.TotalPrice = orderItem.Price * orderItem.Amount;//updates the price
                 cart.TotalPrice = cart.TotalPrice + orderItem.Price;//updates the final price of the cart
-                cart.Items = cart.Items.Where(x => x.ProductID != productId);//take all the products but the product that we updated
-                cart.Items = cart.Items.Add(orderItem);//addes orderitem to the cart
+                List<BO.OrderItem>? temp = cart.Items.Where(x => x.ProductID != productId).ToList();//take all the products but the product that we updated
+                temp.Add(orderItem);//addes orderitem to the cart
+               // cart.Items = cart.Items.Add(orderItem);//addes orderitem to the cart
             }
 
         }
