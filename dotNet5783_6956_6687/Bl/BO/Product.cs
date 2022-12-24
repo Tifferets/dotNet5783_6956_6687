@@ -22,7 +22,7 @@ public class Product
     /// <summary>
     /// the category the product belongs to
     /// </summary>
-    public Category? Category { get; set; }
+    public Category Category { get; set; }
 
     public override string ToString() => Extention.ToStringProperty(this);
 }

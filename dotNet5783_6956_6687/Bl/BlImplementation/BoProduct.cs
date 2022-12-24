@@ -2,7 +2,7 @@
 using BO;
 using DalApi;
 using DO;
-
+using System.Security.Cryptography.X509Certificates;
 
 namespace BlImplementation;
 
@@ -111,14 +111,16 @@ internal class BoProduct : BlApi.IProduct
             try
             {
 
-                var product = dal?.product.GetSingle(x=> x?.ID == Id);
-                /*  var doOrder = Dal.Order.GetById(id);
+                var product = dal?.product.GetSingle(x => x?.ID == Id);
+                return new BO.Product
+                {
+                    Id = Id,
+                    Name = product?.Name,
+                    Category = (BO.Category)product?.Category,
+                    Price = product?.Price ?? 0,
+                    InStock =product?.InStock ?? 0,
 
-        IMapper mapper = myMapper.OredrMappingConfiguration.CreateMapper();
-        var boOrder = mapper.Map<BO.Order>(doOrder);
-
-        return boOrder;
-                */
+                };
 
                 // BO.Product product = new BO.Product();
                 //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
@@ -151,19 +153,36 @@ internal class BoProduct : BlApi.IProduct
     {
         if (Id >= 300000 && Id < 400000)
         {
-            //  var productItem =(dal?.product.GetAll() ?? throw new BO.NullException()).FirstOrDefault(x => x?.ID == Id);
-            BO.ProductItem productItem = new();
-            foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
+            try
             {
-                if (item.ID == Id)
+                var productItem = (dal?.product.GetAll() ?? throw new BO.NullException()).FirstOrDefault(x => x?.ID == Id);
+                return new ProductItem
                 {
-                    productItem.ID = Id;
-                    productItem.Name = item.Name;
-                    productItem.Category = (BO.Category)item.Category;
-                    productItem.Amount = item.InStock;
-                }
+                    ID= Id,
+                    Name= productItem?.Name,
+                    Category= (BO.Category?)productItem?.Category,
+                    Amount= productItem?.InStock ?? 0,
+                    Price= productItem?.Price ?? 0,
+                    Instock= productItem?.InStock >0,
+            };
             }
-            return productItem;
+            catch
+            {
+                throw new BO.doesNotExistException();
+            }
+          
+            ////BO.ProductItem productItem = new();
+            //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
+            //{
+            //    if (item.ID == Id)
+            //    {
+            //        productItem.ID = Id;
+            //        productItem.Name = item.Name;
+            //        productItem.Category = (BO.Category)item.Category;
+            //        productItem.Amount = item.InStock;
+            //    }
+            //}
+            //return productItem;
         }
         else
         {
@@ -245,25 +264,32 @@ internal class BoProduct : BlApi.IProduct
     /// delete a product, gets id checks that it isnt in anybodys cart if it isnt it delets it and if it is, it throws an exception 
     /// </summary>
     /// <param name="Id"></param>
-    public void DeletProduct(int Id)
+    public void DeletProduct(int Id)//gets product id
     {
-        if (Id >= 300000 && Id < 400000)
+        if (Id >= 300000 && Id < 400000)//checks if the product is in any order
         {
-            IEnumerable<DO.Order?> orderList = (dal?.order.GetAll() ?? throw new BO.NullException());//list of do.order
-            
-            //if (dal?.product.GetAll().Any(x => x.Value.ID == product?.Id) == true)//checks if the id exsistes
-            //{ throw new BO.alreadyExistException(); }
-            foreach (DO.Order item in orderList)//going over the list
-            {
-                IEnumerable<DO.OrderItem?> orderItemList = (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()) ;//gets a list of all order items for the order
-                foreach (DO.OrderItem oitem in orderItemList)//
-                {
-                    if (oitem.ProductID == Id)//checks if the product is in the orderitem
-                    {
-                        throw new BO.CantDeleteException();
-                    }
-                }
-            }
+            var there = (from DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException()
+                         where (dal?.order.GetAllOrderItems(item.ID).Any(x => x?.ProductID == Id) ?? true)
+                         select (item));
+            if(there.Count() != 0)
+                throw new BO.CantDeleteException();
+
+
+
+
+            //foreach (DO.Order item in (dal?.order.GetAll() ?? throw new BO.NullException()))//going over the list
+            //{
+            //    IEnumerable<DO.OrderItem?> orderItemList = (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()) ;//gets a list of all order items for the order
+            //    if (orderItemList.Any(x=> x?.ProductID == Id))
+            //        throw new BO.CantDeleteException();
+            //    //foreach (DO.OrderItem oitem in orderItemList)//
+            //    //{
+            //    //    if (oitem.ProductID == Id)//checks if the product is in the orderitem
+            //    //    {
+            //    //        throw new BO.CantDeleteException();
+            //    //    }
+            //    //}
+
             try
             {
                 dal?.product.Delete(Id);

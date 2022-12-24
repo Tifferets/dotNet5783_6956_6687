@@ -18,80 +18,80 @@ internal class BoCart : ICart
     /// <returns></returns>
     public Cart AddProductToCart(Cart cart, int productId)
     {
-        BO.OrderItem? orderItem = cart.Items.FirstOrDefault(x => x.ProductID == productId);//orderItem is null if the product doesnt exist in the cart
-        if (orderItem != null) //if the product exists
-        {
-            BO.Product? p = dal.product.GetAll().FirstOrDefault(x => x.ID == productId);//p is the product that we want to add
-            if (p == null || p.InStock < orderItem.Amount) //if the product doesnt exist or there is not enough left
-                throw new BO.NoMoreInStockException();
-            else
-            {
-                orderItem.Amount = orderItem.Amount + 1;//updates the amount
-                orderItem.TotalPrice = orderItem.Price * orderItem.Amount;//updates the price
-                cart.TotalPrice = cart.TotalPrice + orderItem.Price;//updates the final price of the cart
-                List<BO.OrderItem>? temp = cart.Items.Where(x => x.ProductID != productId).ToList();//take all the products but the product that we updated
-                temp.Add(orderItem);//addes orderitem to the cart
-               // cart.Items = cart.Items.Add(orderItem);//addes orderitem to the cart
-            }
+        //BO.OrderItem? orderItem = cart.Items.FirstOrDefault(x => x.ProductID == productId);//orderItem is null if the product doesnt exist in the cart
+        //if (orderItem != null) //if the product exists
+        //{
+        //   BO.Product p = dal.product.GetAll().FirstOrDefault(x => x.Value.ID == productId);//p is the product that we want to add
+        //    if (p == null || p.InStock < orderItem.Amount) //if the product doesnt exist or there is not enough left
+        //        throw new BO.NoMoreInStockException();
+        //    else
+        //    {
+        //        orderItem.Amount = orderItem.Amount + 1;//updates the amount
+        //        orderItem.TotalPrice = orderItem.Price * orderItem.Amount;//updates the price
+        //        cart.TotalPrice = cart.TotalPrice + orderItem.Price;//updates the final price of the cart
+        //        List<BO.OrderItem>? temp = cart.Items.Where(x => x.ProductID != productId).ToList();//take all the products but the product that we updated
+        //        temp.Add(orderItem);//addes orderitem to the cart
+        //       // cart.Items = cart.Items.Add(orderItem);//addes orderitem to the cart
+        //    }
 
-        }
-        else//if the product doesnt exist
-        {
+        //}
+        //else//if the product doesnt exist
+        //{
 
-        }
+        //}
 
-        bool flag = false;
-        if (productId < 300000 || productId > 499999)//checking product id
-            throw new WrongIDException();
-        foreach (BO.OrderItem? item in (cart.Items ?? throw new BO.NullException()))//goes through all the items in the cart
-        {
-            if (item?.ProductID == productId)//checking if the product already exists in the cart
-            {
-                flag = true;
+        //bool flag = false;
+        //if (productId < 300000 || productId > 499999)//checking product id
+        //    throw new WrongIDException();
+        //foreach (BO.OrderItem? item in (cart.Items ?? throw new BO.NullException()))//goes through all the items in the cart
+        //{
+        //    if (item?.ProductID == productId)//checking if the product already exists in the cart
+        //    {
+        //        flag = true;
 
 
-                foreach (DO.Product? item1 in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
-                {
-                    if (item1?.ID == productId && item1?.InStock > 0)//if it exists and has enough in stock
-                    {
-                        item.Amount = item.Amount + 1;//addes 1 more of the product to the cart
-                        item.TotalPrice = item.TotalPrice + item.Price;
-                        cart.TotalPrice = item.TotalPrice;
-                        break;
-                    }
-                    else
-                        throw new NoMoreInStockException();
-                }
-                break;
-            }
-        }
-        if (flag == false)//if the product does not exists in the cart
-        {
-            foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
-            {
-                if (item.ID == productId)//if it exists and has aenough in stock
-                {
-                    if (item.InStock > 0)
-                    {
-                        double price = item.Price;
-                        cart.TotalPrice = price + cart.TotalPrice;
-                        //BO.OrderItem newItem = new BO.OrderItem()//creats a new orderitem
-                        //{
-                        //    ProductID = productId,
-                        //    ID = item.ID,
-                        //    Name = item.Name,
-                        //    Price = item.Price,
-                        //    TotalPrice = item.Price,
-                        //    Amount = 1
-                        //};
-                        //cart.TotalPrice = newItem.TotalPrice + cart.TotalPrice;
-                    }
-                    else
-                        throw new NoMoreInStockException();//if the product already exists in the cart but the amount is 0
-                }
+        //        foreach (DO.Product? item1 in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
+        //        {
+        //            if (item1?.ID == productId && item1?.InStock > 0)//if it exists and has enough in stock
+        //            {
+        //                item.Amount = item.Amount + 1;//addes 1 more of the product to the cart
+        //                item.TotalPrice = item.TotalPrice + item.Price;
+        //                cart.TotalPrice = item.TotalPrice;
+        //                break;
+        //            }
+        //            else
+        //                throw new NoMoreInStockException();
+        //        }
+        //        break;
+        //    }
+        //}
+        //if (flag == false)//if the product does not exists in the cart
+        //{
+        //    foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
+        //    {
+        //        if (item.ID == productId)//if it exists and has aenough in stock
+        //        {
+        //            if (item.InStock > 0)
+        //            {
+        //                double price = item.Price;
+        //                cart.TotalPrice = price + cart.TotalPrice;
+        //                //BO.OrderItem newItem = new BO.OrderItem()//creats a new orderitem
+        //                //{
+        //                //    ProductID = productId,
+        //                //    ID = item.ID,
+        //                //    Name = item.Name,
+        //                //    Price = item.Price,
+        //                //    TotalPrice = item.Price,
+        //                //    Amount = 1
+        //                //};
+        //                //cart.TotalPrice = newItem.TotalPrice + cart.TotalPrice;
+        //            }
+        //            else
+        //                throw new NoMoreInStockException();//if the product already exists in the cart but the amount is 0
+        //        }
 
-            }
-        }
+        //    }
+        //}
         return cart;
     }
 
