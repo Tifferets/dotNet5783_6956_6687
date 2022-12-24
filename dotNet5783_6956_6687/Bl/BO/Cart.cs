@@ -15,7 +15,7 @@ public class Cart
     /// <summary>
     /// list of order items BO-cart
     /// </summary>
-    public IEnumerable<OrderItem?>? Items { get; set; }  
+    public List<OrderItem> Items { get; set; }  
     /// <summary>
     /// total price of cart BO-Cart
     /// </summary>

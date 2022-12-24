@@ -110,19 +110,29 @@ internal class BoProduct : BlApi.IProduct
         {
             try
             {
-                BO.Product product = new BO.Product();
-                foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
-                {
-                    if (item.ID == Id)
-                    {
-                        product.Id = Id;
-                        product.Name = item.Name;
-                        product.Category = (BO.Category)item.Category;
-                        product.InStock = item.InStock;
-                        product.Price = item.Price;
-                    }
-                }
-                return product;
+
+                var product = dal?.product.GetSingle(x=> x?.ID == Id);
+                /*  var doOrder = Dal.Order.GetById(id);
+
+        IMapper mapper = myMapper.OredrMappingConfiguration.CreateMapper();
+        var boOrder = mapper.Map<BO.Order>(doOrder);
+
+        return boOrder;
+                */
+
+                // BO.Product product = new BO.Product();
+                //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
+                //{
+                //    if (item.ID == Id)
+                //    {
+                //        product.Id = Id;
+                //        product.Name = item.Name;
+                //        product.Category = (BO.Category)item.Category;
+                //        product.InStock = item.InStock;
+                //        product.Price = item.Price;
+                //    }
+                //}
+                //return product;
             }
             catch
             {
