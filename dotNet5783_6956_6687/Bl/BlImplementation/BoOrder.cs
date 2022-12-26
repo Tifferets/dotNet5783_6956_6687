@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace BlImplementation;
 
-internal class BoOrder:IOrder
+internal class BoOrder: IOrder
 {
     private static DalApi.IDal? dal = DalApi.Factory.Get();
     //private BO.OrderStatus ordered;
@@ -20,42 +20,46 @@ internal class BoOrder:IOrder
        List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();//list of orderForList
         try
         {
-            //var neww = (from DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException()
-            //           from DO.OrderItem oitem in dal?.order.GetAllOrderItems(item.ID)
-            //           select new BO.OrderForList
-            //           {
-            //               ID = item.ID,
-            //               CustomerName = item.CustomerName,
-            //               Status = (BO.OrderStatus)OrderStatus(item.ID).Status,
-            //               AmountOfItems = (int)dal?.order.GetAllOrderItems(item.ID).Count(),
-            //               TotalPrice= (double)dal?.order.GetAllOrderItems(item.ID).Sum(x => x.Value.ProductID),
-            //           }).ToList();
+            var neww = (from DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException()
+                        let amountOfitems = dal?.order.GetAllOrderItems(item.ID).Count()
+                        let totalPrice = dal?.order.GetAllOrderItems(item.ID).Sum(x => x?.ProductID)
+                        let status = (BO.OrderStatus)OrderStatus(item.ID).Status
+                        let oilist = dal?.order?.GetAllOrderItems(item.ID).OrderByDescending(x=> x.Value.OrderItemID)
+                        select new BO.OrderForList
+                        {
+                            ID = item.ID,
+                            CustomerName = item.CustomerName,
+                            Status = status,
+                            AmountOfItems = amountOfitems ?? 0,
+                            TotalPrice = totalPrice ?? 0,
+                        }).ToList();
 
-            //return neww;
-            foreach (DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException())
-            {
-                BO.OrderTracking orderTracking = OrderStatus(item.ID);
-                string? statusee = status(orderTracking);
-                BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
-                double price = 0;
-                int amount = 0;
-                foreach (DO.OrderItem oitem in (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()))//loop to count the amount of products and total price
-                {
-                    amount++;
-                    price += oitem.Price;
-                }
-                OrderForlist.Add(new BO.OrderForList
-                {
-                    ID = item.ID,
-                    CustomerName = item.CustomerName,
-                    AmountOfItems = amount,
-                    TotalPrice = price,
-                    Status = stauss,//converting to enum
-                });
-            }
-            IEnumerable<BO.OrderForList> orderForLists = OrderForlist;//list to return
-            return orderForLists;
+            return neww;
         }
+            //foreach (DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException())
+            //{
+            //    BO.OrderTracking orderTracking = OrderStatus(item.ID);
+            //    string? statusee = status(orderTracking);
+            //    BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
+            //    double price = 0;
+            //    int amount = 0;
+            //    foreach (DO.OrderItem oitem in (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()))//loop to count the amount of products and total price
+            //    {
+            //        amount++;
+            //        price += oitem.Price;
+            //    }
+            //    OrderForlist.Add(new BO.OrderForList
+            //    {
+            //        ID = item.ID,
+            //        CustomerName = item.CustomerName,
+            //        AmountOfItems = amount,
+            //        TotalPrice = price,
+            //        Status = stauss,//converting to enum
+            //    });
+        
+            //IEnumerable<BO.OrderForList> orderForLists = OrderForlist;//list to return
+           // return orderForLists;
+       //}
         catch(Exception)
         {
             throw new BO.errorException();
@@ -94,7 +98,7 @@ internal class BoOrder:IOrder
                     });
                 }
                 BO.OrderTracking orderTracking = OrderStatus(orderId);
-                string statusee = status(orderTracking);
+                string statusee = status(orderTracking)!;
                 BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
                 return new BO.Order
                 {

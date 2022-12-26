@@ -17,7 +17,7 @@ public class OrderForList
     /// <summary>
     /// the status of the Orderforlists
     /// </summary>
-    public OrderStatus? Status { get; set; }
+    public OrderStatus Status { get; set; }
     /// <summary>
     /// the amount of items in the Orderforlists
     /// </summary>
