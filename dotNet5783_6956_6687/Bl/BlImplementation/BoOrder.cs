@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using BO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
 namespace BlImplementation;
@@ -16,17 +17,29 @@ internal class BoOrder:IOrder
     /// <returns></returns>
     public IEnumerable<BO.OrderForList?> GetOrderList()
     {
-        List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();//list of orderForList
+      //  List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();//list of orderForList
         try
         {
-            foreach(DO.Order item in (dal?.order.GetAll() ?? throw new BO.NullException()) )
-            { 
+            //var neww = (from DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException()
+            //           from DO.OrderItem oitem in dal?.order.GetAllOrderItems(item.ID)
+            //           select new BO.OrderForList
+            //           {
+            //               ID = item.ID,
+            //               CustomerName = item.CustomerName,
+            //               Status = (BO.OrderStatus)OrderStatus(item.ID).Status,
+            //               AmountOfItems = (int)dal?.order.GetAllOrderItems(item.ID).Count(),
+            //               TotalPrice= (double)dal?.order.GetAllOrderItems(item.ID).Sum(x => x.Value.ProductID),
+            //           }).ToList();
+
+            //return neww;
+            foreach (DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException())
+            {
                 BO.OrderTracking orderTracking = OrderStatus(item.ID);
                 string? statusee = status(orderTracking);
                 BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
                 double price = 0;
                 int amount = 0;
-                foreach(DO.OrderItem oitem in (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()))//loop to count the amount of products and total price
+                foreach (DO.OrderItem oitem in (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()))//loop to count the amount of products and total price
                 {
                     amount++;
                     price += oitem.Price;

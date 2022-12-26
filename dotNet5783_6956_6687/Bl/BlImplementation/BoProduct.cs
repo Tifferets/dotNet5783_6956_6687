@@ -26,7 +26,7 @@ internal class BoProduct : BlApi.IProduct
                              ID = (int)item?.ID,
                              Name = item?.Name,
                              InStock = gtz,
-                             Amount = (int)item?.InStock,
+                             Amount = item?.InStock ?? 0,
                              Price = item?.Price,
                              Category = (BO.Category)item?.Category
                          };
@@ -73,7 +73,7 @@ internal class BoProduct : BlApi.IProduct
                              ID = (int)item?.ID,
                              Name = item?.Name,
                              InStock = gtz,
-                             Amount = (int)item?.InStock,
+                             Amount = item?.InStock ?? 0,
                              Price = item?.Price,
                              Category = (BO.Category)item?.Category
                          };
@@ -163,7 +163,7 @@ internal class BoProduct : BlApi.IProduct
                     Category= (BO.Category?)productItem?.Category,
                     Amount= productItem?.InStock ?? 0,
                     Price= productItem?.Price ?? 0,
-                    Instock= productItem?.InStock >0,
+                    Instock= productItem?.InStock > 0,
             };
             }
             catch
