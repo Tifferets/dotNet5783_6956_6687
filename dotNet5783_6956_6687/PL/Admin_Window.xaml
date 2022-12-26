@@ -26,7 +26,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="ProductListview" Grid.Column="1" Grid.Row="1" MouseDoubleClick="MouseDoubleClicked" SelectionChanged="ProductListview_SelectionChanged">
+        <ListView x:Name="ProductListview" Grid.Column="1" Grid.Row="1" ItemsSource = "{Binding }" MouseDoubleClick="MouseDoubleClicked" SelectionChanged="ProductListview_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
