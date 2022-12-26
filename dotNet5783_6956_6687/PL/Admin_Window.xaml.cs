@@ -32,20 +32,29 @@ namespace PL
             this.productForLists = new ObservableCollection<ProductForList?>();
             this.orderForLists = new ObservableCollection<OrderForList?>();
             ProductListview.DataContext = bl?.Product.GetListOfProducts();
-            // ProductListView.ItemsSource = 
-
+            orderListview.DataContext = bl?.Order.GetOrderList();
         }
         
         private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow().Show();//opens product window
 
         private void Button_Click_1(object sender, RoutedEventArgs e) => new OrderWindow().Show();//opens order window
 
-        private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)
+        private void MouseDoubleClickedProduct(object sender, MouseButtonEventArgs e)
         {
             ProductForList? p1 = (ProductListview.SelectedItem as ProductForList);//creats a new productforlist
             if(p1 != null)
             {
                 ProductWindow productWindow = new ProductWindow(p1);
+                productWindow.ShowDialog();
+            }
+        }
+
+        private void MouseDoubleClickedOrder(object sender, MouseButtonEventArgs e)
+        {
+            OrderForList? p1 = (orderListview.SelectedItem as OrderForList);//creats a new productforlist
+            if (p1 != null)
+            {
+                OrderWindow productWindow = new OrderWindow(p1);
                 productWindow.ShowDialog();
             }
         }

@@ -53,5 +53,7 @@ namespace PL
             Category_ComboBox.SelectedItem = null;//sets to null so that the comboBox will clear itself
 
         }
+
+      
     }
 }
