@@ -49,5 +49,15 @@ namespace PL
                 productWindow.ShowDialog();
             }
         }
+
+        private void orderListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ProductListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

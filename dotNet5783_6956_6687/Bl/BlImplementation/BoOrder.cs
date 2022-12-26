@@ -18,52 +18,52 @@ internal class BoOrder: IOrder
     public IEnumerable<BO.OrderForList?> GetOrderList()
     {
        List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();//list of orderForList
-        try
-        {
-            var neww = (from DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException()
-                        let amountOfitems = dal?.order.GetAllOrderItems(item.ID).Count()
-                        let totalPrice = dal?.order.GetAllOrderItems(item.ID).Sum(x => x?.ProductID)
-                        let status = (BO.OrderStatus)OrderStatus(item.ID).Status
-                        let oilist = dal?.order?.GetAllOrderItems(item.ID).OrderByDescending(x=> x.Value.OrderItemID)
-                        select new BO.OrderForList
-                        {
-                            ID = item.ID,
-                            CustomerName = item.CustomerName,
-                            Status = status,
-                            AmountOfItems = amountOfitems ?? 0,
-                            TotalPrice = totalPrice ?? 0,
-                        }).ToList();
+                                                                        //try
+                                                                        //{
+                                                                        //    var neww = (from DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException()
+                                                                        //                let amountOfitems = dal?.order.GetAllOrderItems(item.ID).Count()
+                                                                        //                let totalPrice = dal?.order.GetAllOrderItems(item.ID).Sum(x => x?.ProductID)
+                                                                        //                let status = (BO.OrderStatus)OrderStatus(item.ID).Status
+                                                                        //                let oilist = dal?.order?.GetAllOrderItems(item.ID).OrderByDescending(x=> x.Value.OrderItemID)
+                                                                        //                select new BO.OrderForList
+                                                                        //                {
+                                                                        //                    ID = item.ID,
+                                                                        //                    CustomerName = item.CustomerName,
+                                                                        //                    Status = status,
+                                                                        //                    AmountOfItems = amountOfitems ?? 0,
+                                                                        //                    TotalPrice = totalPrice ?? 0,
+                                                                        //                }).ToList();
 
-            return neww;
-        }
-            //foreach (DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException())
-            //{
-            //    BO.OrderTracking orderTracking = OrderStatus(item.ID);
-            //    string? statusee = status(orderTracking);
-            //    BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
-            //    double price = 0;
-            //    int amount = 0;
-            //    foreach (DO.OrderItem oitem in (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()))//loop to count the amount of products and total price
-            //    {
-            //        amount++;
-            //        price += oitem.Price;
-            //    }
-            //    OrderForlist.Add(new BO.OrderForList
-            //    {
-            //        ID = item.ID,
-            //        CustomerName = item.CustomerName,
-            //        AmountOfItems = amount,
-            //        TotalPrice = price,
-            //        Status = stauss,//converting to enum
-            //    });
-        
-            //IEnumerable<BO.OrderForList> orderForLists = OrderForlist;//list to return
-           // return orderForLists;
-       //}
-        catch(Exception)
+        //    return neww;
+        //}
+        foreach (DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException())
         {
-            throw new BO.errorException();
+            BO.OrderTracking orderTracking = OrderStatus(item.ID);
+            string? statusee = status(orderTracking);
+            BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
+            double price = 0;
+            int amount = 0;
+            foreach (DO.OrderItem oitem in (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()))//loop to count the amount of products and total price
+            {
+                amount++;
+                price += oitem.Price;
+            }
+            OrderForlist.Add(new BO.OrderForList
+            {
+                ID = item.ID,
+                CustomerName = item.CustomerName,
+                AmountOfItems = amount,
+                TotalPrice = price,
+                Status = stauss,//converting to enum
+            });
         }
+            IEnumerable<BO.OrderForList> orderForLists = OrderForlist;//list to return
+            return orderForLists;
+       
+        //catch(Exception)
+        //{
+        //    throw new BO.errorException();
+        //}
     }
     /// <summary>
     /// gets an order id, returns an order - for admin and user
@@ -192,16 +192,16 @@ internal class BoOrder: IOrder
             DO.Order order = (DO.Order)dal?.order.GetSingle(x => x?.ID == orderId);
             List<Tuple<BO.OrderStatus,DateTime>> list = new List<Tuple<BO.OrderStatus,DateTime>>();
             BO.OrderStatus status = BO.OrderStatus.ordered;
-            if (order.OrderDate != null)
+            if (order.OrderDate != null && order.OrderDate != DateTime.MinValue)
             {
                 list.Add(Tuple.Create(BO.OrderStatus.ordered, (DateTime)order.OrderDate));
             }
-            if (order.ShipDate != null)
+            if (order.ShipDate != null && order.ShipDate != DateTime.MinValue)
             {
                 list.Add(Tuple.Create(BO.OrderStatus.shipped, (DateTime)order.ShipDate));
                 status = BO.OrderStatus.shipped;
             }
-            if (order.DeliveryDate != null)
+            if (order.DeliveryDate != null && order.DeliveryDate != DateTime.MinValue)
             {
                 list.Add(Tuple.Create(BO.OrderStatus.delivered, (DateTime)order.DeliveryDate));
                 status = BO.OrderStatus.delivered;

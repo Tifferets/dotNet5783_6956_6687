@@ -64,14 +64,14 @@ internal static class DataSource
             order.CustomerAddress = customerAddress[rand.Next(0, 10)];//generats random location
             order.CustomerEmail = order.CustomerName + "@gmail.com";//creates email address
             order.OrderDate = DateTime.Now.Add(new TimeSpan(rand.Next(-360, 0), 0, 0, 0));//time in last year till 2 months ago
-            if(i < 16)//80% have a ship date
+            if(i < 8)//80% have a ship date
             { 
                 order.ShipDate = order.OrderDate?.Add(new TimeSpan(rand.Next(1, 7), 0, 0, 0));
             }
             else
-                order.ShipDate =null;
+                order.ShipDate = null;
 
-            if (i <10 )//60% have a delivery date
+            if (i < 5 )//60% have a delivery date
             {
                 order.DeliveryDate = order.ShipDate?.Add(new TimeSpan(rand.Next(1, 2), 0, 0, 0));//from one to 2 days later
             }
@@ -92,7 +92,7 @@ internal static class DataSource
             product.Price = (double)rand.Next(10, 200);//randome price from range 
             product.Category = Category.Dog+(i%5);//assings in order 
 
-            if (i > 1)//5% of products with no stock
+            if (i > 2)//5% of products with no stock
             {
                 product.InStock = (int)rand.Next(1, 20);
             }

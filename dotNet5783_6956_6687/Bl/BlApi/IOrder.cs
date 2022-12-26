@@ -31,7 +31,7 @@ public interface IOrder
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
-    public OrderTracking OrderStatus(int orderId); 
+    public BO.OrderTracking OrderStatus(int orderId);
     /// <summary>
     /// BONUS!!
     /// </summary>

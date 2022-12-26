@@ -19,14 +19,14 @@
         <Grid>
             <Label Content="Orders" HorizontalAlignment="Left" Margin="156,36,0,0" VerticalAlignment="Top"/>
         </Grid>
-        <ListView x:Name="orderListview" Grid.Column="0" Grid.Row ="1"  ItemsSource = "{Binding }" >
+        <ListView x:Name="orderListview" Grid.Column="0" Grid.Row ="1"  ItemsSource = "{Binding}" SelectionChanged="orderListview_SelectionChanged" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="ProductListview" Grid.Column="1" Grid.Row="1" ItemsSource = "{Binding }" MouseDoubleClick="MouseDoubleClicked">
+        <ListView x:Name="ProductListview" Grid.Column="1" Grid.Row="1" MouseDoubleClick="MouseDoubleClicked" SelectionChanged="ProductListview_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
