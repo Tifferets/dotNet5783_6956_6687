@@ -1,5 +1,8 @@
-﻿using System;
+﻿using BO;
+using PL.PlProduct;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +22,32 @@ namespace PL
     /// </summary>
     public partial class Admin_Window : Window
     {
+        private BlApi.IBl? bl = BlApi.Factory.Get();
+
+        public ObservableCollection<ProductForList?> productForLists { get; set; }
+        public ObservableCollection<OrderForList?> orderForLists { get; set; }
         public Admin_Window()
         {
             InitializeComponent();
-        }
+            this.productForLists = new ObservableCollection<ProductForList?>();
+            this.orderForLists = new ObservableCollection<OrderForList?>();
+            ProductListview.DataContext = bl?.Product.GetListOfProducts();
+            // ProductListView.ItemsSource = 
 
-       
+        }
+        
+        private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow().Show();//opens product window
+
+        private void Button_Click_1(object sender, RoutedEventArgs e) => new OrderWindow().Show();//opens order window
+
+        private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)
+        {
+            ProductForList? p1 = (ProductListview.SelectedItem as ProductForList);//creats a new productforlist
+            if(p1 != null)
+            {
+                ProductWindow productWindow = new ProductWindow(p1);
+                productWindow.ShowDialog();
+            }
+        }
     }
 }

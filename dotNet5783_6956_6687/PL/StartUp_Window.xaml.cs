@@ -19,14 +19,14 @@ namespace PL
     /// </summary>
     public partial class StartUp_Window : Window
     {
+        private BlApi.IBl? bl = BlApi.Factory.Get();
+
         public StartUp_Window()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+        private void Button_Click(object sender, RoutedEventArgs e) => new Admin_Window().Show();
 
-        }
     }
 }
