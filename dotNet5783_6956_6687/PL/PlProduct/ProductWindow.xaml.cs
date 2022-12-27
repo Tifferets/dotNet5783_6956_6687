@@ -30,17 +30,18 @@ namespace PL.PlProduct
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
-            this.myData = myData;
-            if (myData != null)//if came with info - from product list window
-            {
-                Id_Textbox.Text = myData.ID.ToString();
-                Id_Textbox.IsEnabled = false;// no accesses to change the id
-                Name_Textbox.Text = myData.Name;
-                Price_Textbox.Text = myData.Price.ToString();
-                InStock_Textbox.Text = myData.Amount.ToString();
-                Category_ComboBox.Text= myData.Category.ToString();
-                AddProduct_Button.Visibility = Visibility.Hidden;//add butten invisable
-            }
+            GridProduct.DataContext= myData;
+            //this.myData = myData;
+            //if (myData != null)//if came with info - from product list window
+            //{
+            //    Id_Textbox.Text = myData.ID.ToString();
+            //    Id_Textbox.IsEnabled = false;// no accesses to change the id
+            //    Name_Textbox.Text = myData.Name;
+            //    Price_Textbox.Text = myData.Price.ToString();
+            //    InStock_Textbox.Text = myData.Amount.ToString();
+            //    Category_ComboBox.Text= myData.Category.ToString();
+            //    AddProduct_Button.Visibility = Visibility.Hidden;//add butten invisable
+            //}
         }
 
         public ProductWindow()
@@ -152,5 +153,9 @@ namespace PL.PlProduct
             return !regex.IsMatch(text);
         }
 
+        private void Id_Textbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
