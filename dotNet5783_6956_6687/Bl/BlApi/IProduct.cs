@@ -44,4 +44,5 @@ public interface IProduct
     /// <returns></returns>
     public ProductItem GetProductItem(int id);
     public IEnumerable<ProductForList?> GetproductForListByCategory(Category selectedItem);
+    public BO.ProductForList GetProductForList(int Id);
 }

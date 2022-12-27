@@ -26,9 +26,11 @@ namespace PL.PlProduct
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
 
-        public ProductWindow(ProductForList? myData)//gets value from selecting on te comboBox to update
+        private Action<ProductForList> action;
+        public ProductWindow(Action<ProductForList> action,ProductForList ? myData)//gets value from selecting on te comboBox to update
         {
             InitializeComponent();
+            this.action = action;
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
             GridProduct.DataContext= myData;
             //this.myData = myData;
@@ -44,14 +46,15 @@ namespace PL.PlProduct
             //}
         }
 
-        public ProductWindow()
+        public ProductWindow(Action<ProductForList> action)
         {
-           InitializeComponent();
+            InitializeComponent();
+            this.action = action;
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
             UpdateProduct_button.Visibility = Visibility.Hidden;//update butten invisable
 
         }
-        public BO.ProductForList? myData { get; set; }
+       // public BO.ProductForList? myData { get; set; }
 
         private void AddProduct_Button_Click(object sender, RoutedEventArgs e)//adds a product to the DO list
         {
@@ -74,6 +77,7 @@ namespace PL.PlProduct
                 try
                 {
                     bl?.Product.AddProduct(product);//adds the product to the do
+                    action(bl?.Product.GetProductForList(product.Id) ?? throw new NullException());
                     MessageBox.Show("product added successfully");
                     this.Close();
                 }
@@ -109,6 +113,7 @@ namespace PL.PlProduct
                 try
                 {
                     bl?.Product.UpdateProduct(product);//adds the product to the do
+                    action(bl?.Product.GetProductForList(product.Id) ?? throw new NullException());
                     MessageBox.Show("product updated successfully");
                     this.Close();
 
