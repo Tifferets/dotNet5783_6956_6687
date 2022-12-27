@@ -152,6 +152,5 @@ namespace PL.PlProduct
             return !regex.IsMatch(text);
         }
 
-
     }
 }
