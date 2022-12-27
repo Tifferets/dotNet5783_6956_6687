@@ -17,22 +17,23 @@ internal class BoOrder: IOrder
     /// <returns></returns>
     public IEnumerable<BO.OrderForList?> GetOrderList()
     {
-       List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();//list of orderForList
-                                                                        //try
-                                                                        //{
-                                                                        //    var neww = (from DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException()
-                                                                        //                let amountOfitems = dal?.order.GetAllOrderItems(item.ID).Count()
-                                                                        //                let totalPrice = dal?.order.GetAllOrderItems(item.ID).Sum(x => x?.ProductID)
-                                                                        //                let status = (BO.OrderStatus)OrderStatus(item.ID).Status
-                                                                        //                let oilist = dal?.order?.GetAllOrderItems(item.ID).OrderByDescending(x=> x.Value.OrderItemID)
-                                                                        //                select new BO.OrderForList
-                                                                        //                {
-                                                                        //                    ID = item.ID,
-                                                                        //                    CustomerName = item.CustomerName,
-                                                                        //                    Status = status,
-                                                                        //                    AmountOfItems = amountOfitems ?? 0,
-                                                                        //                    TotalPrice = totalPrice ?? 0,
-                                                                        //                }).ToList();
+       List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();
+        //list of orderForList
+        //try
+        //{
+        //    var neww = (from DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException()
+        //                let amountOfitems = dal?.order.GetAllOrderItems(item.ID).Count()
+        //                let totalPrice = dal?.order.GetAllOrderItems(item.ID).Sum(x => x?.ProductID)
+        //                let status = (BO.OrderStatus)OrderStatus(item.ID).Status
+        //                let oilist = dal?.order?.GetAllOrderItems(item.ID).OrderByDescending(x=> x.Value.OrderItemID)
+        //                select new BO.OrderForList
+        //                {
+        //                    ID = item.ID,
+        //                    CustomerName = item.CustomerName,
+        //                    Status = status,
+        //                    AmountOfItems = amountOfitems ?? 0,
+        //                    TotalPrice = totalPrice ?? 0,
+        //                }).ToList();
 
         //    return neww;
         //}
@@ -40,7 +41,7 @@ internal class BoOrder: IOrder
         {
             BO.OrderTracking orderTracking = OrderStatus(item.ID);
             string? statusee = status(orderTracking);
-            BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
+            BO.OrderStatus stauss = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
             double price = 0;
             int amount = 0;
             foreach (DO.OrderItem oitem in (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()))//loop to count the amount of products and total price
@@ -99,7 +100,7 @@ internal class BoOrder: IOrder
                 }
                 BO.OrderTracking orderTracking = OrderStatus(orderId);
                 string statusee = status(orderTracking)!;
-                BO.OrderStatus stauss = (BO.OrderStatus)BO.Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
+                BO.OrderStatus stauss = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
                 return new BO.Order
                 {
                     ID = orderId,

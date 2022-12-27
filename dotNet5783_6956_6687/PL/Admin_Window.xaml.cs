@@ -37,7 +37,8 @@ namespace PL
         
         private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow().Show();//opens product window
 
-        private void Button_Click_1(object sender, RoutedEventArgs e) => new OrderWindow().Show();//opens order window
+        private void addOrder(OrderForList orderForList) => orderForLists.Add(orderForList);
+        private void Button_Click_1(object sender, RoutedEventArgs e) => new OrderWindow(addOrder).ShowDialog();//opens order window
 
         private void MouseDoubleClickedProduct(object sender, MouseButtonEventArgs e)
         {
@@ -52,9 +53,10 @@ namespace PL
         private void MouseDoubleClickedOrder(object sender, MouseButtonEventArgs e)
         {
             OrderForList? p1 = (orderListview.SelectedItem as OrderForList);//creats a new productforlist
+            Order order = bl.Order.GetOrderInfo(p1.ID);
             if (p1 != null)
             {
-                OrderWindow productWindow = new OrderWindow(p1);
+                OrderWindow productWindow = new OrderWindow(order);
                 productWindow.ShowDialog();
             }
         }

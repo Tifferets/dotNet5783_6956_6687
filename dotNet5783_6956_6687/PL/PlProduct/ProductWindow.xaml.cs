@@ -30,17 +30,18 @@ namespace PL.PlProduct
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
-            this.myData = myData;
-            if (myData != null)//if came with info - from product list window
-            {
-                Id_Textbox.Text = myData.ID.ToString();
-                Id_Textbox.IsEnabled = false;// no accesses to change the id
-                Name_Textbox.Text = myData.Name;
-                Price_Textbox.Text = myData.Price.ToString();
-                InStock_Textbox.Text = myData.Amount.ToString();
-                Category_ComboBox.Text= myData.Category.ToString();
-                AddProduct_Button.Visibility = Visibility.Hidden;//add butten invisable
-            }
+
+            //this.myData = myData;
+            //if (myData != null)//if came with info - from product list window
+            //{
+            //    Id_Textbox.Text = myData.ID.ToString();
+            //    Id_Textbox.IsEnabled = false;// no accesses to change the id
+            //    Name_Textbox.Text = myData.Name;
+            //    Price_Textbox.Text = myData.Price.ToString();
+            //    InStock_Textbox.Text = myData.Amount.ToString();
+            //    Category_ComboBox.Text= myData.Category.ToString();
+            //    AddProduct_Button.Visibility = Visibility.Hidden;//add butten invisable
+            //}
         }
 
         public ProductWindow()
@@ -122,6 +123,7 @@ namespace PL.PlProduct
                 MessageBox.Show("Please enter missing data");
             }
         }
+        #region correct input
         private void PreviewTextImputString(object sender, TextCompositionEventArgs e)// for name -only lets to put letters 
         {
             e.Handled = IsTextAllowedString(e.Text);//checks what is there
@@ -151,6 +153,7 @@ namespace PL.PlProduct
         {
             return !regex.IsMatch(text);
         }
+        #endregion
 
 
     }
