@@ -33,15 +33,15 @@
             <Label Content="Shipping Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="7" FontSize="25"/>
             <Label Content="Delivery Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="8" FontSize="25"/>
 
-            <TextBox x:Name="OrderID_textBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding ID}" VerticalAlignment="Top" Width="365" Grid.Column="1" Grid.Row="0" Height="42" FontSize="20"/>
-            <TextBox x:Name="Name_textbox" HorizontalAlignment="Left" TextWrapping="Wrap"  Text="{Binding CustomerName}" VerticalAlignment="Top" Width="365" Grid.Column="1" Grid.Row="1" Height="43" FontSize="20" PreviewTextInput="PreviewTextInputString"/>
-            <TextBox x:Name="Email_textBox"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding CustomerEmail}" VerticalAlignment="Top" Width="365" Grid.Column="1" Grid.Row="2" Height="42" FontSize="20"/>
-            <TextBox x:Name="Address_textbox"  HorizontalAlignment="Left"  TextWrapping="Wrap" Text="{Binding CustomerAddress}" VerticalAlignment="Top" Width="365" Grid.Column="1" Grid.Row="3" Height="44" Grid.RowSpan="2" FontSize="20"/>
-            <TextBox x:Name="TotalPrice_textbox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TotalPrice}" VerticalAlignment="Top" Width="365" Grid.Column="1" Grid.Row="4" Height="43" Grid.RowSpan="2" FontSize="20"/>
-            <ComboBox x:Name="OrderStatus_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="365" Grid.Column="1" Grid.Row="5" Height="43" Text="{Binding Status}" FontSize="20"/>
-            <DatePicker x:Name="Ordered_datePicker" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="6" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding OrderDate}"/>
-            <DatePicker x:Name="Shipped_datePicker" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="7" Height="42" Width="365" FontSize="20" Text="{Binding ShipDate}"/>
-            <DatePicker x:Name="delivered_datePicker" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="8" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding DeliveryDate}"/>
+            <TextBox x:Name="OrderID_textBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding ID}" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="365" Grid.Column="1" Grid.Row="0" Height="42" FontSize="20" PreviewTextInput="PreviewTextImputNoDec"/>
+            <TextBox x:Name="Name_textbox" HorizontalAlignment="Left" TextWrapping="Wrap"  Text="{Binding CustomerName}" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="1" Height="43" FontSize="20" PreviewTextInput="PreviewTextImputString"/>
+            <TextBox x:Name="Email_textBox"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding CustomerEmail}" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="365" Grid.Column="1" Grid.Row="2" Height="42" FontSize="20"/>
+            <TextBox x:Name="Address_textbox"  HorizontalAlignment="Left"  TextWrapping="Wrap" Text="{Binding CustomerAddress}" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="3" Height="44" Grid.RowSpan="2" FontSize="20"/>
+            <TextBox x:Name="TotalPrice_textbox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TotalPrice}" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="4" Height="43" Grid.RowSpan="2" FontSize="20" PreviewTextInput="PreviewTextImput"/>
+            <ComboBox x:Name="OrderStatus_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="5" Height="43" Text="{Binding Status}" FontSize="20"/>
+            <DatePicker x:Name="Ordered_datePicker" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="6" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding OrderDate}"/>
+            <DatePicker x:Name="Shipped_datePicker" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="7" Height="42" Width="365" FontSize="20" Text="{Binding ShipDate}"/>
+            <DatePicker x:Name="delivered_datePicker" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="8" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding DeliveryDate}" />
 
         </Grid>
         <Button x:Name="Add_button" Content="Add" HorizontalAlignment="Left" Margin="669,114,0,0" VerticalAlignment="Top" Height="57" Width="177" FontSize="25" Click="Add_button_Click" />
