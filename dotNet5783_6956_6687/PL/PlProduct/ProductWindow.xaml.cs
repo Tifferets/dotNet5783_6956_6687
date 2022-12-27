@@ -30,7 +30,7 @@ namespace PL.PlProduct
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
-
+            GridProduct.DataContext= myData;
             //this.myData = myData;
             //if (myData != null)//if came with info - from product list window
             //{
@@ -155,6 +155,9 @@ namespace PL.PlProduct
         }
         #endregion
 
+        private void Id_Textbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+        }
     }
 }
