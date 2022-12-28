@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,19 +24,24 @@ namespace PL
     public partial class Admin_Window : Window
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
-
-        public ObservableCollection<ProductForList?> productForLists { get; set; }
-        public ObservableCollection<OrderForList?> orderForLists { get; set; }
+        private ObservableCollection<ProductForList> productForLists { get; set; }
+        private ObservableCollection<OrderForList> orderForLists { get; set; }
         public Admin_Window()
         {
             InitializeComponent();
-            this.productForLists = new ObservableCollection<ProductForList?>();
-            this.orderForLists = new ObservableCollection<OrderForList?>();
-            ProductListview.DataContext = bl?.Product.GetListOfProducts();
-            orderListview.DataContext = bl?.Order.GetOrderList();
+            productForLists = new ObservableCollection<ProductForList>(bl?.Product.GetListOfProducts().ToList());
+            orderForLists = new ObservableCollection<OrderForList>(bl?.Order.GetOrderList().ToList());
+            ProductListview.DataContext = productForLists;
+            orderListview.DataContext = orderForLists;
         }
-        
-        private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow().Show();//opens product window
+        private void addProduct(ProductForList productForList)=> productForLists.Add(productForList);
+        private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow(addProduct).Show();//opens product window
+        private void updateProduct(ProductForList productForList)
+        {
+            var item = productForLists.FirstOrDefault(x=> x.ID == productForList.ID);
+            int index= productForLists.IndexOf(item);
+            productForLists[index] = productForList;
+        }
 
         private void addOrder(OrderForList orderForList) => orderForLists.Add(orderForList);
         private void Button_Click_1(object sender, RoutedEventArgs e) => new OrderWindow(addOrder).ShowDialog();//opens order window
@@ -45,20 +51,24 @@ namespace PL
             ProductForList? p1 = (ProductListview.SelectedItem as ProductForList);//creats a new productforlist
             if(p1 != null)
             {
-                ProductWindow productWindow = new ProductWindow(p1);
-                productWindow.ShowDialog();
+                //ProductWindow productWindow = new ProductWindow(p1);
+                //productWindow.ShowDialog();
+                new ProductWindow(updateProduct,p1).ShowDialog();
+
             }
         }
 
         private void MouseDoubleClickedOrder(object sender, MouseButtonEventArgs e)
         {
-            OrderForList? p1 = (orderListview.SelectedItem as OrderForList);//creats a new productforlist
-            Order order = bl.Order.GetOrderInfo(p1.ID);
+            OrderForList? p1 = orderListview.SelectedItem as OrderForList;//creats a new productforlist
+            Order? order = bl?.Order.GetOrderInfo(p1.ID);
             if (p1 != null)
             {
                 OrderWindow productWindow = new OrderWindow(order);
                 productWindow.ShowDialog();
             }
         }
+
+       
     }
 }

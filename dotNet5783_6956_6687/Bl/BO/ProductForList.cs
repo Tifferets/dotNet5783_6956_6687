@@ -10,6 +10,11 @@ public class ProductForList
     /// item id
     /// </summary>
     public int ID { get; set; }
+   
+    /// <summary>
+    /// the category the item belongs in
+    /// </summary>
+    public Category Category { get; set; }
     /// <summary>
     /// the name of the item
     /// </summary>
@@ -18,10 +23,7 @@ public class ProductForList
     /// the price of the item
     /// </summary>
     public double? Price { get; set; }
-    /// <summary>
-    /// the category the item belongs in
-    /// </summary>
-    public Category Category { get; set; }
+   
     /// <summary>
     /// the amount of 1 item
     /// </summary>

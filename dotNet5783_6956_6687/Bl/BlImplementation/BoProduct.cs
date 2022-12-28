@@ -63,7 +63,6 @@ internal class BoProduct : BlApi.IProduct
 
     public IEnumerable<BO.ProductForList> GetListOfProducts()
     {
-       // List<BO.ProductForList> products = new List<BO.ProductForList>();
         try
         {
             var result = from item in (dal?.product.GetAll() ?? throw new BO.NullException())//gets a list of product and returns all that have the category
@@ -79,6 +78,7 @@ internal class BoProduct : BlApi.IProduct
                          };
 
             return result;
+            //List<BO.ProductForList> products = new List<BO.ProductForList>();
             //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
             //{
             //    bool flag = false;
@@ -95,8 +95,6 @@ internal class BoProduct : BlApi.IProduct
         {
             throw new BO.errorException();
         }
-
-
     }
 
     /// <summary>
@@ -104,6 +102,35 @@ internal class BoProduct : BlApi.IProduct
     /// </summary>
     /// <param name="Id"></param>
     /// <returns></returns>
+    public BO.ProductForList GetProductForList(int Id)
+    {
+        if (Id >= 300000 && Id < 400000)
+        {
+            try
+            {
+
+                var product = dal?.product.GetSingle(x => x?.ID == Id);
+                return new BO.ProductForList
+                {
+                    ID = Id,
+                    Name = product?.Name,
+                    Category = (BO.Category)product?.Category,
+                    Price = product?.Price ?? 0,
+                    Amount = product?.InStock ?? 0,
+                    InStock = product?.InStock > 0
+
+                };
+            }
+            catch
+            {
+                throw new BO.CantGetException();
+            }
+        }
+        else
+        {
+            throw new BO.doesNotExistException();
+        }
+    }
     public BO.Product GetProductbyID(int Id)
     {
         if (Id >= 300000 && Id < 400000)
