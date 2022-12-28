@@ -7,13 +7,13 @@ namespace BO;
 public class OrderForList
 {
     /// <summary>
-    /// the customers name
-    /// </summary>
-    public string? CustomerName { get; set; }
-    /// <summary>
     /// the Orderforlists id name
     /// </summary>
     public int ID { get; set; }
+    /// <summary>
+    /// the customers name
+    /// </summary>
+    public string? CustomerName { get; set; } 
     /// <summary>
     /// the status of the Orderforlists
     /// </summary>

@@ -10,4 +10,8 @@ namespace PL
     {
         Dog, Cat, Parrot, Rabbit, Fish, All
     }
+    public enum OrderStatus
+    {
+        ordered, shipped, delivered
+    }
 }

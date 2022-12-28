@@ -128,6 +128,7 @@ namespace PL.PlProduct
                 MessageBox.Show("Please enter missing data");
             }
         }
+        #region correct input
         private void PreviewTextImputString(object sender, TextCompositionEventArgs e)// for name -only lets to put letters 
         {
             e.Handled = IsTextAllowedString(e.Text);//checks what is there
@@ -157,6 +158,7 @@ namespace PL.PlProduct
         {
             return !regex.IsMatch(text);
         }
+        #endregion
 
         private void Id_Textbox_TextChanged(object sender, TextChangedEventArgs e)
         {

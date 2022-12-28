@@ -5,26 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="OrderWindow" Height="600" Width="800">
+        Title="OrderWindow" Height="700" Width="900">
     <Grid>
-        <Label Content="Order ID:" HorizontalAlignment="Left" Margin="270,530,0,0" VerticalAlignment="Top"/>
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="270,482,0,0" VerticalAlignment="Top"/>
-        <Label Content="Email:" HorizontalAlignment="Left" Margin="270,430,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.958,8.659"/>
-        <Label Content="Address" HorizontalAlignment="Left" Margin="270,356,0,0" VerticalAlignment="Top"/>
-        <Label Content="Order Status:" HorizontalAlignment="Left" Margin="270,292,0,0" VerticalAlignment="Top"/>
-        <Label Content="Date Ordered:" HorizontalAlignment="Left" Margin="270,241,0,0" VerticalAlignment="Top"/>
-        <Label Content="Shipping Date:" HorizontalAlignment="Left" Margin="270,194,0,0" VerticalAlignment="Top"/>
-        <Label Content="Delivery Date:" HorizontalAlignment="Left" Margin="270,133,0,0" VerticalAlignment="Top"/>
-        <Label Content="Total Price:" HorizontalAlignment="Left" Margin="270,82,0,0" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Margin="420,146,0,0" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Margin="420,207,0,0" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Margin="420,254,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="420,305,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="420,364,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="420,438,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="420,495,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="420,543,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="420,79,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <Grid x:Name="Order_Grid" HorizontalAlignment="Left" Height="533" Margin="38,0,0,0" VerticalAlignment="Center" Width="626">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Order ID:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.845,2.421" Grid.Column="0" Grid.Row="0" FontSize="25"/>
+            <Label Content="Name:" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" FontSize="25"/>
+            <Label Content="Email:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="3.958,8.659" Grid.Column="0" Grid.Row="2" FontSize="25"/>
+            <Label Content="Address:" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" FontSize="25"/>
+            <Label Content="Total Price:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="4" FontSize="25"/>
+            <Label Content="Order Status:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="5" FontSize="25"/>
+            <Label Content="Date Ordered:" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="0" Grid.Row="6" FontSize="25"/>
+            <Label Content="Shipping Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="7" FontSize="25"/>
+            <Label Content="Delivery Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="8" FontSize="25"/>
 
+            <TextBox x:Name="OrderID_textBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding ID}" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="365" Grid.Column="1" Grid.Row="0" Height="42" FontSize="20" PreviewTextInput="PreviewTextImputNoDec"/>
+            <TextBox x:Name="Name_textbox" HorizontalAlignment="Left" TextWrapping="Wrap"  Text="{Binding CustomerName}" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="1" Height="43" FontSize="20" PreviewTextInput="PreviewTextImputString"/>
+            <TextBox x:Name="Email_textBox"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding CustomerEmail}" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="365" Grid.Column="1" Grid.Row="2" Height="42" FontSize="20"/>
+            <TextBox x:Name="Address_textbox"  HorizontalAlignment="Left"  TextWrapping="Wrap" Text="{Binding CustomerAddress}" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="3" Height="44" Grid.RowSpan="2" FontSize="20"/>
+            <TextBox x:Name="TotalPrice_textbox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TotalPrice}" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="4" Height="43" Grid.RowSpan="2" FontSize="20" PreviewTextInput="PreviewTextImput"/>
+            <ComboBox x:Name="OrderStatus_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="5" Height="43" Text="{Binding Status}" FontSize="20"/>
+            <DatePicker x:Name="Ordered_datePicker" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="6" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding OrderDate}"/>
+            <DatePicker x:Name="Shipped_datePicker" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="7" Height="42" Width="365" FontSize="20" Text="{Binding ShipDate}"/>
+            <DatePicker x:Name="delivered_datePicker" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="8" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding DeliveryDate}" />
+
+        </Grid>
+        <Button x:Name="Add_button" Content="Add" HorizontalAlignment="Left" Margin="669,114,0,0" VerticalAlignment="Top" Height="57" Width="177" FontSize="25" Click="Add_button_Click" />
+        <Button x:Name="Update_button" Content="Update" HorizontalAlignment="Left" Margin="669,214,0,0" VerticalAlignment="Top" Height="57" Width="177" FontSize="25"/>
     </Grid>
 </Window>
