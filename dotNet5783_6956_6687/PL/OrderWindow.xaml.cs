@@ -26,6 +26,7 @@ namespace PL
         public OrderWindow(Order? mydata)
         {
             InitializeComponent();
+            
             Order_Grid.DataContext = mydata;
             OrderStatus_comboBox.ItemsSource = OrderStatus.GetValues(typeof(PL.OrderStatus));//combobox source 
             //Ordered_datePicker.SelectedDate = DateTime.Now;//the date we start with is nows date

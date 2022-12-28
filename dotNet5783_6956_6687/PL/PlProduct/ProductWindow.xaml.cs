@@ -3,6 +3,7 @@ using BO;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -27,11 +28,12 @@ namespace PL.PlProduct
         private BlApi.IBl? bl = BlApi.Factory.Get();
 
         private Action<ProductForList> action;
-        public ProductWindow(Action<ProductForList> action,ProductForList ? myData)//gets value from selecting on te comboBox to update
+        public ProductWindow(Action<ProductForList> action,ProductForList ? myData):this()//gets value from selecting on te comboBox to update
         {
-            InitializeComponent();
+          //  InitializeComponent();
             this.action = action;
-            Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
+            AddProduct_Button.Visibility = Visibility.Hidden;
+            // Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
             GridProduct.DataContext= myData;
             //this.myData = myData;
             //if (myData != null)//if came with info - from product list window
@@ -46,14 +48,19 @@ namespace PL.PlProduct
             //}
         }
 
-        public ProductWindow(Action<ProductForList> action)
+        public ProductWindow(Action<ProductForList> action):this()
         {
-            InitializeComponent();
+          //  InitializeComponent();
             this.action = action;
-            Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
             UpdateProduct_button.Visibility = Visibility.Hidden;//update butten invisable
 
         }
+        public ProductWindow()
+        {
+            InitializeComponent();
+            Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
+        }
+
        // public BO.ProductForList? myData { get; set; }
 
         private void AddProduct_Button_Click(object sender, RoutedEventArgs e)//adds a product to the DO list
@@ -164,5 +171,7 @@ namespace PL.PlProduct
         {
 
         }
+
+        
     }
 }

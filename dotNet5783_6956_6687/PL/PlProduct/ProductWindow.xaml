@@ -34,7 +34,7 @@
         </Grid>
 
         <Button x:Name= "AddProduct_Button" Content= "Add" HorizontalAlignment= "Left" Margin= "639,109,0,0" VerticalAlignment= "Top" Click= "AddProduct_Button_Click" Height="38" Width="93" />
-        <Button x:Name="UpdateProduct_button" Content="Update" HorizontalAlignment="Left" Margin="639,174,0,0" VerticalAlignment="Top" Click="UpdateProduct_button_Click" Height="38" Width="90"/>
+        <Button x:Name="UpdateProduct_button" Content="Update" HorizontalAlignment="Left" Margin="639,174,0,0" VerticalAlignment="Top" Click="UpdateProduct_button_Click" Height="38" Width="90" />
 
 
 
