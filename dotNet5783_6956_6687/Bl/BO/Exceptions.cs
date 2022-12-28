@@ -155,3 +155,11 @@ public class NoItemsInCartException : Exception
         return Message;
     }
 }
+public class CouldntFindProductException : Exception
+{//used in bocart
+    public override string Message => "Couldnt Find Product";
+    public override string ToString()
+    {
+        return Message;
+    }
+}

@@ -110,41 +110,65 @@ internal class BoCart : ICart
 
             if (productId < 300000 || productId > 490000)
                 throw new BO.WrongIDException();
-            if (cart.CustomerAddress == null || cart.CustomerAddress == " " || CheckEmail(cart.CustomerAddress) || cart.CustomerName == null || cart.CustomerName == " ")
-            {
-                throw new BO.MissingCustomersInfoException();
-            }
-
+            //if (cart.CustomerAddress == null || cart.CustomerAddress == " " || CheckEmail(cart.CustomerAddress) || cart.CustomerName == null || cart.CustomerName == " ")
+            //{
+            //    throw new BO.MissingCustomersInfoException();
+            //}
             int dif = 0; //the difference between the new amount and the old amount
             List<BO.OrderItem?> lst = (from OrderItem? item in cart.Items
-                                       select item).ToList()//copies all the list in cart to the lst
-;
-            foreach (BO.OrderItem? item in cart.Items)
+                                       select item).ToList();//copies all the orderItems in item in cart to the lst
+            BO.OrderItem? theProductToUpdate = cart.Items.FirstOrDefault();//finds the product to updates its amount
+            if(theProductToUpdate != null)//if the product were updating exists
             {
-                if (item?.ProductID == productId)
+
+                if (newAmount == 0)
                 {
-                    if (newAmount == 0)
-                    {
-                        lst.Remove(item);//removes the orderitem from lst
-                        cart.Items = lst;//updates the cart
-                        break;
-                    }
-                    if (newAmount > item.Amount)//wanted more
-                    {
-                        dif = newAmount - item.Amount;
-                        cart.TotalPrice = cart.TotalPrice + dif * item.Price;
-                        item.Amount = newAmount;
-                        break;
-                    }
-                    if (newAmount < item.Amount)//wanted less
-                    {
-                        dif = newAmount - item.Amount;
-                        cart.TotalPrice = cart.TotalPrice - dif * item.Price;
-                        item.Amount = newAmount;
-                        break;
-                    }
+                    lst.Remove(theProductToUpdate);//removes the orderitem from lst
+                    cart.Items = lst;//updates the cart                 
+                }
+                if (newAmount > theProductToUpdate.Amount)//wanted more
+                {
+                    dif = newAmount - theProductToUpdate.Amount;
+                    cart.TotalPrice = cart.TotalPrice + dif * theProductToUpdate.Price;
+                    theProductToUpdate.Amount = newAmount;
+                }
+                if (newAmount < theProductToUpdate.Amount)//wanted less
+                {
+                    dif = newAmount - theProductToUpdate.Amount;
+                    cart.TotalPrice = cart.TotalPrice - dif * theProductToUpdate.Price;
+                    theProductToUpdate.Amount = newAmount;
                 }
             }
+            else
+            {
+                throw new BO.CouldntFindProductException();
+            }
+            //foreach (BO.OrderItem? item in cart.Items)
+            //{
+            //    if (item?.ProductID == productId)
+            //    {
+            //        if (newAmount == 0)
+            //        {
+            //            lst.Remove(item);//removes the orderitem from lst
+            //            cart.Items = lst;//updates the cart
+            //            break;
+            //        }
+            //        if (newAmount > item.Amount)//wanted more
+            //        {
+            //            dif = newAmount - item.Amount;
+            //            cart.TotalPrice = cart.TotalPrice + dif * item.Price;
+            //            item.Amount = newAmount;
+            //            break;
+            //        }
+            //        if (newAmount < item.Amount)//wanted less
+            //        {
+            //            dif = newAmount - item.Amount;
+            //            cart.TotalPrice = cart.TotalPrice - dif * item.Price;
+            //            item.Amount = newAmount;
+            //            break;
+            //        }
+            //    }
+            //}
             return cart;
         }
         catch(Exception )
