@@ -33,7 +33,8 @@
             <TextBox x:Name="Price_Textbox" Grid.Column="1" Grid.Row="3" Text="{Binding Price , Mode=TwoWay}" TextWrapping="Wrap" PreviewTextInput="PreviewTextImput" Margin="57,10,56,13"  />
         </Grid>
 
-        <Button x:Name= "AddProduct_Button" Content= "Add" HorizontalAlignment= "Left" Margin= "639,109,0,0" VerticalAlignment= "Top" Click= "AddProduct_Button_Click" Height="38" Width="93" />
+        <Button x:Name= "AddProduct_Button" Content= "Add" HorizontalAlignment= "Left" Margin= "639,109,0,0" VerticalAlignment= "Top" Click= "AddProduct_Button_Click" Height="38" Width="93"/> 
+        
         <Button x:Name="UpdateProduct_button" Content="Update" HorizontalAlignment="Left" Margin="639,174,0,0" VerticalAlignment="Top" Click="UpdateProduct_button_Click" Height="38" Width="90" />
 
 
