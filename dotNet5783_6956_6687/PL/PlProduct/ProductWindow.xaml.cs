@@ -33,7 +33,7 @@ namespace PL.PlProduct
             this.action = action;
             AddProduct_Button.Visibility = Visibility.Hidden;
             GridProduct.DataContext= myData;
-            Id_Textbox.IsEnabled = false;
+         //   Id_Textbox.IsEnabled = false;
         }
 
         public ProductWindow(Action<ProductForList> action):this()
