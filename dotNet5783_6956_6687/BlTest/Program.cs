@@ -259,7 +259,7 @@ public static void ProductFunc()
                     string Category = Console.ReadLine()!;
                     try
                     {
-                        Category category = (Category)BO.Enum.Parse(typeof(Category), Category);//converting to enum type
+                        Category category = (Category)Enum.Parse(typeof(Category), Category);//converting to enum type
                         product1.Category = category;
                     }
                     catch
@@ -290,7 +290,7 @@ public static void ProductFunc()
                     Category = Console.ReadLine()!;
                     try
                     {
-                        Category category = (Category)BO.Enum.Parse(typeof(Category), Category);//converting to enum type
+                        Category category = (Category)Enum.Parse(typeof(Category), Category);//converting to enum type
                         product1.Category = category;
                     }
                     catch
