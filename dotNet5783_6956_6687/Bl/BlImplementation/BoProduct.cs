@@ -180,13 +180,15 @@ internal class BoProduct : BlApi.IProduct
         try
         {
             var result = from item in (dal?.product.GetAll() ?? throw new BO.NullException())//gets a list of product and returns all that have the category
-                         select new BO.ProductItem()
+                         let instock = item?.InStock > 0
+                         select new ProductItem()
                          {
                              ID = (int)item?.ID,
                              Name = item?.Name,
-                             Amount= item?.InStock ?? 0,
+                             Amount= 0,
                              Price = item?.Price ?? 0,
-                             Category = (BO.Category)item?.Category
+                             Category = (BO.Category)item?.Category,
+                             Instock = instock,
                          };
 
             return result;
@@ -209,7 +211,7 @@ internal class BoProduct : BlApi.IProduct
                     ID = Id,
                     Name= productItem?.Name,
                     Category= (BO.Category)productItem?.Category,
-                    Amount= productItem?.InStock ?? 0,
+                    Amount= 0,
                     Price= productItem?.Price ?? 0,
                     Instock= productItem?.InStock > 0,
                 };
