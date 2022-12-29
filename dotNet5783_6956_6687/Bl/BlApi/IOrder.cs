@@ -37,5 +37,8 @@ public interface IOrder
     /// </summary>
     /// <param name="order"></param>
     //public void UpdateOrder(Order order);
+  //  public OrderItem GetOrderItem(int id);
+  //  public IEnumerable<OrderForList?> GetOrderForListByStatus(OrderStatus selectedItem);
+    //public BO.OrderForList GetOrderForList(int Id);
 
 }

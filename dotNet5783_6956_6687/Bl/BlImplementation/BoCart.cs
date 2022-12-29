@@ -4,6 +4,7 @@ using DalApi;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BlImplementation;
 
@@ -200,6 +201,7 @@ internal class BoCart : ICart
                 if (item?.Amount < 0)
                     throw new WrongAmountException();
 
+               // DO.Product product = dal?.product.GetAll().FirstOrDefault(x => x.ID == item.ID);
                 foreach (DO.Product? item1 in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the product looking for the product in the cart
                 {
                     if (item1?.ID == item?.ProductID)
@@ -244,23 +246,38 @@ internal class BoCart : ICart
                     //    Price = item.Price,
                     //    ProductID = item.ProductID,
                     //};
-                    foreach (DO.Product p in dal?.product.GetAll()?? throw new BO.NullException())//goes through all the products in do
-                    {
 
-                        if (p.ID == item?.ProductID)//if its the product then change the amount in stock
+                   // foreach (DO.Product p in dal?.product.GetAll()?? throw new BO.NullException())//goes through all the products in do
+                 //   {
+                        DO.Product? p = dal?.product.GetAll().ToList().FirstOrDefault(x => x.Value.ID == item?.ProductID);
+                    
+                        if(p != null)
                         {
-                            DO.Product product = new DO.Product()
-                            {
-                                ID = p.ID,
-                                Price = p.Price,
-                                Name = p.Name,
-                                Category = p.Category,
-                                InStock = p.InStock - item.Amount,
-                            };
-                            dal?.product.Update(p);
-                            break;
+
+                        DO.Product product = new DO.Product()
+                        {
+                            ID = p.Value.ID,
+                            Price = p.Value.Price,
+                            Name = p.Value.Name,
+                            Category = p.Value.Category,
+                            InStock = p.Value.InStock - item.Amount,
+                        };
+                        dal?.product.Update(product);
                         }
-                    }
+                        //if (p.ID == item?.ProductID)//if its the product then change the amount in stock
+                        //{
+                        //    DO.Product product = new DO.Product()
+                        //    {
+                        //        ID = p.ID,
+                        //        Price = p.Price,
+                        //        Name = p.Name,
+                        //        Category = p.Category,
+                        //        InStock = p.InStock - item.Amount,
+                        //    };
+                        //    dal?.product.Update(p);
+                        //    break;
+                        //}
+                 //   }
                 }
             }
     }
