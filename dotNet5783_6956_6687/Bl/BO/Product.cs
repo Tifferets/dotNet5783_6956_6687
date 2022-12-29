@@ -6,7 +6,12 @@ public class Product
 /// <summary>
 /// products id
 /// </summary>
-    public int Id { get; set; } 
+    public int Id { get; set; }
+  
+    /// <summary>
+    /// the category the product belongs to
+    /// </summary>
+    public Category Category { get; set; }
     /// <summary>
     /// prodicts name
     /// </summary>
@@ -19,10 +24,7 @@ public class Product
     /// the amount of products in stock
     /// </summary>
     public int InStock { get; set; } 
-    /// <summary>
-    /// the category the product belongs to
-    /// </summary>
-    public Category Category { get; set; }
+   
 
     public override string ToString() => Extention.ToStringProperty(this);
 }

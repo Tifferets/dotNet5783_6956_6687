@@ -23,15 +23,6 @@ public class ProductForList
     /// the price of the item
     /// </summary>
     public double? Price { get; set; }
-   
-    /// <summary>
-    /// the amount of 1 item
-    /// </summary>
-    public int Amount { get; set; }
-    /// <summary>
-    /// true if it exists in the stock,false if it doesnt exist
-    /// </summary>
-    public bool InStock { get; set; }
 
 public override string ToString() => Extention.ToStringProperty(this);
 }

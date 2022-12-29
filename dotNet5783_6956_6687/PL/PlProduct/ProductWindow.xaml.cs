@@ -28,40 +28,24 @@ namespace PL.PlProduct
         private BlApi.IBl? bl = BlApi.Factory.Get();
 
         private Action<ProductForList> action;
-        public ProductWindow(Action<ProductForList> action,ProductForList ? myData):this()//gets value from selecting on te comboBox to update
-        {
-          //  InitializeComponent();
+        public ProductWindow(Action<ProductForList> action,Product ? myData):this()//gets value from selecting on te comboBox to update
+        { 
             this.action = action;
             AddProduct_Button.Visibility = Visibility.Hidden;
-            // Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
             GridProduct.DataContext= myData;
-            //this.myData = myData;
-            //if (myData != null)//if came with info - from product list window
-            //{
-            //    Id_Textbox.Text = myData.ID.ToString();
-            //    Id_Textbox.IsEnabled = false;// no accesses to change the id
-            //    Name_Textbox.Text = myData.Name;
-            //    Price_Textbox.Text = myData.Price.ToString();
-            //    InStock_Textbox.Text = myData.Amount.ToString();
-            //    Category_ComboBox.Text= myData.Category.ToString();
-            //    AddProduct_Button.Visibility = Visibility.Hidden;//add butten invisable
-            //}
+            Id_Textbox.IsEnabled = false;
         }
 
         public ProductWindow(Action<ProductForList> action):this()
         {
-          //  InitializeComponent();
             this.action = action;
             UpdateProduct_button.Visibility = Visibility.Hidden;//update butten invisable
-
         }
         public ProductWindow()
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
         }
-
-       // public BO.ProductForList? myData { get; set; }
 
         private void AddProduct_Button_Click(object sender, RoutedEventArgs e)//adds a product to the DO list
         {
