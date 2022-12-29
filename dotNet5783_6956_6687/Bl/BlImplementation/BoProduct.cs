@@ -30,7 +30,7 @@ internal class BoProduct : BlApi.IProduct
                              Price = item?.Price,
                              Category = (BO.Category)item?.Category
                          };
-            
+
             return result;
             //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes over all products
             //{
@@ -60,6 +60,7 @@ internal class BoProduct : BlApi.IProduct
             throw new BO.errorException();
         }
     }
+
 
     public IEnumerable<BO.ProductForList> GetListOfProducts()
     {
@@ -116,8 +117,6 @@ internal class BoProduct : BlApi.IProduct
                     Name = product?.Name,
                     Category = (BO.Category)product?.Category,
                     Price = product?.Price ?? 0,
-                    //Amount = product?.InStock ?? 0,
-                    //InStock = product?.InStock > 0
 
                 };
             }
@@ -176,6 +175,28 @@ internal class BoProduct : BlApi.IProduct
     /// </summary>
     /// <param name="Id"></param>
     /// <returns></returns>
+    public IEnumerable<ProductItem> GetlListOfProductItem()
+    {
+        try
+        {
+            var result = from item in (dal?.product.GetAll() ?? throw new BO.NullException())//gets a list of product and returns all that have the category
+                         select new BO.ProductItem()
+                         {
+                             ID = (int)item?.ID,
+                             Name = item?.Name,
+                             Amount= item?.InStock ?? 0,
+                             Price = item?.Price ?? 0,
+                             Category = (BO.Category)item?.Category
+                         };
+
+            return result;
+        }
+        catch (Exception)
+        {
+            throw new BO.errorException();
+        }
+    }
+
     public BO.ProductItem ProductItemBuild(int Id)//has different stuff in both papers returns a product ieme
     {
         if (Id >= 300000 && Id < 400000)
@@ -191,7 +212,7 @@ internal class BoProduct : BlApi.IProduct
                     Amount= productItem?.InStock ?? 0,
                     Price= productItem?.Price ?? 0,
                     Instock= productItem?.InStock > 0,
-            };
+                };
             }
             catch
             {
