@@ -40,7 +40,7 @@ public class Order
     /// <summary>
     /// Total Price -BO
     /// </summary>
-    public double? TotalPrice { get; set; }
+    public double TotalPrice { get; set; }
 
     public override string ToString() => $@"
 Order ID: {ID}

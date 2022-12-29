@@ -25,8 +25,8 @@ internal class BoProduct : BlApi.IProduct
                          {
                              ID = (int)item?.ID,
                              Name = item?.Name,
-                             InStock = gtz,
-                             Amount = item?.InStock ?? 0,
+                             //InStock = gtz,
+                             //Amount = item?.InStock ?? 0,
                              Price = item?.Price,
                              Category = (BO.Category)item?.Category
                          };
@@ -71,8 +71,8 @@ internal class BoProduct : BlApi.IProduct
                          {
                              ID = (int)item?.ID,
                              Name = item?.Name,
-                             InStock = gtz,
-                             Amount = item?.InStock ?? 0,
+                             //InStock = gtz,
+                             //Amount = item?.InStock ?? 0,
                              Price = item?.Price,
                              Category = (BO.Category)item?.Category
                          };
@@ -116,8 +116,8 @@ internal class BoProduct : BlApi.IProduct
                     Name = product?.Name,
                     Category = (BO.Category)product?.Category,
                     Price = product?.Price ?? 0,
-                    Amount = product?.InStock ?? 0,
-                    InStock = product?.InStock > 0
+                    //Amount = product?.InStock ?? 0,
+                    //InStock = product?.InStock > 0
 
                 };
             }
@@ -176,7 +176,7 @@ internal class BoProduct : BlApi.IProduct
     /// </summary>
     /// <param name="Id"></param>
     /// <returns></returns>
-    public BO.ProductItem ProductItemBuild(int Id)//has different stuff in both papers
+    public BO.ProductItem ProductItemBuild(int Id)//has different stuff in both papers returns a product ieme
     {
         if (Id >= 300000 && Id < 400000)
         {
@@ -185,9 +185,9 @@ internal class BoProduct : BlApi.IProduct
                 var productItem = (dal?.product.GetAll() ?? throw new BO.NullException()).FirstOrDefault(x => x?.ID == Id);
                 return new ProductItem
                 {
-                    ID= Id,
+                    ID = Id,
                     Name= productItem?.Name,
-                    Category= (BO.Category?)productItem?.Category,
+                    Category= (BO.Category)productItem?.Category,
                     Amount= productItem?.InStock ?? 0,
                     Price= productItem?.Price ?? 0,
                     Instock= productItem?.InStock > 0,

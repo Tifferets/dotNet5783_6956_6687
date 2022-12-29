@@ -112,7 +112,7 @@ internal class BoOrder: IOrder
                     DeliveryDate = order?.DeliveryDate,
                     Status = (BO.OrderStatus)System.Enum.Parse(typeof(BO.OrderStatus), stauss.ToString()),//converting to enum
                     Items = orderitemList.ToList(),
-                    TotalPrice = totalprice,
+                    TotalPrice = (double)totalprice,
                 };
             }
             catch

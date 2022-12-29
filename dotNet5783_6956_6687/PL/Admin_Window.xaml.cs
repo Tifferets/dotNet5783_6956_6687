@@ -49,11 +49,12 @@ namespace PL
         private void MouseDoubleClickedProduct(object sender, MouseButtonEventArgs e)
         {
             ProductForList? p1 = (ProductListview.SelectedItem as ProductForList);//creats a new productforlist
-            if(p1 != null)
+            Product product = bl?.Product.GetProductbyID(p1.ID);
+            if(product != null)
             {
                 //ProductWindow productWindow = new ProductWindow(p1);
                 //productWindow.ShowDialog();
-                new ProductWindow(updateProduct,p1).ShowDialog();
+                new ProductWindow(updateProduct, product).ShowDialog();
 
             }
         }
