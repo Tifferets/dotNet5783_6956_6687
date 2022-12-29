@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,13 +17,18 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for OrderListWindow.xaml
+    /// Interaction logic for NewOrderWindow.xaml
     /// </summary>
-    public partial class OrderListWindow : Window
+    
+
+    public partial class NewOrderWindow : Window
     {
-        public OrderListWindow()
+        private BlApi.IBl? bl = BlApi.Factory.Get();
+        private ObservableCollection<ProductItem> productItemList { get; set; }
+        public NewOrderWindow()
         {
             InitializeComponent();
+            Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
         }
     }
 }

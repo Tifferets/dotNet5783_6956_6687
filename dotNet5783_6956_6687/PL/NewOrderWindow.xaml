@@ -1,0 +1,25 @@
+﻿<Window x:Class="PL.NewOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="NewOrderWindow" Height="450" Width="800">
+    <Grid>
+        <DataGrid  x:Name="ProductItem_DataGrid" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="236" Margin="62,124,0,0" VerticalAlignment="Top" Width="450" d:ItemsSource="{d:SampleData ItemCount=5}" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="IdColum" Binding="{Binding ID}" Header="ID" Width="*"/>
+                <DataGridTextColumn x:Name="TypeColum" Binding="{Binding Name}" Header="Type" Width="*"/>
+                <DataGridTextColumn x:Name="CategoryColum" Binding="{Binding Category}" Header="Category" Width="*"/>
+                <DataGridTextColumn x:Name="PriceColum" Binding="{Binding Price}" Header="Price" Width="*"/>
+                <DataGridCheckBoxColumn x:Name="InStockColumn" Binding="{Binding Price}" Header="In Stock" Width="*"/>
+                <DataGridTextColumn x:Name="AmountColum" Binding="{Binding Amount}" Header="Amount" Width="*"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="555,69,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="51" Margin="579,222,0,0" VerticalAlignment="Top" Width="185"/>
+       
+    </Grid>
+</Window>
