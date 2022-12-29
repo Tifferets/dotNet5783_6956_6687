@@ -45,4 +45,5 @@ public interface IProduct
     public ProductItem GetProductItem(int id);
     public IEnumerable<ProductForList?> GetproductForListByCategory(Category selectedItem);
     public BO.ProductForList GetProductForList(int Id);
+    public IEnumerable<ProductItem> GetlListOfProductItem();
 }

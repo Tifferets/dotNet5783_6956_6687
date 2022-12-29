@@ -1,4 +1,5 @@
 ﻿using BO;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,7 +20,7 @@ namespace PL
     /// <summary>
     /// Interaction logic for NewOrderWindow.xaml
     /// </summary>
-    
+
 
     public partial class NewOrderWindow : Window
     {
@@ -29,6 +30,25 @@ namespace PL
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
+            productItemList = new ObservableCollection<ProductItem>(bl.Product.GetlListOfProductItem().ToList());
+            ProductItem_DataGrid.DataContext = productItemList;
+            //Category_ComboBox.SelectedItem = Category.All;
+        }
+
+        private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //var groups = productItemList.GroupBy(x => x.Category);
+            //var products = (from x in groups
+            //                             where x.Key == (BO.Category)Category_ComboBox.SelectedItem
+            //                             select x).ToList();
+            //ProductItem_DataGrid.DataContext = products.va
+            // productItemList = new ObservableCollection<ProductItem>();
+            // ProductItem_DataGrid.DataContext = groups.Where(x => x?.Key.ToString() == Category_ComboBox.SelectedItem);
+
+            //productItemList = from ProductItem item in productItemList
+            //                  let choice = Category_ComboBox.SelectedItem
+            //                  group item by item.Category into lst
+            //                  select new { key = lst.Key, item = lst }
         }
     }
 }
