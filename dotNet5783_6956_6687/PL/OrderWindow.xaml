@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="OrderWindow" Height="700" Width="900">
+        Title="OrderWindow" Height="700" Width="1200">
     <Grid>
         <Grid x:Name="Order_Grid" HorizontalAlignment="Left" Height="533" Margin="38,0,0,0" VerticalAlignment="Center" Width="626">
             <Grid.ColumnDefinitions>
@@ -33,18 +33,24 @@
             <Label Content="Shipping Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="7" FontSize="25"/>
             <Label Content="Delivery Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="8" FontSize="25"/>
 
-            <TextBox x:Name="OrderID_textBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding ID}" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="365" Grid.Column="1" Grid.Row="0" Height="42" FontSize="20" PreviewTextInput="PreviewTextImputNoDec"/>
-            <TextBox x:Name="Name_textbox" HorizontalAlignment="Left" TextWrapping="Wrap"  Text="{Binding CustomerName}" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="1" Height="43" FontSize="20" PreviewTextInput="PreviewTextImputString"/>
-            <TextBox x:Name="Email_textBox"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding CustomerEmail}" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="365" Grid.Column="1" Grid.Row="2" Height="42" FontSize="20"/>
-            <TextBox x:Name="Address_textbox"  HorizontalAlignment="Left"  TextWrapping="Wrap" Text="{Binding CustomerAddress}" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="3" Height="44" Grid.RowSpan="2" FontSize="20"/>
-            <TextBox x:Name="TotalPrice_textbox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TotalPrice}" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="4" Height="43" Grid.RowSpan="2" FontSize="20" PreviewTextInput="PreviewTextImput"/>
-            <ComboBox x:Name="OrderStatus_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="5" Height="43" Text="{Binding Status}" FontSize="20"/>
-            <DatePicker x:Name="Ordered_datePicker" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="6" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding OrderDate}"/>
-            <DatePicker x:Name="Shipped_datePicker" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="7" Height="42" Width="365" FontSize="20" Text="{Binding ShipDate}"/>
-            <DatePicker x:Name="delivered_datePicker" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="8" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding DeliveryDate}" />
+            <TextBox x:Name="OrderID_textBox" IsEnabled="False" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding ID}" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="365" Grid.Column="1" Grid.Row="0" Height="42" FontSize="20"/>
+            <TextBox x:Name="Name_textbox" IsEnabled="False" HorizontalAlignment="Left" TextWrapping="Wrap"  Text="{Binding CustomerName}" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="1" Height="43" FontSize="20" />
+            <TextBox x:Name="Email_textBox"  IsEnabled="False"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding CustomerEmail}" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="365" Grid.Column="1" Grid.Row="2" Height="42" FontSize="20"/>
+            <TextBox x:Name="Address_textbox"  IsEnabled="False"  HorizontalAlignment="Left"  TextWrapping="Wrap" Text="{Binding CustomerAddress}" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="3" Height="44" Grid.RowSpan="2" FontSize="20"/>
+            <TextBox x:Name="TotalPrice_textbox"  IsEnabled="False"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TotalPrice}" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="4" Height="43" Grid.RowSpan="2" FontSize="20" />
+            <ComboBox x:Name="OrderStatus_comboBox" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="365" Grid.Column="1" Grid.Row="5" Height="43" Text="{Binding Status}" FontSize="20"/>
+            <DatePicker x:Name="Ordered_datePicker"  IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="6" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding OrderDate}"/>
+            <DatePicker x:Name="Shipped_datePicker" IsEnabled="False"  HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="7" Height="42" Width="365" FontSize="20" Text="{Binding ShipDate}"/>
+            <DatePicker x:Name="delivered_datePicker"  IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="8" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding DeliveryDate}" />
 
         </Grid>
-        <Button x:Name="Add_button" Content="Add" HorizontalAlignment="Left" Margin="669,114,0,0" VerticalAlignment="Top" Height="57" Width="177" FontSize="25" Click="Add_button_Click" />
-        <Button x:Name="Update_button" Content="Update" HorizontalAlignment="Left" Margin="669,214,0,0" VerticalAlignment="Top" Height="57" Width="177" FontSize="25"/>
+        <Button x:Name="Update_button" Content="Update" HorizontalAlignment="Left" Margin="690,76,0,0" VerticalAlignment="Top" Height="57" Width="177" FontSize="25"/>
+        <ListView x:Name="Items_listview" HorizontalAlignment="Left" Height="396" Margin="690,213,0,0" VerticalAlignment="Top" Width="441" ItemsSource = "{Binding}" d:ItemsSource="{d:SampleData ItemCount=10}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

@@ -43,9 +43,8 @@ namespace PL
             productForLists[index] = productForList;
         }
 
-        private void addOrder(OrderForList orderForList) => orderForLists.Add(orderForList);
-        private void Button_Click_1(object sender, RoutedEventArgs e) => new OrderWindow(addOrder).ShowDialog();//opens order window
-
+       // private void addOrder(OrderForList orderForList) => orderForLists.Add(orderForList);
+        //private void Button_Click_1(object sender, RoutedEventArgs e) => new OrderWindow(addOrder).ShowDialog();//opens order window
         private void MouseDoubleClickedProduct(object sender, MouseButtonEventArgs e)
         {
             ProductForList? p1 = (ProductListview.SelectedItem as ProductForList);//creats a new productforlist
@@ -67,8 +66,6 @@ namespace PL
                 OrderWindow productWindow = new OrderWindow(order);
                 productWindow.ShowDialog();
             }
-        }
-
-       
+        }       
     }
 }
