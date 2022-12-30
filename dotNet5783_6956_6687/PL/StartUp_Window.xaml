@@ -7,10 +7,16 @@
         mc:Ignorable="d"
         Title="StartUp_Window" Height="450" Width="800">
     <Grid>
-        <Button x:Name="Admin_Button" Content="Admin" HorizontalAlignment="Left" Margin="213,0,0,0" VerticalAlignment="Center" Height="56" Width="120" Click="Button_Click_Admin"/>
-        <Button Content="New Order" HorizontalAlignment="Left" Margin="375,0,0,0" VerticalAlignment="Center" Height="56" Width="120" Click="Button_Click_NewOrder"/>
-        <Button Content="Track An Order" HorizontalAlignment="Left" Margin="556,0,0,0" VerticalAlignment="Center" Height="56" Width="120" Click="Button_Click_TrackOrder"/>
         <Label Content="WELCOME" HorizontalAlignment="Center" Height="70" Margin="0,83,0,0" VerticalAlignment="Top" Width="108"/>
+        <GroupBox Header="Choose An Option:" Margin="186,129,220,183" >
+            <StackPanel  Height="61" Margin="41,0,97,0" >
+                <RadioButton x:Name ="Admin" Content="Admin" Height="24" IsChecked="True"/>
+                <RadioButton x:Name ="NewOrder" Content="New Order" Height="23" Margin="0,0,-11,0"/>
+                <RadioButton x:Name ="TrackOrder" Content="Track An Order" Height="35"/>
+            </StackPanel>
+        </GroupBox>
+
+        <Button x:Name="Next_button" Content="Next" Margin="322,301,318,80" Click="Next_button_Click"/>
 
     </Grid>
 </Window>

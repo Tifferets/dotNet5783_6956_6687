@@ -11,13 +11,23 @@
             <RowDefinition Height="400*"/>
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
-        <Grid/>
-        <ListView x:Name="TrackOrderList" Grid.Row="0" ItemsSource = "{Binding}" SelectionChanged="TrackOrderList_SelectionChanged" >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="400*"/>
+
+        </Grid.ColumnDefinitions>
+        <Label Content="Order Id:" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top" Height="45" Width="101" FontSize="20" Margin="10,78,0,0"/>
+        <TextBox x:Name="Id_textbox" HorizontalAlignment="Left" Margin="116,78,0,0" Grid.Column="0" Grid.Row="0" TextWrapping="Wrap" FontSize="20" VerticalAlignment="Top" Width="123" Height="32" TextChanged="Id_textbox_TextChanged"/>
+        <Button x:Name="id_butten" Content="Button" HorizontalAlignment="Left" Margin="135,148,0,0" VerticalAlignment="Top" Height="26" Width="67" Click="Button_Click"/>
+        <Button Grid.Column="1" Content="View Order Details" HorizontalAlignment="Left" Margin="251,20,0,0" Grid.Row="1" VerticalAlignment="Top" Height="37" Width="173" Click="Button_Click_1" IsEnabled="{Binding ElementName=id_butten, Path= ClickMode }"/>
+        <DataGrid x:Name="details_datagrid"  Grid.Column="1" ItemsSource="{Binding tracking}" CanUserResizeColumns="False"  CanUserReorderColumns = "False" AutoGenerateColumns="False" CanUserAddRows="False"  >
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="Status" Binding="{Binding Item1}" Header="Order Status" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="DateColumn" Binding="{Binding Item2}" Header="Date" Width="*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+
     </Grid>
 </Window>

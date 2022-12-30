@@ -30,5 +30,21 @@ namespace PL
         private void Button_Click_NewOrder(object sender, RoutedEventArgs e) => new NewOrderWindow().Show();
 
         private void Button_Click_TrackOrder(object sender, RoutedEventArgs e)=> new TrackOrder_Window().Show();
+
+        private void Next_button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Admin.IsChecked == true)
+            {
+                new Admin_Window().Show();
+            }
+            else if (NewOrder.IsChecked == true)
+            {
+                new NewOrderWindow().Show();
+            }
+            else if (TrackOrder.IsChecked == true)
+            {
+                new TrackOrder_Window().Show();
+            }
+        }
     }
 }
