@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
 
             <Label x:Name= "ID_Label" Content= "ID:" Grid.Column="0"  Margin= "25,0,0,0" Grid.Row="0" Width= "42" RenderTransformOrigin ="1.055,-1.79" FontWeight="Bold" FontSize="16"   HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Label x:Name= "Name_Label" Content="Name:" Grid.Column="0" Margin="25,5,0,0" Grid.Row="1" Width="64" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name= "Name_Label" Content="Type:" Grid.Column="0" Margin="25,5,0,0" Grid.Row="1" Width="64" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Label x:Name="Category_Label" Content="Category:" Grid.Column="0" Margin="25,0,0,0" Grid.Row="2" Width="84" RenderTransformOrigin="4.79,3.53" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <Label x:Name="Price_Label" Content="Price:" Grid.Column="0" Margin="25,5,0,0" Grid.Row="3" Width="73" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Label x:Name="InStock_Label" Content="In Stock:" Grid.Column="0" Margin="25,1,0,0" Grid.Row="4" Width="84" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>

@@ -23,18 +23,22 @@ namespace PL
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
         public ObservableCollection<OrderTracking> orderTrackings { get; set; }
-        private int id;
         public TrackOrder_Window()
         {
             InitializeComponent();
-            var lst = from OrderForList? item in bl?.Order.GetOrderList()
-                      select (bl.Order.OrderStatus(item.ID));
+          //  var lst = from OrderForList? item in bl?.Order.GetOrderList()
+                    //  select (bl.Order.OrderStatus(item.ID));
 
-            orderTrackings = new ObservableCollection<OrderTracking>(lst);
+            orderTrackings = new ObservableCollection<OrderTracking>();
             //TrackOrder_Grid.DataContext = bl?.Order.OrderStatus(100000);
             //TrackOrder_Grid.DataContext = orderTrackings;
         }
+        public TrackOrder_Window(int value):this()
+        {
+            TrackOrder_Grid.DataContext = bl?.Order.OrderStatus(value);
 
+
+        }
         private void Id_textbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             //if(Id_textbox.Text.Length == 6)
@@ -42,23 +46,14 @@ namespace PL
             //    Details_dataGrid.DataContext = orderTrackings;
             //}
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (Id_textbox.Text.Length == 6)
-            {
-                int.TryParse(Id_textbox.Text, out id);
-                TrackOrder_Grid.DataContext = bl?.Order.OrderStatus(id);
-            }
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            try 
+            try
             {
+                int id;
+                int.TryParse(Id_textbox.Text, out id);
                 Order? order = bl?.Order.GetOrderInfo(id);
-                OrderWindow orderWindow = new OrderWindow(order);
-                orderWindow.ShowDialog();
+                new OrderWindow(order).ShowDialog();
             }
             catch (Exception ex)
             {

@@ -5,22 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="TrackOrder_Window" Height="450" Width="800">
+        Title="TrackOrder_Window" Height="347" Width="500">
     <Grid x:Name="TrackOrder_Grid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="400*"/>
-            <RowDefinition Height="100*"/>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="35*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200*"/>
             <ColumnDefinition Width="400*"/>
 
         </Grid.ColumnDefinitions>
-        <Label Content="Order Id:" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top" Height="45" Width="101" FontSize="20" Margin="10,78,0,0"/>
-        <TextBox x:Name="Id_textbox" HorizontalAlignment="Left" Margin="116,78,0,0" Grid.Column="0" Grid.Row="0" TextWrapping="Wrap" FontSize="20" VerticalAlignment="Top" Width="123" Height="32" TextChanged="Id_textbox_TextChanged"/>
-        <Button x:Name="id_butten" Content="Button" HorizontalAlignment="Left" Margin="135,148,0,0" VerticalAlignment="Top" Height="26" Width="67" Click="Button_Click"/>
-        <Button Grid.Column="1" Content="View Order Details" HorizontalAlignment="Left" Margin="251,20,0,0" Grid.Row="1" VerticalAlignment="Top" Height="37" Width="173" Click="Button_Click_1" IsEnabled="{Binding ElementName=id_butten, Path= ClickMode }"/>
-        <DataGrid x:Name="details_datagrid"  Grid.Column="1" ItemsSource="{Binding tracking}" CanUserResizeColumns="False"  CanUserReorderColumns = "False" AutoGenerateColumns="False" CanUserAddRows="False"  >
+        <Label Content="Order Id:" HorizontalAlignment="Left" Grid.Column="0" VerticalAlignment="Top" Height="45" Width="101" FontSize="20"  RenderTransformOrigin="0.403,-0.609" Margin="10,66,0,0"/>
+        <TextBox x:Name="Id_textbox" HorizontalAlignment="Center" Text="{Binding ID}"  FontSize="20" VerticalAlignment="Top" Width="147" Height="41" IsEnabled="False" Margin="0,100,0,0"/>
+        <Button Grid.Column="1" Content="View Order Details" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Height="37" Width="172" Click="Button_Click_1" Margin="83,41,0,0"/>
+        <DataGrid x:Name="details_datagrid" ItemsSource="{Binding tracking}" CanUserResizeColumns="False"  CanUserReorderColumns = "False" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10" Grid.Column="1"  >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="Status" Binding="{Binding Item1}" Header="Order Status" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="DateColumn" Binding="{Binding Item2}" Header="Date" Width="*" IsReadOnly="True"/>
