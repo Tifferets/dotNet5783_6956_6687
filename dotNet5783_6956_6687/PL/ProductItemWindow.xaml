@@ -9,7 +9,7 @@
     <Grid>
 
 
-        <Grid HorizontalAlignment="Left" Height="260" Margin="62,0,0,0" VerticalAlignment="Center" Width="310">
+        <Grid x:Name="ProductOtemGrid" HorizontalAlignment="Left" Height="260" Margin="62,0,0,0" VerticalAlignment="Center" Width="310">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -33,9 +33,10 @@
             <Label Content="{Binding Name}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
             <Label Content="{Binding Category}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
             <Label Content="{Binding Amount}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="3"/>
-            <Label Content="{Binding Instock}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="4"/>
-            <TextBox HorizontalAlignment="Center" Height="43" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="155" Grid.Column="1" Grid.Row="5"/>
+            <Label Content="{Binding Instock}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="5"/>
+            <TextBox x:Name="Amount_textbox"  HorizontalAlignment="Center" Height="43" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="155" Grid.Column="1" Grid.Row="4"/>
         </Grid>
+        <Button x:Name="addToCart"  Content="Add one to cart" HorizontalAlignment="Left" Height="65" Margin="474,320,0,0" VerticalAlignment="Top" Width="126" Click="addToCart_Click"/>
 
     </Grid>
 </Window>

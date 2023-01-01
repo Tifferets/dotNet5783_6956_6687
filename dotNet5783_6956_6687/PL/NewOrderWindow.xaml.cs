@@ -30,10 +30,15 @@ namespace PL
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
         private ObservableCollection<ProductItem> productItemList { get; set; }
-        private Cart Cart;
-        public NewOrderWindow(Cart cart):this()
+        private Cart Cart = new Cart();
+        public NewOrderWindow(Cart cart = null) : this()
         {
-            Cart = cart;//the given cart is our cart now
+            Cart = new Cart()
+            {
+                Items = new List<BO.OrderItem>(),
+                TotalPrice = 0,
+            };
+            //the given cart is our cart now
         }
         public NewOrderWindow()
         {
@@ -68,7 +73,9 @@ namespace PL
 
                 }
             }
-
+        }
+    }
+}
             //{
             //int value;
             //int.TryParse(Interaction.InputBox("Please Enter Name, Email, Address", "Tracking Order ID", "100000"), out value);//displays an inputbox and gets the id
@@ -88,5 +95,5 @@ namespace PL
             //    MessageBox.Show(ex.Message);
             //}
             //  }
-        }
-    }
+
+

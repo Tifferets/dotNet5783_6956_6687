@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,38 @@ namespace PL
     /// </summary>
     public partial class ProductItemWindow : Window
     {
+        private BlApi.IBl? bl = BlApi.Factory.Get();
+        Cart Cart = new Cart()
+        {
+            Items = new List<OrderItem>()
+        };
+        ProductItem ProductItem = new ProductItem();
         public ProductItemWindow()
         {
             InitializeComponent();
+        }
+        public ProductItemWindow(Cart cart, ProductItem productItem ):this() 
+        {
+            ProductOtemGrid.DataContext = productItem;
+            Cart=cart;
+            ProductItem= productItem;
+        }
+
+        private void addToCart_Click(object sender, RoutedEventArgs e)
+        {
+            if (Cart == null) return;
+            try
+            {
+               // bl?.Cart.AddProductToCart(Cart, ProductItem.ID);
+                MessageBox.Show("Product added successfully");
+                Cart.CustomerAddress = " jsjs";
+            }
+              catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
         }
     }
 }
