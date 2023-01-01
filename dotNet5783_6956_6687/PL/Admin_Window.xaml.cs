@@ -47,25 +47,32 @@ namespace PL
         //private void Button_Click_1(object sender, RoutedEventArgs e) => new OrderWindow(addOrder).ShowDialog();//opens order window
         private void MouseDoubleClickedProduct(object sender, MouseButtonEventArgs e)
         {
-            ProductForList? p1 = (ProductListview.SelectedItem as ProductForList);//creats a new productforlist
-            Product product = bl?.Product.GetProductbyID(p1.ID);
-            if(product != null)
+            if (ProductListview.SelectedIndex >= 0)
             {
-                //ProductWindow productWindow = new ProductWindow(p1);
-                //productWindow.ShowDialog();
-                new ProductWindow(updateProduct, product).ShowDialog();
+                ProductForList? p1 = (ProductListview.SelectedItem as ProductForList);//creats a new productforlist
+                Product product = bl?.Product.GetProductbyID(p1.ID);
+                if (product != null)
+                {
+                    //ProductWindow productWindow = new ProductWindow(p1);
+                    //productWindow.ShowDialog();
+                    new ProductWindow(updateProduct, product).ShowDialog();
 
+                }
             }
+            
         }
 
         private void MouseDoubleClickedOrder(object sender, MouseButtonEventArgs e)
         {
-            OrderForList? p1 = orderListview.SelectedItem as OrderForList;//creats a new productforlist
-            Order? order = bl?.Order.GetOrderInfo(p1.ID);
-            if (p1 != null)
+            if (orderListview.SelectedIndex >= 0)
             {
-                OrderWindow orderWindow = new OrderWindow(order);
-                orderWindow.ShowDialog();
+                OrderForList? p1 = orderListview.SelectedItem as OrderForList;//creats a new productforlist
+                Order? order = bl?.Order.GetOrderInfo(p1.ID);
+                if (p1 != null)
+                {
+                    OrderWindow orderWindow = new OrderWindow(order);
+                    orderWindow.ShowDialog();
+                }
             }
         }       
     }

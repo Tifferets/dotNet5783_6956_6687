@@ -4,6 +4,7 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL
@@ -27,6 +29,7 @@ namespace PL
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
         private ObservableCollection<ProductItem> productItemList { get; set; }
+        
         public NewOrderWindow()
         {
             InitializeComponent();
@@ -39,18 +42,22 @@ namespace PL
 
         private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //var groups = productItemList.GroupBy(x => x.Category);
-            //var products = (from x in groups
-            //                             where x.Key == (BO.Category)Category_ComboBox.SelectedItem
-            //                             select x).ToList();
-            //ProductItem_DataGrid.DataContext = products.va
-            // productItemList = new ObservableCollection<ProductItem>();
-            // ProductItem_DataGrid.DataContext = groups.Where(x => x?.Key.ToString() == Category_ComboBox.SelectedItem);
+            if (Category_ComboBox.SelectedItem != null && Category_ComboBox.SelectedItem is not Category.All) //
+                ProductItem_DataGrid.DataContext = bl?.Product.GetproductForListByCategory((BO.Category)Category_ComboBox.SelectedItem);
+            else if (Category_ComboBox.SelectedItem is Category.All)
+            {
+                ProductItem_DataGrid.DataContext = bl?.Product.GetListOfProducts();//listveiws source from BO func getLstOfProducts
+                Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source
+            }
+        }
 
-            //productItemList = from ProductItem item in productItemList
-            //                  let choice = Category_ComboBox.SelectedItem
-            //                  group item by item.Category into lst
-            //                  select new { key = lst.Key, item = lst }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CartWindow1 c1= new CartWindow1();
+            var vm = Application.Current.Windows[0].DataContext;
+            c1.DataContext= vm;
+            c1.ShowDialog();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1().ShowDialog();
