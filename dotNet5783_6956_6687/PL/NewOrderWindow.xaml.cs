@@ -31,7 +31,7 @@ namespace PL
         private BlApi.IBl? bl = BlApi.Factory.Get();
         private ObservableCollection<ProductItem> productItemList { get; set; }
         private Cart Cart;
-        public NewOrderWindow(Cart cart):this()
+        public NewOrderWindow(Cart cart) : this()
         {
             Cart = cart;//the given cart is our cart now
         }
@@ -90,3 +90,4 @@ namespace PL
             //  }
         }
     }
+}

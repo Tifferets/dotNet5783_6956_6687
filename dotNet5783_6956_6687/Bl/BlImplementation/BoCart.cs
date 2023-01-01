@@ -21,6 +21,25 @@ internal class BoCart : ICart
     {
         if (productId < 300000 || productId > 499999)//checking product id
             throw new WrongIDException();
+        if(cart.Items ==null)//the cart is empty
+        {
+            DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x?.ID == productId && x?.InStock > 0);//checks if the product exist at all
+            if (product != null)
+            {
+                BO.OrderItem oi = new BO.OrderItem()
+                {
+                    Price = (double)product?.Price,
+                    ProductID = (int)product?.ID,
+                    Name = product?.Name,
+                    Amount = 1,
+                    TotalPrice = (double)product?.Price,
+
+                };
+                cart.Items.Add(oi);
+                cart.TotalPrice += (double)product?.Price;//added 1 product to the cart
+
+            }
+        }
         try
         {
             BO.OrderItem? orderItem = cart.Items.FirstOrDefault(x => x.ProductID == productId);//orderItem is null if the product doesnt exist in the cart
