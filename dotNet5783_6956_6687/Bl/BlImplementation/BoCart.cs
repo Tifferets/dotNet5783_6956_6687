@@ -71,11 +71,9 @@ internal class BoCart : ICart
                             Name = product?.Name,
                             Amount = 1,
                             TotalPrice = (double)product?.Price,
-
                         };
                         cart.Items.Add(oi);
                         cart.TotalPrice += (double)product?.Price;//added 1 product to the cart
-
                     }
                     else throw new BO.CouldntFindProductException();
                 }
@@ -205,6 +203,7 @@ internal class BoCart : ICart
             {
                 throw new BO.CouldntFindProductException();
             }
+            return cart;
             //foreach (BO.OrderItem? item in cart.Items)
             //{
             //    if (item?.ProductID == productId)
@@ -231,7 +230,7 @@ internal class BoCart : ICart
             //        }
             //    }
             //}
-            return cart;
+
         }
         catch(Exception )
         {
@@ -351,8 +350,8 @@ internal class BoCart : ICart
         if (checkIfWorked == true)
             Console.WriteLine("cart confirmed");
     }
-    private bool CheckEmail(string email)
-    {//returns true if the email is proper else returns false
+    private bool CheckEmail(string email)//returns true if the email is proper else returns false
+    {
         if(email == null) return false;
         if (email.Contains('@')) return true;
         return false;

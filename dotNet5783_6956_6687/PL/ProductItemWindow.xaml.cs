@@ -33,8 +33,8 @@ namespace PL
         public ProductItemWindow(Cart cart, ProductItem productItem ):this() 
         {
             ProductOtemGrid.DataContext = productItem;
-            Cart=cart;
-            ProductItem= productItem;
+            Cart = cart;
+            ProductItem = productItem;
         }
 
         private void addToCart_Click(object sender, RoutedEventArgs e)
@@ -47,11 +47,10 @@ namespace PL
                 new NewOrderWindow(Cart).ShowDialog();
                 this.Close();
             }
-              catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
 
         }
     }
