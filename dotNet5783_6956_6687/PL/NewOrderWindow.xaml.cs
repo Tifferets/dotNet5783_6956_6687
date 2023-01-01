@@ -31,7 +31,8 @@ namespace PL
             InitializeComponent();
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
             productItemList = new ObservableCollection<ProductItem>(bl.Product.GetlListOfProductItem().ToList());
-            ProductItem_DataGrid.DataContext = productItemList;
+            List<ProductItem> lst=   productItemList.OrderBy(x => x.Category.ToString()).ToList();
+            ProductItem_DataGrid.DataContext = lst;
             //Category_ComboBox.SelectedItem = Category.All;
         }
 

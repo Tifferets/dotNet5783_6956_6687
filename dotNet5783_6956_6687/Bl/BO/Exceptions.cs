@@ -163,3 +163,12 @@ public class CouldntFindProductException : Exception
         return Message;
     }
 }
+public class CouldntAddProductException : Exception
+{//used in bocart
+    public override string Message => "Couldn't Add Product";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
+
