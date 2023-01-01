@@ -33,6 +33,7 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             BO.Cart cart = new BO.Cart();
+           
             //  cart =
             MessageBox.Show("Thank you and have a nice day");
            
