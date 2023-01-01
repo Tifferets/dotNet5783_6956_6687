@@ -55,16 +55,6 @@ namespace PL
                 Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source
             }
         }
-
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    CartWindow1 c1= new CartWindow1();
-        //    var vm = Application.Current.Windows[0].DataContext;
-        //    c1.DataContext= vm;
-        //    c1.ShowDialog();
-
-        //}
-
         private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1().ShowDialog();
 
         private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)
