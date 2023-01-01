@@ -9,7 +9,7 @@
             <Setter Property="FontFamily" Value="calibari" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
-        <Style TargetType="Label" BasedOn="{StaticResource commonStyle}"/>
+    <Style TargetType="Label" BasedOn="{StaticResource commonStyle}"/>
         
     </Application.Resources>
 </Application>

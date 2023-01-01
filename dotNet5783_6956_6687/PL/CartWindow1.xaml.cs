@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,13 @@ namespace PL
     /// </summary>
     public partial class CartWindow1 : Window
     {
+        private BlApi.IBl? bl = BlApi.Factory.Get();
+        private ObservableCollection<ProductItem> productItemList { get; set; }
         public CartWindow1()
         {
             InitializeComponent();
+            productItemList= new ObservableCollection<ProductItem>();
+
         }
     }
 }

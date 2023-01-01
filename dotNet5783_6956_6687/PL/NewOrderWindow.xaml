@@ -7,28 +7,19 @@
         mc:Ignorable="d"
         Title="NewOrderWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid  x:Name="ProductItem_DataGrid" AutoGenerateColumns="False" ItemsSource="{Binding }" HorizontalAlignment="Left" Height="236" Margin="62,124,0,0" VerticalAlignment="Top" Width="450"  CanUserResizeColumns="False"  CanUserReorderColumns="False" CanUserAddRows="False">
+        <DataGrid  x:Name="ProductItem_DataGrid" AutoGenerateColumns="False" ItemsSource="{Binding }" HorizontalAlignment="Left" Height="236" Margin="49,66,0,0" VerticalAlignment="Top" Width="450"  CanUserResizeColumns="False"  CanUserReorderColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="IdColum" Binding="{Binding ID}" Header="ID" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="TypeColum" Binding="{Binding Name}" Header="Type" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="TypeColum" Binding="{Binding Name}" Header="Type" Width="2*" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="CategoryColum" Binding="{Binding Category}" Header="Category" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="PriceColum" Binding="{Binding Price}" Header="Price" Width="*" IsReadOnly="True"/>
                 <DataGridCheckBoxColumn x:Name="InStockColumn" Binding="{Binding Instock}" Header="In Stock" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="AmountColum" Binding="{Binding Amount}" Header="Amount" Width="*"/>
-                <DataGridTemplateColumn >
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button x:Name="AddToCart" Content="Add to cart">
-                                
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
             </DataGrid.Columns>
+
         </DataGrid>
-        <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="555,69,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Category_ComboBox_SelectionChanged"/>
-        <Button Content="Button" HorizontalAlignment="Left" Height="51" Margin="579,222,0,0" VerticalAlignment="Top" Width="185"/>
-       
+        <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="579,66,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Category_ComboBox_SelectionChanged"/>
+        <Button Content="Add To Cart" HorizontalAlignment="Left" Height="51" Margin="49,339,0,0" VerticalAlignment="Top" Width="185" Click="Button_Click"/>
+
     </Grid>
 </Window>
