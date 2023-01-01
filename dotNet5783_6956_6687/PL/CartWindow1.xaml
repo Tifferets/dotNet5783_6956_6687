@@ -7,8 +7,29 @@
         mc:Ignorable="d"
         Title="CartWindow1" Height="450" Width="800">
     <Grid>
-        <Button Content="Check out" HorizontalAlignment="Left" Margin="634,338,0,0" VerticalAlignment="Top" Height="60" Width="132"/>
-        <Button Content="Continue shopping" HorizontalAlignment="Left" Margin="432,338,0,0" VerticalAlignment="Top" Height="60" Width="134"/>
-
+        <Button Content="Check out" HorizontalAlignment="Left" Margin="634,338,0,0" VerticalAlignment="Top" Height="60" Width="132" Click="Button_Click"/>
+        <Button Content="Continue shopping" HorizontalAlignment="Left" Margin="432,338,0,0" VerticalAlignment="Top" Height="60" Width="134" Click="Button_Click_1"/>
+        <DataGrid x:Name="Products_DataGrid" HorizontalAlignment="Left" Height="203" Margin="458,64,0,0" VerticalAlignment="Top" Width="308" d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding Items}"/>
+        <Grid x:Name="CustomersInfo_Grid" HorizontalAlignment="Left" Height="286" Margin="46,82,0,0" VerticalAlignment="Top" Width="302">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+            <Label Content="Email:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+            <Label Content="Address:" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.544,4.784" Grid.Row="2" Grid.Column="0"/>
+            <Label Content="Total Price:" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.322,6.787" Grid.Row="3" Grid.Column="0"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Grid.Row="0" Grid.Column="1" Text="{Binding CustomerName}"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Grid.Row="1" Grid.Column="1" Text="{Binding CustomerEmail}"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Grid.Row="2" Grid.Column="1" Text="{Binding CustomerAddress}"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Grid.Row="3" Grid.Column="1" Text="{Binding CustomerTotalPrice}"/>
+        </Grid>
+        
     </Grid>
 </Window>

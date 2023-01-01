@@ -36,8 +36,6 @@ namespace PL
         public TrackOrder_Window(int value):this()
         {
             TrackOrder_Grid.DataContext = bl?.Order.OrderStatus(value);
-
-
         }
         private void Id_textbox_TextChanged(object sender, TextChangedEventArgs e)
         {

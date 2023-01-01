@@ -1,5 +1,6 @@
 ﻿using BO;
 using DO;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,5 +52,26 @@ namespace PL
             //                  group item by item.Category into lst
             //                  select new { key = lst.Key, item = lst }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1().ShowDialog();
+        //{
+            //int value;
+            //int.TryParse(Interaction.InputBox("Please Enter Name, Email, Address", "Tracking Order ID", "100000"), out value);//displays an inputbox and gets the id
+            //try
+            //{
+            //    if (value != 0)//making sure there is text
+            //    {
+            //        OrderTracking? orderTracking = bl?.Order.OrderStatus(value);
+            //        if (orderTracking != null)//checking thet there is an order with the id
+            //        {
+            //            new TrackOrder_Window(value).ShowDialog();//opens the window with the id
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+      //  }
     }
 }
