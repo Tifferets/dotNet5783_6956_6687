@@ -44,11 +44,7 @@ internal class BoCart : ICart
             }
             else
             {
-                BO.OrderItem? orderItem = new OrderItem();
-                if (cart.Items != null)
-                {
-                    orderItem = cart?.Items.FirstOrDefault(x => x.ProductID == productId);
-                }//orderItem is null if the product doesnt exist in the cart
+                BO.OrderItem? orderItem = cart.Items.ToList().FirstOrDefault(x => x.ProductID == productId);//orderItem is null if the product doesnt exist in the cart
                 if (orderItem != null) //if the product already exists in the cart
                 {
                     DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x?.ID == productId && x?.InStock > 0);//checks if the product exist at all
@@ -84,6 +80,8 @@ internal class BoCart : ICart
             }
         }
         catch (Exception ex) { throw new CouldntAddProductException(); }//if nothing worked
+   return cart;
+ }
         //    {
         //        BO.Product p = dal.product.GetAll().FirstOrDefault(x => x.Value.ID == productId);//p is the product that we want to add
         //        if (p == null || p.InStock < orderItem.Amount) //if the product doesnt exist or there is not enough left
@@ -155,9 +153,8 @@ internal class BoCart : ICart
         //        }
         //    }
         //}
-        return cart;
-    }
 
+   
     /// <summary>
     /// update an amount of a product in the cart
     /// </summary>
