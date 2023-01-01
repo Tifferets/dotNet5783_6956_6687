@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="NewOrderWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid  x:Name="ProductItem_DataGrid" AutoGenerateColumns="False" ItemsSource="{Binding }" HorizontalAlignment="Left" Height="236" Margin="62,124,0,0" VerticalAlignment="Top" Width="450"  CanUserResizeColumns="False"  CanUserReorderColumns="False" CanUserAddRows="False" >
+        <DataGrid  x:Name="ProductItem_DataGrid" AutoGenerateColumns="False" ItemsSource="{Binding }" HorizontalAlignment="Left" Height="236" Margin="49,70,0,0" VerticalAlignment="Top" Width="450"  CanUserResizeColumns="False"  CanUserReorderColumns="False" CanUserAddRows="False" RenderTransformOrigin="0.375,0.209" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="IdColum" Binding="{Binding ID}" Header="ID" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="TypeColum" Binding="{Binding Name}" Header="Type" Width="2*" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="CategoryColum" Binding="{Binding Category}" Header="Category" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="PriceColum" Binding="{Binding Price}" Header="Price" Width="*" IsReadOnly="True"/>
                 <DataGridCheckBoxColumn x:Name="InStockColumn" Binding="{Binding Instock}" Header="In Stock" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="AmountColum" Binding="{Binding Amount}" Header="Amount" Width="*"/>
+                <DataGridTextColumn x:Name="AmountColum" Binding="{Binding Amount}" Header="Amount" Width="*" IsReadOnly="True" />
             </DataGrid.Columns>
 
         </DataGrid>

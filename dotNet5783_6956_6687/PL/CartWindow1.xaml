@@ -9,8 +9,16 @@
     <Grid>
         <Button Content="Check out" HorizontalAlignment="Left" Margin="634,338,0,0" VerticalAlignment="Top" Height="60" Width="132" Click="Button_Click"/>
         <Button Content="Continue shopping" HorizontalAlignment="Left" Margin="432,338,0,0" VerticalAlignment="Top" Height="60" Width="134" Click="Button_Click_1"/>
-        <DataGrid x:Name="Products_DataGrid" HorizontalAlignment="Left" Height="203" Margin="458,64,0,0" VerticalAlignment="Top" Width="308" d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding Items}"/>
-        <Grid x:Name="CustomersInfo_Grid" HorizontalAlignment="Left" Height="286" Margin="46,82,0,0" VerticalAlignment="Top" Width="302">
+        <DataGrid x:Name="Products_DataGrid" HorizontalAlignment="Left" Height="203" Margin="432,64,0,0" VerticalAlignment="Top" Width="308" ItemsSource="{Binding Items}">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="IdColum" Binding="{Binding ID}" Header="ID" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="TypeColum" Binding="{Binding Name}" Header="Type" Width="2*" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="CategoryColum" Binding="{Binding Category}" Header="Category" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="PriceColum" Binding="{Binding Price}" Header="Price" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="AmountColum" Binding="{Binding Amount}" Header="Amount" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+                <Grid x:Name="CustomersInfo_Grid" HorizontalAlignment="Left" Height="213" Margin="69,64,0,0" VerticalAlignment="Top" Width="302">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

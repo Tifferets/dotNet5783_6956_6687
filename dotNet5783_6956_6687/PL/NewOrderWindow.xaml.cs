@@ -29,13 +29,16 @@ namespace PL
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
         private ObservableCollection<ProductItem> productItemList { get; set; }
-        
+        public NewOrderWindow(Cart cart):this()
+        {
+            Cart c = cart;
+        }
         public NewOrderWindow()
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
             productItemList = new ObservableCollection<ProductItem>(bl.Product.GetlListOfProductItem().ToList());
-            List<ProductItem> lst=   productItemList.OrderBy(x => x.Category.ToString()).ToList();
+            List<ProductItem> lst = productItemList.OrderBy(x => x.Category.ToString()).ToList();
             ProductItem_DataGrid.DataContext = lst;
             //Category_ComboBox.SelectedItem = Category.All;
         }
@@ -51,14 +54,14 @@ namespace PL
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CartWindow1 c1= new CartWindow1();
-            var vm = Application.Current.Windows[0].DataContext;
-            c1.DataContext= vm;
-            c1.ShowDialog();
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    CartWindow1 c1= new CartWindow1();
+        //    var vm = Application.Current.Windows[0].DataContext;
+        //    c1.DataContext= vm;
+        //    c1.ShowDialog();
 
-        }
+        //}
 
         private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1().ShowDialog();
         //{
