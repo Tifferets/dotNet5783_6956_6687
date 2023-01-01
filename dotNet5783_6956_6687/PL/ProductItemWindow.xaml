@@ -7,6 +7,35 @@
         mc:Ignorable="d"
         Title="ProductItemWindow" Height="450" Width="800">
     <Grid>
-        
+
+
+        <Grid HorizontalAlignment="Left" Height="260" Margin="62,0,0,0" VerticalAlignment="Center" Width="310">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="ID" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+            <Label Content="Type" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="0" Grid.Row="1"/>
+            <Label Content="Category" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2"/>
+            <Label Content="Price" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3"/>
+            <Label Content="Amount in cart" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="0" Grid.Row="4"/>
+            <Label Content="In Stock" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="0" Grid.Row="5"/>
+
+            <Label Content="{Binding ID}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+            <Label Content="{Binding Name}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+            <Label Content="{Binding Category}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
+            <Label Content="{Binding Amount}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="3"/>
+            <Label Content="{Binding Instock}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="4"/>
+            <TextBox HorizontalAlignment="Center" Height="43" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="155" Grid.Column="1" Grid.Row="5"/>
+        </Grid>
+
     </Grid>
 </Window>
