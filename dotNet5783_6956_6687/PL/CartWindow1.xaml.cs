@@ -22,14 +22,27 @@ namespace PL
     public partial class CartWindow1 : Window
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
-        private ObservableCollection<ProductItem> productItemList { get; set; }
+        private ObservableCollection<OrderItem> OrderItemList { get; set; }
+        Cart cart1= new Cart();
         public CartWindow1()
         {
             InitializeComponent();
-            productItemList= new ObservableCollection<ProductItem>();
-
         }
-
+        public CartWindow1(Cart cart = null):this()
+        {
+            cart1 = cart;
+            if(cart.Items != null) 
+            {
+                OrderItemList = new ObservableCollection<OrderItem>(cart.Items);
+                Products_DataGrid.DataContext = OrderItemList;
+                
+            }
+            else
+            {
+                OrderItemList = new ObservableCollection<OrderItem>();
+            }
+            
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             BO.Cart cart = new BO.Cart();

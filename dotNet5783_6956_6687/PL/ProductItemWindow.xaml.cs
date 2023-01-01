@@ -44,8 +44,9 @@ namespace PL
             {
                 bl?.Cart.AddProductToCart(Cart, ProductItem.ID);
                 MessageBox.Show("Product added successfully");
-                new NewOrderWindow(Cart).ShowDialog();
                 this.Close();
+                new NewOrderWindow(Cart).ShowDialog();
+                
             }
             catch (Exception ex)
             {

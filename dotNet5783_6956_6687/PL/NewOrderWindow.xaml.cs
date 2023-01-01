@@ -30,10 +30,9 @@ namespace PL
         private BlApi.IBl? bl = BlApi.Factory.Get();
         private ObservableCollection<ProductItem> productItemList { get; set; }
         private Cart Cart = new Cart();
-        public NewOrderWindow(Cart cart = null) : this() 
+        public NewOrderWindow(Cart cart = null /*ProductItem productItem = null*/) : this() 
         {
             Cart = cart;
-            
         }
         public NewOrderWindow()
         {
@@ -53,15 +52,23 @@ namespace PL
                 Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1().ShowDialog();
+        private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1(Cart).ShowDialog();
         private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)
         {
             if (ProductItem_DataGrid.SelectedIndex >= 0)
             {
                 ProductItem? p1 = ProductItem_DataGrid.SelectedItem as ProductItem;//creats a new productforlist
-                if (p1 != null)
+                if (p1.Instock)
                 {
-                    new ProductItemWindow(Cart,p1).ShowDialog();
+                    if (p1 != null)
+                    {
+                        this.Close();
+                        new ProductItemWindow(Cart, p1).ShowDialog();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Prosuct is out of stock, sorry");
                 }
             }
         }

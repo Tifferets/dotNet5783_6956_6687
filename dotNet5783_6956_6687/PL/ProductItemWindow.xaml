@@ -8,7 +8,7 @@
         Title="ProductItemWindow" Height="450" Width="800">
 
     <Grid>
-            
+
         <Grid x:Name="ProductOtemGrid" HorizontalAlignment="Left" Height="246" Margin="62,0,0,0" VerticalAlignment="Center" Width="370">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="89*"/>
@@ -30,10 +30,10 @@
             <Label Content="{Binding ID}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1"  Height="34" Width="156" FontWeight="Normal" />
             <Label Content="{Binding Name}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Height="34" Width="156" FontWeight="Normal"/>
             <Label Content="{Binding Category}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Height="34" Width="156" FontWeight="Normal" />
-            <Label Content="{Binding Amount}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Height="34" Width="156" FontWeight="Normal"/>
-            <Label x:Name="Amount_textbox" Content="{Binding Amount}" HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.Column="1" Grid.Row="4" FontWeight="Normal" Height="34" Width="182"/>
+            <Label Content="{Binding Price}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Height="34" Width="156" FontWeight="Normal"/>
+            <Label x:Name="Amount_textbox" Content="{Binding Amount}" HorizontalAlignment="Left"  VerticalAlignment="Top"  Grid.Column="1" Grid.Row="4" FontWeight="Normal" Height="34" Width="182" Margin="0,5,0,0"/>
         </Grid>
-        <Button x:Name="addToCart"  Content="Add one to cart" HorizontalAlignment="Left" Height="65" Margin="474,320,0,0" VerticalAlignment="Top" Width="126" Click="addToCart_Click"/>
-
+        <Button x:Name="addToCart"  Content="Add one to cart" HorizontalAlignment="Left" Height="65" Margin="547,275,0,0" VerticalAlignment="Top" Width="126" Click="addToCart_Click"/>
+      
     </Grid>
 </Window>

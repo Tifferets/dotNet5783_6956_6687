@@ -25,6 +25,7 @@ internal class BoCart : ICart
                 throw new WrongIDException();
             if (cart.Items == null)//the cart is empty
             {
+                List<OrderItem> items = new List<OrderItem>();
                 DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x?.ID == productId && x?.InStock > 0);//checks if the product exist at all
                 if (product != null)
                 {
@@ -37,9 +38,9 @@ internal class BoCart : ICart
                         TotalPrice = (double)product?.Price,
 
                     };
-                    cart.Items.Add(oi);
+                    items.Add(oi);
+                    cart.Items= items;
                     cart.TotalPrice += (double)product?.Price;//added 1 product to the cart
-
                 }
             }
             else
