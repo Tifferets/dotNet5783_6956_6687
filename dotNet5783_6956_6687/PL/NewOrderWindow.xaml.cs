@@ -60,25 +60,30 @@ namespace PL
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1().ShowDialog();
+        private void ProductItem_DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        // private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1().ShowDialog();
         //{
-            //int value;
-            //int.TryParse(Interaction.InputBox("Please Enter Name, Email, Address", "Tracking Order ID", "100000"), out value);//displays an inputbox and gets the id
-            //try
-            //{
-            //    if (value != 0)//making sure there is text
-            //    {
-            //        OrderTracking? orderTracking = bl?.Order.OrderStatus(value);
-            //        if (orderTracking != null)//checking thet there is an order with the id
-            //        {
-            //            new TrackOrder_Window(value).ShowDialog();//opens the window with the id
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-      //  }
+        //int value;
+        //int.TryParse(Interaction.InputBox("Please Enter Name, Email, Address", "Tracking Order ID", "100000"), out value);//displays an inputbox and gets the id
+        //try
+        //{
+        //    if (value != 0)//making sure there is text
+        //    {
+        //        OrderTracking? orderTracking = bl?.Order.OrderStatus(value);
+        //        if (orderTracking != null)//checking thet there is an order with the id
+        //        {
+        //            new TrackOrder_Window(value).ShowDialog();//opens the window with the id
+        //        }
+        //    }
+        //}
+        //catch (Exception ex)
+        //{
+        //    MessageBox.Show(ex.Message);
+        //}
+        //  }
     }
 }
