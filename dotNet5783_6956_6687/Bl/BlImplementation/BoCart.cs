@@ -21,7 +21,7 @@ internal class BoCart : ICart
     {
         if (productId < 300000 || productId > 499999)//checking product id
             throw new WrongIDException();
-        if(cart.Items ==null)//the cart is empty
+        if(cart.Items == null)//the cart is empty
         {
             DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x?.ID == productId && x?.InStock > 0);//checks if the product exist at all
             if (product != null)
@@ -33,11 +33,11 @@ internal class BoCart : ICart
                     Name = product?.Name,
                     Amount = 1,
                     TotalPrice = (double)product?.Price,
-
                 };
-                cart.Items.Add(oi);
                 cart.TotalPrice += (double)product?.Price;//added 1 product to the cart
-
+                List<BO.OrderItem> lst = new List<BO.OrderItem>();
+                lst.Add(oi);
+                cart.Items = lst;
             }
         }
         try
@@ -73,16 +73,17 @@ internal class BoCart : ICart
                             Name = product?.Name,
                             Amount = 1,
                             TotalPrice = (double)product?.Price,
-
                         };
                         cart.Items.Add(oi);
                         cart.TotalPrice += (double)product?.Price;//added 1 product to the cart
-
                     }
                 }
-            
         }
-        catch(Exception ex) { throw new CouldntAddProductException(); }//if nothing worked
+        catch(Exception)
+        {
+             throw new CouldntAddProductException(); 
+        }
+        //if nothing worked
         //    {
         //        BO.Product p = dal.product.GetAll().FirstOrDefault(x => x.Value.ID == productId);//p is the product that we want to add
         //        if (p == null || p.InStock < orderItem.Amount) //if the product doesnt exist or there is not enough left
@@ -205,6 +206,7 @@ internal class BoCart : ICart
             {
                 throw new BO.CouldntFindProductException();
             }
+            return cart;
             //foreach (BO.OrderItem? item in cart.Items)
             //{
             //    if (item?.ProductID == productId)
@@ -231,7 +233,7 @@ internal class BoCart : ICart
             //        }
             //    }
             //}
-            return cart;
+
         }
         catch(Exception )
         {
@@ -351,8 +353,8 @@ internal class BoCart : ICart
         if (checkIfWorked == true)
             Console.WriteLine("cart confirmed");
     }
-    private bool CheckEmail(string email)
-    {//returns true if the email is proper else returns false
+    private bool CheckEmail(string email)//returns true if the email is proper else returns false
+    {
         if(email == null) return false;
         if (email.Contains('@')) return true;
         return false;

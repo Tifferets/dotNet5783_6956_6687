@@ -23,7 +23,11 @@ namespace PL
     public partial class StartUp_Window : Window
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
-        Cart? cart= new Cart();
+        Cart cart = new Cart()
+        {
+            CustomerName = " Nikki"
+        };
+
         public StartUp_Window()
         {
             InitializeComponent();
@@ -38,11 +42,11 @@ namespace PL
         {
             if (Admin.IsChecked == true)
             {
-                new Admin_Window().Show();
+                new Admin_Window().ShowDialog();
             }
             else if (NewOrder.IsChecked == true)
             {
-                new NewOrderWindow().Show();
+                new NewOrderWindow(cart).ShowDialog();
             }
             else if (TrackOrder.IsChecked == true)
             {
