@@ -42,42 +42,47 @@ internal class BoCart : ICart
         }
         try
         {
-            BO.OrderItem? orderItem = cart.Items.FirstOrDefault(x => x.ProductID == productId);//orderItem is null if the product doesnt exist in the cart
-            if (orderItem != null) //if the product already exists in the cart
+            BO.OrderItem? orderItem = new OrderItem();
+            if (cart.Items != null)
             {
-                DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x?.ID == productId && x?.InStock > 0);//checks if the product exist at all
-                if (product != null)
+               orderItem = cart?.Items.FirstOrDefault(x => x.ProductID == productId);
+            }//orderItem is null if the product doesnt exist in the cart
+                if (orderItem != null) //if the product already exists in the cart
                 {
-                    cart.Items.Remove(orderItem);//removes the orderitem from the cart
-                    orderItem.Amount += 1;
-                    orderItem.TotalPrice = orderItem.TotalPrice + (double)product?.Price;
-                    cart.TotalPrice = cart.TotalPrice + (double)product?.Price;
-                    cart.Items.Add(orderItem);//adds the updated order item
-                }
-                else
-                    throw new BO.NoMoreInStockException();
-            }
-            else//the product doesnt exist yet in the cart
-            {
-                DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x?.ID == productId && x?.InStock > 0);//checks if the product exist at all
-                if (product != null)
-                {
-                    BO.OrderItem oi = new BO.OrderItem()
+                    DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x?.ID == productId && x?.InStock > 0);//checks if the product exist at all
+                    if (product != null)
                     {
-                        Price = (double)product?.Price,
-                        ProductID = (int)product?.ID,
-                        Name = product?.Name,
-                        Amount = 1,
-                        TotalPrice = (double)product?.Price,
-
-                    };
-                    cart.Items.Add(oi);
-                    cart.TotalPrice += (double)product?.Price;//added 1 product to the cart
-
+                        cart.Items.Remove(orderItem);//removes the orderitem from the cart
+                        orderItem.Amount += 1;
+                        orderItem.TotalPrice = orderItem.TotalPrice + (double)product?.Price;
+                        cart.TotalPrice = cart.TotalPrice + (double)product?.Price;
+                        cart.Items.Add(orderItem);//adds the updated order item
+                    }
+                    else
+                        throw new BO.NoMoreInStockException();
                 }
-            }
+                else//the product doesnt exist yet in the cart
+                {
+                    DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x?.ID == productId && x?.InStock > 0);//checks if the product exist at all
+                    if (product != null)
+                    {
+                        BO.OrderItem oi = new BO.OrderItem()
+                        {
+                            Price = (double)product?.Price,
+                            ProductID = (int)product?.ID,
+                            Name = product?.Name,
+                            Amount = 1,
+                            TotalPrice = (double)product?.Price,
+
+                        };
+                        cart.Items.Add(oi);
+                        cart.TotalPrice += (double)product?.Price;//added 1 product to the cart
+
+                    }
+                }
+            
         }
-        catch(Exception ex) { throw new BO.CouldntAddProductException(); }//if nothing worked
+        catch(Exception ex) { throw new CouldntAddProductException(); }//if nothing worked
         //    {
         //        BO.Product p = dal.product.GetAll().FirstOrDefault(x => x.Value.ID == productId);//p is the product that we want to add
         //        if (p == null || p.InStock < orderItem.Amount) //if the product doesnt exist or there is not enough left
