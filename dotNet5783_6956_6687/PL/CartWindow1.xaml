@@ -9,13 +9,7 @@
     <Grid>
         <Button Content="Check out" HorizontalAlignment="Left" Margin="634,338,0,0" VerticalAlignment="Top" Height="60" Width="132"/>
         <Button Content="Continue shopping" HorizontalAlignment="Left" Margin="432,338,0,0" VerticalAlignment="Top" Height="60" Width="134"/>
-        <ListView HorizontalAlignment="Left" Height="153" Margin="99,125,0,0" VerticalAlignment="Top" Width="301" ItemsSource ="{ Binding}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        
 
     </Grid>
 </Window>
