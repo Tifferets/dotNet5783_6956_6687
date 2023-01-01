@@ -1,6 +1,7 @@
 ﻿using BO;
 using DO;
 using Microsoft.VisualBasic;
+using PL.PlProduct;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,9 +30,10 @@ namespace PL
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
         private ObservableCollection<ProductItem> productItemList { get; set; }
+        private Cart Cart;
         public NewOrderWindow(Cart cart):this()
         {
-            Cart c = cart;
+            Cart = cart;//the given cart is our cart now
         }
         public NewOrderWindow()
         {
@@ -64,7 +66,20 @@ namespace PL
         //}
 
         private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1().ShowDialog();
-        //{
+
+        private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)
+        {
+            if (ProductItem_DataGrid.SelectedIndex >= 0)
+            {
+                ProductItem? p1 = (ProductItem_DataGrid.SelectedItem as ProductItem);//creats a new productforlist
+                if (p1 != null)
+                {
+                    new ProductItemWindow(Cart, p1).ShowDialog();
+
+                }
+            }
+
+            //{
             //int value;
             //int.TryParse(Interaction.InputBox("Please Enter Name, Email, Address", "Tracking Order ID", "100000"), out value);//displays an inputbox and gets the id
             //try
@@ -82,6 +97,6 @@ namespace PL
             //{
             //    MessageBox.Show(ex.Message);
             //}
-      //  }
+            //  }
+        }
     }
-}
