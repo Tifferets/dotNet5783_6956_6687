@@ -13,7 +13,7 @@
                 <DataGridTextColumn x:Name="TypeColum" Binding="{Binding Name}" Header="Type" Width="2*" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="CategoryColum" Binding="{Binding Category}" Header="Category" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="PriceColum" Binding="{Binding Price}" Header="Price" Width="*" IsReadOnly="True"/>
-                <DataGridCheckBoxColumn x:Name="InStockColumn" Binding="{Binding Instock}" Header="In Stock" Width="*" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn x:Name="InStockColumn"  Binding="{Binding Instock}"  Header="In Stock" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="AmountColum" Binding="{Binding Amount}" Header="Amount" Width="*" IsReadOnly="True" />
             </DataGrid.Columns>
 
