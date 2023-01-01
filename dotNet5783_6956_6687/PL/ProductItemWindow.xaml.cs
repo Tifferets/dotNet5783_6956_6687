@@ -42,9 +42,10 @@ namespace PL
             if (Cart == null) return;
             try
             {
-               // bl?.Cart.AddProductToCart(Cart, ProductItem.ID);
+                bl?.Cart.AddProductToCart(Cart, ProductItem.ID);
                 MessageBox.Show("Product added successfully");
-                Cart.CustomerAddress = " jsjs";
+                new NewOrderWindow(Cart).ShowDialog();
+                this.Close();
             }
               catch(Exception ex)
             {

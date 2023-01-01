@@ -39,6 +39,7 @@ namespace PL
                 TotalPrice = 0,
             };
             //the given cart is our cart now
+
         }
         public NewOrderWindow()
         {
@@ -47,12 +48,12 @@ namespace PL
             productItemList = new ObservableCollection<ProductItem>(bl.Product.GetlListOfProductItem().ToList());
             List<ProductItem> lst = productItemList.OrderBy(x => x.Category.ToString()).ToList();
             ProductItem_DataGrid.DataContext = lst;
-            //Category_ComboBox.SelectedItem = Category.All;
+            
         }
 
         private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Category_ComboBox.SelectedItem != null && Category_ComboBox.SelectedItem is not Category.All) //
+            if (Category_ComboBox.SelectedItem != null && Category_ComboBox.SelectedItem is not Category.All) //we want to chang the info
                 ProductItem_DataGrid.DataContext = bl?.Product.GetproductForListByCategory((BO.Category)Category_ComboBox.SelectedItem);
             else if (Category_ComboBox.SelectedItem is Category.All)
             {
@@ -76,24 +77,6 @@ namespace PL
         }
     }
 }
-            //{
-            //int value;
-            //int.TryParse(Interaction.InputBox("Please Enter Name, Email, Address", "Tracking Order ID", "100000"), out value);//displays an inputbox and gets the id
-            //try
-            //{
-            //    if (value != 0)//making sure there is text
-            //    {
-            //        OrderTracking? orderTracking = bl?.Order.OrderStatus(value);
-            //        if (orderTracking != null)//checking thet there is an order with the id
-            //        {
-            //            new TrackOrder_Window(value).ShowDialog();//opens the window with the id
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-            //  }
+           
 
 
