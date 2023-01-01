@@ -1,6 +1,7 @@
 ﻿using BO;
 using DO;
 using Microsoft.VisualBasic;
+using PL.PlProduct;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,13 +30,17 @@ namespace PL
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
         private ObservableCollection<ProductItem> productItemList { get; set; }
-        
+        private Cart Cart;
+        public NewOrderWindow(Cart cart):this()
+        {
+            Cart = cart;//the given cart is our cart now
+        }
         public NewOrderWindow()
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
             productItemList = new ObservableCollection<ProductItem>(bl.Product.GetlListOfProductItem().ToList());
-            List<ProductItem> lst=   productItemList.OrderBy(x => x.Category.ToString()).ToList();
+            List<ProductItem> lst = productItemList.OrderBy(x => x.Category.ToString()).ToList();
             ProductItem_DataGrid.DataContext = lst;
             //Category_ComboBox.SelectedItem = Category.All;
         }
@@ -50,40 +55,38 @@ namespace PL
                 Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source
             }
         }
+        private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1().ShowDialog();
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)
         {
-            CartWindow1 c1= new CartWindow1();
-            var vm = Application.Current.Windows[0].DataContext;
-            c1.DataContext= vm;
-            c1.ShowDialog();
+            if (ProductItem_DataGrid.SelectedIndex >= 0)
+            {
+                ProductItem? p1 = (ProductItem_DataGrid.SelectedItem as ProductItem);//creats a new productforlist
+                if (p1 != null)
+                {
+                    new ProductItemWindow(Cart, p1).ShowDialog();
 
+                }
+            }
+
+            //{
+            //int value;
+            //int.TryParse(Interaction.InputBox("Please Enter Name, Email, Address", "Tracking Order ID", "100000"), out value);//displays an inputbox and gets the id
+            //try
+            //{
+            //    if (value != 0)//making sure there is text
+            //    {
+            //        OrderTracking? orderTracking = bl?.Order.OrderStatus(value);
+            //        if (orderTracking != null)//checking thet there is an order with the id
+            //        {
+            //            new TrackOrder_Window(value).ShowDialog();//opens the window with the id
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+            //  }
         }
-
-        private void ProductItem_DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        // private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1().ShowDialog();
-        //{
-        //int value;
-        //int.TryParse(Interaction.InputBox("Please Enter Name, Email, Address", "Tracking Order ID", "100000"), out value);//displays an inputbox and gets the id
-        //try
-        //{
-        //    if (value != 0)//making sure there is text
-        //    {
-        //        OrderTracking? orderTracking = bl?.Order.OrderStatus(value);
-        //        if (orderTracking != null)//checking thet there is an order with the id
-        //        {
-        //            new TrackOrder_Window(value).ShowDialog();//opens the window with the id
-        //        }
-        //    }
-        //}
-        //catch (Exception ex)
-        //{
-        //    MessageBox.Show(ex.Message);
-        //}
-        //  }
     }
-}
