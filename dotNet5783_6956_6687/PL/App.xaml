@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:PL"
              StartupUri="StartUp_Window.xaml">
     <Application.Resources>
-         
+        <Style x:Key="commonStyle" TargetType="Control">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="calibari" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style TargetType="Label" BasedOn="{StaticResource commonStyle}"/>
+        
     </Application.Resources>
 </Application>

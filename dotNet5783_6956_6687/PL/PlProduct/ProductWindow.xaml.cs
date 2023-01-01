@@ -32,11 +32,11 @@ namespace PL.PlProduct
         { 
             this.action = action;
             AddProduct_Button.Visibility = Visibility.Hidden;
-            GridProduct.DataContext= myData;
+            GridProduct.DataContext= myData;//putting all the data in the textboxes via binding
             Id_Textbox.IsEnabled = false;
         }
 
-        public ProductWindow(Action<ProductForList> action):this()
+        public ProductWindow(Action<ProductForList> action):this()//to add a product
         {
             this.action = action;
             UpdateProduct_button.Visibility = Visibility.Hidden;//update butten invisable
@@ -68,7 +68,7 @@ namespace PL.PlProduct
                 try
                 {
                     bl?.Product.AddProduct(product);//adds the product to the do
-                    action(bl?.Product.GetProductForList(product.Id) ?? throw new NullException());
+                    action(bl?.Product.GetProductForList(product.Id) ?? throw new NullException());//goes back to the window b4 and adds the product to the observablcollection
                     MessageBox.Show("product added successfully");
                     this.Close();
                 }
@@ -104,7 +104,7 @@ namespace PL.PlProduct
                 try
                 {
                     bl?.Product.UpdateProduct(product);//adds the product to the do
-                    action(bl?.Product.GetProductForList(product.Id) ?? throw new NullException());
+                    action(bl?.Product.GetProductForList(product.Id) ?? throw new NullException());//goes back a window and does the update to the oc
                     MessageBox.Show("product updated successfully");
                     this.Close();
 
@@ -151,10 +151,7 @@ namespace PL.PlProduct
         }
         #endregion
 
-        private void Id_Textbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+       
 
         
     }

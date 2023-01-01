@@ -188,27 +188,35 @@ internal class BoOrder: IOrder
     /// <returns></returns>
     public BO.OrderTracking OrderStatus(int orderId)
     {
-        //try
+        try
         {
-            DO.Order order = (DO.Order)dal?.order.GetSingle(x => x?.ID == orderId);
+            DO.Order? order = (DO.Order?)dal?.order?.GetSingle(x => x?.ID == orderId);
+            if (order == null)
+            {
+                throw new BO.WrongIDException();
+            }
             List<Tuple<BO.OrderStatus,DateTime>> list = new List<Tuple<BO.OrderStatus,DateTime>>();
             BO.OrderStatus status = BO.OrderStatus.ordered;
-            if (order.OrderDate != null && order.OrderDate != DateTime.MinValue)
+            if (order?.OrderDate != null && order?.OrderDate != DateTime.MinValue)
             {
-                list.Add(Tuple.Create(BO.OrderStatus.ordered, (DateTime)order.OrderDate));
+                list.Add(Tuple.Create(BO.OrderStatus.ordered, (DateTime)order?.OrderDate));
             }
-            if (order.ShipDate != null && order.ShipDate != DateTime.MinValue)
+            if (order?.ShipDate != null && order?.ShipDate != DateTime.MinValue)
             {
-                list.Add(Tuple.Create(BO.OrderStatus.shipped, (DateTime)order.ShipDate));
+                list.Add(Tuple.Create(BO.OrderStatus.shipped, (DateTime)order?.ShipDate));
                 status = BO.OrderStatus.shipped;
             }
-            if (order.DeliveryDate != null && order.DeliveryDate != DateTime.MinValue)
+            if (order?.DeliveryDate != null && order?.DeliveryDate != DateTime.MinValue)
             {
-                list.Add(Tuple.Create(BO.OrderStatus.delivered, (DateTime)order.DeliveryDate));
+                list.Add(Tuple.Create(BO.OrderStatus.delivered, (DateTime)order?.DeliveryDate));
                 status = BO.OrderStatus.delivered;
             }
             BO.OrderTracking orderTracking = new BO.OrderTracking() { ID = orderId, Status = status, tracking = list };
             return orderTracking;
+        }
+        catch(Exception ex)
+        {
+            throw new Exception(ex.ToString());
         }
     }
     /// <summary>

@@ -211,7 +211,7 @@ internal class BoProduct : BlApi.IProduct
                     ID = Id,
                     Name= productItem?.Name,
                     Category= (BO.Category)productItem?.Category,
-                    Amount= productItem?.InStock ?? 0,
+                    Amount= 0,
                     Price= productItem?.Price ?? 0,
                     Instock= productItem?.InStock > 0,
                 };
