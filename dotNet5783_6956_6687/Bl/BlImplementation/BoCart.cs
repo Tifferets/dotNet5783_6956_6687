@@ -19,34 +19,36 @@ internal class BoCart : ICart
     /// <returns></returns>
     public Cart AddProductToCart(Cart cart, int productId)
     {
-        if (productId < 300000 || productId > 499999)//checking product id
-            throw new WrongIDException();
-        if(cart.Items ==null)//the cart is empty
-        {
-            DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x?.ID == productId && x?.InStock > 0);//checks if the product exist at all
-            if (product != null)
-            {
-                BO.OrderItem oi = new BO.OrderItem()
-                {
-                    Price = (double)product?.Price,
-                    ProductID = (int)product?.ID,
-                    Name = product?.Name,
-                    Amount = 1,
-                    TotalPrice = (double)product?.Price,
-
-                };
-                cart.Items.Add(oi);
-                cart.TotalPrice += (double)product?.Price;//added 1 product to the cart
-
-            }
-        }
         try
         {
-            BO.OrderItem? orderItem = new OrderItem();
-            if (cart.Items != null)
+            if (productId < 300000 || productId > 499999)//checking product id
+                throw new WrongIDException();
+            if (cart.Items == null)//the cart is empty
             {
-               orderItem = cart?.Items.FirstOrDefault(x => x.ProductID == productId);
-            }//orderItem is null if the product doesnt exist in the cart
+                DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x?.ID == productId && x?.InStock > 0);//checks if the product exist at all
+                if (product != null)
+                {
+                    BO.OrderItem oi = new BO.OrderItem()
+                    {
+                        Price = (double)product?.Price,
+                        ProductID = (int)product?.ID,
+                        Name = product?.Name,
+                        Amount = 1,
+                        TotalPrice = (double)product?.Price,
+
+                    };
+                    cart.Items.Add(oi);
+                    cart.TotalPrice += (double)product?.Price;//added 1 product to the cart
+
+                }
+            }
+            else
+            {
+                BO.OrderItem? orderItem = new OrderItem();
+                if (cart.Items != null)
+                {
+                    orderItem = cart?.Items.FirstOrDefault(x => x.ProductID == productId);
+                }//orderItem is null if the product doesnt exist in the cart
                 if (orderItem != null) //if the product already exists in the cart
                 {
                     DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x?.ID == productId && x?.InStock > 0);//checks if the product exist at all
@@ -79,10 +81,11 @@ internal class BoCart : ICart
                         cart.TotalPrice += (double)product?.Price;//added 1 product to the cart
 
                     }
+                    else throw new BO.CouldntFindProductException();
                 }
-            
+            }
         }
-        catch(Exception ex) { throw new CouldntAddProductException(); }//if nothing worked
+        catch (Exception ex) { throw new CouldntAddProductException(); }//if nothing worked
         //    {
         //        BO.Product p = dal.product.GetAll().FirstOrDefault(x => x.Value.ID == productId);//p is the product that we want to add
         //        if (p == null || p.InStock < orderItem.Amount) //if the product doesnt exist or there is not enough left
