@@ -28,7 +28,8 @@ namespace PL
         }
         public CustomerInfoWindow(Cart cart) : this()
         {
-            if (cart.Items == null) {
+            if (cart.Items == null) 
+            {
                 MessageBox.Show("Cart is empty, Please add product befor you check out");
                 this.Close();
             }

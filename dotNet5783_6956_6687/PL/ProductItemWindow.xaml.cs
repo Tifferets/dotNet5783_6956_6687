@@ -76,7 +76,6 @@ namespace PL
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            new NewOrderWindow(Cart, ProductItem).ShowDialog();
         }
     }
 }
