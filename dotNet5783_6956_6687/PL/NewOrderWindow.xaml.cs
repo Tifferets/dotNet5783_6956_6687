@@ -35,15 +35,18 @@ namespace PL
         public NewOrderWindow(Cart cart = null , ProductItem productItem = null) : this() 
         {
             Cart = cart;
-            ProductItem = new Products()
+            if (productItem != null)
             {
-                ID = productItem.ID,
-                Name = productItem.Name,
-                Amount = productItem.Amount,
-                Category = (PL.Category)productItem.Category,
-                InStock = productItem.Instock,
-                Price = productItem.Price,
-            };
+                ProductItem = new Products()
+                {
+                    ID = productItem.ID,
+                    Name = productItem.Name,
+                    Amount = productItem.Amount,
+                    Category = (PL.Category)productItem.Category,
+                    InStock = productItem.Instock,
+                    Price = productItem.Price,
+                };
+            }
         }
         public NewOrderWindow()
         {
