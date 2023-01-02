@@ -54,5 +54,10 @@ namespace PL
             }
 
         }
+
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

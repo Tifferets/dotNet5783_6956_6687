@@ -33,7 +33,8 @@
             <Label Content="{Binding Price}" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Height="34" Width="156" FontWeight="Normal"/>
             <Label x:Name="Amount_textbox" Content="{Binding Amount}" HorizontalAlignment="Left"  VerticalAlignment="Top"  Grid.Column="1" Grid.Row="4" FontWeight="Normal" Height="34" Width="182" Margin="0,5,0,0"/>
         </Grid>
-        <Button x:Name="addToCart" Content="Add one to cart" HorizontalAlignment="Left" Height="65" Margin="547,275,0,0" VerticalAlignment="Top" Width="126" Click="addToCart_Click" /> 
+        <Button x:Name="addToCart_button" Content="Add one to cart" HorizontalAlignment="Left" Height="65" Margin="547,275,0,0" VerticalAlignment="Top" Width="126" Click="addToCart_Click" />
+        <Button x:Name="back_button" Content="Go back" Height="27" Margin="0,0,718,0" VerticalAlignment="Top" Click="GoBack_Click" />
 
     </Grid>
 </Window>
