@@ -26,15 +26,16 @@
             <Label x:Name="Price_Label" Content="Price:" Grid.Column="0" Margin="25,5,0,0" Grid.Row="3" Width="73" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Label x:Name="InStock_Label" Content="In Stock:" Grid.Column="0" Margin="25,1,0,0" Grid.Row="4" Width="84" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-            <TextBox x:Name="Id_Textbox" Grid.Column="1"  Grid.Row="0"  MaxLength="6" PreviewTextInput="PreviewTextImputNoDec" Text="{Binding Id}" ToolTipService.ToolTip  =  "ID range is 300000- 399999" Margin="57,8,56,10"   />
+            <TextBox x:Name="Id_Textbox" Grid.Column="1"  Grid.Row="0"  MaxLength="6" PreviewTextInput="PreviewTextImputNoDec" Text="{Binding Id}" Margin="57,10,56,10" MouseEnter="Id_Textbox_MouseEnter" MouseLeave="Id_Textbox_MouseLeaveId_Textbox_MouseLeave_1"/>
             <TextBox x:Name="Name_Textbox" Grid.Column="1"  Grid.Row="1" Text ="{Binding Name , Mode=TwoWay}"  TextWrapping="Wrap" PreviewTextInput="PreviewTextImputString" Margin="57,5,56,10"/>
             <TextBox x:Name="InStock_Textbox"  Grid.Column="1"  Grid.Row="4" Text="{Binding InStock}" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" PreviewTextInput="PreviewTextImputNoDec" Margin="0,10,0,0" Height="23"/>
             <ComboBox x:Name="Category_ComboBox"  Grid.Column="1" Grid.Row="2" Text="{Binding Category , Mode=TwoWay}" Width="120"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="27" />
             <TextBox x:Name="Price_Textbox" Grid.Column="1" Grid.Row="3" Text="{Binding Price , Mode=TwoWay}" TextWrapping="Wrap" PreviewTextInput="PreviewTextImput" Margin="57,10,56,13"  />
+            <Label x:Name="message_lable" Grid.Column="1" Content="ID range 300000-399999" HorizontalAlignment="Center" Margin="0,33,0,0" VerticalAlignment="Top" Width="120" FontWeight="Normal" FontSize="10" Grid.RowSpan="2"/>
         </Grid>
 
-        <Button x:Name= "AddProduct_Button" Content= "Add" HorizontalAlignment= "Left" Margin= "639,109,0,0" VerticalAlignment= "Top" Click= "AddProduct_Button_Click" Height="38" Width="93"/> 
-        
+        <Button x:Name= "AddProduct_Button" Content= "Add" HorizontalAlignment= "Left" Margin= "639,109,0,0" VerticalAlignment= "Top" Click= "AddProduct_Button_Click" Height="38" Width="93"/>
+
         <Button x:Name="UpdateProduct_button" Content="Update" HorizontalAlignment="Left" Margin="639,174,0,0" VerticalAlignment="Top" Click="UpdateProduct_button_Click" Height="38" Width="90" />
 
 

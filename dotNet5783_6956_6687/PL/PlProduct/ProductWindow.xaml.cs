@@ -44,6 +44,7 @@ namespace PL.PlProduct
         public ProductWindow()
         {
             InitializeComponent();
+            message_lable.Visibility = Visibility.Hidden;
             Category_ComboBox.ItemsSource = BO.Category.GetValues(typeof(BO.Category));//combobox source of info- categories
         }
 
@@ -148,10 +149,29 @@ namespace PL.PlProduct
         {
             return !regex.IsMatch(text);
         }
+
+
+
         #endregion
 
-       
+        private void Id_Textbox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            message_lable.Visibility = Visibility.Hidden;
+        }
 
-        
+        private void Id_Textbox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            message_lable.Visibility = Visibility.Visible;
+        }
+
+        private void Id_Textbox_MouseLeave_1(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Id_Textbox_MouseLeaveId_Textbox_MouseLeave_1(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }
