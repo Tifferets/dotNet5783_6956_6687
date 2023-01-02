@@ -47,6 +47,7 @@ namespace PL
         {
             CustomerInfoWindow ciw = new CustomerInfoWindow(cart1);
             ciw.ShowDialog();
+            this.Close();
             //try
             //{
             //    cart1.CustomerEmail =cu
@@ -59,7 +60,7 @@ namespace PL
             //catch(Exception ex) { MessageBox.Show(ex.ToString()); }//if theres a problem 
            
             
-            MessageBox.Show("Thank you and have a nice day");
+
            
         }
 

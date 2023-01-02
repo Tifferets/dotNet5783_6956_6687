@@ -21,7 +21,7 @@ namespace PL
     public partial class CustomerInfoWindow : Window
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
-        Cart Cart = new Cart();
+        Cart cart1 = new Cart();
         public CustomerInfoWindow()
         {
             InitializeComponent();
@@ -33,6 +33,27 @@ namespace PL
                 MessageBox.Show("Cart is empty, Please add product befor you check out");
                 this.Close();
             }
+            cart1 = cart;
+        }
+
+        private void CheckOut_button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Cart cart = new Cart()//creats the  customers cart
+                {
+                    CustomerAddress = Address_TextBox.Text,
+                    CustomerEmail = Email_TextBox.Text,
+                    CustomerName = Name_TextBox.Text,
+                    Items = cart1.Items.ToList(),
+                    TotalPrice = cart1.TotalPrice,
+
+                };
+                bl?.Cart.confirmCart(cart);
+                MessageBox.Show("Thank you and have a nice day");
+                this.Close();
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message.ToString()); }
         }
     }
 }
