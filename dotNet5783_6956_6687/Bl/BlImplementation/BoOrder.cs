@@ -24,9 +24,9 @@ internal class BoOrder: IOrder
         {
             var neww = (from DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException()
                         let amountOfitems = dal?.order.GetAllOrderItems(item.ID).Count()
-                        let totalPrice = dal?.order.GetAllOrderItems(item.ID).Sum(x => x?.ProductID)
+                        let totalPrice = dal?.order.GetAllOrderItems(item.ID).Sum(x => x?.Price)
                         let status = (BO.OrderStatus)OrderStatus(item.ID).Status
-                        let oilist = dal?.order?.GetAllOrderItems(item.ID).OrderByDescending(x => x.Value.OrderItemID)
+                        let oilist = dal?.order?.GetAllOrderItems(item.ID).OrderByDescending(x => x?.OrderItemID)
                         select new BO.OrderForList
                         {
                             ID = item.ID,
@@ -82,19 +82,35 @@ internal class BoOrder: IOrder
                 List<BO.OrderItem> orderitemList = new List<BO.OrderItem>();//list of orderitems
                 double totalprice = 0;
                 var orderitems = from DO.OrderItem item in dal?.order.GetAllOrderItems(orderId) ?? throw new BO.NullException()
-                             //let totalPrice = dal?.order.GetAllOrderItems(item.OrderID).Sum(x => x?.ProductID)
-                            // let amountOfitems = dal?.order.GetAllOrderItems(item.OrderID).Count()
-                             let product = dal?.product.GetSingle(x => x?.ID == item.ProductID)//the product by id
-                             select new BO.OrderItem     //adding to the list
-                             {
-                                 ID = item.OrderItemID,
-                                 ProductID = item.ProductID,
-                                 Name = product?.Name,
-                                 Price = item.Price,
-                                 Amount = item.Amount,
-                                 TotalPrice = item.Amount* item.Price,
-                             };
-                foreach(BO.OrderItem item in orderitems)//adding all the items to the list
+                                     //let totalPrice = dal?.order.GetAllOrderItems(item.OrderID).Sum(x => x?.ProductID)
+                                     // let amountOfitems = dal?.order.GetAllOrderItems(item.OrderID).Count()
+                                 let product = dal?.product.GetSingle(x => x?.ID == item.ProductID)//the product by id
+                                 select new BO.OrderItem     //adding to the list
+                                 {
+                                     ID = item.OrderItemID,
+                                     ProductID = item.ProductID,
+                                     Name = product?.Name,
+                                     Price = item.Price,
+                                     Amount = item.Amount,
+                                     TotalPrice = item.Amount * item.Price,
+                                 };
+                //foreach (DO.OrderItem item in dal?.order.GetAllOrderItems(orderId) ?? throw new BO.NullException())//going over all the order items dor this order
+                //{
+                //    // totalprice += item.Price* item.Amount;//the total price of the items
+                //    // oiamount = item.Amount;//amount of items
+                //    DO.Product? product = dal?.product.GetSingle(x => x?.ID == item.ProductID);//the product by id 
+                //    orderitemList.Add(new BO.OrderItem     //adding to the list
+                //    {
+                //        ID = item.OrderItemID,
+                //        ProductID = item.ProductID,
+                //        Name = product?.Name,
+                //        Price = item.Price,
+                //        Amount = item.Amount,
+                //        TotalPrice = item.Price * item.Amount,
+
+                //    });
+                //}
+                foreach (BO.OrderItem item in orderitems)//adding all the items to the list
                 {
                     orderitemList.Add(item);
                     totalprice += item.TotalPrice;
