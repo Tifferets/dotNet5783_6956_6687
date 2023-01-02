@@ -15,7 +15,7 @@ public class Products: INotifyPropertyChanged
     private double price;
     private Category category;
     private int amount;
-    private bool? inStock;
+    private bool inStock;
     public int ID
     {
         get { return Id;}
@@ -82,7 +82,7 @@ public class Products: INotifyPropertyChanged
         }
 
     }
-    public bool? InStock
+    public bool InStock
     {
         get { return inStock; }
         set

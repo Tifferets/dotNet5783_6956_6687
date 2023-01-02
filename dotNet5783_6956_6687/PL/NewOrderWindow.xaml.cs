@@ -31,31 +31,36 @@ namespace PL
         private ObservableCollection<ProductItem?> productItemList { get; set; }
         public ObservableCollection<IGrouping<BO.Category, ProductItem>> CatergoryGroup { get; set; }
         private Cart Cart = new Cart();
-        private Products ProductItem { get; set; }
-        public NewOrderWindow(Cart cart = null , ProductItem productItem = null) : this() 
+        private Products ProductItem;
+        public NewOrderWindow(Cart cart = null , Products productItem = null) : this() 
         {
-            Cart = cart;
-            if (productItem != null)
-            {
-                ProductItem = new Products()
-                {
-                    ID = productItem.ID,
-                    Name = productItem.Name,
-                    Amount = productItem.Amount,
-                    Category = (PL.Category)productItem.Category,
-                    InStock = productItem.Instock,
-                    Price = productItem.Price,
-                };
-            }
+            this.refresh(cart, productItem);
+            //Cart = cart;
+            //if (productItem != null)//if the product item isnt null we want to update it in our CO
+            //{
+            //    ProductItem = productItem;
+            //    var product = new ProductItem()
+            //    {
+            //        ID = ProductItem.ID,
+            //        Name = ProductItem.Name,
+            //        Amount = 0,
+            //        Category = (BO.Category)ProductItem.Category,
+            //        Instock = ProductItem.InStock,
+            //        Price = ProductItem.Price
+            //    };
+            //    var item = productItemList.FirstOrDefault(x => x.ID == ProductItem.ID);
+            //    var index = productItemList.IndexOf(item);
+            //    product.Amount = ProductItem.Amount;
+            //    productItemList[index] = product;
+            //}
+            //ProductItem_DataGrid.DataContext = productItemList;
         }
         public NewOrderWindow()
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
             productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
-            // List<ProductItem> lst = productItemList.OrderBy(x => x.Category.ToString()).ToList();
             ProductItem_DataGrid.DataContext = productItemList;
-            // CatergoryGroup = CatergoryGroup.
             CatergoryGroup = new ObservableCollection < IGrouping < BO.Category, ProductItem >>
                 (from item in bl.Product.GetlListOfProductItem()
                 orderby item.Category
@@ -85,25 +90,52 @@ namespace PL
             {
                 try
                 {
-                    ProductItem? p1 = ProductItem_DataGrid.SelectedItem as ProductItem;
-                    if (p1 != null)
+
+                    ProductItem? p1 = ProductItem_DataGrid.SelectedItem as ProductItem;//get the selected item
+                    ProductItem = new Products()//convert it to pl product item
                     {
-                        //this.Close();
-                        new ProductItemWindow(Cart, p1).ShowDialog();
+                        ID = p1.ID,
+                        Name = p1.Name,
+                        Amount = p1.Amount,
+                        Category = (PL.Category)p1.Category,
+                        InStock = p1.Instock,
+                        Price = p1.Price,
+                    };
+                    if (ProductItem != null)//if it exests
+                    {
+                        new ProductItemWindow(Cart, ProductItem, refresh).ShowDialog();//go to the next window with our cart and product
                     }
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show("Prosuct is out of stock, sorry");
-                    //}}
                 }
-                catch(Exception ex) { MessageBox.Show(ex.Message); }
+                catch(Exception ex)
+                { 
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
         private void ShopBy_CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             ProductItem_DataGrid.DataContext = CatergoryGroup;
+        }
+        private void refresh(Cart cart , Products productItem)
+        {
+            if (productItem != null)//if the product item isnt null we want to update it in our CO
+            { 
+                var product = new ProductItem()
+                {
+                    ID = productItem.ID,
+                    Name = productItem.Name,
+                    Amount = 0,
+                    Category = (BO.Category)productItem.Category,
+                    Instock = productItem.InStock,
+                    Price = productItem.Price
+                };
+                var item = productItemList.FirstOrDefault(x => x.ID == productItem.ID);
+                var index = productItemList.IndexOf(item);
+                product.Amount = productItem.Amount;
+                productItemList[index] = product;
+            }
+            ProductItem_DataGrid.DataContext = productItemList;
         }
     }
 }

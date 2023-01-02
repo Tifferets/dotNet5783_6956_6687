@@ -1,4 +1,5 @@
 ﻿using BO;
+using PL.PlProduct;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,43 +22,61 @@ namespace PL
     public partial class ProductItemWindow : Window
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
+        Action<Cart, Products>? action;
         Cart Cart = new Cart()
         {
             Items = new List<OrderItem>()
         };
-        ProductItem ProductItem = new ProductItem();
+       // ProductItem ProductItem = new ProductItem();
+        Products ProductItem= new Products();
         public ProductItemWindow()
         {
             InitializeComponent();
         }
-        public ProductItemWindow(Cart cart, ProductItem productItem ):this() 
+        public ProductItemWindow(Cart cart, Products p1, Action<Cart, Products>? action) :this() 
         {
-            ProductOtemGrid.DataContext = productItem;
+            this.action= action;
             Cart = cart;
-            ProductItem = productItem;
+            ProductItem = new Products()//builds new productitem- the pl one
+            {
+                ID = p1.ID,
+                Name = p1.Name,
+                Amount = p1.Amount,
+                Category = (PL.Category)p1.Category,
+                InStock = p1.InStock,
+                Price = p1.Price,
+            };
+            ProductOtemGrid.DataContext = ProductItem;// displays the info to the screeen
         }
 
-        private void addToCart_Click(object sender, RoutedEventArgs e)
+        private void addToCart_Click(object sender, RoutedEventArgs e)//butten to add one to the cart
         {
-            if (Cart == null) return;
+            if (Cart == null) return;//if the cart is null
             try
             {
-                bl?.Cart.AddProductToCart(Cart, ProductItem.ID);
-                MessageBox.Show("Product added successfully");
-                this.Close();
-                new NewOrderWindow(Cart).ShowDialog();
-                
+                if(ProductItem.InStock == true)// if there is enough in stock we can add it  
+                {
+                    ProductItem.Amount++;//add to the amount 
+                    
+                    bl?.Cart.AddProductToCart(Cart, ProductItem.ID);//adds it to our cart 
+                    MessageBox.Show("Product added successfully");
+                    action(Cart, ProductItem);
+                }
+                else
+                {
+                    MessageBox.Show("Product is out of stock, sorry");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            new NewOrderWindow(Cart, ProductItem).ShowDialog();
         }
     }
 }
