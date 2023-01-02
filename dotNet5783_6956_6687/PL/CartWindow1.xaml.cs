@@ -41,13 +41,22 @@ namespace PL
             {
                 OrderItemList = new ObservableCollection<OrderItem>();
             }
-            
+            cart1 = cart;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            BO.Cart cart = new BO.Cart();
+            //try
+            //{
+            //    cart1.CustomerEmail =cu
+
+            //    bl.Cart.confirmCart(cart1,)
+            //   // BO.Cart cart = new BO.Cart()
+                
+
+            //}
+            //catch(Exception ex) { MessageBox.Show(ex.ToString()); }//if theres a problem 
            
-            //  cart =
+            
             MessageBox.Show("Thank you and have a nice day");
            
         }
