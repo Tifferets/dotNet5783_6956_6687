@@ -88,7 +88,7 @@ namespace PL
                     ProductItem? p1 = ProductItem_DataGrid.SelectedItem as ProductItem;
                     if (p1 != null)
                     {
-                        this.Close();
+                        //this.Close();
                         new ProductItemWindow(Cart, p1).ShowDialog();
                     }
                     //}
