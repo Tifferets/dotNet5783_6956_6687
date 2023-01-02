@@ -233,7 +233,7 @@ internal class BoCart : ICart
             //}
 
         }
-        catch(Exception )
+        catch(Exception)
         {
             throw new BO.CantUpDateException();
         }

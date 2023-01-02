@@ -28,7 +28,8 @@ namespace PL
     public partial class NewOrderWindow : Window
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
-        private ObservableCollection<ProductItem> productItemList { get; set; }
+        private ObservableCollection<ProductItem?> productItemList { get; set; }
+        public ObservableCollection<IGrouping<BO.Category, ProductItem>> CatergoryGroup { get; set; }
         private Cart Cart = new Cart();
         public NewOrderWindow(Cart cart = null /*ProductItem productItem = null*/) : this() 
         {
@@ -38,17 +39,29 @@ namespace PL
         {
             InitializeComponent();
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
-            productItemList = new ObservableCollection<ProductItem>(bl.Product.GetlListOfProductItem().ToList());
-            List<ProductItem> lst = productItemList.OrderBy(x => x.Category.ToString()).ToList();
-            ProductItem_DataGrid.DataContext = lst;
+            productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
+            // List<ProductItem> lst = productItemList.OrderBy(x => x.Category.ToString()).ToList();
+            ProductItem_DataGrid.DataContext = productItemList;
+            // CatergoryGroup = CatergoryGroup.
+            CatergoryGroup = new ObservableCollection < IGrouping < BO.Category, ProductItem >>
+                (from item in bl.Product.GetlListOfProductItem()
+                orderby item.Category
+                group item by item.Category into item
+                select item);
+
         }
         private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Category_ComboBox.SelectedItem != null && Category_ComboBox.SelectedItem is not Category.All) //we want to chang the info
-                ProductItem_DataGrid.DataContext = bl?.Product.GetproductForListByCategory((BO.Category)Category_ComboBox.SelectedItem);
+            {
+                productItemList = new ObservableCollection<ProductItem?>(CatergoryGroup[Category_ComboBox.SelectedIndex]);
+                ProductItem_DataGrid.DataContext = productItemList;
+            }
+
             else if (Category_ComboBox.SelectedItem is Category.All)
             {
-                ProductItem_DataGrid.DataContext = bl?.Product.GetListOfProducts();//listveiws source from BO func getLstOfProducts
+                productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
+                ProductItem_DataGrid.DataContext = productItemList;
                 Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source
             }
         }
@@ -57,20 +70,27 @@ namespace PL
         {
             if (ProductItem_DataGrid.SelectedIndex >= 0)
             {
-                ProductItem? p1 = ProductItem_DataGrid.SelectedItem as ProductItem;//creats a new productforlist
-                if (p1.Instock)
+                try
                 {
+                    ProductItem? p1 = ProductItem_DataGrid.SelectedItem as ProductItem;
                     if (p1 != null)
                     {
                         this.Close();
                         new ProductItemWindow(Cart, p1).ShowDialog();
                     }
+                    //}
+                    //else
+                    //{
+                    //    MessageBox.Show("Prosuct is out of stock, sorry");
+                    //}}
                 }
-                else
-                {
-                    MessageBox.Show("Prosuct is out of stock, sorry");
-                }
+                catch(Exception ex) { MessageBox.Show(ex.Message); }
             }
+        }
+
+        private void ShopBy_CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            ProductItem_DataGrid.DataContext = CatergoryGroup;
         }
     }
 }

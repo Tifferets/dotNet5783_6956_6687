@@ -19,7 +19,8 @@
 
         </DataGrid>
         <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="565,72,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="Category_ComboBox_SelectionChanged"/>
-        <Button Content="Add To Cart" HorizontalAlignment="Left" Height="51" Margin="565,255,0,0" VerticalAlignment="Top" Width="186" Click="Button_Click"/>
+        <Button Content="Go To Cart" HorizontalAlignment="Left" Height="51" Margin="565,255,0,0" VerticalAlignment="Top" Width="186" Click="Button_Click"/>
+        <CheckBox x:Name="ShopBy_CheckBox" Content="Shop by Category" HorizontalAlignment="Left" Height="26" Margin="565,129,0,0" VerticalAlignment="Top" Width="114" Checked="ShopBy_CheckBox_Checked"/>
 
     </Grid>
 </Window>

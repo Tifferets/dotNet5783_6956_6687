@@ -35,7 +35,7 @@ namespace PL
             {
                 OrderItemList = new ObservableCollection<OrderItem>(cart.Items);
                 Products_DataGrid.DataContext = OrderItemList;
-                
+                this.DataContext = cart1;
             }
             else
             {
