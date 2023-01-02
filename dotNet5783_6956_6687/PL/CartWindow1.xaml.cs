@@ -45,6 +45,8 @@ namespace PL
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            CustomerInfoWindow ciw = new CustomerInfoWindow(cart1);
+            ciw.ShowDialog();
             //try
             //{
             //    cart1.CustomerEmail =cu

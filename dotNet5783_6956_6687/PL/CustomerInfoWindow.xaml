@@ -7,24 +7,25 @@
         mc:Ignorable="d"
         Title="CustomerInfoWindow" Height="450" Width="800">
     <Grid>
-        <Grid>
+        <Grid Margin="44,67,384,67">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="61*"/>
-                <ColumnDefinition Width="89*"/>
+
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="2*"/>
+
             </Grid.RowDefinitions>
-            <Label Content="Name:" HorizontalAlignment="Left" Margin="67,0,0,0" VerticalAlignment="Center" Height="34" Width="71"/>
-            <Label Content="Email Address:" HorizontalAlignment="Center" Margin="0,31,0,0" Grid.Row="1" VerticalAlignment="Top" Height="34" Width="148"/>
-            <Label Content="Address:" HorizontalAlignment="Left" Margin="70,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="34" Width="91"/>
-            <TextBox x:Name="Name"  Grid.Column="1" HorizontalAlignment="Center" Margin="0,60,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18"/>
-            <TextBox x:Name="Email" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="Customer@gmail.com" VerticalAlignment="Center" Width="138" Height="18"/>
-            <TextBox x:Name="Address" Grid.Column="1" HorizontalAlignment="Center" Margin="0,26,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+            <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="34" Width="71"/>
+            <Label Content="Email Address:" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" Height="34" Width="148"/>
+            <Label Content="Address:" VerticalAlignment="center" HorizontalAlignment="Left"  Grid.Row="2" Height="34" Width="91"/>
+            <TextBox x:Name="Name_TextBox"  Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap"  VerticalAlignment="Center" Width="184" Height="34"/>
+            <TextBox x:Name="Email_TextBox" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="Customer@gmail.com" VerticalAlignment="Center" Width="184" Height="34"/>
+            <TextBox x:Name="Address_TextBox" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="184" Height="34"/>
         </Grid>
+        <Button x:Name="CheckOut_button" Content="Check out" HorizontalAlignment="Left" Height="34" Margin="478,250,0,0" VerticalAlignment="Top" Width="232"/>
     </Grid>
 </Window>

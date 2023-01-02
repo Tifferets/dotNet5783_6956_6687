@@ -8,7 +8,7 @@
         Title="CartWindow1" Height="450" Width="800">
     <Grid x:Name="WindowGrid">
         <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"  Text="{Binding TotalPrice}" Margin="239,297,0,0"  IsReadOnly="True" Height="29"/>
-        <Button Content="Check out" HorizontalAlignment="Left" Margin="617,156,0,0" VerticalAlignment="Top" Height="60" Width="132" Click="Button_Click"/>
+        <Button Content="Proceed to checkout" HorizontalAlignment="Left" Margin="617,156,0,0" VerticalAlignment="Top" Height="60" Width="132" Click="Button_Click"/>
         <Button Content="Continue shopping" HorizontalAlignment="Left" Margin="615,49,0,0" VerticalAlignment="Top" Height="60" Width="134" Click="Button_Click_1"/>
 
         <DataGrid x:Name="Products_DataGrid" HorizontalAlignment="Left" Height="215" Margin="92,49,0,0" VerticalAlignment="Top" Width="474" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserResizeColumns="False"  CanUserReorderColumns="False" CanUserAddRows="False">
