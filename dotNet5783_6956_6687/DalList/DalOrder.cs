@@ -76,7 +76,7 @@ internal class DalOrder : IOrder
     public IEnumerable<OrderItem?> GetAllOrderItems(int id)//returns all the order items for the spicific order by its id
     {
         List<OrderItem?> lst = (from OrderItem? item in DataSource.OrderItemList ?? throw new NullException()
-                                where item?.OrderItemID == id
+                                where item?.OrderID == id
                                 select item).ToList();
         //List<OrderItem?> lst = new List<OrderItem?>();
         //foreach (OrderItem? item in DataSource.OrderItemList ?? throw new NullException())

@@ -45,7 +45,7 @@
 
         </Grid>
         <Button x:Name="Update_button" Content="Update" HorizontalAlignment="Left" Margin="690,76,0,0" VerticalAlignment="Top" Height="57" Width="177" FontSize="25"/>
-        <ListView x:Name="Items_listview" HorizontalAlignment="Left" Height="396" Margin="690,213,0,0" VerticalAlignment="Top" Width="441" ItemsSource = "{Binding Items}" d:ItemsSource="{d:SampleData ItemCount=10}">
+        <ListView x:Name="Items_listview" HorizontalAlignment="Left" Height="396" Margin="690,213,0,0" VerticalAlignment="Top" Width="441" ItemsSource = "{Binding}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
