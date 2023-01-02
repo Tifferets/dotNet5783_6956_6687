@@ -83,7 +83,12 @@ namespace PL
                 Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1(Cart).ShowDialog();
+        //private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1(Cart).ShowDialog();
+        private void Button_Click(object sender, RoutedEventArgs e)
+        { 
+            new CartWindow1(Cart).ShowDialog();
+            this.Close();
+        }
         private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)
         {
             if (ProductItem_DataGrid.SelectedIndex >= 0)

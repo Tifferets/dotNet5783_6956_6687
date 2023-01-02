@@ -245,13 +245,13 @@ internal class BoCart : ICart
     /// <param name="name"></param>
     ///<param name="address"></param>
     /// <param name="email"></param>
-    public void confirmCart(Cart cart, string name, string address, string email)
+    public void confirmCart(Cart cart)//, string name, string address, string email)
     {
         bool checkIfWorked = true;
         try
         {
-            if (name == null || address == null || CheckEmail(email) == false)//makes sure all the customers info is correct
-                throw new MissingCustomersInfoException();
+           // if (name == null || address == null || CheckEmail(email) == false)//makes sure all the customers info is correct
+              //  throw new MissingCustomersInfoException();
             if (cart.Items == null)
                 throw new BO.NoItemsInCartException();
 
@@ -281,9 +281,9 @@ internal class BoCart : ICart
             {
                 DO.Order order = new DO.Order()
                 {
-                    CustomerAddress = address,
-                    CustomerEmail = email,
-                    CustomerName = name,
+                    CustomerAddress = cart.CustomerAddress,
+                    CustomerEmail = cart.CustomerEmail,
+                    CustomerName = cart.CustomerName,
                     OrderDate = DateTime.Now,
                     DeliveryDate = DateTime.Now,
                     ShipDate = DateTime.Now,
