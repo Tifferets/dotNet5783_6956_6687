@@ -45,11 +45,9 @@ namespace PL
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            BO.Cart cart = new BO.Cart();
            
-            //  cart =
-            MessageBox.Show("Thank you and have a nice day");
-           
+           new CustomerInfoWindow(cart1).ShowDialog();
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)=> this.Close();

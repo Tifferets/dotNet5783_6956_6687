@@ -31,9 +31,19 @@ namespace PL
         private ObservableCollection<ProductItem?> productItemList { get; set; }
         public ObservableCollection<IGrouping<BO.Category, ProductItem>> CatergoryGroup { get; set; }
         private Cart Cart = new Cart();
-        public NewOrderWindow(Cart cart = null /*ProductItem productItem = null*/) : this() 
+        private Products ProductItem { get; set; }
+        public NewOrderWindow(Cart cart = null , ProductItem productItem = null) : this() 
         {
             Cart = cart;
+            ProductItem = new Products()
+            {
+                ID = productItem.ID,
+                Name = productItem.Name,
+                Amount = productItem.Amount,
+                Category = (PL.Category)productItem.Category,
+                InStock = productItem.Instock,
+                Price = productItem.Price,
+            };
         }
         public NewOrderWindow()
         {
