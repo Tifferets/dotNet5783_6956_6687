@@ -289,8 +289,6 @@ internal class BoCart : ICart
                     CustomerEmail = cart.CustomerEmail,
                     CustomerName = cart.CustomerName,
                     OrderDate = DateTime.Now,
-                    DeliveryDate = DateTime.Now,
-                    ShipDate = DateTime.Now,
                 };
                 int id;
                 try
@@ -300,6 +298,18 @@ internal class BoCart : ICart
                 catch (Exception )
                 {
                     throw new BO.errorException();
+                }
+                foreach (OrderItem? item in cart.Items)//goes through all the orderitems in cart
+                {
+                    DO.OrderItem orderItem = new DO.OrderItem()
+                    {
+                        OrderID = id,
+                        Amount = item.Amount,
+                        Price = item.Price,
+                        ProductID = item.ProductID,
+                       
+                    };
+                    orderItem.OrderItemID = (int)dal?.orderItem.Add(orderItem);
                 }
                 foreach (OrderItem? item in cart.Items)//goes through all the orderitems in cart
                 {

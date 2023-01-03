@@ -54,8 +54,7 @@ namespace PL
                     };
                     bl?.Cart.confirmCart(cart);
                     MessageBox.Show("Thank you and have a nice day");
-
-                    //this.Close();
+                    this.Close();
                 }
             }
             catch(Exception ex) { MessageBox.Show(ex.Message.ToString()); }

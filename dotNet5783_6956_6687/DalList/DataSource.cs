@@ -56,7 +56,7 @@ internal static class DataSource
     private static void s_Initialize()
     {
         // Order
-        for (int i = 0; i <10 ; i++)//adds 20 orders to the list
+        for (int i = 0; i < 10 ; i++)//adds 20 orders to the list
         {
             Order order = new Order();
             order.ID = config.GetOrderID;
@@ -115,7 +115,7 @@ internal static class DataSource
                 orderItem.Price = p.Price;//same price as product
                 orderItem.Amount = rand.Next(1,10);//random amount
                 orderItem.ProductID = p.ID;
-                orderItem.OrderID = 100000 + j;
+              //  orderItem.OrderID = 100000 + j;
                 OrderItemList.Add(orderItem);
             }
             

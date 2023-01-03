@@ -62,6 +62,7 @@ namespace PL
                     CustomerInfoWindow ciw = new CustomerInfoWindow(cart1);
                     ciw.ShowDialog();//opens the window that costomer can put info in
                 }
+                this.Close();
             }
             catch(Exception ex)
             {

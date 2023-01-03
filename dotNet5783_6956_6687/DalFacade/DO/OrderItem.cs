@@ -24,7 +24,7 @@ public struct OrderItem
     /// </summary>
     public double Price { get; set; }
     /// <summary>
-    /// the amount od the product
+    /// the amount of the product
     /// </summary>
     public int Amount { get; set; }
     /// <summary>
