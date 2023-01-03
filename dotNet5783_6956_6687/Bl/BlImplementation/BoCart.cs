@@ -358,11 +358,7 @@ internal class BoCart : ICart
                 try
                 {
                     order.ID = dal?.order.Add(order) ?? 0;
-                }
-                catch (Exception )
-                {
-                    throw new BO.errorException();
-                }
+               
                 foreach (OrderItem? item in cart.Items)//goes through all the orderitems in cart
                 {
                     DO.OrderItem orderItem = new DO.OrderItem()
@@ -371,9 +367,14 @@ internal class BoCart : ICart
                         Price = item.Price,
                     };
                     orderItem.OrderItemID = (int)dal?.orderItem.Add(orderItem);
-                    orderItem.OrderID = order.ID;
+                        orderItem.OrderID = order.ID;
                     orderItem.ProductID = item.ProductID;
                     dal?.orderItem.Update(orderItem);
+                }
+                }
+                catch (Exception)
+                {
+                    throw new BO.errorException();
                 }
                 foreach (OrderItem? item in cart.Items)//goes through all the orderitems in cart
                 {
