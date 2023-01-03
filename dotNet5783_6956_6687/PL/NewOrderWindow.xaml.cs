@@ -140,13 +140,13 @@ namespace PL
         //    ProductItemWindow_listView.DataContext = productItemList;
         //    Category_ComboBox.IsEnabled = true;
         //}
-        private void ShopBy_CheckBox_Checked(object sender, RoutedEventArgs e)//checkbox Unchecked for sort by category
-        {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ProductItemWindow_listView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
-            view.GroupDescriptions.Add(groupDescription);
-            Category_ComboBox.IsEnabled = false;
-        }
+        //private void ShopBy_CheckBox_Checked(object sender, RoutedEventArgs e)//checkbox Unchecked for sort by category
+        //{
+        //    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ProductItemWindow_listView.ItemsSource);
+        //    PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
+        //    view.GroupDescriptions.Add(groupDescription);
+        //    Category_ComboBox.IsEnabled = false;
+        //}
 
        
     }
