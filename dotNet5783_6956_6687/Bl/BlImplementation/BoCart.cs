@@ -251,6 +251,70 @@ internal class BoCart : ICart
     /// <param name="email"></param>
     public void confirmCart(Cart cart)//, string name, string address, string email)
     {
+        //if(cart.CustomerName == null || cart.CustomerAddress ==null||    !cart.CustomerEmail.Contains('@')
+        //    throw new MissingCustomersInfoException();
+        //foreach (OrderItem item in cart.Items)
+        //{
+        //    DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x.Value.ID == item.ProductID);
+        //    if (product == null)
+        //        throw new BO.CouldntFindProductException();
+        //    else
+        //    {
+        //        if(product?.InStock < item.Amount)
+        //            throw new BO.NoMoreInStockException();
+        //        if(item.Amount <=0 )
+        //            throw new BO.errorException();
+
+        //    }
+        //}
+        ////if alls good
+
+        //DO.Order order = new DO.Order()
+        //{
+        //    DeliveryDate =null,
+        //    ShipDate=null,
+            
+        //    CustomerAddress = cart.CustomerAddress,
+        //    CustomerEmail = cart.CustomerEmail,
+        //    CustomerName = cart.CustomerName,
+        //    OrderDate = DateTime.Now,
+        //};
+        //try
+        //{
+
+        //    order.ID = dal?.order.Add(order) ?? 0;
+
+        //}
+        //catch (Exception ex) { throw new BO.errorException(); }
+        //foreach (OrderItem item in cart.Items)
+        //{
+        //    DO.OrderItem orderItem = new DO.OrderItem()
+        //    {
+        //        Amount = item.Amount,
+        //        Price = item.Price,
+        //        ProductID = item.ProductID,
+        //        OrderID = order.ID,
+        //        OrderItemID = item.ID
+        //    };
+
+        //    orderItem.OrderItemID = (int)dal?.orderItem.Add(orderItem);
+        //}
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         bool checkIfWorked = true;
         try
         {
@@ -366,7 +430,7 @@ internal class BoCart : ICart
         if (checkIfWorked == true)
             Console.WriteLine("cart confirmed");
     }
-    public bool CheckEmail(string email)//returns true if the email is proper else returns false
+    private bool CheckEmail(string email)//returns true if the email is proper else returns false
     {
         if(email == null) return false;
         if (email.Contains('@')) return true;
