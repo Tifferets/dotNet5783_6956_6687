@@ -193,12 +193,14 @@ internal class BoCart : ICart
                     dif = newAmount - theProductToUpdate.Amount;
                     cart.TotalPrice = cart.TotalPrice + dif * theProductToUpdate.Price;
                     theProductToUpdate.Amount = newAmount;
+                    theProductToUpdate.TotalPrice = newAmount * theProductToUpdate.Price;
                 }
                 else if (newAmount < theProductToUpdate.Amount)//wanted less
                 {
                     dif = theProductToUpdate.Amount- newAmount;
                     cart.TotalPrice = cart.TotalPrice - dif * theProductToUpdate.Price;
                     theProductToUpdate.Amount = newAmount;
+                    theProductToUpdate.TotalPrice = newAmount * theProductToUpdate.Price;
                 }
             }
             else

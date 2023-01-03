@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BO;
+using Microsoft.VisualBasic;
 using PL.PlProduct;
 using System;
 using System.Collections.Generic;
@@ -113,9 +114,34 @@ namespace PL
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                OrderItem orderItem = Products_DataGrid.SelectedItem as OrderItem;
+            if (orderItem != null)
+            {
+                    int amount;
+                    int.TryParse(Interaction.InputBox("Please enter new amount", "Chang product amount in cart", ""), out amount);//displays an inputbox and gets the id
+                    if (amount >= 0)//making sure there is text
+                    {
+                        cart1 = bl?.Cart.UpdateAmountOfProductInCart(cart1, orderItem.ProductID, amount);
+                        OrderItemList = new ObservableCollection<OrderItem>(cart1.Items);
+                        Products_DataGrid.DataContext = OrderItemList;
+                        cart2.TotalPrice = cart1.TotalPrice;
+                        Products productItem = new Products()
+                        {
+                            ID = orderItem.ProductID,
+                            Amount = amount,
+                        };
+                        action(cart1, productItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
