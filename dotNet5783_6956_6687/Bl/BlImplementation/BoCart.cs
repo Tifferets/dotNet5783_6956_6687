@@ -367,13 +367,13 @@ internal class BoCart : ICart
                 {
                     DO.OrderItem orderItem = new DO.OrderItem()
                     {
-                        OrderID = order.ID,
                         Amount = item.Amount,
                         Price = item.Price,
-                        ProductID = item.ProductID,
-                       
                     };
                     orderItem.OrderItemID = (int)dal?.orderItem.Add(orderItem);
+                    orderItem.OrderID = id;
+                    orderItem.ProductID = item.ProductID;
+                    dal?.orderItem.Update(orderItem);
                 }
                 foreach (OrderItem? item in cart.Items)//goes through all the orderitems in cart
                 {

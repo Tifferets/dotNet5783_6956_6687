@@ -105,7 +105,10 @@ internal class Program
                     name = Console.ReadLine()!;
                     string address = Console.ReadLine()!;
                     string email = Console.ReadLine()!;
-                    bl?.Cart.confirmCart(cart, name, address, email);
+                    cart.CustomerAddress= address;
+                    cart.CustomerEmail= email;
+                    cart.CustomerName= name;
+                    bl?.Cart.confirmCart(cart);
                     
                     break;
                 default:
