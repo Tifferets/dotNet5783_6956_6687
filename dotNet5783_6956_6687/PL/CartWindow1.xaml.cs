@@ -112,5 +112,10 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

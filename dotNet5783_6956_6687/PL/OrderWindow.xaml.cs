@@ -33,6 +33,7 @@ namespace PL
             OrderStatus_comboBox.ItemsSource = OrderStatus.GetValues(typeof(PL.OrderStatus));//combobox source 
             items = new ObservableCollection<OrderItem>(mydata.Items);
             Items_listview.DataContext = items;
+           // mydata.ID
             
 
             //Ordered_datePicker.SelectedDate = DateTime.Now;//the date we start with is nows date

@@ -25,7 +25,7 @@ namespace PL
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
         private ObservableCollection<ProductForList> productForLists;// { get; set; }
-        private ObservableCollection<OrderForList> orderForLists { get; set; }
+        private ObservableCollection<OrderForList> orderForLists;//{ get; set; }
         public Admin_Window()
         {
             InitializeComponent();
@@ -74,6 +74,11 @@ namespace PL
                     orderWindow.ShowDialog();
                 }
             }
-        }       
+        }
+
+        private void orderListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
