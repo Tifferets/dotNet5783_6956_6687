@@ -92,6 +92,7 @@ namespace PL
                     if (ProductItem != null)//if it exests
                     {
                         new ProductItemWindow(Cart, ProductItem, refresh).ShowDialog();//go to the next window with our cart and product
+                       // this.Close();
                     }
                 }
                 catch (Exception ex)

@@ -70,6 +70,7 @@ namespace PL.PlProduct
                     bl?.Product.AddProduct(product);//adds the product to the do
                     action(bl?.Product.GetProductForList(product.Id) ?? throw new NullException());//goes back to the window b4 and adds the product to the observablcollection
                     MessageBox.Show("product added successfully");
+                    this.Close();  //closes the window
                 }
                 catch (Exception ex)
                 {
@@ -105,6 +106,7 @@ namespace PL.PlProduct
                     bl?.Product.UpdateProduct(product);//adds the product to the do
                     action(bl?.Product.GetProductForList(product.Id) ?? throw new NullException());//goes back a window and does the update to the oc
                     MessageBox.Show("product updated successfully");
+                    this.Close();
 
                 }
                 catch (Exception ex)

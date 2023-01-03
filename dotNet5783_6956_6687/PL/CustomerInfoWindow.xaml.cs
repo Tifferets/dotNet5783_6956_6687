@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -53,10 +54,20 @@ namespace PL
                     };
                     bl?.Cart.confirmCart(cart);
                     MessageBox.Show("Thank you and have a nice day");
-                    this.Close();
+
+                    //this.Close();
                 }
             }
             catch(Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+        }
+        private void PreviewTextImputString(object sender, TextCompositionEventArgs e)// for name -only lets to put letters 
+        {
+            e.Handled = IsTextAllowedString(e.Text);//checks what is there
+        }
+        private static readonly Regex regex_str = new Regex("[^A-Z a-z]+");//only lets it be a letter
+        private static bool IsTextAllowedString(string text) //for name - makes sure the imput is a letter
+        {
+            return regex_str.IsMatch(text);
         }
     }
 }
