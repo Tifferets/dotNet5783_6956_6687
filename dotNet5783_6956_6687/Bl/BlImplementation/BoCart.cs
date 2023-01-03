@@ -351,7 +351,7 @@ internal class BoCart : ICart
         if (checkIfWorked == true)
             Console.WriteLine("cart confirmed");
     }
-    private bool CheckEmail(string email)//returns true if the email is proper else returns false
+    public bool CheckEmail(string email)//returns true if the email is proper else returns false
     {
         if(email == null) return false;
         if (email.Contains('@')) return true;
