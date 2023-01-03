@@ -371,7 +371,7 @@ internal class BoCart : ICart
                         Price = item.Price,
                     };
                     orderItem.OrderItemID = (int)dal?.orderItem.Add(orderItem);
-                    orderItem.OrderID = id;
+                    orderItem.OrderID = order.ID;
                     orderItem.ProductID = item.ProductID;
                     dal?.orderItem.Update(orderItem);
                 }
