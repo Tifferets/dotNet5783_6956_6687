@@ -24,8 +24,8 @@ namespace PL
     public partial class Admin_Window : Window
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
-        private ObservableCollection<ProductForList> productForLists;// { get; set; }
-        private ObservableCollection<OrderForList> orderForLists;//{ get; set; }
+        private ObservableCollection<ProductForList> productForLists { get; set; }
+        private ObservableCollection<OrderForList> orderForLists{ get; set; }
         public Admin_Window()
         {
             InitializeComponent();
@@ -71,14 +71,11 @@ namespace PL
                 if (p1 != null)
                 {
                     OrderWindow orderWindow = new OrderWindow(order);
-                    orderWindow.ShowDialog();
+                    orderWindow.ShowDialog();//opens the window with the orders information
                 }
             }
         }
 
-        private void orderListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
     }
 }

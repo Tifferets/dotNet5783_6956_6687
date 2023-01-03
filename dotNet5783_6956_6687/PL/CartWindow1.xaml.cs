@@ -25,7 +25,7 @@ namespace PL
     public partial class CartWindow1 : Window
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
-        private ObservableCollection<OrderItem> OrderItemList { get; set; }
+        private ObservableCollection<OrderItem> OrderItemList { get; set; }//for the listview
         private BO.Cart cart1 = new BO.Cart();
         private PL.PlProduct.Cart cart2 = new PL.PlProduct.Cart();
         Action<BO.Cart, Products>? action;
@@ -57,10 +57,10 @@ namespace PL
                 {
                     MessageBox.Show("Cart is empty, Please add product befor you check out");
                 }
-                else
+                else//if the cart has stuff in it
                 {
                     CustomerInfoWindow ciw = new CustomerInfoWindow(cart1);
-                    ciw.ShowDialog();
+                    ciw.ShowDialog();//opens the window that costomer can put info in
                 }
             }
             catch(Exception ex)
@@ -76,30 +76,25 @@ namespace PL
                 
 
             //}
-            //catch(Exception ex) { MessageBox.Show(ex.ToString()); }//if theres a problem 
-           
-            
-
-           
+            //catch(Exception ex) { MessageBox.Show(ex.ToString()); }//if theres a problem           
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ContinueShoppingButton_Click(object sender, RoutedEventArgs e)
         { 
             this.Close();
-
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)//remove from cart
+        private void RemoveProductFromCartButton_Click(object sender, RoutedEventArgs e)//remove from cart
         {
             try
             {
-                OrderItem orderItem = Products_DataGrid.SelectedItem as OrderItem;
+                OrderItem orderItem = Products_DataGrid.SelectedItem as OrderItem;//orderitem is the product they want to remove from cart
                 if (orderItem != null)
                 {
-                    cart1 = bl?.Cart.UpdateAmountOfProductInCart(cart1, orderItem.ProductID, 0);
+                    cart1 = bl?.Cart.UpdateAmountOfProductInCart(cart1, orderItem.ProductID, 0);//takes the product out of the cart
                     OrderItemList = new ObservableCollection<OrderItem>(cart1.Items);
                     Products_DataGrid.DataContext = OrderItemList;
-                    cart2.TotalPrice = cart1.TotalPrice;
+                    cart2.TotalPrice = cart1.TotalPrice;//updates the total price of the cart
                     Products productItem = new Products()
                     {
                         ID = orderItem.ProductID,
@@ -108,24 +103,24 @@ namespace PL
                     action(cart1, productItem);
                 }
             }
-            catch(Exception ex)
+            catch(Exception ex)//if theres a problem
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void ChangeAmountButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                OrderItem orderItem = Products_DataGrid.SelectedItem as OrderItem;
-            if (orderItem != null)
+                OrderItem orderItem = Products_DataGrid.SelectedItem as OrderItem;//orderitem is the product they want to update amount in cart
+                if (orderItem != null)
             {
                     int amount;
                     int.TryParse(Interaction.InputBox("Please enter new amount", "Chang product amount in cart", ""), out amount);//displays an inputbox and gets the id
                     if (amount > 0)//making sure there is text
                     {
-                        cart1 = bl?.Cart.UpdateAmountOfProductInCart(cart1, orderItem.ProductID, amount);
+                        cart1 = bl?.Cart.UpdateAmountOfProductInCart(cart1, orderItem.ProductID, amount);//updates the amount of the product in the cart
                         OrderItemList = new ObservableCollection<OrderItem>(cart1.Items);
                         Products_DataGrid.DataContext = OrderItemList;
                         cart2.TotalPrice = cart1.TotalPrice;
@@ -143,5 +138,6 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
+
     }
 }
