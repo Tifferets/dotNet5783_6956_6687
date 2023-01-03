@@ -53,7 +53,7 @@ namespace PL
         {
             try
             {
-                if (cart1.Items == null)
+                if (cart1.Items == null || cart1.Items.Count == 0)
                 {
                     MessageBox.Show("Cart is empty, Please add product befor you check out");
                 }
@@ -123,7 +123,7 @@ namespace PL
             {
                     int amount;
                     int.TryParse(Interaction.InputBox("Please enter new amount", "Chang product amount in cart", ""), out amount);//displays an inputbox and gets the id
-                    if (amount >= 0)//making sure there is text
+                    if (amount > 0)//making sure there is text
                     {
                         cart1 = bl?.Cart.UpdateAmountOfProductInCart(cart1, orderItem.ProductID, amount);
                         OrderItemList = new ObservableCollection<OrderItem>(cart1.Items);
