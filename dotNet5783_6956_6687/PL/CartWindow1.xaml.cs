@@ -1,4 +1,5 @@
-﻿using BO;
+﻿using BlApi;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,10 +44,17 @@ namespace PL
             }
             cart1 = cart;
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ProceedToCheckoutButton_Click(object sender, RoutedEventArgs e)
         {
-            CustomerInfoWindow ciw = new CustomerInfoWindow(cart1);
-            ciw.ShowDialog();
+            if (cart1.Items == null)
+            {
+                MessageBox.Show("Cart is empty, Please add product befor you check out");
+                this.Close();
+            }
+            else
+               new CustomerInfoWindow(cart1).ShowDialog();
+            //new CustomerInfoWindow(cart1).ShowDialog();
+           // ciw.ShowDialog();
             this.Close();
             //try
             //{
