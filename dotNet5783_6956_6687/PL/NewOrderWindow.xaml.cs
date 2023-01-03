@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections;
 
 namespace PL
 {
@@ -60,26 +61,26 @@ namespace PL
             InitializeComponent();
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
             productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
-            ProductItem_DataGrid.DataContext = productItemList;
-            CatergoryGroup = new ObservableCollection < IGrouping < BO.Category, ProductItem >>
-                (from item in bl.Product.GetlListOfProductItem()
-                orderby item.Category
-                group item by item.Category into item
-                select item);
-
+            ProductItemWindow_listView.DataContext = productItemList;
+            //CatergoryGroup = new ObservableCollection < IGrouping < BO.Category, ProductItem >>(
+            //from item in bl.Product.GetlListOfProductItem()
+            //              orderby item.Category
+            //              group item by item.Category into item
+            //              select item);
+           
         }
         private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Category_ComboBox.SelectedItem != null && Category_ComboBox.SelectedItem is not Category.All) //we want to chang the info
             {
                 productItemList = new ObservableCollection<ProductItem?>(CatergoryGroup[Category_ComboBox.SelectedIndex]);
-                ProductItem_DataGrid.DataContext = productItemList;
+                ProductItemWindow_listView.DataContext = productItemList;
             }
 
             else if (Category_ComboBox.SelectedItem is Category.All)
             {
                 productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
-                ProductItem_DataGrid.DataContext = productItemList;
+                ProductItemWindow_listView.DataContext = productItemList;
                 Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source
             }
         }
@@ -90,12 +91,12 @@ namespace PL
         }
         private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)
         {
-            if (ProductItem_DataGrid.SelectedIndex >= 0)
+            if (ProductItemWindow_listView.SelectedIndex >= 0)
             {
                 try
                 {
 
-                    ProductItem? p1 = ProductItem_DataGrid.SelectedItem as ProductItem;//get the selected item
+                    ProductItem? p1 = ProductItemWindow_listView.SelectedItem as ProductItem;//get the selected item
                     ProductItem = new Products()//convert it to pl product item
                     {
                         ID = p1.ID,
@@ -110,16 +111,22 @@ namespace PL
                         new ProductItemWindow(Cart, ProductItem, refresh).ShowDialog();//go to the next window with our cart and product
                     }
                 }
-                catch(Exception ex)
-                { 
+                catch (Exception ex)
+                {
                     MessageBox.Show(ex.Message);
                 }
             }
         }
-
+        public enum Category
+        {
+            // Cat, Dog, Fish, Parrot, Rabbit, All
+            Dog, Cat, Parrot, Rabbit, Fish, All,
+        }
         private void ShopBy_CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            ProductItem_DataGrid.DataContext = CatergoryGroup;
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ProductItemWindow_listView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
+            view.GroupDescriptions.Add(groupDescription);
         }
         private void refresh(Cart cart , Products productItem)
         {
@@ -139,10 +146,37 @@ namespace PL
                 product.Amount = productItem.Amount;
                 productItemList[index] = product;
             }
-            ProductItem_DataGrid.DataContext = productItemList;
+            ProductItemWindow_listView.DataContext = productItemList;
+        }
+
+        private void ShopBy_CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
+            ProductItemWindow_listView.DataContext = productItemList;
         }
     }
 }
-           
 
 
+
+/*
+    <DataGrid  x:Name="ProductItem_DataGrid" AutoGenerateColumns="False" ItemsSource="{Binding }" HorizontalAlignment="Left" Height="236" Margin="49,70,0,0" VerticalAlignment="Top" Width="450"  CanUserResizeColumns="False"  CanUserReorderColumns="False" CanUserAddRows="False" MouseDoubleClick="MouseDoubleClicked"  >
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="IdColum" Binding="{Binding ID }" Header="ID" Width="*" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="TypeColum" Binding="{Binding Name}" Header="Type" Width="2*" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="CategoryColum" Binding="{Binding Category}" Header="Category" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="PriceColum" Binding="{Binding Price}" Header="Price" Width="*" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn x:Name="InStockColumn"  Binding="{Binding Instock}"  Header="In Stock" Width="*" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="AmountColum" Binding="{Binding Amount}" Header="Amount" Width="*" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+  <ListView x:Name= "ProductItemWindow_listView" ItemsSource="{Binding}"  Margin="71,35,272,65" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+*/

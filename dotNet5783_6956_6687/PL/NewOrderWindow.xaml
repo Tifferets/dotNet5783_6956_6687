@@ -7,20 +7,26 @@
         mc:Ignorable="d"
         Title="NewOrderWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid  x:Name="ProductItem_DataGrid" AutoGenerateColumns="False" ItemsSource="{Binding }" HorizontalAlignment="Left" Height="236" Margin="49,70,0,0" VerticalAlignment="Top" Width="450"  CanUserResizeColumns="False"  CanUserReorderColumns="False" CanUserAddRows="False" MouseDoubleClick="MouseDoubleClicked"  >
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="IdColum" Binding="{Binding ID }" Header="ID" Width="*" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="TypeColum" Binding="{Binding Name}" Header="Type" Width="2*" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="CategoryColum" Binding="{Binding Category}" Header="Category" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="PriceColum" Binding="{Binding Price}" Header="Price" Width="*" IsReadOnly="True"/>
-                <DataGridCheckBoxColumn x:Name="InStockColumn"  Binding="{Binding Instock}"  Header="In Stock" Width="*" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="AmountColum" Binding="{Binding Amount}" Header="Amount" Width="*" IsReadOnly="True" />
-            </DataGrid.Columns>
-
-        </DataGrid>
+        <ListView x:Name= "ProductItemWindow_listView" ItemsSource="{Binding}"  Margin="71,35,272,65" ItemBindingGroup="{Binding}" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+            
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
         <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="565,72,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="Category_ComboBox_SelectionChanged"/>
         <Button Content="Go To Cart" HorizontalAlignment="Left" Height="51" Margin="565,255,0,0" VerticalAlignment="Top" Width="186" Click="Button_Click"/>
-        <CheckBox x:Name="ShopBy_CheckBox" Content="Shop by Category" HorizontalAlignment="Left" Height="26" Margin="565,129,0,0" VerticalAlignment="Top" Width="114" Checked="ShopBy_CheckBox_Checked"/>
+        <CheckBox x:Name="ShopBy_CheckBox" Content="Shop by Category" HorizontalAlignment="Left" Height="26" Margin="565,129,0,0" VerticalAlignment="Top" Width="114" Checked="ShopBy_CheckBox_Checked" Unchecked="ShopBy_CheckBox_Unchecked"/>
 
     </Grid>
 </Window>
