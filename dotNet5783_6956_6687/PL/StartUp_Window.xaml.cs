@@ -23,7 +23,7 @@ namespace PL
     public partial class StartUp_Window : Window
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
-        Cart cart = new Cart();
+        BO.Cart cart = new BO.Cart();
 
         public StartUp_Window()
         {

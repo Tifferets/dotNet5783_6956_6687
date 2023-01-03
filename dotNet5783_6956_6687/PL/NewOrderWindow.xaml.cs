@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections;
+using BlApi;
 
 namespace PL
 {
@@ -31,30 +32,11 @@ namespace PL
         private BlApi.IBl? bl = BlApi.Factory.Get();
         private ObservableCollection<ProductItem?> productItemList { get; set; }
         public ObservableCollection<IGrouping<BO.Category, ProductItem>> CatergoryGroup { get; set; }
-        private Cart Cart = new Cart();
+        private BO.Cart Cart = new BO.Cart();
         private Products ProductItem;
-        public NewOrderWindow(Cart cart = null , Products productItem = null) : this() 
+        public NewOrderWindow(BO.Cart cart = null , Products productItem = null) : this() 
         {
             this.refresh(cart, productItem);
-            //Cart = cart;
-            //if (productItem != null)//if the product item isnt null we want to update it in our CO
-            //{
-            //    ProductItem = productItem;
-            //    var product = new ProductItem()
-            //    {
-            //        ID = ProductItem.ID,
-            //        Name = ProductItem.Name,
-            //        Amount = 0,
-            //        Category = (BO.Category)ProductItem.Category,
-            //        Instock = ProductItem.InStock,
-            //        Price = ProductItem.Price
-            //    };
-            //    var item = productItemList.FirstOrDefault(x => x.ID == ProductItem.ID);
-            //    var index = productItemList.IndexOf(item);
-            //    product.Amount = ProductItem.Amount;
-            //    productItemList[index] = product;
-            //}
-            //ProductItem_DataGrid.DataContext = productItemList;
         }
         public NewOrderWindow()
         {
@@ -62,12 +44,12 @@ namespace PL
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
             productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
             ProductItemWindow_listView.DataContext = productItemList;
-            //CatergoryGroup = new ObservableCollection < IGrouping < BO.Category, ProductItem >>(
-            //from item in bl.Product.GetlListOfProductItem()
-            //              orderby item.Category
-            //              group item by item.Category into item
-            //              select item);
-           
+            CatergoryGroup = new ObservableCollection<IGrouping<BO.Category, ProductItem>>
+                             (from item in bl.Product.GetlListOfProductItem()
+                             orderby item.Category
+                             group item by item.Category into item
+                             select item);
+
         }
         private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -84,10 +66,10 @@ namespace PL
                 Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source
             }
         }
-        //private void Button_Click(object sender, RoutedEventArgs e) => new CartWindow1(Cart).ShowDialog();
         private void Button_Click(object sender, RoutedEventArgs e)
         { 
-            new CartWindow1(Cart).ShowDialog();
+            new CartWindow1(Cart, refresh).ShowDialog();
+            ProductItemWindow_listView.DataContext = productItemList;
         }
         private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)
         {
@@ -117,33 +99,37 @@ namespace PL
                 }
             }
         }
-        public enum Category
-        {
-            // Cat, Dog, Fish, Parrot, Rabbit, All
-            Dog, Cat, Parrot, Rabbit, Fish, All,
-        }
         private void ShopBy_CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ProductItemWindow_listView.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
             view.GroupDescriptions.Add(groupDescription);
         }
-        private void refresh(Cart cart , Products productItem)
+        private void refresh(BO.Cart cart , Products productItem)
         {
             if (productItem != null)//if the product item isnt null we want to update it in our CO
-            { 
-                var product = new ProductItem()
+            {
+                ProductItem? product;
+                if (productItem.Name == null)//if it came here by deleting  product from the cart
                 {
-                    ID = productItem.ID,
-                    Name = productItem.Name,
-                    Amount = 0,
-                    Category = (BO.Category)productItem.Category,
-                    Instock = productItem.InStock,
-                    Price = productItem.Price
-                };
-                var item = productItemList.FirstOrDefault(x => x.ID == productItem.ID);
+                    product = productItemList.FirstOrDefault(x => x?.ID == productItem.ID);
+                    product.Amount = 0;
+                }
+                else
+                { 
+                    product = new ProductItem()
+                    {
+                        ID = productItem.ID,
+                        Name = productItem.Name,
+                        Amount = productItem.Amount, //was zer0 i changed
+                        Category = (BO.Category)productItem.Category,
+                        Instock = productItem.InStock,
+                        Price = productItem.Price
+                    };
+                }
+                var item = productItemList.FirstOrDefault(x => x?.ID == productItem.ID);
                 var index = productItemList.IndexOf(item);
-                product.Amount = productItem.Amount;
+               // product.Amount = productItem.Amount;
                 productItemList[index] = product;
             }
             ProductItemWindow_listView.DataContext = productItemList;
@@ -157,26 +143,3 @@ namespace PL
     }
 }
 
-
-
-/*
-    <DataGrid  x:Name="ProductItem_DataGrid" AutoGenerateColumns="False" ItemsSource="{Binding }" HorizontalAlignment="Left" Height="236" Margin="49,70,0,0" VerticalAlignment="Top" Width="450"  CanUserResizeColumns="False"  CanUserReorderColumns="False" CanUserAddRows="False" MouseDoubleClick="MouseDoubleClicked"  >
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="IdColum" Binding="{Binding ID }" Header="ID" Width="*" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="TypeColum" Binding="{Binding Name}" Header="Type" Width="2*" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="CategoryColum" Binding="{Binding Category}" Header="Category" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="PriceColum" Binding="{Binding Price}" Header="Price" Width="*" IsReadOnly="True"/>
-                <DataGridCheckBoxColumn x:Name="InStockColumn"  Binding="{Binding Instock}"  Header="In Stock" Width="*" IsReadOnly="True" />
-                <DataGridTextColumn x:Name="AmountColum" Binding="{Binding Amount}" Header="Amount" Width="*" IsReadOnly="True" />
-            </DataGrid.Columns>
-        </DataGrid>
-
-
-  <ListView x:Name= "ProductItemWindow_listView" ItemsSource="{Binding}"  Margin="71,35,272,65" >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-*/
