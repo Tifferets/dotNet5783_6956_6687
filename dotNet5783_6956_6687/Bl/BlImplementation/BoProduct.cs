@@ -385,7 +385,7 @@ internal class BoProduct : BlApi.IProduct
             DO.Product? product = dal?.product.GetSingle(x=> x?.ID== id);
             if (product != null) 
             {
-                var p = new DO.Product() { ID = product.Value.ID, Category = (DO.Category)product.Value.Category, Name = product.Value.Name, Price = product.Value.Price, InStock = product.Value.InStock + amount };
+                var p = new DO.Product() { ID = product.Value.ID, Category = (DO.Category)product?.Category, Name = product?.Name, Price = product.Value.Price, InStock = product.Value.InStock + amount };
                 dal?.product.Update(p);//trys to update te product
             }
          }

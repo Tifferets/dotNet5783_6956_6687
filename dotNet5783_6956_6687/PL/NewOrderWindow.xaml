@@ -7,13 +7,17 @@
         mc:Ignorable="d"
         Title="NewOrderWindow" Height="450" Width="800">
     <Grid>
-        <ListView x:Name= "ProductItemWindow_listView" ItemsSource="{Binding}"  Margin="71,35,272,65" ItemBindingGroup="{Binding}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="391*"/>
+            <ColumnDefinition Width="409*"/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name= "ProductItemWindow_listView" ItemsSource="{Binding}"  Margin="71,35,272,65" ItemBindingGroup="{Binding}" MouseDoubleClick="MouseDoubleClicked" Grid.ColumnSpan="2" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
-            
+
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -24,9 +28,9 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="565,72,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="Category_ComboBox_SelectionChanged"/>
-        <Button Content="Go To Cart" HorizontalAlignment="Left" Height="51" Margin="565,255,0,0" VerticalAlignment="Top" Width="186" Click="Button_Click"/>
-        <CheckBox x:Name="ShopBy_CheckBox" Content="Shop by Category" HorizontalAlignment="Left" Height="26" Margin="565,129,0,0" VerticalAlignment="Top" Width="114" Checked="ShopBy_CheckBox_Checked" Unchecked="ShopBy_CheckBox_Unchecked"/>
+        <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="174,72,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="Category_ComboBox_SelectionChanged" Grid.Column="1"/>
+        <Button Content="Go To Cart" HorizontalAlignment="Left" Height="51" Margin="174,255,0,0" VerticalAlignment="Top" Width="186" Click="Button_Click" Grid.Column="1"/>
+        <CheckBox x:Name="ShopBy_CheckBox" Content="Shop by Category" HorizontalAlignment="Left" Height="26" Margin="174,129,0,0" VerticalAlignment="Top" Width="114" Checked="ShopBy_CheckBox_Checked" Unchecked="ShopBy_CheckBox_Unchecked" Grid.Column="1"/>
 
     </Grid>
 </Window>

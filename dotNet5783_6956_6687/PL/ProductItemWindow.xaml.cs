@@ -22,8 +22,8 @@ namespace PL
     public partial class ProductItemWindow : Window
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
-        Action<Cart, Products>? action;
-        Cart Cart = new Cart()
+        Action<BO.Cart, Products>? action;
+        BO.Cart Cart = new BO.Cart()
         {
             Items = new List<OrderItem>()
         };
@@ -33,7 +33,7 @@ namespace PL
         {
             InitializeComponent();
         }
-        public ProductItemWindow(Cart cart, Products p1, Action<Cart, Products>? action) :this() 
+        public ProductItemWindow(BO.Cart cart, Products p1, Action<BO.Cart, Products>? action) :this() 
         {
             this.action= action;
             Cart = cart;
@@ -57,7 +57,7 @@ namespace PL
                 if(ProductItem.InStock == true)// if there is enough in stock we can add it  
                 {
                     ProductItem.Amount++;//add to the amount 
-                    bl?.Product.UpdateAmountOfProduct(ProductItem.ID, 1);
+                    bl?.Product.UpdateAmountOfProduct(ProductItem.ID, -1);
                     bl?.Cart.AddProductToCart(Cart, ProductItem.ID);//adds it to our cart 
                     action(Cart, ProductItem);
                 }
@@ -86,7 +86,7 @@ namespace PL
                 {
                     ProductItem.Amount--;//add to the amount 
                     bl?.Product.UpdateAmountOfProduct(ProductItem.ID, -1);
-                    bl?.Cart.UpdateAmountOfProductInCart(Cart, ProductItem.ID, ProductItem.Amount);//adds it to our cart 
+                    Cart =  bl?.Cart.UpdateAmountOfProductInCart(Cart, ProductItem.ID, ProductItem.Amount);//adds it to our cart 
                     action(Cart, ProductItem);
                 }
                 else

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +14,6 @@ namespace PL.PlProduct;
 public class Products: INotifyPropertyChanged
 {
     private int Id;
-   
     private double price;
     private Category category;
     private int amount;
@@ -95,5 +97,37 @@ public class Products: INotifyPropertyChanged
         }
 
     }
+    public event PropertyChangedEventHandler PropertyChanged;
+}
+
+public class Cart : INotifyPropertyChanged
+{
+    private double totalprice;
+    public double TotalPrice
+    {
+        get { return totalprice; }
+        set
+        {
+            totalprice = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("TotalPrice"));
+            }
+        }
+    }
+    //private readonly ObservableCollection<OrderItem> orderitemList;
+
+    //public ObservableCollection<OrderItem> OrderItemList
+    //{
+    //    get { return orderitemList; }
+    //    set
+    //    {
+    //        orderitemList. = value;
+    //        if (PropertyChanged != null)
+    //        {
+    //            PropertyChanged(this, new PropertyChangedEventArgs("TotalPrice"));
+    //        }
+    //    }
+    //}
     public event PropertyChangedEventHandler PropertyChanged;
 }

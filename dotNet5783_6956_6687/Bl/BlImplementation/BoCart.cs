@@ -178,24 +178,25 @@ internal class BoCart : ICart
             int dif = 0; //the difference between the new amount and the old amount
             List<BO.OrderItem?> lst = (from OrderItem? item in cart.Items
                                        select item).ToList();//copies all the orderItems in item in cart to the lst
-            BO.OrderItem? theProductToUpdate = cart.Items.FirstOrDefault();//finds the product to updates its amount
+            BO.OrderItem? theProductToUpdate = cart.Items.FirstOrDefault(x=> x.ProductID == productId);//finds the product to updates its amount
             if(theProductToUpdate != null)//if the product were updating exists
             {
 
                 if (newAmount == 0)
                 {
                     lst.Remove(theProductToUpdate);//removes the orderitem from lst
-                    cart.Items = lst;//updates the cart                 
+                    cart.Items = lst;//updates the cart
+                    cart.TotalPrice = cart.TotalPrice - theProductToUpdate.TotalPrice;
                 }
-                if (newAmount > theProductToUpdate.Amount)//wanted more
+                else if (newAmount > theProductToUpdate.Amount)//wanted more
                 {
                     dif = newAmount - theProductToUpdate.Amount;
                     cart.TotalPrice = cart.TotalPrice + dif * theProductToUpdate.Price;
                     theProductToUpdate.Amount = newAmount;
                 }
-                if (newAmount < theProductToUpdate.Amount)//wanted less
+                else if (newAmount < theProductToUpdate.Amount)//wanted less
                 {
-                    dif = newAmount - theProductToUpdate.Amount;
+                    dif = theProductToUpdate.Amount- newAmount;
                     cart.TotalPrice = cart.TotalPrice - dif * theProductToUpdate.Price;
                     theProductToUpdate.Amount = newAmount;
                 }
@@ -204,6 +205,7 @@ internal class BoCart : ICart
             {
                 throw new BO.CouldntFindProductException();
             }
+
             return cart;
             //foreach (BO.OrderItem? item in cart.Items)
             //{
