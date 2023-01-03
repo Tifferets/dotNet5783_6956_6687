@@ -56,6 +56,9 @@ namespace PL
                     MessageBox.Show("Thank you and have a nice day");
 
                     //this.Close();
+                    Admin_Window objEP = new Admin_Window();
+                    CloseAllWindows();//closes all the window
+                    //objEP.ShowDialog();
                 }
             }
             catch(Exception ex) { MessageBox.Show(ex.Message.ToString()); }
@@ -68,6 +71,11 @@ namespace PL
         private static bool IsTextAllowedString(string text) //for name - makes sure the imput is a letter
         {
             return regex_str.IsMatch(text);
+        }
+        private void CloseAllWindows()
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+                App.Current.Windows[intCounter].Close();
         }
     }
 }
