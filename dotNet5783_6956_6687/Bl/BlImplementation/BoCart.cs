@@ -293,7 +293,7 @@ internal class BoCart : ICart
                 int id;
                 try
                 {
-                    id = dal?.order.Add(order) ?? 0;
+                    order.ID = dal?.order.Add(order) ?? 0;
                 }
                 catch (Exception )
                 {
@@ -322,9 +322,9 @@ internal class BoCart : ICart
                     //    ProductID = item.ProductID,
                     //};
 
-                   // foreach (DO.Product p in dal?.product.GetAll()?? throw new BO.NullException())//goes through all the products in do
-                 //   {
-                        DO.Product? p = dal?.product.GetAll().ToList().FirstOrDefault(x => x.Value.ID == item?.ProductID);
+                    // foreach (DO.Product p in dal?.product.GetAll()?? throw new BO.NullException())//goes through all the products in do
+                    //   {
+                    DO.Product? p = dal?.product.GetAll().ToList().FirstOrDefault(x => x.Value.ID == item?.ProductID);
                     
                         if(p != null)
                         {

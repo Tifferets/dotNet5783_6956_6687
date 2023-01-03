@@ -50,7 +50,7 @@ namespace PL
         }
         private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ShopBy_CheckBox.IsChecked = false;
+            //ShopBy_CheckBox.IsChecked = false;
             CatergoryGroup = new ObservableCollection<IGrouping<BO.Category, ProductItem>>  //grouping of products by category
                             (from item in productItemList
                              orderby item.Category

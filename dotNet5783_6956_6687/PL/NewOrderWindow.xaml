@@ -30,7 +30,7 @@
         </ListView>
         <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="174,72,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="Category_ComboBox_SelectionChanged" Grid.Column="1"/>
         <Button Content="Go To Cart" HorizontalAlignment="Left" Height="51" Margin="174,255,0,0" VerticalAlignment="Top" Width="186" Click="Button_Click" Grid.Column="1"/>
-        <CheckBox x:Name="ShopBy_CheckBox" Content="Shop by Category" HorizontalAlignment="Left" Height="26" Margin="174,129,0,0" VerticalAlignment="Top" Width="114" Grid.Column="1" />
+       
 
     </Grid>
 </Window>

@@ -29,8 +29,8 @@ namespace PL
 
         private void ShowProductList_Button_Click(object sender, RoutedEventArgs e)
         {
-            ProductListWindow productListWindow = new ProductListWindow();
-            productListWindow.Show();
+            //ProductListWindow productListWindow = new ProductListWindow();
+            //productListWindow.Show();
         }
     }
 }
