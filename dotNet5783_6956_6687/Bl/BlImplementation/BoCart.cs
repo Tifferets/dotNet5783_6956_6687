@@ -289,8 +289,6 @@ internal class BoCart : ICart
                     CustomerEmail = cart.CustomerEmail,
                     CustomerName = cart.CustomerName,
                     OrderDate = DateTime.Now,
-                    DeliveryDate = DateTime.Now,
-                    ShipDate = DateTime.Now,
                 };
                 int id;
                 try
@@ -303,14 +301,26 @@ internal class BoCart : ICart
                 }
                 foreach (OrderItem? item in cart.Items)//goes through all the orderitems in cart
                 {
-                    DO.OrderItem orderItem = new DO.OrderItem()//creats a new order item
+                    DO.OrderItem orderItem = new DO.OrderItem()
                     {
+                        OrderID = id,
                         Amount = item.Amount,
-                        OrderID = order.ID,
-                        OrderItemID = item.ID,
                         Price = item.Price,
                         ProductID = item.ProductID,
+                       
                     };
+                    orderItem.OrderItemID = (int)dal?.orderItem.Add(orderItem);
+                }
+                foreach (OrderItem? item in cart.Items)//goes through all the orderitems in cart
+                {
+                    //DO.OrderItem orderItem = new DO.OrderItem()//creats a new order item
+                    //{
+                    //    Amount = item.Amount,
+                    //    OrderID = id,
+                    //    OrderItemID = item.ID,
+                    //    Price = item.Price,
+                    //    ProductID = item.ProductID,
+                    //};
 
                     // foreach (DO.Product p in dal?.product.GetAll()?? throw new BO.NullException())//goes through all the products in do
                     //   {
