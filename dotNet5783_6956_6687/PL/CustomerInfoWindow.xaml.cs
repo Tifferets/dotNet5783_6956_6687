@@ -39,18 +39,25 @@ namespace PL
         {
             try
             {
-                Cart cart = new Cart()//creats the  customers cart
+                bool good = Email_TextBox.Text.Contains('@');//makes sure is a correct email
+                if (Address_TextBox.Text == "" || Email_TextBox.Text == "" || Name_TextBox.Text == ""|| Email_TextBox.Text == "Customer@gmail.com")
+                    MessageBox.Show("add missing data");
+                // if( good != true)//wrong email
+                else
                 {
-                    CustomerAddress = Address_TextBox.Text,
-                    CustomerEmail = Email_TextBox.Text,
-                    CustomerName = Name_TextBox.Text,
-                    Items = cart1.Items.ToList(),
-                    TotalPrice = cart1.TotalPrice,
+                    Cart cart = new Cart()//creats the  customers cart
+                    {
+                        CustomerAddress = Address_TextBox.Text,
+                        CustomerEmail = Email_TextBox.Text,
+                        CustomerName = Name_TextBox.Text,
+                        Items = cart1.Items.ToList(),
+                        TotalPrice = cart1.TotalPrice,
 
-                };
-                bl?.Cart.confirmCart(cart);
-                MessageBox.Show("Thank you and have a nice day");
-                this.Close();
+                    };
+                    bl?.Cart.confirmCart(cart);
+                    MessageBox.Show("Thank you and have a nice day");
+                    this.Close();
+                }
             }
             catch(Exception ex) { MessageBox.Show(ex.Message.ToString()); }
         }
