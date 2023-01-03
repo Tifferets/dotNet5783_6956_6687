@@ -56,7 +56,6 @@ namespace PL
             {
                 if(ProductItem.InStock == true)// if there is enough in stock we can add it  
                 {
-                    
                    // bl?.Product.UpdateAmountOfProduct(ProductItem.ID, -1);//takes one out of the stock
                     ProductItem.Amount++;//add to the amount 
                     bl?.Cart.AddProductToCart(Cart, ProductItem.ID);//adds it to our cart 
