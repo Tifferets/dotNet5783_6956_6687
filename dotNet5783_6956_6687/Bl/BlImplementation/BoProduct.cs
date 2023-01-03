@@ -378,6 +378,23 @@ internal class BoProduct : BlApi.IProduct
         }
 
     }
+    public void UpdateAmountOfProduct(int id, int amount)
+    {
+         try
+         {
+            DO.Product? product = dal?.product.GetSingle(x=> x?.ID== id);
+            if (product != null) 
+            {
+                var p = new DO.Product() { ID = product.Value.ID, Category = (DO.Category)product.Value.Category, Name = product.Value.Name, Price = product.Value.Price, InStock = product.Value.InStock + amount };
+                dal?.product.Update(p);//trys to update te product
+            }
+         }
+         catch
+         {
+            throw new BO.CantUpDateException();
+         }
+
+    }
     /// <summary>
     /// function returns a product item 
     /// </summary>

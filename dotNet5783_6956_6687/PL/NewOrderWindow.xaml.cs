@@ -87,7 +87,6 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         { 
             new CartWindow1(Cart).ShowDialog();
-            this.Close();
         }
         private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)
         {

@@ -46,4 +46,5 @@ public interface IProduct
     public IEnumerable<ProductForList?> GetproductForListByCategory(Category selectedItem);
     public BO.ProductForList GetProductForList(int Id);
     public IEnumerable<ProductItem> GetlListOfProductItem();
+    public void UpdateAmountOfProduct(int id, int amount);
 }

@@ -57,9 +57,8 @@ namespace PL
                 if(ProductItem.InStock == true)// if there is enough in stock we can add it  
                 {
                     ProductItem.Amount++;//add to the amount 
-                    
+                    bl?.Product.UpdateAmountOfProduct(ProductItem.ID, 1);
                     bl?.Cart.AddProductToCart(Cart, ProductItem.ID);//adds it to our cart 
-                    MessageBox.Show("Product added successfully");
                     action(Cart, ProductItem);
                 }
                 else
@@ -76,6 +75,29 @@ namespace PL
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Cart == null) return;//if the cart is null
+            try
+            {
+                if (ProductItem.Amount >= 1)// if there is enough in stock we can add it  
+                {
+                    ProductItem.Amount--;//add to the amount 
+                    bl?.Product.UpdateAmountOfProduct(ProductItem.ID, -1);
+                    bl?.Cart.UpdateAmountOfProductInCart(Cart, ProductItem.ID, ProductItem.Amount);//adds it to our cart 
+                    action(Cart, ProductItem);
+                }
+                else
+                {
+                    MessageBox.Show("Product is not in cart");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
