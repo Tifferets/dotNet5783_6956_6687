@@ -110,10 +110,10 @@ namespace PL
             if (productItem != null)//if the product item isnt null we want to update it in our CO
             {
                 ProductItem? product;
-                if (productItem.Name == null)//if it came here by deleting  product from the cart
+                if (productItem.Name == null)//if it came here by changing  product from the cart
                 {
                     product = productItemList.FirstOrDefault(x => x?.ID == productItem.ID);
-                    product.Amount = 0;
+                    product.Amount = productItem.Amount;
                 }
                 else
                 { 
