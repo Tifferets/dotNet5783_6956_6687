@@ -44,7 +44,7 @@ namespace PL
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
             productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
             ProductItemWindow_listView.DataContext = productItemList;
-            CatergoryGroup = new ObservableCollection<IGrouping<BO.Category, ProductItem>>
+            CatergoryGroup = new ObservableCollection<IGrouping<BO.Category, ProductItem>>  //grouping of products by category
                              (from item in bl.Product.GetlListOfProductItem()
                              orderby item.Category
                              group item by item.Category into item
@@ -53,25 +53,26 @@ namespace PL
         }
         private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ShopBy_CheckBox.IsChecked = false; 
             if (Category_ComboBox.SelectedItem != null && Category_ComboBox.SelectedItem is not Category.All) //we want to chang the info
             {
                 productItemList = new ObservableCollection<ProductItem?>(CatergoryGroup[Category_ComboBox.SelectedIndex]);
                 ProductItemWindow_listView.DataContext = productItemList;
             }
 
-            else if (Category_ComboBox.SelectedItem is Category.All)
+            else if (Category_ComboBox.SelectedItem is Category.All)//if we selected all
             {
                 productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
                 ProductItemWindow_listView.DataContext = productItemList;
                 Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)//go to cart button
         { 
             new CartWindow1(Cart, refresh).ShowDialog();
             ProductItemWindow_listView.DataContext = productItemList;
         }
-        private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)
+        private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)//double click on the product to view it
         {
             if (ProductItemWindow_listView.SelectedIndex >= 0)
             {
@@ -99,13 +100,8 @@ namespace PL
                 }
             }
         }
-        private void ShopBy_CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ProductItemWindow_listView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
-            view.GroupDescriptions.Add(groupDescription);
-        }
-        private void refresh(BO.Cart cart , Products productItem)
+      
+        private void refresh(BO.Cart cart , Products productItem)//func that refreshes the datacontext of window 
         {
             if (productItem != null)//if the product item isnt null we want to update it in our CO
             {
@@ -115,7 +111,7 @@ namespace PL
                     product = productItemList.FirstOrDefault(x => x?.ID == productItem.ID);
                     product.Amount = productItem.Amount;
                 }
-                else
+                else//came here from adding / removing from productitem window
                 { 
                     product = new ProductItem()
                     {
@@ -129,16 +125,23 @@ namespace PL
                 }
                 var item = productItemList.FirstOrDefault(x => x?.ID == productItem.ID);
                 var index = productItemList.IndexOf(item);
-               // product.Amount = productItem.Amount;
                 productItemList[index] = product;
             }
             ProductItemWindow_listView.DataContext = productItemList;
         }
 
-        private void ShopBy_CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void ShopBy_CheckBox_Unchecked(object sender, RoutedEventArgs e)//checkbox checked for sort by category
         {
             productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
             ProductItemWindow_listView.DataContext = productItemList;
+            Category_ComboBox.IsEnabled = true;
+        }
+        private void ShopBy_CheckBox_Checked(object sender, RoutedEventArgs e)//checkbox Unchecked for sort by category
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ProductItemWindow_listView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
+            view.GroupDescriptions.Add(groupDescription);
+            Category_ComboBox.IsEnabled = false;
         }
     }
 }
