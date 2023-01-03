@@ -49,7 +49,7 @@ namespace PL
                 OrderItemList = new ObservableCollection<OrderItem>();
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ProceedToCheckoutButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
