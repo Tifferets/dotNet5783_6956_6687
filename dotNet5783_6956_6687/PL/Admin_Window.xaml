@@ -19,7 +19,7 @@
         <Grid>
             <Label Content="Orders" HorizontalAlignment="Left" Margin="156,36,0,0" VerticalAlignment="Top"/>
         </Grid>
-        <ListView x:Name="orderListview" Grid.Column="0" Grid.Row ="1"  ItemsSource = "{Binding}" MouseDoubleClick="MouseDoubleClickedOrder"  >
+        <ListView x:Name="orderListview" Grid.Column="0" Grid.Row ="1"  ItemsSource = "{Binding }" MouseDoubleClick="MouseDoubleClickedOrder" SelectionChanged="orderListview_SelectionChanged"  >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
