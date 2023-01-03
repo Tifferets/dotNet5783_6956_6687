@@ -259,7 +259,7 @@ internal class BoCart : ICart
 
             bool flag = false;
 
-            foreach (OrderItem? item in cart.Items?? throw new BO.NullException())
+            foreach (OrderItem? item in cart.Items ?? throw new BO.NullException())
             {
                 if (item?.Amount < 0)
                     throw new WrongAmountException();
