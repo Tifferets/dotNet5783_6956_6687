@@ -105,7 +105,7 @@ internal static class DataSource
            
         }
         //OterItem
-        for(int j=0; j < 20; j++)
+        for(int j=1; j < 20; j++)
         { 
             for (int i = 0; i < 2; i++)//different number of products in order
             {
@@ -115,7 +115,7 @@ internal static class DataSource
                 orderItem.Price = p.Price;//same price as product
                 orderItem.Amount = rand.Next(1,10);//random amount
                 orderItem.ProductID = p.ID;
-              //  orderItem.OrderID = 100000 + j;
+                orderItem.OrderID = 100000 + j/2;
                 OrderItemList.Add(orderItem);
             }
             
