@@ -44,19 +44,19 @@ namespace PL
             Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source 
             productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
             ProductItemWindow_listView.DataContext = productItemList;
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(productItemList);
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(productItemList);//categorizes the list 
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
             view.GroupDescriptions.Add(groupDescription);
         }
         private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ShopBy_CheckBox.IsChecked = false;
             CatergoryGroup = new ObservableCollection<IGrouping<BO.Category, ProductItem>>  //grouping of products by category
                             (from item in productItemList
                              orderby item.Category
                              group item by item.Category into item
                              select item);
             ObservableCollection<ProductItem?> temp = new ObservableCollection<ProductItem?>(productItemList);
+
             if (Category_ComboBox.SelectedItem != null && Category_ComboBox.SelectedItem is not Category.All) //we want to chang the info
             {
                 temp = new ObservableCollection<ProductItem?>(CatergoryGroup[Category_ComboBox.SelectedIndex]);
@@ -133,23 +133,7 @@ namespace PL
                 productItemList[index] = product;
             }
             ProductItemWindow_listView.DataContext = productItemList;
-        }
-
-        //private void ShopBy_CheckBox_Unchecked(object sender, RoutedEventArgs e)//checkbox checked for sort by category
-        //{
-        //  //productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
-        //    ProductItemWindow_listView.DataContext = productItemList;
-        //    Category_ComboBox.IsEnabled = true;
-        //}
-        //private void ShopBy_CheckBox_Checked(object sender, RoutedEventArgs e)//checkbox Unchecked for sort by category
-        //{
-        //    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ProductItemWindow_listView.ItemsSource);
-        //    PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
-        //    view.GroupDescriptions.Add(groupDescription);
-        //    Category_ComboBox.IsEnabled = false;
-        //}
-
-       
+        } 
     }
 }
 

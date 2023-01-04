@@ -26,6 +26,6 @@
             <TextBox x:Name="Email_TextBox" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="Customer@gmail.com" VerticalAlignment="Center" Width="184" Height="34"/>
             <TextBox x:Name="Address_TextBox" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="184" Height="34"/>
         </Grid>
-        <Button x:Name="CheckOut_button" Content="Check out" HorizontalAlignment="Left" Height="34" Margin="478,250,0,0" VerticalAlignment="Top" Width="232" Click="CheckOut_button_Click"/>
+        <Button x:Name="CheckOut_button" Content="Check out" HorizontalAlignment="Left" Height="34" Margin="490,297,0,0" VerticalAlignment="Top" Width="232" Click="CheckOut_button_Click"/>
     </Grid>
 </Window>

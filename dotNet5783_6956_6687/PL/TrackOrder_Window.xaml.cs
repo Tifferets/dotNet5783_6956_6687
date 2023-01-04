@@ -26,25 +26,13 @@ namespace PL
         public TrackOrder_Window()
         {
             InitializeComponent();
-          //  var lst = from OrderForList? item in bl?.Order.GetOrderList()
-                    //  select (bl.Order.OrderStatus(item.ID));
-
             orderTrackings = new ObservableCollection<OrderTracking>();
-            //TrackOrder_Grid.DataContext = bl?.Order.OrderStatus(100000);
-            //TrackOrder_Grid.DataContext = orderTrackings;
         }
         public TrackOrder_Window(int value):this()
         {
             TrackOrder_Grid.DataContext = bl?.Order.OrderStatus(value);
         }
-        private void Id_textbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //if(Id_textbox.Text.Length == 6)
-            //{
-            //    Details_dataGrid.DataContext = orderTrackings;
-            //}
-        }
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)//opens the order window details 
         {
             try
             {

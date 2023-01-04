@@ -424,7 +424,7 @@ internal class BoCart : ICart
 
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            throw e;
             checkIfWorked = false;
         }
         if (checkIfWorked == true)

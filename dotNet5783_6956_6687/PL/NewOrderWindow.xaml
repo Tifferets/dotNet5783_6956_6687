@@ -11,7 +11,7 @@
             <ColumnDefinition Width="391*"/>
             <ColumnDefinition Width="409*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name= "ProductItemWindow_listView" ItemsSource="{Binding}"  Margin="71,35,272,65" ItemBindingGroup="{Binding}" MouseDoubleClick="MouseDoubleClicked" Grid.ColumnSpan="2" >
+        <ListView x:Name= "ProductItemWindow_listView" ItemsSource="{Binding}"  Margin="66,50,277,79" ItemBindingGroup="{Binding}" MouseDoubleClick="MouseDoubleClicked" Grid.ColumnSpan="2" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -28,9 +28,10 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="174,72,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="Category_ComboBox_SelectionChanged" Grid.Column="1"/>
-        <Button Content="Go To Cart" HorizontalAlignment="Left" Height="51" Margin="174,255,0,0" VerticalAlignment="Top" Width="186" Click="Button_Click" Grid.Column="1"/>
-       
+        <ComboBox x:Name="Category_ComboBox" HorizontalAlignment="Left" Margin="174,89,0,0" VerticalAlignment="Top" Width="186" SelectionChanged="Category_ComboBox_SelectionChanged" Grid.Column="1"/>
+        <Button Content="Go To Cart" HorizontalAlignment="Left" Height="51" Margin="174,217,0,0" VerticalAlignment="Top" Width="186" Click="Button_Click" Grid.Column="1"/>
+        <Label Grid.Column="1" Content="Sort by category:" HorizontalAlignment="Left" Margin="174,50,0,0" VerticalAlignment="Top" Width="178" FontWeight="Medium"/>
+
 
     </Grid>
 </Window>

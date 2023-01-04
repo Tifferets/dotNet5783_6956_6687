@@ -33,7 +33,7 @@ namespace PL
         {
             InitializeComponent();
         }
-        public ProductItemWindow(BO.Cart cart, Products p1, Action<BO.Cart, Products>? action) :this() 
+        public ProductItemWindow(BO.Cart cart, Products p1, Action<BO.Cart, Products>? action) :this() //ctor
         {
             this.action= action;
             Cart = cart;

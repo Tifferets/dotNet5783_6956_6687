@@ -29,11 +29,6 @@ namespace PL
         {
             InitializeComponent();
         }
-        private void Button_Click_Admin(object sender, RoutedEventArgs e) => new Admin_Window().ShowDialog();
-
-        private void Button_Click_NewOrder(object sender, RoutedEventArgs e) => new NewOrderWindow(cart).ShowDialog();
-
-        private void Button_Click_TrackOrder(object sender, RoutedEventArgs e)=> new TrackOrder_Window().ShowDialog();
 
         private void Next_button_Click(object sender, RoutedEventArgs e)
         {

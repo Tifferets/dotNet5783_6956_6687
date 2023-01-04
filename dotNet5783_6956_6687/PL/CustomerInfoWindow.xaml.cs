@@ -14,68 +14,71 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL
+namespace PL;
+
+/// <summary>
+/// Interaction logic for CustomerInfoWindow.xaml
+/// </summary>
+public partial class CustomerInfoWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for CustomerInfoWindow.xaml
-    /// </summary>
-    public partial class CustomerInfoWindow : Window
+    private BlApi.IBl? bl = BlApi.Factory.Get();
+    Cart cart1 = new Cart();
+    public CustomerInfoWindow()
     {
-        private BlApi.IBl? bl = BlApi.Factory.Get();
-        Cart cart1 = new Cart();
-        public CustomerInfoWindow()
-        {
-            InitializeComponent();
-        }
-        public CustomerInfoWindow(Cart cart) : this()
-        {
-            
-            cart1 = cart;
-        }
+        InitializeComponent();
+    }
+    public CustomerInfoWindow(Cart cart) : this()
+    {
+        
+        cart1 = cart;
+    }
 
-        private void CheckOut_button_Click(object sender, RoutedEventArgs e)
+    private void CheckOut_button_Click(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            try
+            bool good = Email_TextBox.Text.Contains('@');//makes sure is a correct email
+            if (Address_TextBox.Text == "" || Email_TextBox.Text == "" || Name_TextBox.Text == ""|| Email_TextBox.Text == "Customer@gmail.com")
+                MessageBox.Show("add missing data");
+            // if( good != true)//wrong email
+            else
             {
-                bool good = Email_TextBox.Text.Contains('@');//makes sure is a correct email
-                if (Address_TextBox.Text == "" || Email_TextBox.Text == "" || Name_TextBox.Text == ""|| Email_TextBox.Text == "Customer@gmail.com")
-                    MessageBox.Show("add missing data");
-                // if( good != true)//wrong email
-                else
+                Cart cart = new Cart()//creats the  customers cart
                 {
-                    Cart cart = new Cart()//creats the  customers cart
-                    {
-                        CustomerAddress = Address_TextBox.Text,
-                        CustomerEmail = Email_TextBox.Text,
-                        CustomerName = Name_TextBox.Text,
-                        Items = cart1.Items.ToList(),
-                        TotalPrice = cart1.TotalPrice,
+                    CustomerAddress = Address_TextBox.Text,
+                    CustomerEmail = Email_TextBox.Text,
+                    CustomerName = Name_TextBox.Text,
+                    Items = cart1.Items.ToList(),
+                    TotalPrice = cart1.TotalPrice,
 
-                    };
-                    bl?.Cart.confirmCart(cart);
-                    MessageBox.Show("Thank you and have a nice day");
+                };
+                bl?.Cart.confirmCart(cart);
+                MessageBox.Show("Thank you and have a nice day");
 
-                    //this.Close();
-                    Admin_Window objEP = new Admin_Window();
-                    CloseAllWindows();//closes all the window
-                    //objEP.ShowDialog();
-                }
+                //this.Close();
+                Admin_Window objEP = new Admin_Window();
+                CloseAllWindows();//closes all the window
+                //objEP.ShowDialog();
             }
-            catch(Exception ex) { MessageBox.Show(ex.Message.ToString()); }
         }
-        private void PreviewTextImputString(object sender, TextCompositionEventArgs e)// for name -only lets to put letters 
-        {
-            e.Handled = IsTextAllowedString(e.Text);//checks what is there
+        catch(Exception ex) 
+        { 
+            MessageBox.Show(ex.Message.ToString());
+            this.Close();
         }
-        private static readonly Regex regex_str = new Regex("[^A-Z a-z]+");//only lets it be a letter
-        private static bool IsTextAllowedString(string text) //for name - makes sure the imput is a letter
-        {
-            return regex_str.IsMatch(text);
-        }
-        private void CloseAllWindows()
-        {
-            for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
-                App.Current.Windows[intCounter].Close();
-        }
+    }
+    private void PreviewTextImputString(object sender, TextCompositionEventArgs e)// for name -only lets to put letters 
+    {
+        e.Handled = IsTextAllowedString(e.Text);//checks what is there
+    }
+    private static readonly Regex regex_str = new Regex("[^A-Z a-z]+");//only lets it be a letter
+    private static bool IsTextAllowedString(string text) //for name - makes sure the imput is a letter
+    {
+        return regex_str.IsMatch(text);
+    }
+    private void CloseAllWindows()
+    {
+        for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+            App.Current.Windows[intCounter].Close();
     }
 }
