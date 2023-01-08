@@ -24,7 +24,9 @@ internal class DalProduct : IProduct
             throw new NoNameException();
         }
        if(DataSource.Productlist.Contains(product))//checks if the product already exists in the data source
-        { throw new Exception("Product ID already exist"); }
+       { 
+            throw new Exception("Product ID already exist"); 
+       }
         //foreach (Product? item in DataSource.Productlist ?? throw new NullException())
         //{
         //    if (item?.ID == product.ID)
