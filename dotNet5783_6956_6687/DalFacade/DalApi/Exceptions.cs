@@ -58,3 +58,21 @@ public class NoNameException : Exception
         return Message;
     }
 }
+public class EmptyListException : Exception
+{//used in xml tools
+    public override string Message => "Empty List";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
+public class CantGetListFromXMLException : Exception
+{//used in xml tools
+    public override string Message => "Cant Get List From XML";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
+
+
