@@ -20,29 +20,32 @@ public class DoProduct : IProduct
         else
             LoadData();
     }
-    private void Creatfile()
+    private void CreatFile()
     {
         productRoot = new XElement("Product");
         productRoot.Save(FPath);
     }
-    private void Save(IEnumerable<Product> products)
-    {//saves ower list into the xml file
+    private void Save(IEnumerable<Product> products)//saves ower list into the xml file
+    {
         try 
         {
             productRoot = new XElement("Products", from p in products
-                                                   select new XElement("Product", new XElement("ID", p.ID)
+                                                   select new XElement("Product", new XElement("ID", p.ID),
  
-                                                   new XElement("Name", p.Name)
+                                                   new XElement("Name", p.Name),
  
-                                                   new XElement("Category", p.Category)
+                                                   new XElement("Category", p.Category),
  
-                                                   new XElement("InStock", p.InStock)
+                                                   new XElement("InStock", p.InStock),
  
                                                    new XElement("Price", p.Price)));
 
             productRoot.Save(FPath);
         }
-        catch (Exception ex) { throw (ex); }
+        catch (Exception ex)
+        { 
+            throw ex;
+        }
     }
     private void LoadData()
     {
@@ -50,9 +53,9 @@ public class DoProduct : IProduct
         {
             productRoot =XElement.Load(FPath);
         }
-        catch()
+        catch
         {
-            throw "file uploadproduct";
+     //       throw "file upload product nut successful" ;
         }
     }
     public Product? GetSingle(Func<Product?, bool> func)
@@ -73,20 +76,20 @@ public class DoProduct : IProduct
                      }).FirstOrDefault();
             productRoot.Save(FPath);
         }
-        catch ()
+        catch 
         { 
             product = null;
         }
         
         return product;//returns the product
     }
-    public IEnumerable<Product?> GetAll()
+    public IEnumerable<Product?> GetAll(Func<Product?, bool> func)
     {
 
     }
-    public int Add(Product product)
-    {//gets a product and adds it to the xml file
-        if (product.ID < 300000 || product > 400000)
+    public int Add(Product product)//gets a product and adds it to the xml file
+    {
+        if (product.ID < 300000 || product.ID > 400000)
             throw new WrongIdException();
         if(product.Name == null)
             throw new NoNameException();
@@ -106,7 +109,7 @@ public class DoProduct : IProduct
         }
         catch(Exception ex)
         {
-            throw "Cant add product";
+            //throw "Cant add product";
         }
         return product.ID;
 
@@ -125,24 +128,28 @@ public class DoProduct : IProduct
             return;
 
         }
-        catch()
+        catch
         {
-            throw "Cant delete product";
+           // throw "Cant delete product";
         }
     }
-    public void update (Product product)
+    public void Update (Product product)
     {
         try
         {
             LoadData();
             XElement productElment = (from p in productRoot.Elements()
-                                      where Convert.ToInt32((p.Element("ID").Value) == product.ID)
+                                      where Convert.ToInt32(p.Element("ID").Value) == product.ID
                                       select p).FirstOrDefault();
+
             productElment.Element("Name").Value = product.Name;
-            productElment.Element("Price").Value = product.Price;
-            productElment.Element("Category").Value = product.Category;
-            productElment.Element("InStock").Value = product.InStock;
+            productElment.Element("Price").Value = product.Price.ToString();
+            productElment.Element("Category").Value = product.Category.ToString();
+            productElment.Element("InStock").Value = product.InStock.ToString();
             productRoot.Save(FPath);
+        }
+        catch
+        {
 
         }
     }
