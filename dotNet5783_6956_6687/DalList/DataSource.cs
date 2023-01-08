@@ -115,7 +115,7 @@ internal static class DataSource
                 orderItem.Price = p.Price;//same price as product
                 orderItem.Amount = rand.Next(1,10);//random amount
                 orderItem.ProductID = p.ID;
-                orderItem.OrderID = 100000 + j;
+                orderItem.OrderID = 100000 + j/2;
                 OrderItemList.Add(orderItem);
             }
             

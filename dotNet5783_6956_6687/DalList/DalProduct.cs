@@ -17,7 +17,7 @@ internal class DalProduct : IProduct
     /// <exception cref="Exception"></exception>
     public int Add(Product product)
     {
-        if (product.ID < 300000 || product.ID > 500000)
+        if (product.ID < 300000 || product.ID > 400000)
             throw new WrongIdException();
         if(product.Name =="" || product.Name == null)
         {
@@ -42,14 +42,6 @@ internal class DalProduct : IProduct
     public void Delete(int productID)
     {
         DataSource.Productlist.Remove(GetSingle(x=> x?.ID == productID));
-        //foreach (Product? item in DataSource.Productlist ?? throw new NullException())//goes through the list looking for the order.
-        //{
-        //    if (item?.ID == productID)
-        //    {
-        //        DataSource.Productlist.Remove(item);
-        //        break;
-        //    }
-        //}
     }
     /// <summary>
     /// method gets a product and updates its details
@@ -58,20 +50,8 @@ internal class DalProduct : IProduct
     public void Update(Product product)
     {
         Delete(product.ID);
-        
         DataSource.Productlist.Add(product);
         DataSource.Productlist= DataSource.Productlist.OrderByDescending(x=> -x?.ID ).ToList();// sorts the list by small id to bigger id
-        //int count = 0;
-        //foreach (Product? item in DataSource.Productlist ?? throw new NullException())//goes through the list looking for the order.
-        //{
-        //    if (item?.ID != product.ID) 
-        //        count++;
-        //    if (item?.ID == product.ID)
-        //    {
-        //        DataSource.Productlist[count] = product;
-        //        break;
-        //    }
-        //}
     }
 
     /// <summary>
@@ -84,15 +64,9 @@ internal class DalProduct : IProduct
         {
             return DataSource.Productlist ?? throw new NullException();//if null retun te whole list
         }
-        // List<Product?> result = new();//creating a list
         var result = (from Product? item in DataSource.Productlist ?? throw new NullException()
                       where func(item)
                       select item);
-        //foreach (var item in DataSource.Productlist ?? throw new NullException())
-        //{
-        //    if(func(item))//if the id is good
-        //        result.Add(item);//adds to list 
-        //}
         return result;
     }
     public Product? GetSingle(Func<Product?, bool>? func) => DataSource.Productlist.FirstOrDefault(func ?? throw new NullException()); // return a product with this id
