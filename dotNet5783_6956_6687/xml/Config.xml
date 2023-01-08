@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+internal static class config
+{
+private static int orderID = 100000;
+private static int orderItemId = 200000;
+public static int GetOrderID { get => orderID++; }
+public static int GetOrderItemId { get => orderItemId++; }
+
+}
