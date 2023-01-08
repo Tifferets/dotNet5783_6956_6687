@@ -8,6 +8,7 @@ using DO;
 
 namespace Dal;
 
-internal class DoOrderItem:IOrderItem
+public class DoOrderItem:IOrderItem
 {
+    static string FPath = @"OrderItems.xml"
 }
