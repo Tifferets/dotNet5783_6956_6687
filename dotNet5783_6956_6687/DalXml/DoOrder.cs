@@ -11,6 +11,7 @@ namespace Dal;
 
 public class DoOrder:IOrder
 {
+    static string fpath = @"Order";
     public static void SaveListToXML(List<Order> listOfOrders, string path)
     {
         FileStream fs = new FileStream(path, FileMode.Create);
