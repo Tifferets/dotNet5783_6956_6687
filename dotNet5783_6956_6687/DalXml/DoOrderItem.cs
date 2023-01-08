@@ -10,5 +10,5 @@ namespace Dal;
 
 public class DoOrderItem:IOrderItem
 {
-    static string FPath = @"OrderItems.xml"
+    
 }
