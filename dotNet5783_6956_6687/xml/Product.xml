@@ -3,14 +3,14 @@
   <Product>
     <Name>kitten</Name>
     <ID>300001</ID>
-    <Price>900</Price>
+    <Price>975</Price>
     <Category>Cat</Category>
-    <InStock>1</InStock>
+    <InStock>50</InStock>
   </Product>
   <Product>
     <Name>Cockatiel</Name>
     <ID>300002</ID>
-    <Price>75</Price>
+    <Price>750</Price>
     <Category>Cat</Category>
     <InStock>5</InStock>
   </Product>
@@ -88,7 +88,7 @@
     <ID>388888</ID>
     <Name>old fish</Name>
     <Category>Fish</Category>
-    <Price>50</Price>
+    <Price>58</Price>
     <InStock>1</InStock>
   </Product>
   <Product>
@@ -104,5 +104,19 @@
     <Category>Dog</Category>
     <Price>80000000</Price>
     <InStock>5</InStock>
+  </Product>
+  <Product>
+    <ID>300000</ID>
+    <Name>poodle</Name>
+    <Category>Dog</Category>
+    <Price>755</Price>
+    <InStock>0</InStock>
+  </Product>
+  <Product>
+    <ID>330000</ID>
+    <Name>fluffy rabbit</Name>
+    <Category>Rabbit</Category>
+    <Price>60</Price>
+    <InStock>0</InStock>
   </Product>
 </ArrayOfProduct>

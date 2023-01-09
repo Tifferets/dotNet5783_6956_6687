@@ -88,9 +88,11 @@ public class DoProduct : IProduct
     } 
     public IEnumerable<Product?> GetAll(Func<Product?, bool> func = null)
     {
-        LoadData();
-        IEnumerable<Product> products;
-        products = (from p in productRoot?.Elements()
+        try
+        {
+            LoadData();
+            IEnumerable<Product> products;
+            products = (from p in productRoot?.Elements()
                         let newproduct = new DO.Product()
                         {
                             ID = Convert.ToInt32(p.Element("ID").Value),
@@ -100,8 +102,12 @@ public class DoProduct : IProduct
                             Price = Convert.ToInt32(p.Element("Price").Value),
                         }
                         where func == null ? true : func(newproduct)
+                        orderby (newproduct.ID)
                         select newproduct);
             return products.Cast<Product?>();
+        }
+        catch
+        { throw new Exception("Can not get list of all products"); }
     }
     public int Add(Product product)//gets a product and adds it to the xml file
     {
