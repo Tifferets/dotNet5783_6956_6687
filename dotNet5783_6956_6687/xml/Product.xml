@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Product>
     <Name>kitten</Name>
@@ -104,5 +104,19 @@
     <Category>Dog</Category>
     <Price>80000000</Price>
     <InStock>5</InStock>
+  </Product>
+  <Product>
+    <ID>362589</ID>
+    <Name>ggggg</Name>
+    <Category>Dog</Category>
+    <Price>20</Price>
+    <InStock>35</InStock>
+  </Product>
+  <Product>
+    <ID>323232</ID>
+    <Name>stray</Name>
+    <Category>Dog</Category>
+    <Price>65.5</Price>
+    <InStock>36</InStock>
   </Product>
 </ArrayOfProduct>
