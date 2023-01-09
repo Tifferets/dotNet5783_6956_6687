@@ -35,18 +35,18 @@ public class DoOrder:IOrder
         }
         catch(Exception ex) { throw new Exception("cant save"); }
     }
-    public static void SaveListToXML(List<Order> listOfOrders, string path)
-    {
-        FileStream fs = new FileStream(path, FileMode.Create);
-        XmlSerializer x =new XmlSerializer(listOfOrders.GetType());
-        x.Serialize(fs, listOfOrders);
-    }
-    public static List<Order> LoadListFromXML(string path)
-    {
-        FileStream fs = new FileStream(path, FileMode.Open);
-        XmlSerializer x = new XmlSerializer(typeof(List<Order>));
-        return (List<Order>)x.Deserialize(fs);
-    }
+    //public static void SaveListToXML(List<Order> listOfOrders, string path)
+    //{
+    //    FileStream fs = new FileStream(path, FileMode.Create);
+    //    XmlSerializer x =new XmlSerializer(listOfOrders.GetType());
+    //    x.Serialize(fs, listOfOrders);
+    //}
+    //public static List<Order> LoadListFromXML(string path)
+    //{
+    //    FileStream fs = new FileStream(path, FileMode.Open);
+    //    XmlSerializer x = new XmlSerializer(typeof(List<Order>));
+    //    return (List<Order>)x.Deserialize(fs);
+    //}
 
 
     /// <summary>
@@ -102,7 +102,7 @@ public class DoOrder:IOrder
     public void Delete(int orderID)
     {
         List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
-        orderLst.remove()
+        orderLst.remove();
         LoadData();
         try
         {
@@ -135,7 +135,6 @@ public class DoOrder:IOrder
     public void Update(Order order)
     {
         Delete(order.ID);
-
         DataSource.Orderlist.Add(order);
         DataSource.Orderlist = DataSource.Orderlist.OrderByDescending(x => -x?.ID).ToList();// sorts the list by small id to bigger id
         //int count = 0;
