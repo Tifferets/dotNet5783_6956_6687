@@ -63,24 +63,23 @@ public class DoProduct : IProduct
     {
         //gets a single product from the file
         LoadData();
-        IEnumerable<Product?> products;
-        List<Product> plist;//list to save them in
+        IEnumerable<Product> products;
         try
         {
-            plist = (from p in productRoot.Elements()
-                     select new Product()
-                     {
-                         ID = Convert.ToInt32(p.Element("ID").Value),
-                         Name = p.Element("Name").Value,
-                         InStock = Convert.ToInt32(p.Element("InStock").Value),
-                         Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
-                         Price = Convert.ToInt32(p.Element("Price").Value)
-                     }).ToList();//we put it all in the list
+          products = (from p in productRoot?.Elements()
+                            let newproduct = new DO.Product()
+                            {
+                                ID = Convert.ToInt32(p.Element("ID").Value),
+                                Name = p.Element("Name").Value,
+                                InStock = Convert.ToInt32(p.Element("InStock").Value),
+                                Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
+                                Price = Convert.ToInt32(p.Element("Price").Value),
+                            }
+                            where func == null ? true : func(newproduct)
+                            select newproduct).ToList();
 
             productRoot.Save(dir + FPath);
-            products = plist.ConvertAll<Product?>(x => x);//converts the list to ienumerable?
-            Product? p1 = products.FirstOrDefault(func);
-            return p1;
+            return  products.Cast<Product?>().FirstOrDefault(func);    
         }
         catch 
         {
@@ -90,35 +89,19 @@ public class DoProduct : IProduct
     public IEnumerable<Product?> GetAll(Func<Product?, bool> func = null)
     {
         LoadData();
-        IEnumerable<Product?> products;
-        List<Product> plist = new List<Product>();
-        try
-        {
-            plist = (from p in productRoot?.Elements()
-                     select new DO.Product()
-                     {
-                         ID = Convert.ToInt32(p.Element("ID").Value),
-                         Name = p.Element("Name").Value,
-                         InStock = Convert.ToInt32(p.Element("InStock").Value),
-                         Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
-                         Price = Convert.ToInt32(p.Element("Price").Value),
-                     }).ToList();
-            products = plist.ConvertAll<Product?>(x=>x);
-            if (func == null)
-            {
-                return products;
-            }
-            else
-            {
-                return products.Where(func).OrderByDescending(x => x?.ID);
-            }
-               
-        }
-        catch
-        {
-            products = null;
-        }
-        return products;
+        IEnumerable<Product> products;
+        products = (from p in productRoot?.Elements()
+                        let newproduct = new DO.Product()
+                        {
+                            ID = Convert.ToInt32(p.Element("ID").Value),
+                            Name = p.Element("Name").Value,
+                            InStock = Convert.ToInt32(p.Element("InStock").Value),
+                            Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
+                            Price = Convert.ToInt32(p.Element("Price").Value),
+                        }
+                        where func == null ? true : func(newproduct)
+                        select newproduct);
+            return products.Cast<Product?>();
     }
     public int Add(Product product)//gets a product and adds it to the xml file
     {
@@ -139,7 +122,7 @@ public class DoProduct : IProduct
         }
         catch(Exception ex)
         {
-            //throw "Cant add product";
+            throw new Exception("Cant add product");
         }
         return product.ID;
     }

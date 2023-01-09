@@ -11,8 +11,8 @@
     <Name>Cockatiel</Name>
     <ID>300002</ID>
     <Price>75</Price>
-    <Category>Parrot</Category>
-    <InStock>0</InStock>
+    <Category>Cat</Category>
+    <InStock>5</InStock>
   </Product>
   <Product>
     <Name>Holland Lop</Name>
@@ -75,6 +75,34 @@
     <Name>mousish</Name>
     <Category>Dog</Category>
     <Price>80</Price>
+    <InStock>5</InStock>
+  </Product>
+  <Product>
+    <ID>300015</ID>
+    <Name>Gray cat</Name>
+    <Category>Cat</Category>
+    <Price>500</Price>
+    <InStock>6</InStock>
+  </Product>
+  <Product>
+    <ID>388888</ID>
+    <Name>old fish</Name>
+    <Category>Fish</Category>
+    <Price>50</Price>
+    <InStock>1</InStock>
+  </Product>
+  <Product>
+    <ID>355046</ID>
+    <Name>bihk</Name>
+    <Category>Dog</Category>
+    <Price>454</Price>
+    <InStock>46</InStock>
+  </Product>
+  <Product>
+    <ID>366666</ID>
+    <Name>koiki</Name>
+    <Category>Dog</Category>
+    <Price>80000000</Price>
     <InStock>5</InStock>
   </Product>
 </ArrayOfProduct>

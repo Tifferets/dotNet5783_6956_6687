@@ -249,7 +249,9 @@ internal class BoProduct : BlApi.IProduct
         if (checkDataIsGood(product))
         {
             if(dal?.product.GetAll().Any(x=> x.Value.ID == product?.Id) == true )//checks if the id exsistes
-            { throw new BO.alreadyExistException(); }
+            {
+                throw new BO.alreadyExistException();
+            }
             //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
             //{
             //    if (item.ID == product.Id)
@@ -263,6 +265,7 @@ internal class BoProduct : BlApi.IProduct
             }
             catch
             {
+                throw new Exception("can not add this product");
             }
         }
         else
