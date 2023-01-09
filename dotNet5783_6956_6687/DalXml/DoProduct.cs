@@ -77,14 +77,15 @@ public class DoProduct : IProduct
                      }).ToList();
             productRoot.Save(FPath);
             products = (IEnumerable<Product?>)plist;
+            Product? p1 = products.FirstOrDefault(func);
+            return p1;
         }
         catch 
-        { 
-
+        {
+            throw new Exception("cant get single");
         }
        
-        Product? p1 = products.FirstOrDefault(func);
-        return p1;
+
     } 
     public IEnumerable<Product?> GetAll(Func<Product?, bool> func)
     {
