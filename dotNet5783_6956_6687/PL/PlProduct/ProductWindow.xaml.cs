@@ -164,14 +164,6 @@ namespace PL.PlProduct
             message_lable.Visibility = Visibility.Visible;
         }
 
-        private void Id_Textbox_MouseLeave_1(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void Id_Textbox_MouseLeaveId_Textbox_MouseLeave_1(object sender, MouseEventArgs e)
-        {
-
-        }
+      
     }
 }

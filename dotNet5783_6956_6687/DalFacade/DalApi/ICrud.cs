@@ -8,7 +8,7 @@ public interface ICrud<T> where T: struct
     void Update(T entity);
     void Delete(int id);
     int Add(T other);
-    IEnumerable<T?> GetAll(Func<T?, bool>? select = null);
+    IEnumerable<T?> GetAll(Func<T?, bool>? func = null);
     T? GetSingle(Func<T?, bool>? func);
 }
 
