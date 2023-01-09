@@ -1,12 +1,10 @@
 ﻿using DalApi;
-
-
 namespace Dal;
 
-sealed internal class DalXml:IDal
+ internal sealed class DalXml:IDal
 {
     private DalXml() { }
-    public IProduct DoProduct { get; } = new Dal.DoProduct();
-    public IOrder DoOrder { get; } = new Dal.DoOrder();
-    public IOrderItem DoOrderItem { get; } = new Dal.DoOrderItem();
+    public IProduct product { get; } = new Dal.DoProduct();
+    public IOrder order { get; } = new Dal.DoOrder();
+    public IOrderItem orderItem { get; } = new Dal.DoOrderItem();
 }

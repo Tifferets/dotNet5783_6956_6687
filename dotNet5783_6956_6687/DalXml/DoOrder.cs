@@ -82,7 +82,6 @@ public class DoOrder:IOrder
     {
         try
         {
-            LoadData();
             List<DO.OrderItem?> OrderItemsList = Dal.XMLTools.LoadListFromXML<DO.OrderItem?>(orderItemPath); //gets all the orderitem
             List<DO.OrderItem?> items = OrderItemsList.Where(x =>x?.OrderID == id).ToList();//items is a list of all the orderitems that have order id is the id we got
 
