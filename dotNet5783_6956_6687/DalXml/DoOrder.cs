@@ -14,40 +14,6 @@ public class DoOrder:IOrder
 {
     static string fPath = @"Order";
     static string orderItemPath = @"OrderItem";
-    XElement configRoot;
-    string configPath = @"Config.xml";
-    private void LoadData()
-    {
-        try
-        {
-            configRoot= XElement.Load(configPath);
-        }
-        catch(Exception ex)
-        {
-            throw new Exception("cant load");
-        }
-    }
-    private void SaveData(int orderID)
-    {
-        try
-        {
-            configRoot = new XElement("ID", new XElement("OrderID", orderID));
-            configRoot.Save(configPath);
-        }
-        catch(Exception ex) { throw new Exception("cant save"); }
-    }
-    //public static void SaveListToXML(List<Order> listOfOrders, string path)
-    //{
-    //    FileStream fs = new FileStream(path, FileMode.Create);
-    //    XmlSerializer x =new XmlSerializer(listOfOrders.GetType());
-    //    x.Serialize(fs, listOfOrders);
-    //}
-    //public static List<Order> LoadListFromXML(string path)
-    //{
-    //    FileStream fs = new FileStream(path, FileMode.Open);
-    //    XmlSerializer x = new XmlSerializer(typeof(List<Order>));
-    //    return (List<Order>)x.Deserialize(fs);
-    //}
 
 
     /// <summary>
@@ -58,14 +24,14 @@ public class DoOrder:IOrder
     public int Add(Order order)
     {
         List<DO.Order> OrderList =Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
-        LoadData();
+    //    LoadData();
         try
         {
-            XElement orderid = configRoot.Element("OrderID");
-            int numid = Convert.ToInt32(orderid.Element("OrderID").Value);
-            order.ID = numid++;
+            int orderid = Config.getNewOrderID();
+            // int numid = Convert.ToInt32(orderid.Element("OrderID").Value);
+            order.ID = orderid;
             OrderList.Add(order);
-            SaveData((int)orderid);
+            //SaveData((int)orderid);
             Dal.XMLTools.SaveListToXML(OrderList, fPath);
             return order.ID;
         }
@@ -73,37 +39,15 @@ public class DoOrder:IOrder
         {
             throw new Exception("couldnt add");
         }
-        //order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
-        //DataSource.Orderlist.Add(order);//not recursion
-       // return order.ID;
-
     }
 
-    /// <summary>
-    /// method gets an order ID and renurns the order it belongs to
-    /// </summary>
-    /// <param name="orderID"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    //public Order Get(int orderID)
-    //{
 
-    //       foreach(Order item in DataSource.Orderlist)//goes through the list looking for the order.
-    //       {
-    //            if(item.ID == orderID)  
-    //                return item;
-    //       }
-    //       throw new Exception("order does not exist");
-
-    //}
     /// <summary>
     /// method gets an order ID and delets the right order
     /// </summary>
     /// <param name="orderID"></param>
     public void Delete(int orderID)
     {//gets an orders id and deletes the order
-
-        LoadData();
         List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
         Order or = OrderList.FirstOrDefault(x => x.ID == orderID);//or is A copy of the order we  want to delete
         OrderList.Remove(or);//removes the order from the list
@@ -119,8 +63,7 @@ public class DoOrder:IOrder
         
         try
         {
-            LoadData();
-            List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
+            List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(fPath);//gets all the orders
             OrderList.Remove(order);//deletes the order from the list
             OrderList.Add(order);
             OrderList = OrderList.OrderBy(x => x.ID).ToList();// sorts the list by  id 
@@ -136,10 +79,7 @@ public class DoOrder:IOrder
     {
         try
         {
-            LoadData();
             List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
-           
-
             Dal.XMLTools.SaveListToXML(OrderList, fPath);//saves the list into xml file
         }
         catch (Exception ex)
@@ -187,7 +127,6 @@ public class DoOrder:IOrder
     {
         try 
         {
-            LoadData();
             List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
             Order? or = OrderList.FirstOrDefault(x => func(x));//or is the order were looking for
             Dal.XMLTools.SaveListToXML(OrderList, fPath);//saves the list into xml file
