@@ -36,18 +36,18 @@ public class DoOrder:IOrder
         }
         catch(Exception ex) { throw new Exception("cant save"); }
     }
-    public static void SaveListToXML(List<Order> listOfOrders, string path)
-    {
-        FileStream fs = new FileStream(path, FileMode.Create);
-        XmlSerializer x =new XmlSerializer(listOfOrders.GetType());
-        x.Serialize(fs, listOfOrders);
-    }
-    public static List<Order> LoadListFromXML(string path)
-    {
-        FileStream fs = new FileStream(path, FileMode.Open);
-        XmlSerializer x = new XmlSerializer(typeof(List<Order>));
-        return (List<Order>)x.Deserialize(fs);
-    }
+    //public static void SaveListToXML(List<Order> listOfOrders, string path)
+    //{
+    //    FileStream fs = new FileStream(path, FileMode.Create);
+    //    XmlSerializer x =new XmlSerializer(listOfOrders.GetType());
+    //    x.Serialize(fs, listOfOrders);
+    //}
+    //public static List<Order> LoadListFromXML(string path)
+    //{
+    //    FileStream fs = new FileStream(path, FileMode.Open);
+    //    XmlSerializer x = new XmlSerializer(typeof(List<Order>));
+    //    return (List<Order>)x.Deserialize(fs);
+    //}
 
 
     /// <summary>
@@ -174,22 +174,14 @@ public class DoOrder:IOrder
     /// <returns></returns>
     public IEnumerable<Order?> GetAll(Func<Order?, bool>? func)
     {
-        if (func == null)
+        if (func is null)
         {
-            return (DataSource.Orderlist ?? throw new NullException());//if null retun te whole list
+            return XMLTools.LoadListFromXML<Order?>(fPath);
         }
-
-        return (from item in (DataSource.Orderlist ?? throw new NullException())
-                where func(item)//if the id is good
-                select item).ToList()//adds to list 
-;
-        //List<Order?> result = new List<Order?>();
-        //foreach (var item in (DataSource.Orderlist ?? throw new NullException()))
-        //{
-        //    if (func(item))//if the id is good
-        //        result.Add(item);//adds to list 
-        //}
-        //return result;
+        else
+        {
+            return XMLTools.LoadListFromXML<Order?>(fPath).Where(func);
+        }
     }
     public Order? GetSingle(Func<Order?, bool>? func)
     {
