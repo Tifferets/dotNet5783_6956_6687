@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Product>
+    <Name>kitten</Name>
+    <ID>300001</ID>
+    <Price>900</Price>
+    <Category>Cat</Category>
+    <InStock>1</InStock>
+  </Product>
+  <Product>
+    <Name>Cockatiel</Name>
+    <ID>300002</ID>
+    <Price>75</Price>
+    <Category>Parrot</Category>
+    <InStock>0</InStock>
+  </Product>
+  <Product>
+    <Name>Holland Lop</Name>
+    <ID>300003</ID>
+    <Price>22</Price>
+    <Category>Rabbit</Category>
+    <InStock>3</InStock>
+  </Product>
+  <Product>
+    <Name>Gold Fish</Name>
+    <ID>300004</ID>
+    <Price>189</Price>
+    <Category>Fish</Category>
+    <InStock>0</InStock>
+  </Product>
+  <Product>
+    <Name>golden retriever</Name>
+    <ID>300005</ID>
+    <Price>32</Price>
+    <Category>Dog</Category>
+    <InStock>16</InStock>
+  </Product>
+  <Product>
+    <Name>Persian Cat</Name>
+    <ID>300006</ID>
+    <Price>135</Price>
+    <Category>Cat</Category>
+    <InStock>0</InStock>
+  </Product>
+  <Product>
+    <Name>Cockatoo</Name>
+    <ID>300007</ID>
+    <Price>12</Price>
+    <Category>Parrot</Category>
+    <InStock>4</InStock>
+  </Product>
+  <Product>
+    <Name>Lionhead Rabbit</Name>
+    <ID>300008</ID>
+    <Price>133</Price>
+    <Category>Rabbit</Category>
+    <InStock>4</InStock>
+  </Product>
+  <Product>
+    <Name> Betta</Name>
+    <ID>300009</ID>
+    <Price>40</Price>
+    <Category>Fish</Category>
+    <InStock>8</InStock>
+  </Product>
+  <Product>
+    <ID>355555</ID>
+    <Name>black cat</Name>
+    <Category>Dog</Category>
+    <Price>566666</Price>
+    <InStock>1</InStock>
+  </Product>
+  <Product>
+    <ID>300011</ID>
+    <Name>mousish</Name>
+    <Category>Dog</Category>
+    <Price>80</Price>
+    <InStock>5</InStock>
+  </Product>
+</ArrayOfProduct>

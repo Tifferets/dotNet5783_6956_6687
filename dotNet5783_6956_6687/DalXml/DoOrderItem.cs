@@ -11,18 +11,17 @@ namespace Dal;
 
 public class DoOrderItem:IOrderItem
 {
-    const string orderItem = "OrderItem";
+    static string dir = @"..\xml\";
+    const string orderItem = @"OrderItems.xml";
     public int Add(OrderItem OrderItem)
     {
        
         try
         {
             List<OrderItem> OrderItemList = Dal.XMLTools.LoadListFromXML<OrderItem>(orderItem); //gets all the orders                                                                                             
-            int orderItemId = Config.getNewOrderItemID();
-            // int numid = Convert.ToInt32(orderid.Element("OrderID").Value);
+            int orderItemId = Config.getNewOrderItemID();//gets id from the 
             OrderItem.OrderItemID = orderItemId;
-            OrderItemList.Add(OrderItem);
-            //SaveData((int)orderid);
+            OrderItemList.Add(OrderItem);//adds to list
             Dal.XMLTools.SaveListToXML(OrderItemList, orderItem);
             return OrderItem.OrderItemID;
         }
@@ -60,11 +59,11 @@ public class DoOrderItem:IOrderItem
     {
         if (func is null) 
         { 
-            return XMLTools.LoadListFromXML<OrderItem?>(orderItem);
+            return XMLTools.LoadListFromXML<OrderItem?>(orderItem);//returns the whole list
         }
         else 
         {
-            return XMLTools.LoadListFromXML<OrderItem?>(orderItem).Where(func);
+            return XMLTools.LoadListFromXML<OrderItem?>(orderItem).Where(func);//returns all that are tre from the func
         }
 
     }

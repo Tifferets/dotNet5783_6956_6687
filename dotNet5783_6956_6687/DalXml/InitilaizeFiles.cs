@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dal;
 
-public  class InitilaizeFiles
+public  class program
 {
     internal static readonly Random rand = new Random();//to generat random 
     internal static List<Order?> Orderlist = new List<Order?>();
@@ -49,7 +49,7 @@ public  class InitilaizeFiles
     /// <summary>
     /// default constructor
     /// </summary>
-    static InitilaizeFiles()
+    static program()
     {
         s_Initialize();
     }
@@ -145,6 +145,7 @@ public  class InitilaizeFiles
         XMLTools.SaveListToXML<OrderItem?>(orderitemlist, path1);
         string path2 = "Product.xml";
         XMLTools.SaveListToXML<Product?>(productlist, path2);
+        Console.WriteLine("jsj");
     }
 }
 

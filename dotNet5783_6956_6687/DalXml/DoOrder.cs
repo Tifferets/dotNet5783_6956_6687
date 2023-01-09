@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -12,8 +13,9 @@ namespace Dal;
 
 public class DoOrder:IOrder
 {
-    static string fPath = @"Order";
-    static string orderItemPath = @"OrderItem";
+    static string dir = @"..\xml\";
+    static string fPath = @"Orders.xml";
+    static string orderItemPath = @"OrderItems.xml";
 
 
     /// <summary>
@@ -23,15 +25,12 @@ public class DoOrder:IOrder
     /// <returns></returns>
     public int Add(Order order)
     {
-        List<DO.Order> OrderList =Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
-    //    LoadData();
+        List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(dir+fPath); //gets all the orders
         try
         {
-            int orderid = Config.getNewOrderID();
-            // int numid = Convert.ToInt32(orderid.Element("OrderID").Value);
+            int orderid = Config.getNewOrderID();//gets an id from config
             order.ID = orderid;
-            OrderList.Add(order);
-            //SaveData((int)orderid);
+            OrderList.Add(order);//adds to list
             Dal.XMLTools.SaveListToXML(OrderList, fPath);
             return order.ID;
         }
@@ -82,7 +81,7 @@ public class DoOrder:IOrder
     {
         try
         {
-            List<DO.OrderItem?> OrderItemsList = Dal.XMLTools.LoadListFromXML<DO.OrderItem?>(orderItemPath); //gets all the orderitem
+            List<DO.OrderItem?> OrderItemsList = Dal.XMLTools.LoadListFromXML<DO.OrderItem?>(dir+orderItemPath); //gets all the orderitem
             List<DO.OrderItem?> items = OrderItemsList.Where(x =>x?.OrderID == id).ToList();//items is a list of all the orderitems that have order id is the id we got
 
 
@@ -95,11 +94,6 @@ public class DoOrder:IOrder
         }
     }
     /// <summary>
-    /// method returns the list 
-    /// </summary>
-    /// <returns></returns>
-    //public IEnumerable<Order?> GetAll() => DataSource.Orderlist;
-    /// <summary>
     /// returns list of all order items with the id
     /// </summary>
     /// <returns></returns>
@@ -107,7 +101,8 @@ public class DoOrder:IOrder
     {
         if (func is null)
         {
-            return XMLTools.LoadListFromXML<Order?>(fPath);
+            IEnumerable<Order?> lst= XMLTools.LoadListFromXML<Order?>(fPath);
+            return lst;// XMLTools.LoadListFromXML<Order?>(fPath);
         }
         else
         {

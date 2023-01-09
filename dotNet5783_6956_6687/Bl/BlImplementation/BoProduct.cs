@@ -66,31 +66,31 @@ internal class BoProduct : BlApi.IProduct
     {
         try
         {
-            var result = from item in (dal?.product.GetAll() ?? throw new BO.NullException())//gets a list of product and returns all that have the category
-                         let gtz = item.Value.InStock > 0
-                         select new BO.ProductForList()
-                         {
-                             ID = (int)item?.ID,
-                             Name = item?.Name,
-                             //InStock = gtz,
-                             //Amount = item?.InStock ?? 0,
-                             Price = item?.Price,
-                             Category = (BO.Category)item?.Category
-                         };
+            //var result = from item in (dal?.product.GetAll() ?? throw new BO.NullException())//gets a list of product and returns all that have the category
+            //             let gtz = item.Value.InStock > 0
+            //             select new BO.ProductForList()
+            //             {
+            //                 ID = (int)item?.ID,
+            //                 Name = item?.Name,
+            //                 //InStock = gtz,
+            //                 //Amount = item?.InStock ?? 0,
+            //                 Price = item?.Price,
+            //                 Category = (BO.Category)item?.Category
+            //             };
 
-            return result;
-            //List<BO.ProductForList> products = new List<BO.ProductForList>();
-            //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
-            //{
-            //    bool flag = false;
-            //    if (item.InStock > 0)
-            //    {
-            //        flag = true;
-            //    }
-            //    BO.ProductForList productForList = new BO.ProductForList() { ID = item.ID, Name = item.Name, InStock = flag, Amount = item.InStock, Price = item.Price, Category = (BO.Category)item.Category };
-            //    products.Add(productForList);
-            //}
-            //return products;
+            //return result;
+            List<BO.ProductForList> products = new List<BO.ProductForList>();
+            foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
+            {
+                bool flag = false;
+                if (item.InStock > 0)
+                {
+                    flag = true;
+                }
+                BO.ProductForList productForList = new BO.ProductForList() { ID = item.ID, Name = item.Name, Price = item.Price, Category = (BO.Category)item.Category };
+                products.Add(productForList);
+            }
+            return products;
         }
         catch (Exception)
         {
@@ -321,7 +321,7 @@ internal class BoProduct : BlApi.IProduct
             var there = (from DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException()
                          where (dal?.order.GetAllOrderItems(item.ID).Any(x => x?.ProductID == Id) ?? true)
                          select (item));
-            if(there.Count() != 0)
+            if (there.Count() != 0)
                 throw new BO.CantDeleteException();
 
 
@@ -329,22 +329,22 @@ internal class BoProduct : BlApi.IProduct
 
             //foreach (DO.Order item in (dal?.order.GetAll() ?? throw new BO.NullException()))//going over the list
             //{
-            //    IEnumerable<DO.OrderItem?> orderItemList = (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()) ;//gets a list of all order items for the order
-            //    if (orderItemList.Any(x=> x?.ProductID == Id))
+            //    IEnumerable<DO.OrderItem?> orderItemList = (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException());//gets a list of all order items for the order
+            //    if (orderItemList.Any(x => x?.ProductID == Id))
             //        throw new BO.CantDeleteException();
-            //    //foreach (DO.OrderItem oitem in orderItemList)//
-            //    //{
-            //    //    if (oitem.ProductID == Id)//checks if the product is in the orderitem
-            //    //    {
-            //    //        throw new BO.CantDeleteException();
-            //    //    }
-            //    //}
+            //    foreach (DO.OrderItem oitem in orderItemList)//
+            //    {
+            //        if (oitem.ProductID == Id)//checks if the product is in the orderitem
+            //        {
+            //            throw new BO.CantDeleteException();
+            //        }
+            //    }
 
             try
             {
                 dal?.product.Delete(Id);
             }
-            catch (Exception )
+            catch (Exception)
             {
                 throw new BO.CantDeleteException();
             }
@@ -353,6 +353,7 @@ internal class BoProduct : BlApi.IProduct
         {
             throw new BO.WrongIDException();
         }
+   // }
     }
     /// <summary>
     /// updates product, gets product checks if the data is right adds to the system if not throws exception

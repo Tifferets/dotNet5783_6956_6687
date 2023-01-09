@@ -9,9 +9,9 @@ using System.Xml.Serialization;
 
 namespace Dal;
 
-class XMLTools
+public class XMLTools
 {
-    static string dir = @"xml\";
+    static string dir = @"..\xml\";
     static XMLTools()
     {
         if (!Directory.Exists(dir))
@@ -22,7 +22,6 @@ class XMLTools
     {
         try
         {
-
             FileStream fs = new FileStream(dir + path, FileMode.Create);
             XmlSerializer x = new XmlSerializer(listOfOrders.GetType());
             x.Serialize(fs, listOfOrders);
@@ -30,7 +29,7 @@ class XMLTools
         }
         catch (Exception ex)
         {
-            //  throw new DO.CantSaveListToXMLException();
+            throw new Exception("AAAHHHHHHHHHH"); //  DO.CantSaveListToXMLException();
         }
     }
     public static List<T> LoadListFromXML<T>(string path)
@@ -44,10 +43,7 @@ class XMLTools
                 FileStream fs = new FileStream(dir + path, FileMode.Open);
                 list = (List<T>)x.Deserialize(fs);
                 fs.Close();
-                if (list != null)
-                    return list;
-                else
-                    throw new DalApi.EmptyListException();
+                return list;
             }
             else
                 return new List<T>();
@@ -59,9 +55,9 @@ class XMLTools
     }
 }
 public static class Config
-    {
+{
     private static XElement configRoot;
-    private  static string configPath = @"Config.xml";
+    private static string configPath = @"..\xml\Config.xml";
     public static void LoadData()
     {
         try
@@ -75,16 +71,18 @@ public static class Config
     }
     static Config()
     {
-        LoadData();
-        if(configRoot== null)
-        {
-            configRoot = new XElement("Config", new XElement("OrderID", 100000), new XElement ("OrderItemID", 200000));
+        if (File.Exists(configPath) == false)
+        { 
+            configRoot = new XElement("Config", new XElement("OrderID", 100000), new XElement("OrderItemID", 200000));
+            configRoot.Save(configPath);
         }
+        else
+            LoadData();
     }
     public static int getNewOrderID()
     {
         LoadData();
-        XElement OrderId = configRoot.Element("Config")!.Element("OrderID")!;
+        XElement OrderId = configRoot.Element("OrderID");
         OrderId.Value = (Convert.ToInt32(OrderId.Value) + 1).ToString();
         configRoot.Save(configPath);
         return (Convert.ToInt32(OrderId.Value));
@@ -92,7 +90,7 @@ public static class Config
     public static int getNewOrderItemID()
     {
         LoadData();
-        XElement OrderItemID = configRoot.Element("Config")!.Element("OrderItemID")!;
+        XElement OrderItemID = configRoot.Element("OrderItemID");
         OrderItemID.Value = (Convert.ToInt32(OrderItemID.Value) + 1).ToString();
         configRoot.Save(configPath);
         return (Convert.ToInt32(OrderItemID.Value));

@@ -1,4 +1,6 @@
 ﻿using DalApi;
+using System.Diagnostics;
+
 namespace Dal;
 
  internal sealed class DalXml:IDal
@@ -7,4 +9,5 @@ namespace Dal;
     public IProduct product { get; } = new Dal.DoProduct();
     public IOrder order { get; } = new Dal.DoOrder();
     public IOrderItem orderItem { get; } = new Dal.DoOrderItem();
+    public static IDal Instance { get; } = new DalXml();
 }

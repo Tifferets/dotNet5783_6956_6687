@@ -11,8 +11,9 @@ namespace Dal;
 
 public class DoProduct : IProduct
 {
-    XElement productRoot;
-    string FPath = @"Products.xml";
+    static XElement? productRoot ;
+    static string dir = @"..\xml\";
+    string FPath = @"Product.xml";
     public DoProduct()
     {
         if (File.Exists(FPath) == false)
@@ -40,7 +41,7 @@ public class DoProduct : IProduct
  
                                                    new XElement("Price", p.Price)));
 
-            productRoot.Save(FPath);
+            productRoot.Save(dir+FPath);
         }
         catch (Exception ex)
         { 
@@ -51,7 +52,7 @@ public class DoProduct : IProduct
     {
         try
         {
-            productRoot =XElement.Load(FPath);
+            productRoot = XElement.Load(dir + FPath);
         }
         catch
         {
@@ -63,7 +64,7 @@ public class DoProduct : IProduct
         //gets a single product from the file
         LoadData();
         IEnumerable<Product?> products;
-        List<Product> plist;
+        List<Product> plist;//list to save them in
         try
         {
             plist = (from p in productRoot.Elements()
@@ -74,9 +75,10 @@ public class DoProduct : IProduct
                          InStock = Convert.ToInt32(p.Element("InStock").Value),
                          Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
                          Price = Convert.ToInt32(p.Element("Price").Value)
-                     }).ToList();
-            productRoot.Save(FPath);
-            products = (IEnumerable<Product?>)plist;
+                     }).ToList();//we put it all in the list
+
+            productRoot.Save(dir + FPath);
+            products = plist.ConvertAll<Product?>(x => x);//converts the list to ienumerable?
             Product? p1 = products.FirstOrDefault(func);
             return p1;
         }
@@ -85,24 +87,23 @@ public class DoProduct : IProduct
             throw new Exception("cant get single");
         }
     } 
-    public IEnumerable<Product?> GetAll(Func<Product?, bool> func)
+    public IEnumerable<Product?> GetAll(Func<Product?, bool> func = null)
     {
         LoadData();
         IEnumerable<Product?> products;
-        List<Product> plist;
+        List<Product> plist = new List<Product>();
         try
         {
-            plist = (from p in productRoot.Elements()
-                        select new Product()
-                        {
-                            ID = Convert.ToInt32(p.Element("ID").Value),
-                            Name = p.Element("Name").Value,
-                            InStock = Convert.ToInt32(p.Element("InStock").Value),
-                            Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
-                            Price = Convert.ToInt32(p.Element("Price").Value)
-
-                        }).ToList();
-            products = (IEnumerable<Product?>)plist;
+            plist = (from p in productRoot?.Elements()
+                     select new DO.Product()
+                     {
+                         ID = Convert.ToInt32(p.Element("ID").Value),
+                         Name = p.Element("Name").Value,
+                         InStock = Convert.ToInt32(p.Element("InStock").Value),
+                         Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
+                         Price = Convert.ToInt32(p.Element("Price").Value),
+                     }).ToList();
+            products = plist.ConvertAll<Product?>(x=>x);
             if (func == null)
             {
                 return products;
@@ -133,10 +134,8 @@ public class DoProduct : IProduct
             XElement Category = new XElement("Category", product.Category);
             XElement Price = new XElement("Price", product.Price);
             XElement InStock = new XElement("InStock", product.InStock);
-            productRoot.Add(new XElement("Product", ID, Name, Category, Price, InStock));
-            productRoot.Save(FPath);
-
-
+            productRoot.Add(new XElement("Product", ID, Name, Category, Price, InStock));//adding all the info
+            productRoot.Save(dir + FPath);
         }
         catch(Exception ex)
         {
@@ -149,13 +148,12 @@ public class DoProduct : IProduct
         try
         {
             LoadData();
-            XElement product;
-            product = (from p in productRoot.Elements()
-                     where Convert.ToInt32(p.Element("ID").Value) ==id
+            XElement? product;
+            product = (from p in productRoot.Elements()//gets the one to delete
+                     where Convert.ToInt32(p.Element("ID").Value) == id
                      select p).FirstOrDefault();
-            product.Remove();
-            productRoot.Save(FPath);
-            return;
+            product?.Remove();//deleates it
+            productRoot.Save(dir + FPath);
 
         }
         catch
@@ -168,19 +166,22 @@ public class DoProduct : IProduct
         try
         {
             LoadData();
-            XElement productElment = (from p in productRoot.Elements()
+            XElement? productElment = (from p in productRoot.Elements()//gets one to update 
                                       where Convert.ToInt32(p.Element("ID").Value) == product.ID
                                       select p).FirstOrDefault();
-
-            productElment.Element("Name").Value = product.Name;
-            productElment.Element("Price").Value = product.Price.ToString();
-            productElment.Element("Category").Value = product.Category.ToString();
-            productElment.Element("InStock").Value = product.InStock.ToString();
-            productRoot.Save(FPath);
+            if (productElment != null)//if there is one to update 
+            {
+                productElment.Element("Name").Value = product.Name;
+                productElment.Element("Price").Value = product.Price.ToString();
+                productElment.Element("Category").Value = product.Category.ToString();
+                productElment.Element("InStock").Value = product.InStock.ToString();
+                productRoot.Save(dir + FPath);
+            }
+            else throw new Exception("Cant Udate this Product");
         }
-        catch
+        catch(Exception ex) 
         {
-
+            throw(ex);  
         }
     }
 }
