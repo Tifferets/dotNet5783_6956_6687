@@ -55,37 +55,69 @@ public class DoProduct : IProduct
         }
         catch
         {
-     //       throw "file upload product nut successful" ;
+            throw new Exception("file upload product nut successful");
         }
     }
     public Product? GetSingle(Func<Product?, bool> func)
-    {//gets a single product from the file
+    {
+        //gets a single product from the file
         LoadData();
-        Product? product;
+        IEnumerable<Product?> products;
+        List<Product> plist;
         try
         {
-            product = (from p in productRoot.Elements()
-                      where  func(p.Element) //Convert.ToInt32(p.Element("ID").value) ==
-                      select new Product()
+            plist = (from p in productRoot.Elements()
+                     select new Product()
                      {
-                         ID = Convert.ToInt32(p.Element("ID").value),
-                         Name = p.Element("Name").value,
-                         InStock = Convert.ToInt32(p.Element("InStock").value),
-                         Category = p.Element("Category").value,
-                         Price = Convert.ToInt32(p.Element("Price").value)
-                     }).FirstOrDefault();
+                         ID = Convert.ToInt32(p.Element("ID").Value),
+                         Name = p.Element("Name").Value,
+                         InStock = Convert.ToInt32(p.Element("InStock").Value),
+                         Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
+                         Price = Convert.ToInt32(p.Element("Price").Value)
+                     }).ToList();
             productRoot.Save(FPath);
+            products = (IEnumerable<Product?>)plist;
+            Product? p1 = products.FirstOrDefault(func);
+            return p1;
         }
         catch 
-        { 
-            product = null;
+        {
+            throw new Exception("cant get single");
         }
-        
-        return product;//returns the product
-    }
+    } 
     public IEnumerable<Product?> GetAll(Func<Product?, bool> func)
     {
+        LoadData();
+        IEnumerable<Product?> products;
+        List<Product> plist;
+        try
+        {
+            plist = (from p in productRoot.Elements()
+                        select new Product()
+                        {
+                            ID = Convert.ToInt32(p.Element("ID").Value),
+                            Name = p.Element("Name").Value,
+                            InStock = Convert.ToInt32(p.Element("InStock").Value),
+                            Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
+                            Price = Convert.ToInt32(p.Element("Price").Value)
 
+                        }).ToList();
+            products = (IEnumerable<Product?>)plist;
+            if (func == null)
+            {
+                return products;
+            }
+            else
+            {
+                return products.Where(func).OrderByDescending(x => x?.ID);
+            }
+               
+        }
+        catch
+        {
+            products = null;
+        }
+        return products;
     }
     public int Add(Product product)//gets a product and adds it to the xml file
     {
@@ -93,7 +125,6 @@ public class DoProduct : IProduct
             throw new WrongIdException();
         if(product.Name == null)
             throw new NoNameException();
-
         try
         {
             LoadData();
@@ -112,7 +143,6 @@ public class DoProduct : IProduct
             //throw "Cant add product";
         }
         return product.ID;
-
     }
     public void Delete(int id)
     {
@@ -120,8 +150,8 @@ public class DoProduct : IProduct
         {
             LoadData();
             XElement product;
-            product =(from p in productRoot.Elements()
-                     where Convert.ToInt32((p.Element("ID").Value)==id)
+            product = (from p in productRoot.Elements()
+                     where Convert.ToInt32(p.Element("ID").Value) ==id
                      select p).FirstOrDefault();
             product.Remove();
             productRoot.Save(FPath);
@@ -133,7 +163,7 @@ public class DoProduct : IProduct
            // throw "Cant delete product";
         }
     }
-    public void Update (Product product)
+    public void Update(Product product)
     {
         try
         {
