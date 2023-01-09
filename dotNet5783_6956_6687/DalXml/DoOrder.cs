@@ -73,9 +73,7 @@ public class DoOrder:IOrder
         {
             throw new Exception("couldnt add");
         }
-        //order.ID = DataSource.config.GetOrderID;//gets a generated id from data source inner class
-        //DataSource.Orderlist.Add(order);//not recursion
-       // return order.ID;
+
 
     }
 
@@ -132,36 +130,23 @@ public class DoOrder:IOrder
         }
     }
 
+
     public IEnumerable<OrderItem?> GetAllOrderItems(int id)//returns all the order items for the spicific order by its id
     {
         try
         {
             LoadData();
-            List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
-           
+            List<DO.OrderItem?> OrderItemsList = Dal.XMLTools.LoadListFromXML<DO.OrderItem?>(orderItemPath); //gets all the orderitem
+            List<DO.OrderItem?> items = OrderItemsList.Where(x =>x?.OrderID == id).ToList();//items is a list of all the orderitems that have order id is the id we got
 
-            Dal.XMLTools.SaveListToXML(OrderList, fPath);//saves the list into xml file
+
+            Dal.XMLTools.SaveListToXML(OrderItemsList, orderItemPath);//saves the list into xml file
+            return items;//returns the list of all the order items with the order id
         }
         catch (Exception ex)
         {
             throw new Exception("cant update");
         }
-
-
-
-        List<OrderItem?> lst = (from OrderItem? item in DataSource.OrderItemList ?? throw new NullException()
-                                where item?.OrderID == id
-                                select item).ToList();
-        //List<OrderItem?> lst = new List<OrderItem?>();
-        //foreach (OrderItem? item in DataSource.OrderItemList ?? throw new NullException())
-        //{
-        //    if (item?.OrderItemID == id)
-        //    {
-        //        lst.Add(item);
-        //    }
-        //}
-        //IEnumerable<OrderItem?> orderItems = lst;
-        return lst;
     }
     /// <summary>
     /// method returns the list 
@@ -183,6 +168,7 @@ public class DoOrder:IOrder
             return XMLTools.LoadListFromXML<Order?>(fPath).Where(func);
         }
     }
+
     public Order? GetSingle(Func<Order?, bool>? func)
     {
         try 
@@ -199,6 +185,4 @@ public class DoOrder:IOrder
         }
 
     }
-    //DataSource.Orderlist.FirstOrDefault((func ?? throw new NullException())); // return an order with this id
-
 }
