@@ -84,8 +84,6 @@ public class DoProduct : IProduct
         {
             throw new Exception("cant get single");
         }
-       
-
     } 
     public IEnumerable<Product?> GetAll(Func<Product?, bool> func)
     {
