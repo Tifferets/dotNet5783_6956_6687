@@ -29,7 +29,7 @@ public class XMLTools
         }
         catch (Exception ex)
         {
-            throw new Exception("AAAHHHHHHHHHH"); //  DO.CantSaveListToXMLException();
+            throw new("Cant Save List To XML Exception");
         }
     }
     public static List<T> LoadListFromXML<T>(string path)

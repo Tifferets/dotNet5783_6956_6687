@@ -56,7 +56,7 @@ public class DoProduct : IProduct
         }
         catch
         {
-            throw new Exception("file upload product nut successful");
+            throw new Exception("file upload product not successful");
         }
     }
     public Product? GetSingle(Func<Product?, bool> func)
@@ -101,7 +101,7 @@ public class DoProduct : IProduct
                          Name = p.Element("Name").Value,
                          InStock = Convert.ToInt32(p.Element("InStock").Value),
                          Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
-                         Price = Convert.ToInt32(p.Element("Price").Value),
+                         Price = Convert.ToDouble(p.Element("Price").Value),
                      }).ToList();
             products = plist.ConvertAll<Product?>(x=>x);
             if (func == null)
@@ -139,7 +139,7 @@ public class DoProduct : IProduct
         }
         catch(Exception ex)
         {
-            //throw "Cant add product";
+            throw new Exception("Cant add product");
         }
         return product.ID;
     }
@@ -158,7 +158,7 @@ public class DoProduct : IProduct
         }
         catch
         {
-           // throw "Cant delete product";
+            throw new Exception("Cant delete product");
         }
     }
     public void Update(Product product)
@@ -177,7 +177,7 @@ public class DoProduct : IProduct
                 productElment.Element("InStock").Value = product.InStock.ToString();
                 productRoot.Save(dir + FPath);
             }
-            else throw new Exception("Cant Udate this Product");
+            else throw new Exception("Cant Update this Product");
         }
         catch(Exception ex) 
         {

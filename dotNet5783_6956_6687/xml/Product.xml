@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Product>
     <Name>kitten</Name>
     <ID>300001</ID>
     <Price>900</Price>
     <Category>Cat</Category>
-    <InStock>1</InStock>
+    <InStock>0</InStock>
   </Product>
   <Product>
     <Name>Cockatiel</Name>
@@ -76,5 +76,33 @@
     <Category>Dog</Category>
     <Price>80</Price>
     <InStock>5</InStock>
+  </Product>
+  <Product>
+    <ID>355556</ID>
+    <Name>cleaner</Name>
+    <Category>Fish</Category>
+    <Price>50</Price>
+    <InStock>1</InStock>
+  </Product>
+  <Product>
+    <ID>345666</ID>
+    <Name>blacktail</Name>
+    <Category>Parrot</Category>
+    <Price>65.5</Price>
+    <InStock>3</InStock>
+  </Product>
+  <Product>
+    <ID>311111</ID>
+    <Name>dogfish</Name>
+    <Category>Fish</Category>
+    <Price>56.23</Price>
+    <InStock>6</InStock>
+  </Product>
+  <Product>
+    <ID>362652</ID>
+    <Name>dinofish</Name>
+    <Category>Fish</Category>
+    <Price>50</Price>
+    <InStock>3</InStock>
   </Product>
 </ArrayOfProduct>
