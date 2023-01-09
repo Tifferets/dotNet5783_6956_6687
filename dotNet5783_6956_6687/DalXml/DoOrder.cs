@@ -13,6 +13,7 @@ namespace Dal;
 public class DoOrder:IOrder
 {
     static string fPath = @"Order";
+    static string orderItemPath = @"OrderItem";
     XElement configRoot;
     string configPath = @"Config.xml";
     private void LoadData()
@@ -100,57 +101,54 @@ public class DoOrder:IOrder
     /// </summary>
     /// <param name="orderID"></param>
     public void Delete(int orderID)
-    {
-        List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
-        orderLst.remove()
+    {//gets an orders id and deletes the order
+
         LoadData();
-        try
-        {
-            XElement orderid = configRoot.Element("OrderID");
-            int numid = Convert.ToInt32(orderid.Element("OrderID").Value);
-            order.ID = numid++;
-            OrderList.Add(order);
-            SaveData((int)orderid);
-            Dal.XMLTools.SaveListToXML(OrderList, fPath);
-            return order.ID;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception("couldnt add");
-        }
-        DataSource.Orderlist.Remove(GetSingle(x => x?.ID == orderID));
-        //foreach (Order? item in DataSource.Orderlist)//goes through the list looking for the order.
-        //{
-        //    if (item?.ID == orderID)
-        //    {
-        //        DataSource.Orderlist.Remove(item);
-        //        break;
-        //    }
-        //}
+        List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
+        Order or = OrderList.FirstOrDefault(x => x.ID == orderID);//or is A copy of the order we  want to delete
+        OrderList.Remove(or);//removes the order from the list
+        Dal.XMLTools.SaveListToXML(OrderList, fPath);//saves the list into xml file
+
     }
     /// <summary>
     /// method gets an order and updates its details
     /// </summary>
     /// <param name="order"></param>
     public void Update(Order order)
-    {
-        Delete(order.ID);
-
-        DataSource.Orderlist.Add(order);
-        DataSource.Orderlist = DataSource.Orderlist.OrderByDescending(x => -x?.ID).ToList();// sorts the list by small id to bigger id
-        //int count = 0;
-        //foreach (Order? item in (DataSource.Orderlist ?? throw new NullException()))//goes through the list looking for the order.
-        //{
-        //    if (item?.ID != order.ID) count++;
-        //    if (item?.ID==order.ID)
-        //    {
-        //        DataSource.Orderlist[count] = order;
-        //        break;
-        //    }
-        //}
+    {//gets an order in its updated version and updates it in the list
+        
+        try
+        {
+            LoadData();
+            List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
+            OrderList.Remove(order);//deletes the order from the list
+            OrderList.Add(order);
+            OrderList = OrderList.OrderBy(x => x.ID).ToList();// sorts the list by  id 
+            Dal.XMLTools.SaveListToXML(OrderList, fPath);//saves the list into xml file
+        }
+        catch(Exception ex)
+        {
+            throw new Exception("cant update");
+        }
     }
+
     public IEnumerable<OrderItem?> GetAllOrderItems(int id)//returns all the order items for the spicific order by its id
     {
+        try
+        {
+            LoadData();
+            List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
+           
+
+            Dal.XMLTools.SaveListToXML(OrderList, fPath);//saves the list into xml file
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("cant update");
+        }
+
+
+
         List<OrderItem?> lst = (from OrderItem? item in DataSource.OrderItemList ?? throw new NullException()
                                 where item?.OrderID == id
                                 select item).ToList();
@@ -193,6 +191,22 @@ public class DoOrder:IOrder
         //}
         //return result;
     }
-    public Order? GetSingle(Func<Order?, bool>? func) => DataSource.Orderlist.FirstOrDefault((func ?? throw new NullException())); // return an order with this id
+    public Order? GetSingle(Func<Order?, bool>? func)
+    {
+        try 
+        {
+            LoadData();
+            List<DO.Order> OrderList = Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
+            Order? or = OrderList.FirstOrDefault(x => func(x));//or is the order were looking for
+            Dal.XMLTools.SaveListToXML(OrderList, fPath);//saves the list into xml file
+            return or;
+        }
+        catch(Exception ex)
+        {
+            throw new Exception("cant get a single order");
+        }
+
+    }
+    //DataSource.Orderlist.FirstOrDefault((func ?? throw new NullException())); // return an order with this id
 
 }

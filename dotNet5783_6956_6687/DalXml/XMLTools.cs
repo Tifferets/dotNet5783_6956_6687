@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-
+//gjgj
 namespace Dal
 {
     class XMLTools
@@ -57,3 +57,10 @@ namespace Dal
         }
     }
 }
+/*
+     LoadData();
+     List<DO.Order> OrderList =Dal.XMLTools.LoadListFromXML<DO.Order>(fPath); //gets all the orders
+     Order or = OrderList.FirstOrDefault(x => x.ID == order.ID);//or is A copy of the order we  want to delete
+     OrderList.Remove(or);//removes the order from the list
+     Dal.XMLTools.SaveListToXML(OrderList, fPath);
+   */
