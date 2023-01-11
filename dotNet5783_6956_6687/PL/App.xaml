@@ -9,7 +9,13 @@
             <Setter Property="FontFamily" Value="calibari" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
-    <Style TargetType="Label" BasedOn="{StaticResource commonStyle}"/>
-        
+        <Style TargetType="Label" BasedOn="{StaticResource commonStyle}"/>
+        <Style TargetType="RadioButton" BasedOn="{StaticResource commonStyle}"/>
+        <Style TargetType="GroupBox" BasedOn="{StaticResource commonStyle}"/>
+        <Style TargetType="ListViewItem" x:Key="ListViewItemStyle">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Width" Value="Auto" />
+        </Style>
     </Application.Resources>
 </Application>

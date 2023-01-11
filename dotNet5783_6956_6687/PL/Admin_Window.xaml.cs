@@ -33,6 +33,7 @@ namespace PL
             orderForLists = new ObservableCollection<OrderForList>(bl?.Order.GetOrderList().ToList());
             ProductListview.DataContext = productForLists;
             orderListview.DataContext = orderForLists;
+            
         }
         private void addProduct(ProductForList productForList)=> productForLists.Add(productForList);
         private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow(addProduct).Show();//opens product window

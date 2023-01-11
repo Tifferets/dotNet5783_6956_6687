@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Admin_Window" Height="500" Width="800">
+  
     <Grid x:Name="AdminGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="100*"/>
@@ -19,7 +20,7 @@
         <Grid>
             <Label Content="Orders" HorizontalAlignment="Left" Margin="156,36,0,0" VerticalAlignment="Top"/>
         </Grid>
-        <ListView x:Name="orderListview" Grid.Column="0" Grid.Row ="1"  ItemsSource = "{Binding }" MouseDoubleClick="MouseDoubleClickedOrder" >
+        <ListView x:Name="orderListview" Grid.Column="0" Grid.Row ="1"  ItemsSource = "{Binding}" MouseDoubleClick="MouseDoubleClickedOrder" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

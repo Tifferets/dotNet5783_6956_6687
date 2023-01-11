@@ -7,16 +7,45 @@
         mc:Ignorable="d"
         Title="StartUp_Window" Height="450" Width="800">
     <Grid>
-        <Label Content="WELCOME" HorizontalAlignment="Center" Height="70" Margin="0,83,0,0" VerticalAlignment="Top" Width="108"/>
-        <GroupBox Header="Choose An Option:" Margin="186,129,220,183" >
-            <StackPanel  Height="61" Margin="41,0,97,0" >
-                <RadioButton x:Name ="Admin" Content="Admin" Height="24" IsChecked="True"/>
-                <RadioButton x:Name ="NewOrder" Content="New Order" Height="23" Margin="0,0,-11,0"/>
-                <RadioButton x:Name ="TrackOrder" Content="Track An Order" Height="35"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Untitled Design (1).png"/>
+        </Grid.Background>
+        <Label Content="WELCOME TO ADOPT A PET" HorizontalAlignment="Left" FontSize="35" Height="70" Margin="160,10,0,0" VerticalAlignment="Top" Width="484" Opacity="5">
+            <Label.Background>
+                <ImageBrush/>
+            </Label.Background>
+        </Label>
+        <GroupBox Header="Choose An Option:" Margin="239,143,239,131" Opacity="5" >
+            <GroupBox.Background>
+                <ImageBrush/>
+            </GroupBox.Background>
+            <StackPanel  Height="89" Margin="41,0,51,0" Opacity="5"  >
+                <StackPanel.Background>
+                    <ImageBrush/>
+                </StackPanel.Background>
+                <RadioButton x:Name ="Admin" Content="Admin" Height="35" IsChecked="True" Opacity="5">
+                    <RadioButton.Background>
+                        <ImageBrush/>
+                    </RadioButton.Background>
+                </RadioButton>
+                <RadioButton x:Name ="NewOrder" Content="New Order" Height="35" Margin="0,0,-11,0" Opacity="5">
+                    <RadioButton.Background>
+                        <ImageBrush/>
+                    </RadioButton.Background>
+                </RadioButton>
+                <RadioButton x:Name ="TrackOrder" Content="Track An Order" Height="35" Opacity="5" >
+                    <RadioButton.Background>
+                        <ImageBrush/>
+                    </RadioButton.Background>
+                </RadioButton>
             </StackPanel>
         </GroupBox>
 
-        <Button x:Name="Next_button" Content="Next" Margin="322,301,318,80" Click="Next_button_Click"/>
+        <Button x:Name="Next_button" Content="Next" Margin="322,324,318,57" Click="Next_button_Click" FontSize="25" RenderTransformOrigin="0.596,1.249" >
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>
