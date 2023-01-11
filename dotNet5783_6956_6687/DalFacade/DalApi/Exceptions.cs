@@ -74,5 +74,14 @@ public class CantGetListFromXMLException : Exception
         return Message;
     }
 }
+public class CouldntAddException : Exception
+{//used in xml tools
+    public override string Message => "Couldnt add product";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
+
 
 

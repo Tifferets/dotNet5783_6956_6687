@@ -290,7 +290,7 @@ internal class BoProduct : BlApi.IProduct
     /// <param name="product"></param>
     /// <returns></returns>
     private bool checkDataIsGood(BO.Product product)
-    {
+    {// gets a product and returns true if all its data is good otherwise returns false
         if (product.Id >= 300000 && product.Id < 400000)
         {
             if (product.Name != null && product.Name  != "" && product.Price > 0 && product.InStock >= 0)
@@ -317,7 +317,7 @@ internal class BoProduct : BlApi.IProduct
     /// delete a product, gets id checks that it isnt in anybodys cart if it isnt it delets it and if it is, it throws an exception 
     /// </summary>
     /// <param name="Id"></param>
-    public void DeletProduct(int Id)//gets product id
+    public void DeletProduct(int Id)
     {
         if (Id >= 300000 && Id < 400000)//checks if the product is in any order
         {

@@ -16,13 +16,13 @@ public class DoProduct : IProduct
     string FPath = @"Product.xml";
     public DoProduct()
     {
-        if (File.Exists(FPath) == false)
+        if (File.Exists(FPath) == false)//if the file doesnt exists creats a new file
             CreatFile();
         else
-            LoadData();
+            LoadData();//loads the file
     }
     private void CreatFile()
-    {
+    {//creats an empty file
         productRoot = new XElement("Product");
         productRoot.Save(FPath);
     }
@@ -49,19 +49,19 @@ public class DoProduct : IProduct
         }
     }
     private void LoadData()
-    {
+    {//gets the data from the xml file
         try
         {
             productRoot = XElement.Load(dir + FPath);
         }
         catch
         {
-            throw new Exception("file upload product nut successful");
+            throw new Exception("file upload product not successful");
         }
     }
-    public Product? GetSingle(Func<Product?, bool> func)
+
+    public Product? GetSingle(Func<Product?, bool> func)//gets a single product from the file
     {
-        //gets a single product from the file
         LoadData();
         IEnumerable<Product> products;
         try
@@ -86,7 +86,7 @@ public class DoProduct : IProduct
             throw new Exception("cant get single");
         }
     } 
-    public IEnumerable<Product?> GetAll(Func<Product?, bool> func = null)
+    public IEnumerable<Product?> GetAll(Func<Product?, bool> func = null)//gets a function and returns all the product that the function returns true to them, which is all the products
     {
         try
         {
@@ -132,7 +132,7 @@ public class DoProduct : IProduct
         }
         return product.ID;
     }
-    public void Delete(int id)
+    public void Delete(int id)//gets a products id and delets the product from the xml file
     {
         try
         {
@@ -142,15 +142,14 @@ public class DoProduct : IProduct
                      where Convert.ToInt32(p.Element("ID").Value) == id
                      select p).FirstOrDefault();
             product?.Remove();//deleates it
-            productRoot.Save(dir + FPath);
-
+            productRoot.Save(dir + FPath);//saves the rest of the products
         }
         catch
         {
-           // throw "Cant delete product";
+            throw new Exception("Cant delete product");
         }
     }
-    public void Update(Product product)
+    public void Update(Product product)//gets a product in its newer version and replaces it with its old version
     {
         try
         {
@@ -166,7 +165,7 @@ public class DoProduct : IProduct
                 productElment.Element("InStock").Value = product.InStock.ToString();
                 productRoot.Save(dir + FPath);
             }
-            else throw new Exception("Cant Udate this Product");
+            else throw new Exception("Cant Update this Product");
         }
         catch(Exception ex) 
         {
