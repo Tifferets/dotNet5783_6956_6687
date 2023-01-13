@@ -33,14 +33,14 @@
     <ID>300005</ID>
     <Price>32</Price>
     <Category>Dog</Category>
-    <InStock>32</InStock>
+    <InStock>34</InStock>
   </Product>
   <Product>
     <Name>Persian Cat</Name>
     <ID>300006</ID>
     <Price>135</Price>
     <Category>Cat</Category>
-    <InStock>2</InStock>
+    <InStock>7</InStock>
   </Product>
   <Product>
     <Name>Cockatoo</Name>
@@ -82,7 +82,7 @@
     <Name>bihk</Name>
     <Category>Dog</Category>
     <Price>454</Price>
-    <InStock>46</InStock>
+    <InStock>41</InStock>
   </Product>
   <Product>
     <ID>300000</ID>

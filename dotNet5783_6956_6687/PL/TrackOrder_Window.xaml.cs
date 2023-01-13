@@ -48,36 +48,3 @@ namespace PL
         }
     }
 }
-/*
- <ListBox ItemsSource="{Binding tracking}" Grid.Column="1" Grid.Row="1"  HorizontalContentAlignment="Stretch">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Item1}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Item2}"/>
-                            <TextBlock Grid.Column="2" Text="{Binding Item3}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-
-<DataGridTemplateColumn x:Name="OrderDateColumn" Header="Order Date" Width="SizeToHeader">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <DatePicker SelectedDate="{Binding }"/>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn x:Name="ShippingDateColumn" Header="Shipping Date" Width="SizeToHeader">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <DatePicker SelectedDate="{Binding }"/>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-*/

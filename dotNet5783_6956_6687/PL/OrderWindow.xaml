@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="OrderWindow" Height="700" Width="1200">
+  
     <Grid>
+        
         <Grid x:Name="Order_Grid" HorizontalAlignment="Left" Height="533" Margin="38,0,0,0" VerticalAlignment="Center" Width="626">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -23,6 +25,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
             <Label Content="Order ID:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.845,2.421" Grid.Column="0" Grid.Row="0" FontSize="25"/>
             <Label Content="Name:" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" FontSize="25"/>
             <Label Content="Email:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="3.958,8.659" Grid.Column="0" Grid.Row="2" FontSize="25"/>
@@ -44,7 +47,7 @@
             <DatePicker x:Name="delivered_datePicker"  IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="8" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding DeliveryDate}" />
 
         </Grid>
-        <ListView x:Name="Items_listview" HorizontalAlignment="Left" Height="396" Margin="690,213,0,0" VerticalAlignment="Top" Width="441" ItemsSource = "{Binding }" >
+        <ListView x:Name="Items_listview" HorizontalAlignment="Left" Height="396" Margin="690,213,0,0" VerticalAlignment="Top" Width="441" ItemsSource = "{Binding }" SelectionChanged="Items_listview_SelectionChanged" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -57,6 +60,17 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Content="Update Order" HorizontalAlignment="Left" Height="84" Margin="690,76,0,0" VerticalAlignment="Top" Width="220" Click="Button_Click"/>
+        <Button Content="Update Order" HorizontalAlignment="Left" Height="84" Margin="690,76,0,0" VerticalAlignment="Top" Width="220" Click="Button_Click" >
+            <Button.Style>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Visibility" Value="Visible"/>
+                <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName= Items_listview, Path=SelectedIndex, Mode=OneWay}" Value="-1">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>

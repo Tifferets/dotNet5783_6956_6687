@@ -1,9 +1,12 @@
 ﻿using BO;
+using DO;
 using Microsoft.VisualBasic;
 using PL.PlProduct;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Printing;
 using System.Text;
@@ -16,6 +19,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL
@@ -27,32 +31,25 @@ namespace PL
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
         private ObservableCollection<OrderItemPL>? Items { get; set; }
-        // private Action<OrderForList> action;
-        BO.Order? order;
-        //OrderItemPL orderItemPL = new OrderItemPL();
-        public OrderWindow(Order? mydata)
+        private Action<BO.Order> action;
+        BO.Order order;
+        OrderItemPL orderItemPL = new OrderItemPL();
+        OrderPL Orderpl = new OrderPL();
+        public OrderWindow(BO.Order? mydata, Action<BO.Order> action = null)
         {
+            if (action != null)
+                this.action = action;
             InitializeComponent();
             order = mydata;
+            Orderpl.TotalPrice = order.TotalPrice;
             Order_Grid.DataContext = mydata;
-            var lst = new List<OrderItemPL>();
-            foreach (var x in order?.Items)
-            {
-                lst.Add(new OrderItemPL() { ID = x.ID, ProductID = x.ProductID, Amount = x.Amount, Name = x.Name, Price = x.Price, TotalPrice = x.TotalPrice });
-            }
-            // var lst = from x in mydata?.Items
-            // select new OrderItemPL() { ID = x.ID, ProductID = x.ProductID, Amount = x.Amount, Name = x.Name, Price = x.Price, Totalprice = x.TotalPrice };
+            var lst = from x in mydata?.Items
+                      select new OrderItemPL() { ID = x.ID, ProductID = x.ProductID, Amount = x.Amount, Name = x.Name, Price = x.Price, TotalPrice = x.TotalPrice };
             OrderStatus_comboBox.ItemsSource = OrderStatus.GetValues(typeof(PL.OrderStatus));//combobox source 
             Items = new ObservableCollection<OrderItemPL>(lst.ToList());// mydata.Items);
             Items_listview.DataContext = Items;
+            Items_listview.SelectionChanged += Items_listview_SelectionChanged;
         }
-        //public OrderWindow(Action<OrderForList> action)
-        //{
-        //    InitializeComponent();
-        //    this.action = action;
-        //    OrderStatus_comboBox.ItemsSource = OrderStatus.GetValues(typeof(PL.OrderStatus));//combobox source 
-        //    //Ordered_datePicker.SelectedDate = DateTime.Now;//the date we start with is nows date
-        //}
         public OrderWindow()
         {
             InitializeComponent();
@@ -64,7 +61,7 @@ namespace PL
             if (Items_listview.SelectedIndex >= 0)
             {
                 OrderItemPL? x = Items_listview.SelectedItem as OrderItemPL;//creats a new productforlist
-                OrderItem oi = new OrderItem() { ID = x.ID, ProductID = x.ProductID, Amount = x.Amount, Name = x.Name, Price = x.Price, TotalPrice = x.TotalPrice };
+                BO.OrderItem oi = new BO.OrderItem() { ID = x.ID, ProductID = x.ProductID, Amount = x.Amount, Name = x.Name, Price = x.Price, TotalPrice = x.TotalPrice };
                 try
                 {
                     int amount;
@@ -72,16 +69,45 @@ namespace PL
                     string input = Microsoft.VisualBasic.Interaction.InputBox("Please Enter the amount to change to:", "Update Product in order", "", -1, -1);
                     if (!string.IsNullOrEmpty(input))
                     {
+
                         amount = Convert.ToInt32(input);
-                        bl.Order.UpdateOrder(order, amount, oi);
-                        x.Amount = amount;
-                        x.TotalPrice = oi.Price * amount;
-                        //var item = items?.FirstOrDefault(x => x.ID == oi.ID);
-                        //int index = items.IndexOf(item);
-                        //items[index] = oi;
+                        if (Items.Count() == 1 && amount == 0)
+                        {
+                            MessageBox.Show("There are not enough items in order to remove this item.");
+                        }
+                        else
+                        {
+                            bl.Order.UpdateOrder(order, amount, oi);
+                            x.Amount = amount;
+                            x.TotalPrice = oi.Price * amount;
+                            order.TotalPrice = x.TotalPrice;
+                            if (x.Amount == 0)
+                            {
+                                Items.Remove(x);
+                            }
+                            action(order);
+                        }
                     }
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+        }
+
+        //private void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        //{
+        //    if (action == null)
+        //        if (!e.Item.Enabled)
+        //        {
+        //            e.Item.Selected = false;
+        //        }
+        //}
+
+        private void Items_listview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (action == null)
+            {
+                Items_listview.SelectedItem= null;
+                Items_listview.SelectedIndex = -1;
             }
         }
     }

@@ -3,6 +3,7 @@ using PL.PlProduct;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL
@@ -43,7 +45,13 @@ namespace PL
             int index = productForLists.IndexOf(item);
             productForLists[index] = productForList;
         }
-
+        private void updateOrder(BO.Order order)
+        {
+            var item = orderForLists.FirstOrDefault(x => x.ID == order.ID);
+            int index = orderForLists.IndexOf(item);
+            OrderForList ofl1= new OrderForList() { ID= order.ID , AmountOfItems= order.Items.Count, CustomerName= order.CustomerName, Status= order.Status, TotalPrice= order.TotalPrice};
+            orderForLists[index] = ofl1;
+        }
         // private void addOrder(OrderForList orderForList) => orderForLists.Add(orderForList);
         //private void Button_Click_1(object sender, RoutedEventArgs e) => new OrderWindow(addOrder).ShowDialog();//opens order window
         private void MouseDoubleClickedProduct(object sender, MouseButtonEventArgs e)
@@ -71,7 +79,7 @@ namespace PL
                 Order? order = bl?.Order.GetOrderInfo(p1.ID);
                 if (p1 != null)
                 {
-                    OrderWindow orderWindow = new OrderWindow(order);
+                    OrderWindow orderWindow = new OrderWindow(order,updateOrder);
                     orderWindow.ShowDialog();//opens the window with the orders information
                 }
             }
@@ -93,3 +101,5 @@ namespace PL
         }
     }
 }
+
+

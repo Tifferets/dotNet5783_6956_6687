@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Automation;
+using System.Windows.Data;
+using System.Windows.Navigation;
 
 namespace PL.PlProduct;
 
@@ -219,6 +223,28 @@ public class OrderItemPL : INotifyPropertyChanged
         }
 
     }
+    public double TotalPrice
+    {
+        get { return totalprice; }
+        set
+        {
+            totalprice = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("TotalPrice"));
+            }
+        }
+
+    }
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}
+public class OrderPL : INotifyPropertyChanged
+{
+    private double totalprice;
     public double TotalPrice
     {
         get { return totalprice; }
