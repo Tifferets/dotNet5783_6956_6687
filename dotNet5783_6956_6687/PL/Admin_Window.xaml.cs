@@ -25,7 +25,7 @@ namespace PL
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
         private ObservableCollection<ProductForList> productForLists { get; set; }
-        private ObservableCollection<OrderForList> orderForLists{ get; set; }
+        private ObservableCollection<OrderForList> orderForLists { get; set; }
         public Admin_Window()
         {
             InitializeComponent();
@@ -33,18 +33,18 @@ namespace PL
             orderForLists = new ObservableCollection<OrderForList>(bl?.Order.GetOrderList().ToList());
             ProductListview.DataContext = productForLists;
             orderListview.DataContext = orderForLists;
-            
+
         }
-        private void addProduct(ProductForList productForList)=> productForLists.Add(productForList);
+        private void addProduct(ProductForList productForList) => productForLists.Add(productForList);
         private void Button_Click(object sender, RoutedEventArgs e) => new ProductWindow(addProduct).Show();//opens product window
         private void updateProduct(ProductForList productForList)
         {
-            var item = productForLists.FirstOrDefault(x=> x.ID == productForList.ID);
-            int index= productForLists.IndexOf(item);
+            var item = productForLists.FirstOrDefault(x => x.ID == productForList.ID);
+            int index = productForLists.IndexOf(item);
             productForLists[index] = productForList;
         }
 
-       // private void addOrder(OrderForList orderForList) => orderForLists.Add(orderForList);
+        // private void addOrder(OrderForList orderForList) => orderForLists.Add(orderForList);
         //private void Button_Click_1(object sender, RoutedEventArgs e) => new OrderWindow(addOrder).ShowDialog();//opens order window
         private void MouseDoubleClickedProduct(object sender, MouseButtonEventArgs e)
         {
@@ -60,7 +60,7 @@ namespace PL
 
                 }
             }
-            
+
         }
 
         private void MouseDoubleClickedOrder(object sender, MouseButtonEventArgs e)
@@ -77,6 +77,19 @@ namespace PL
             }
         }
 
-
+        private void Button_Click_1(object sender, RoutedEventArgs e)//delete product
+        {
+            if (ProductListview.SelectedIndex >= 0)
+            {
+                ProductForList? p1 = ProductListview.SelectedItem as ProductForList;//creats a new productforlist
+                try
+                {
+                    bl?.Product.DeletProduct(p1.ID);
+                    productForLists.Remove(p1);
+                    MessageBox.Show("Product deleted successfully");
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+        }
     }
 }

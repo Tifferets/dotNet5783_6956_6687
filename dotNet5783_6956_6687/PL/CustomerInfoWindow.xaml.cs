@@ -1,4 +1,5 @@
 ﻿using BO;
+using PL.PlProduct;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +20,21 @@ namespace PL;
 /// <summary>
 /// Interaction logic for CustomerInfoWindow.xaml
 /// </summary>
+
 public partial class CustomerInfoWindow : Window
 {
     private BlApi.IBl? bl = BlApi.Factory.Get();
-    Cart cart1 = new Cart();
+    BO.Cart cart1 = new BO.Cart();
+    Checkout checkout = new Checkout();
+    
     public CustomerInfoWindow()
     {
         InitializeComponent();
+        checkout.Checkedout = false;
     }
-    public CustomerInfoWindow(Cart cart) : this()
+    public CustomerInfoWindow(BO.Cart cart) : this()
     {
-        
+
         cart1 = cart;
     }
 
@@ -38,12 +43,12 @@ public partial class CustomerInfoWindow : Window
         try
         {
             bool good = Email_TextBox.Text.Contains('@');//makes sure is a correct email
-            if (Address_TextBox.Text == "" || Email_TextBox.Text == "" || Name_TextBox.Text == ""|| Email_TextBox.Text == "Customer@gmail.com")
+            if (Address_TextBox.Text == "" || Email_TextBox.Text == "" || Name_TextBox.Text == "" || Email_TextBox.Text == "Customer@gmail.com")
                 MessageBox.Show("add missing data");
             // if( good != true)//wrong email
             else
             {
-                Cart cart = new Cart()//creats the  customers cart
+                BO.Cart cart = new BO.Cart()//creats the  customers cart
                 {
                     CustomerAddress = Address_TextBox.Text,
                     CustomerEmail = Email_TextBox.Text,
@@ -53,16 +58,15 @@ public partial class CustomerInfoWindow : Window
 
                 };
                 bl?.Cart.confirmCart(cart);
+                checkout.Checkedout = true;
                 MessageBox.Show("Thank you and have a nice day");
+            //    Admin_Window objEP = new Admin_Window();
+              CloseAllWindows();//closes all the window
 
-                //this.Close();
-                Admin_Window objEP = new Admin_Window();
-                CloseAllWindows();//closes all the window
-                //objEP.ShowDialog();
             }
         }
-        catch(Exception ex) 
-        { 
+        catch (Exception ex)
+        {
             MessageBox.Show(ex.Message.ToString());
             this.Close();
         }
@@ -80,5 +84,10 @@ public partial class CustomerInfoWindow : Window
     {
         for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
             App.Current.Windows[intCounter].Close();
+    }
+
+    private void CheckOut_button_Checked(object sender, RoutedEventArgs e)
+    {
+
     }
 }

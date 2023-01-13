@@ -32,13 +32,11 @@ public interface IOrder
     /// <param name="orderId"></param>
     /// <returns></returns>
     public BO.OrderTracking OrderStatus(int orderId);
+    
     /// <summary>
     /// BONUS!!
     /// </summary>
     /// <param name="order"></param>
-    //public void UpdateOrder(Order order);
-    //public OrderItem GetOrderItem(int id);
-    //public IEnumerable<OrderForList?> GetOrderForListByStatus(OrderStatus selectedItem);
-    //public BO.OrderForList GetOrderForList(int Id);
+    public void UpdateOrder(BO.Order order, int newAmount,BO.OrderItem orderItem1);
 
 }

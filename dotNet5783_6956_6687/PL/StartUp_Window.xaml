@@ -10,16 +10,12 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Untitled Design (1).png"/>
         </Grid.Background>
-        <Label Content="WELCOME TO ADOPT A PET" HorizontalAlignment="Left" FontSize="35" Height="70" Margin="160,10,0,0" VerticalAlignment="Top" Width="484" Opacity="5">
-            <Label.Background>
-                <ImageBrush/>
-            </Label.Background>
-        </Label>
-        <GroupBox Header="Choose An Option:" Margin="239,143,239,131" Opacity="5" >
+
+        <GroupBox Header="Choose An Option:" Margin="234,140,234,139" Opacity="5" >
             <GroupBox.Background>
                 <ImageBrush/>
             </GroupBox.Background>
-            <StackPanel  Height="89" Margin="41,0,51,0" Opacity="5"  >
+            <StackPanel  Height="89" Margin="41,0,51,0" Opacity="5">
                 <StackPanel.Background>
                     <ImageBrush/>
                 </StackPanel.Background>
@@ -38,14 +34,34 @@
                         <ImageBrush/>
                     </RadioButton.Background>
                 </RadioButton>
+
             </StackPanel>
         </GroupBox>
 
-        <Button x:Name="Next_button" Content="Next" Margin="322,324,318,57" Click="Next_button_Click" FontSize="25" RenderTransformOrigin="0.596,1.249" >
+        <Button x:Name="Next_button" Content="Next" Click="Next_button_Click" FontSize="25" Margin="290,330,290,46" >
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
         </Button>
+
+        <TextBlock Name="Welcome" Text="WELCOME TO ADOPT A PET" HorizontalAlignment="Center" FontSize="50" Height="84" Margin="0,38,0,0" VerticalAlignment="Top" Width="646" >
+            <TextBlock.Background>
+                <ImageBrush/>
+            </TextBlock.Background>
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+            Storyboard.TargetName="Welcome" 
+            Storyboard.TargetProperty="(TextBlock.Opacity)"
+            From="0.0" To="1.0" Duration="0:0:3" 
+            AutoReverse="True" RepeatBehavior="0:0:3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
 
     </Grid>
 </Window>

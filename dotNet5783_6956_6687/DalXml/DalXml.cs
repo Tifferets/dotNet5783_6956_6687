@@ -8,6 +8,6 @@ namespace Dal;
     private DalXml() { }
     public IProduct product { get; } = new Dal.DoProduct();
     public IOrder order { get; } = new Dal.DoOrder();
-    public IOrderItem orderItem { get; } = new Dal.DoOrderItem();
+    public IOrderItem orderItem { get; } = new DoOrderItem();
     public static IDal Instance { get; } = new DalXml();
 }

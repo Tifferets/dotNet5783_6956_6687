@@ -7,17 +7,16 @@
         mc:Ignorable="d"
         Title="CustomerInfoWindow" Height="450" Width="800">
     <Grid>
-        <Grid Margin="44,67,384,67">
+
+        <Grid Margin="159,37,154,217">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="61*"/>
-
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-
             </Grid.RowDefinitions>
             <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="34" Width="71"/>
             <Label Content="Email Address:" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" Height="34" Width="148"/>
@@ -26,6 +25,26 @@
             <TextBox x:Name="Email_TextBox" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="Customer@gmail.com" VerticalAlignment="Center" Width="184" Height="34"/>
             <TextBox x:Name="Address_TextBox" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="184" Height="34"/>
         </Grid>
-        <Button x:Name="CheckOut_button" Content="Check out" HorizontalAlignment="Left" Height="34" Margin="490,297,0,0" VerticalAlignment="Top" Width="232" Click="CheckOut_button_Click"/>
+        <!--<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Height="207" Width="622" Margin="65,217,0,0">
+            <TextBlock Height="138"  Width="574">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding checkout.checkedout }" Value="True" >
+                                <Setter Property="Text" Value="congratulations!" />
+                                <Setter Property="Foreground" Value="BlueViolet"/>
+                                <Setter Property="FontSize" Value="75"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>-->
+        <StackPanel>
+
+           
+        <Button x:Name="CheckOut_button" Content="Check out" Click="CheckOut_button_Click"  Margin="265,272,270,100" Height="66" Width="195"/>
+
+        </StackPanel>
+        <!--</StackPanel>-->
     </Grid>
 </Window>

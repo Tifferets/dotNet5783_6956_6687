@@ -5,21 +5,21 @@
     <ID>300001</ID>
     <Price>975</Price>
     <Category>Cat</Category>
-    <InStock>50</InStock>
+    <InStock>46</InStock>
   </Product>
   <Product>
     <Name>Cockatiel</Name>
     <ID>300002</ID>
     <Price>750</Price>
     <Category>Cat</Category>
-    <InStock>5</InStock>
+    <InStock>0</InStock>
   </Product>
   <Product>
     <Name>Holland Lop</Name>
     <ID>300003</ID>
     <Price>22</Price>
     <Category>Rabbit</Category>
-    <InStock>3</InStock>
+    <InStock>0</InStock>
   </Product>
   <Product>
     <Name>Gold Fish</Name>
@@ -33,14 +33,14 @@
     <ID>300005</ID>
     <Price>32</Price>
     <Category>Dog</Category>
-    <InStock>16</InStock>
+    <InStock>32</InStock>
   </Product>
   <Product>
     <Name>Persian Cat</Name>
     <ID>300006</ID>
     <Price>135</Price>
     <Category>Cat</Category>
-    <InStock>0</InStock>
+    <InStock>2</InStock>
   </Product>
   <Product>
     <Name>Cockatoo</Name>
@@ -54,21 +54,14 @@
     <ID>300008</ID>
     <Price>133</Price>
     <Category>Rabbit</Category>
-    <InStock>4</InStock>
+    <InStock>3</InStock>
   </Product>
   <Product>
     <Name> Betta</Name>
     <ID>300009</ID>
     <Price>40</Price>
     <Category>Fish</Category>
-    <InStock>8</InStock>
-  </Product>
-  <Product>
-    <ID>355555</ID>
-    <Name>black cat</Name>
-    <Category>Dog</Category>
-    <Price>566666</Price>
-    <InStock>1</InStock>
+    <InStock>7</InStock>
   </Product>
   <Product>
     <ID>300011</ID>
@@ -85,13 +78,6 @@
     <InStock>6</InStock>
   </Product>
   <Product>
-    <ID>388888</ID>
-    <Name>old fish</Name>
-    <Category>Fish</Category>
-    <Price>58</Price>
-    <InStock>1</InStock>
-  </Product>
-  <Product>
     <ID>355046</ID>
     <Name>bihk</Name>
     <Category>Dog</Category>
@@ -99,18 +85,11 @@
     <InStock>46</InStock>
   </Product>
   <Product>
-    <ID>366666</ID>
-    <Name>koiki</Name>
-    <Category>Dog</Category>
-    <Price>80000000</Price>
-    <InStock>5</InStock>
-  </Product>
-  <Product>
     <ID>300000</ID>
     <Name>poodle</Name>
     <Category>Dog</Category>
     <Price>755</Price>
-    <InStock>0</InStock>
+    <InStock>2</InStock>
   </Product>
   <Product>
     <ID>330000</ID>
@@ -118,5 +97,12 @@
     <Category>Rabbit</Category>
     <Price>60</Price>
     <InStock>0</InStock>
+  </Product>
+  <Product>
+    <ID>300022</ID>
+    <Name>clown fish</Name>
+    <Category>Fish</Category>
+    <Price>100</Price>
+    <InStock>5</InStock>
   </Product>
 </ArrayOfProduct>

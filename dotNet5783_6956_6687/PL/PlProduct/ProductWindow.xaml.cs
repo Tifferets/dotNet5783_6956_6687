@@ -35,7 +35,6 @@ namespace PL.PlProduct
             GridProduct.DataContext= myData;//putting all the data in the textboxes via binding
             Id_Textbox.IsEnabled = false;
         }
-
         public ProductWindow(Action<ProductForList> action):this()//to add a product
         {
             this.action = action;

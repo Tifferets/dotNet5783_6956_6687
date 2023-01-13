@@ -172,3 +172,20 @@ public class CouldntAddProductException : Exception
     }
 }
 
+
+public class CantUpDateOrderException : Exception
+{
+    public override string Message => "Sorry, This order can not be updated";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
+public class CantUpDateOrderInstockException : Exception
+{
+    public override string Message => "This order can not be updated, there isnt not enough in stock";
+    public override string ToString()
+    {
+        return Message;
+    }
+}

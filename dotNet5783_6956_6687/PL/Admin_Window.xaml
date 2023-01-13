@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Admin_Window" Height="500" Width="800">
-  
+
     <Grid x:Name="AdminGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="100*"/>
@@ -17,9 +17,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid>
-            <Label Content="Orders" HorizontalAlignment="Left" Margin="156,36,0,0" VerticalAlignment="Top"/>
-        </Grid>
+        <Label Content="Orders" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" Grid.Row="0" Width="172" Height="48" FontSize="35"/>
         <ListView x:Name="orderListview" Grid.Column="0" Grid.Row ="1"  ItemsSource = "{Binding}" MouseDoubleClick="MouseDoubleClickedOrder" >
             <ListView.View>
                 <GridView>
@@ -27,14 +25,16 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="ProductListview" Grid.Column="1" Grid.Row="1" ItemsSource = "{Binding}" MouseDoubleClick="MouseDoubleClickedProduct" >
+        <Label x:Name="product_label" Grid.Column="1" Content="Products"  FontSize="35" VerticalAlignment="Top" Width="172" Height="48" HorizontalAlignment="Center" Margin="0,22,0,0" />
+        <ListView x:Name="ProductListview" Grid.Column="1" Grid.Row="1" ItemsSource = "{Binding}" MouseDoubleClick="MouseDoubleClickedProduct" Height="323" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label x:Name="product_label" Grid.Column="1" Content="Products" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.589,1.74"/>
-        <Button Content="Add Product" HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="2" VerticalAlignment="Top" Height="51" Width="128" Grid.Column="1" Click="Button_Click"/>
+        <Button Content="Add Product" HorizontalAlignment="Left" Margin="51,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="51" Width="128" Grid.Column="1" Click="Button_Click"/>
+        <Button Grid.Column="1" Content="Remove Product" HorizontalAlignment="Left" Height="51" Margin="200,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="128" Click="Button_Click_1"/>
     </Grid>
+
 </Window>

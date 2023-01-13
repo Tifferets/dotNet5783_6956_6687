@@ -11,7 +11,7 @@ using System.Windows.Automation;
 
 namespace PL.PlProduct;
 
-public class Products: INotifyPropertyChanged
+public class Products : INotifyPropertyChanged
 {
     private int Id;
     private double price;
@@ -20,11 +20,11 @@ public class Products: INotifyPropertyChanged
     private bool inStock;
     public int ID
     {
-        get { return Id;}
+        get { return Id; }
         set
-        { 
-            Id = value; 
-            if(PropertyChanged != null)
+        {
+            Id = value;
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs("ID"));
             }
@@ -36,8 +36,8 @@ public class Products: INotifyPropertyChanged
     public string? Name
     {
         get { return name; }
-        set 
-        { 
+        set
+        {
             name = value;
             if (PropertyChanged != null)
             {
@@ -98,6 +98,10 @@ public class Products: INotifyPropertyChanged
 
     }
     public event PropertyChangedEventHandler PropertyChanged;
+    protected void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }
 
 public class Cart : INotifyPropertyChanged
@@ -115,19 +119,122 @@ public class Cart : INotifyPropertyChanged
             }
         }
     }
-    //private readonly ObservableCollection<OrderItem> orderitemList;
-
-    //public ObservableCollection<OrderItem> OrderItemList
-    //{
-    //    get { return orderitemList; }
-    //    set
-    //    {
-    //        orderitemList. = value;
-    //        if (PropertyChanged != null)
-    //        {
-    //            PropertyChanged(this, new PropertyChangedEventArgs("TotalPrice"));
-    //        }
-    //    }
-    //}
     public event PropertyChangedEventHandler PropertyChanged;
+}
+public class Checkout : INotifyPropertyChanged
+{
+    private bool _checkedout;
+    public bool Checkedout
+    {
+        get { return _checkedout; }
+        set
+        {
+            _checkedout = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("Checkedout"));
+            }
+        }
+    }
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}
+
+public class OrderItemPL : INotifyPropertyChanged
+{
+    private int Id;
+    private string name;
+    private double price;
+    private int productID;
+    private int amount;
+    private double totalprice;
+    
+    public int ID
+    {
+        get { return Id; }
+        set
+        {
+            Id = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("ID"));
+            }
+        }
+
+    }
+
+    public string? Name
+    {
+        get { return name; }
+        set
+        {
+            name = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+            }
+        }
+    }
+    public int ProductID
+    {
+        get { return productID; }
+        set
+        {
+            productID = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("ProductID"));
+            }
+        }
+
+    }
+
+
+    public double Price
+    {
+        get { return price; }
+        set
+        {
+            price = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("Price"));
+            }
+        }
+
+    }
+    public int Amount
+    {
+        get { return amount; }
+        set
+        {
+            amount = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("Amount"));
+            }
+        }
+
+    }
+    public double TotalPrice
+    {
+        get { return totalprice; }
+        set
+        {
+            totalprice = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("TotalPrice"));
+            }
+        }
+
+    }
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }

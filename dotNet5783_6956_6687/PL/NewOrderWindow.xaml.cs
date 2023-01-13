@@ -33,8 +33,9 @@ namespace PL
         private ObservableCollection<ProductItem?> productItemList { get; set; }
         public ObservableCollection<IGrouping<BO.Category, ProductItem>> CatergoryGroup { get; set; }
         private BO.Cart Cart = new BO.Cart();
+
         private Products ProductItem;
-        public NewOrderWindow(BO.Cart cart = null , Products productItem = null) : this() 
+        public NewOrderWindow(BO.Cart cart = null, Products productItem = null) : this()
         {
             this.refresh(cart, productItem);
         }
@@ -65,13 +66,13 @@ namespace PL
 
             else if (Category_ComboBox.SelectedItem is Category.All)//if we selected all
             {
-              //productItemList = new ObservableCollection<ProductItem?>(productItemList);
+                //productItemList = new ObservableCollection<ProductItem?>(productItemList);
                 ProductItemWindow_listView.DataContext = productItemList;
                 Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)//go to cart button
-        { 
+        {
             new CartWindow1(Cart, refresh).ShowDialog();
             ProductItemWindow_listView.DataContext = productItemList;
         }
@@ -95,7 +96,7 @@ namespace PL
                     if (ProductItem != null)//if it exests
                     {
                         new ProductItemWindow(Cart, ProductItem, refresh).ShowDialog();//go to the next window with our cart and product
-                       // this.Close();
+                                                                                       // this.Close();
                     }
                     Category_ComboBox.SelectedItem = Category.All;
                 }
@@ -105,8 +106,8 @@ namespace PL
                 }
             }
         }
-      
-        private void refresh(BO.Cart cart , Products productItem)//func that refreshes the datacontext of window 
+
+        private void refresh(BO.Cart cart, Products productItem)//func that refreshes the datacontext of window 
         {
             if (productItem != null)//if the product item isnt null we want to update it in our CO
             {
@@ -117,7 +118,7 @@ namespace PL
                     product.Amount = productItem.Amount;
                 }
                 else//came here from adding / removing from productitem window
-                { 
+                {
                     product = new ProductItem()
                     {
                         ID = productItem.ID,
@@ -133,7 +134,7 @@ namespace PL
                 productItemList[index] = product;
             }
             ProductItemWindow_listView.DataContext = productItemList;
-        } 
+        }
     }
 }
 

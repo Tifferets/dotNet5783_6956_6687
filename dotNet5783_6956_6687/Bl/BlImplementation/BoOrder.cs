@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace BlImplementation;
 
-internal class BoOrder: IOrder
+internal class BoOrder : IOrder
 {
     private static DalApi.IDal? dal = DalApi.Factory.Get();
     //private BO.OrderStatus ordered;
@@ -18,26 +18,9 @@ internal class BoOrder: IOrder
     /// <returns></returns>
     public IEnumerable<BO.OrderForList?> GetOrderList()
     {
-       List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();
-        //  list of orderForList
+        List<BO.OrderForList> OrderForlist = new List<BO.OrderForList>();
         try
         {
-            //var neww = (from DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException()
-            //            let amountOfitems = dal?.order.GetAllOrderItems(item.ID).Count()
-            //            let totalPrice = dal?.order.GetAllOrderItems(item.ID).Sum(x => x?.Price)
-            //            let status = (BO.OrderStatus)OrderStatus(item.ID).Status
-            //            let oilist = dal?.order?.GetAllOrderItems(item.ID).OrderByDescending(x => x?.OrderItemID)
-            //            select new BO.OrderForList
-            //            {
-            //                ID = item.ID,
-            //                CustomerName = item.CustomerName,
-            //                Status = status,
-            //                AmountOfItems = amountOfitems ?? 0,
-            //                TotalPrice = totalPrice ?? 0,
-            //            }).ToList();
-
-            //return neww;
-
             foreach (DO.Order item in dal?.order.GetAll() ?? throw new BO.NullException())
             {
                 BO.OrderTracking orderTracking = OrderStatus(item.ID);
@@ -74,7 +57,7 @@ internal class BoOrder: IOrder
     /// <returns></returns>
     public BO.Order GetOrderInfo(int orderId)
     {
-        if(orderId >= 100000 && orderId < 200000)//checks if id is correct
+        if (orderId >= 100000 && orderId < 200000)//checks if id is correct
         {
             try
             {
@@ -94,22 +77,6 @@ internal class BoOrder: IOrder
                                      Amount = item.Amount,
                                      TotalPrice = item.Amount * item.Price,
                                  };
-                //foreach (DO.OrderItem item in dal?.order.GetAllOrderItems(orderId) ?? throw new BO.NullException())//going over all the order items dor this order
-                //{
-                //    // totalprice += item.Price* item.Amount;//the total price of the items
-                //    // oiamount = item.Amount;//amount of items
-                //    DO.Product? product = dal?.product.GetSingle(x => x?.ID == item.ProductID);//the product by id 
-                //    orderitemList.Add(new BO.OrderItem     //adding to the list
-                //    {
-                //        ID = item.OrderItemID,
-                //        ProductID = item.ProductID,
-                //        Name = product?.Name,
-                //        Price = item.Price,
-                //        Amount = item.Amount,
-                //        TotalPrice = item.Price * item.Amount,
-
-                //    });
-                //}
                 foreach (BO.OrderItem item in orderitems)//adding all the items to the list
                 {
                     orderitemList.Add(item);
@@ -138,23 +105,6 @@ internal class BoOrder: IOrder
             }
         }
         throw new BO.WrongIDException();
-
-        //foreach (DO.OrderItem item in dal?.order.GetAllOrderItems(orderId) ?? throw new BO.NullException())//going over all the order items dor this order
-        //{
-        //   // totalprice += item.Price* item.Amount;//the total price of the items
-        //   // oiamount = item.Amount;//amount of items
-        //    DO.Product? product = dal?.product.GetSingle(x=> x?.ID == item.ProductID);//the product by id 
-        //    orderitemList.Add(new BO.OrderItem     //adding to the list
-        //    {
-        //        ID = item.OrderItemID,
-        //        ProductID = item.ProductID,
-        //        Name = product?.Name,
-        //        Price = item.Price,
-        //        Amount = item.Amount,
-        //        TotalPrice = item.Price * item.Amount,
-
-        //    });
-        //}
     }
     /// <summary>
     /// updates the shipping date - for the admin
@@ -228,7 +178,7 @@ internal class BoOrder: IOrder
             {
                 throw new BO.WrongIDException();
             }
-            List<Tuple<BO.OrderStatus,DateTime>> list = new List<Tuple<BO.OrderStatus,DateTime>>();
+            List<Tuple<BO.OrderStatus, DateTime>> list = new List<Tuple<BO.OrderStatus, DateTime>>();
             BO.OrderStatus status = BO.OrderStatus.ordered;
             if (order?.OrderDate != null && order?.OrderDate != DateTime.MinValue)
             {
@@ -247,7 +197,7 @@ internal class BoOrder: IOrder
             BO.OrderTracking orderTracking = new BO.OrderTracking() { ID = orderId, Status = status, tracking = list };
             return orderTracking;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception(ex.ToString());
         }
@@ -257,57 +207,54 @@ internal class BoOrder: IOrder
     /// </summary>
     /// <param name="orderTracking"></param>
     /// <returns></returns>
-    private string? status(BO.OrderTracking orderTracking)=> orderTracking.Status.ToString();
-  
-    /// <summary>
-    /// BONUS!!
-    /// </summary>
-    /// <param name="order"></param>
-   //public BO.Order UpdateOrder(BO.Order order, int orderitemId,int newAmount)
-   // {
-   //     try
-   //     {
-   //        List<BO.OrderItem?> lst = new List<BO.OrderItem?>();
-   //         foreach (BO.OrderItem item in order.Items)
-   //         {
-   //             lst.Add(item);//list of all
-   //         }
-   //         int dif = 0; //the difference between the new amount
-   //         foreach (BO.OrderItem? item in order.Items)
-   //         {
-   //             if(item?.ID == orderitemId)
-   //             { 
-   //             if (newAmount == 0)
-   //                 {
-   //                     lst.Remove(item);//removes the orderitem from lst
-   //                     order.Items = lst;//updates the cart
-   //                     break;
-   //                 }
-   //                 if (newAmount > item.Amount)//wanted more
-   //                 {
-   //                   //  DO.Product pro= dalList.product.GetSingle(x=> x?.))
-   //                     dif = newAmount - item.Amount;
-   //                     order.TotalPrice = order.TotalPrice + dif * item.Price;
-   //                     item.Amount = newAmount;
-   //                     break;
-   //                 }
-   //                 if (newAmount < item.Amount)//wanted less
-   //                 {
-   //                     dif = newAmount - item.Amount;
-   //                     order.TotalPrice = order.TotalPrice - dif * item.Price;
-   //                     item.Amount = newAmount;
-   //                     break;
-   //                 }
-   //             }
-   //         }
-   //         return order;
-   //     }
-        
-   //     catch(Exception ex)
-   //     {
+    private string? status(BO.OrderTracking orderTracking) => orderTracking.Status.ToString();
+    public void UpdateOrder(BO.Order order, int newAmount, BO.OrderItem orderItem1)
+    {
+        try
+        {
+            if (order == null)
+            {
+                throw new CantUpDateOrderException();
+            }
+            if (order?.ShipDate != null && order?.ShipDate != DateTime.MinValue && newAmount >= 0)//the order was already shipped
+            {
+                throw new CantUpDateOrderException();
+            }
+            if (orderItem1.ID >= 200000 && orderItem1.ID < 300000)//they want to chang the amount of a product thats in the order 
+            {
+                DO.OrderItem orderItem = (DO.OrderItem)dal?.orderItem.GetSingle(x => x?.OrderItemID == orderItem1.ID);
+                DO.Product product = (DO.Product)dal?.product.GetSingle(x => x?.ID == orderItem.ProductID);
+                if (newAmount == 0)//we want to delete/remove the order item 
+                {
+                    dal?.orderItem.Delete(orderItem1.ID);
+                    product.InStock += orderItem.Amount;//updating the amount of the product in stock
+                    dal?.product.Update(product);
+                }
+                else if (newAmount < orderItem.Amount)//we want to take off some
+                {
+                    product.InStock += orderItem.Amount - newAmount;//updating the amount of the product in stock
+                    orderItem.Amount = newAmount;
+                    dal.orderItem.Update(orderItem);
+                    dal?.product.Update(product);
+                }
+                else
+                {
+                    if (product.InStock - newAmount + orderItem.Amount >= 0)//there is enough is stock to add to the order 
+                    {
+                        product.InStock += orderItem.Amount - newAmount;//updating the amount of the product in stock
+                        orderItem.Amount = newAmount;
+                        dal.orderItem.Update(orderItem);
+                        dal?.product.Update(product);
+                    }
+                    else
+                    {
+                        throw new CantUpDateOrderInstockException();
+                    }
+                }
+            }
 
-   //     }
-   // }
-
+        }
+        catch (Exception ex) { throw new CantUpDateOrderException(); }
+    }
 }
 

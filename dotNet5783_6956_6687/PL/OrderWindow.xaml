@@ -44,12 +44,19 @@
             <DatePicker x:Name="delivered_datePicker"  IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="8" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding DeliveryDate}" />
 
         </Grid>
-        <ListView x:Name="Items_listview" HorizontalAlignment="Left" Height="396" Margin="690,213,0,0" VerticalAlignment="Top" Width="441" ItemsSource = "{Binding }">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+        <ListView x:Name="Items_listview" HorizontalAlignment="Left" Height="396" Margin="690,213,0,0" VerticalAlignment="Top" Width="441" ItemsSource = "{Binding }" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Id}" Margin="5"/>
+                        <TextBlock Text="{Binding Name}" Margin="5"/>
+                        <TextBlock Text="{Binding Price }" Margin="5"/>
+                        <TextBlock Text="{Binding Amount}" Margin="5" />
+                        <TextBlock Text="{Binding TotalPrice}" Margin="5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
+        <Button Content="Update Order" HorizontalAlignment="Left" Height="84" Margin="690,76,0,0" VerticalAlignment="Top" Width="220" Click="Button_Click"/>
     </Grid>
 </Window>
