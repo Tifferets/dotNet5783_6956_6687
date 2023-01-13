@@ -92,16 +92,6 @@ namespace PL
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
         }
-
-        //private void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        //{
-        //    if (action == null)
-        //        if (!e.Item.Enabled)
-        //        {
-        //            e.Item.Selected = false;
-        //        }
-        //}
-
         private void Items_listview_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (action == null)
