@@ -5,7 +5,7 @@
     <ID>300001</ID>
     <Price>975</Price>
     <Category>Cat</Category>
-    <InStock>43</InStock>
+    <InStock>41</InStock>
   </Product>
   <Product>
     <Name>Cockatiel</Name>
@@ -26,7 +26,7 @@
     <ID>300004</ID>
     <Price>189</Price>
     <Category>Fish</Category>
-    <InStock>5</InStock>
+    <InStock>0</InStock>
   </Product>
   <Product>
     <Name>golden retriever</Name>
@@ -47,14 +47,14 @@
     <ID>300007</ID>
     <Price>12</Price>
     <Category>Parrot</Category>
-    <InStock>4</InStock>
+    <InStock>2</InStock>
   </Product>
   <Product>
     <Name>Lionhead Rabbit</Name>
     <ID>300008</ID>
     <Price>133</Price>
     <Category>Rabbit</Category>
-    <InStock>3</InStock>
+    <InStock>1</InStock>
   </Product>
   <Product>
     <Name> Betta</Name>
@@ -82,7 +82,7 @@
     <Name>poodle</Name>
     <Category>Dog</Category>
     <Price>755</Price>
-    <InStock>25</InStock>
+    <InStock>24</InStock>
   </Product>
   <Product>
     <ID>300022</ID>
@@ -103,7 +103,7 @@
     <Name>Chihuahua</Name>
     <Category>Dog</Category>
     <Price>1550</Price>
-    <InStock>2</InStock>
+    <InStock>1</InStock>
   </Product>
   <Product>
     <ID>300017</ID>
@@ -117,6 +117,6 @@
     <Name>Border Collie</Name>
     <Category>Dog</Category>
     <Price>1845</Price>
-    <InStock>9</InStock>
+    <InStock>8</InStock>
   </Product>
 </ArrayOfProduct>
