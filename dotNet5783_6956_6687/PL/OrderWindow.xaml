@@ -9,6 +9,7 @@
   
     <Grid>
         
+
         <Grid x:Name="Order_Grid" HorizontalAlignment="Left" Height="533" Margin="38,0,0,0" VerticalAlignment="Center" Width="626">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -47,30 +48,29 @@
             <DatePicker x:Name="delivered_datePicker"  IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="8" Height="43"  Grid.RowSpan="2" Width="365" FontSize="20" Text="{Binding DeliveryDate}" />
 
         </Grid>
-        <ListView x:Name="Items_listview" HorizontalAlignment="Left" Height="396" Margin="690,213,0,0" VerticalAlignment="Top" Width="441" ItemsSource = "{Binding }" SelectionChanged="Items_listview_SelectionChanged" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Id}" Margin="5"/>
-                        <TextBlock Text="{Binding Name}" Margin="5"/>
-                        <TextBlock Text="{Binding Price }" Margin="5"/>
-                        <TextBlock Text="{Binding Amount}" Margin="5" />
-                        <TextBlock Text="{Binding TotalPrice}" Margin="5"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        <ListView x:Name="Items_listview" HorizontalAlignment="Left" Height="396" Margin="690,213,0,0" VerticalAlignment="Top" Width="441" ItemsSource = "{Binding}" SelectionChanged="Items_listview_SelectionChanged" MouseEnter="Items_listview_MouseEnter" MouseLeave="Items_listview_MouseLeave" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID " DisplayMemberBinding ="{Binding ID}" Width="50"/>
+                    <GridViewColumn Header="Name " DisplayMemberBinding ="{Binding Name}" Width="100"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding ="{Binding Price}" Width="50"/>
+                    <GridViewColumn Header="Amount" DisplayMemberBinding ="{Binding Amount}" Width="50"/>
+                    <GridViewColumn Header="Total Price" DisplayMemberBinding ="{Binding TotalPrice}" Width="100"/>
+                </GridView>
+            </ListView.View>
         </ListView>
         <Button Content="Update Order" HorizontalAlignment="Left" Height="84" Margin="690,76,0,0" VerticalAlignment="Top" Width="220" Click="Button_Click" >
             <Button.Style>
             <Style TargetType="{x:Type Button}">
                 <Setter Property="Visibility" Value="Visible"/>
                 <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName= Items_listview, Path=SelectedIndex, Mode=OneWay}" Value="-1">
+                    <DataTrigger Binding="{Binding ElementName= Items_listview, Path=SelectedIndex, Mode=OneWay}" Value="-1">
                         <Setter Property="Visibility" Value="Hidden"/>
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
             </Button.Style>
         </Button>
+        <Label x:Name="selectItem_label" Content="Select an item to update:" HorizontalAlignment="Left" Height="23" Margin="693,185,0,0" VerticalAlignment="Top" Width="438" FontWeight="Thin" FontSize="12" Visibility="Collapsed"/>
     </Grid>
 </Window>

@@ -2,7 +2,6 @@
 using System.Diagnostics;
 
 namespace Dal;
-
  internal sealed class DalXml:IDal
 {
     private DalXml() { }

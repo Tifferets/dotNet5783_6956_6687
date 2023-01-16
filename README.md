@@ -10,4 +10,5 @@ Bounes that we did:
 2. reflection to string properties 
 3. Style
 4. Event Trigger
-5.
+5. Update order for maneger
+6. Data Trigger

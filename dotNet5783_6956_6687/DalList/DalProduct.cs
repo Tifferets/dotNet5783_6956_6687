@@ -19,19 +19,14 @@ internal class DalProduct : IProduct
     {
         if (product.ID < 300000 || product.ID > 400000)
             throw new WrongIdException();
-        if(product.Name =="" || product.Name == null)
+        if (product.Name == "" || product.Name == null)
         {
             throw new NoNameException();
         }
-       if(DataSource.Productlist.Contains(product))//checks if the product already exists in the data source
-       { 
-            throw new Exception("Product ID already exist"); 
-       }
-        //foreach (Product? item in DataSource.Productlist ?? throw new NullException())
-        //{
-        //    if (item?.ID == product.ID)
-        //        throw new Exception("Product already exist");
-        //}
+        if (DataSource.Productlist.Contains(product))//checks if the product already exists in the data source
+        {
+            throw new Exception("Product ID already exist");
+        }
         DataSource.Productlist.Add(product);
         return product.ID;
     }
@@ -41,7 +36,7 @@ internal class DalProduct : IProduct
     /// <param name="productID"></param>
     public void Delete(int productID)
     {
-        DataSource.Productlist.Remove(GetSingle(x=> x?.ID == productID));
+        DataSource.Productlist.Remove(GetSingle(x => x?.ID == productID));
     }
     /// <summary>
     /// method gets a product and updates its details
@@ -51,7 +46,7 @@ internal class DalProduct : IProduct
     {
         Delete(product.ID);
         DataSource.Productlist.Add(product);
-        DataSource.Productlist= DataSource.Productlist.OrderByDescending(x=> -x?.ID ).ToList();// sorts the list by small id to bigger id
+        DataSource.Productlist = DataSource.Productlist.OrderByDescending(x => -x?.ID).ToList();// sorts the list by small id to bigger id
     }
 
     /// <summary>
@@ -60,9 +55,9 @@ internal class DalProduct : IProduct
     /// <returns></returns>
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? func)
     {
-        if(func == null)
+        if (func == null)
         {
-            return DataSource.Productlist ?? throw new NullException();//if null retun te whole list
+            return DataSource.Productlist ?? throw new NullException();//if null retun the whole list
         }
         var result = (from Product? item in DataSource.Productlist ?? throw new NullException()
                       where func(item)

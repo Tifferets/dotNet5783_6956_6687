@@ -46,10 +46,10 @@ namespace PL
             productItemList = new ObservableCollection<ProductItem?>(bl.Product.GetlListOfProductItem().ToList());
             ProductItemWindow_listView.DataContext = productItemList;
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(productItemList);//categorizes the list 
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");//tells it to say the name of the categorise
             view.GroupDescriptions.Add(groupDescription);
         }
-        private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Category_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)//changeing the bomboBox selection
         {
             CatergoryGroup = new ObservableCollection<IGrouping<BO.Category, ProductItem>>  //grouping of products by category
                             (from item in productItemList
@@ -58,7 +58,7 @@ namespace PL
                              select item);
             ObservableCollection<ProductItem?> temp = new ObservableCollection<ProductItem?>(productItemList);
 
-            if (Category_ComboBox.SelectedItem != null && Category_ComboBox.SelectedItem is not Category.All) //we want to chang the info
+            if (Category_ComboBox.SelectedItem != null && Category_ComboBox.SelectedItem is not Category.All) //we want to change to the chosen category 
             {
                 temp = new ObservableCollection<ProductItem?>(CatergoryGroup[Category_ComboBox.SelectedIndex]);
                 ProductItemWindow_listView.DataContext = temp;
@@ -66,14 +66,13 @@ namespace PL
 
             else if (Category_ComboBox.SelectedItem is Category.All)//if we selected all
             {
-                //productItemList = new ObservableCollection<ProductItem?>(productItemList);
                 ProductItemWindow_listView.DataContext = productItemList;
                 Category_ComboBox.ItemsSource = Category.GetValues(typeof(PL.Category));//combobox source
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)//go to cart button
         {
-            new CartWindow1(Cart, refresh).ShowDialog();
+            new CartWindow1(Cart, refresh).ShowDialog();//sends to the cart window with func
             ProductItemWindow_listView.DataContext = productItemList;
         }
         private void MouseDoubleClicked(object sender, MouseButtonEventArgs e)//double click on the product to view it
@@ -106,30 +105,29 @@ namespace PL
                 }
             }
         }
-
-        private void refresh(BO.Cart cart, Products productItem)//func that refreshes the datacontext of window 
+        private void refresh(BO.Cart cart, Products productItem)//func that refreshes the datacontext of window gets inotifiableproperty type
         {
             if (productItem != null)//if the product item isnt null we want to update it in our CO
             {
                 ProductItem? product;
-                if (productItem.Name == null)//if it came here by changing  product from the cart
+                if (productItem.Name == null)//if it came here by changing product from the cart
                 {
-                    product = productItemList.FirstOrDefault(x => x?.ID == productItem.ID);
+                    product = productItemList.FirstOrDefault(x => x?.ID == productItem.ID);//we just need to change the amount thats in the cart
                     product.Amount = productItem.Amount;
                 }
-                else//came here from adding / removing from productitem window
+                else//came here from adding / removing a product from product item window
                 {
-                    product = new ProductItem()
+                    product = new ProductItem() //converting from inotifiableproperty type to BO type
                     {
                         ID = productItem.ID,
                         Name = productItem.Name,
-                        Amount = productItem.Amount, //was zer0 i changed
+                        Amount = productItem.Amount, 
                         Category = (BO.Category)productItem.Category,
                         Instock = productItem.InStock,
                         Price = productItem.Price
                     };
                 }
-                var item = productItemList.FirstOrDefault(x => x?.ID == productItem.ID);
+                var item = productItemList.FirstOrDefault(x => x?.ID == productItem.ID);//we update it in our list
                 var index = productItemList.IndexOf(item);
                 productItemList[index] = product;
             }

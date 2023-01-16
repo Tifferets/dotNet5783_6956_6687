@@ -13,7 +13,7 @@ internal class BoOrder : IOrder
     //private BO.OrderStatus ordered;
 
     /// <summary>
-    /// returns the list of orders- for the admin
+    /// returns the list of orders for list- for the admin
     /// </summary>
     /// <returns></returns>
     public IEnumerable<BO.OrderForList?> GetOrderList()
@@ -107,7 +107,7 @@ internal class BoOrder : IOrder
         throw new BO.WrongIDException();
     }
     /// <summary>
-    /// updates the shipping date - for the admin
+    /// updates the shipping date to now- for the admin
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
@@ -180,9 +180,10 @@ internal class BoOrder : IOrder
             }
             List<Tuple<BO.OrderStatus, DateTime>> list = new List<Tuple<BO.OrderStatus, DateTime>>();
             BO.OrderStatus status = BO.OrderStatus.ordered;
-            if (order?.OrderDate != null && order?.OrderDate != DateTime.MinValue)
+            if (order?.OrderDate != null && order?.OrderDate != DateTime.MinValue)//check if it has a date- meaning if it already happend
             {
                 list.Add(Tuple.Create(BO.OrderStatus.ordered, (DateTime)order?.OrderDate));
+                status = BO.OrderStatus.ordered;
             }
             if (order?.ShipDate != null && order?.ShipDate != DateTime.MinValue)
             {
@@ -208,6 +209,14 @@ internal class BoOrder : IOrder
     /// <param name="orderTracking"></param>
     /// <returns></returns>
     private string? status(BO.OrderTracking orderTracking) => orderTracking.Status.ToString();
+    /// <summary>
+    /// func that gets an order and orderitem id and the new amount and updates the amount of products in that order item
+    /// </summary>
+    /// <param name="order"></param>
+    /// <param name="newAmount"></param>
+    /// <param name="orderItem1"></param>
+    /// <exception cref="CantUpDateOrderException"></exception>
+    /// <exception cref="CantUpDateOrderInstockException"></exception>
     public void UpdateOrder(BO.Order order, int newAmount, BO.OrderItem orderItem1)
     {
         try
@@ -220,7 +229,7 @@ internal class BoOrder : IOrder
             {
                 throw new CantUpDateOrderException();
             }
-            if (orderItem1.ID >= 200000 && orderItem1.ID < 300000)//they want to chang the amount of a product thats in the order 
+            if (orderItem1.ID >= 200000 && orderItem1.ID < 300000)//they want to change the amount of a product thats in the order 
             {
                 DO.OrderItem orderItem = (DO.OrderItem)dal?.orderItem.GetSingle(x => x?.OrderItemID == orderItem1.ID);
                 DO.Product product = (DO.Product)dal?.product.GetSingle(x => x?.ID == orderItem.ProductID);

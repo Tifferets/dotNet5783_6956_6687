@@ -33,22 +33,22 @@ namespace PL
         private ObservableCollection<OrderItemPL>? Items { get; set; }
         private Action<BO.Order> action;
         BO.Order order;
-        OrderItemPL orderItemPL = new OrderItemPL();
-        OrderPL Orderpl = new OrderPL();
-        public OrderWindow(BO.Order? mydata, Action<BO.Order> action = null)
+        OrderItemPL orderItemPL = new OrderItemPL();// inotifiableproperty 
+        OrderPL Orderpl = new OrderPL();//inotifiableproperty for the total price of the order
+        public OrderWindow(BO.Order? mydata, Action<BO.Order> action = null) : this()
         {
             if (action != null)
                 this.action = action;
-            InitializeComponent();
             order = mydata;
             Orderpl.TotalPrice = order.TotalPrice;
             Order_Grid.DataContext = mydata;
             var lst = from x in mydata?.Items
                       select new OrderItemPL() { ID = x.ID, ProductID = x.ProductID, Amount = x.Amount, Name = x.Name, Price = x.Price, TotalPrice = x.TotalPrice };
-            OrderStatus_comboBox.ItemsSource = OrderStatus.GetValues(typeof(PL.OrderStatus));//combobox source 
+           // OrderStatus_comboBox.ItemsSource = OrderStatus.GetValues(typeof(PL.OrderStatus));//combobox source 
             Items = new ObservableCollection<OrderItemPL>(lst.ToList());// mydata.Items);
             Items_listview.DataContext = Items;
             Items_listview.SelectionChanged += Items_listview_SelectionChanged;
+            TotalPrice_textbox.DataContext = Orderpl;
         }
         public OrderWindow()
         {
@@ -65,27 +65,35 @@ namespace PL
                 try
                 {
                     int amount;
-                    //int.TryParse(Interaction.InputBox("Please Enter the amount to change to:", "Update Product in order", ""), out amount);//displays an inputbox
                     string input = Microsoft.VisualBasic.Interaction.InputBox("Please Enter the amount to change to:", "Update Product in order", "", -1, -1);
-                    if (!string.IsNullOrEmpty(input))
+                    //input box that defalt values are -1
+                    if (!string.IsNullOrEmpty(input))//making sure they didnt press cancle 
                     {
-
                         amount = Convert.ToInt32(input);
-                        if (Items.Count() == 1 && amount == 0)
+
+                        if (amount >= 0)//making sure the amount isnt negative
                         {
-                            MessageBox.Show("There are not enough items in order to remove this item.");
+                            if (Items?.Count() == 1 && amount == 0)
+                            {
+                                MessageBox.Show("There are not enough items in order to remove this item.");
+                            }
+                            else
+                            {
+                                bl?.Order.UpdateOrder(order, amount, oi);//updates the amount 
+                                x.Amount = amount;//updating for the infotifi...
+                                Orderpl.TotalPrice -= x.TotalPrice;
+                                Orderpl.TotalPrice += x.TotalPrice = oi.Price * amount;
+                                order.TotalPrice = Orderpl.TotalPrice;
+                                if (x.Amount == 0)//if the new amounts is 0 we remove the item
+                                {
+                                    Items.Remove(x);
+                                }
+                                action(order);
+                            }
                         }
                         else
                         {
-                            bl.Order.UpdateOrder(order, amount, oi);
-                            x.Amount = amount;
-                            x.TotalPrice = oi.Price * amount;
-                            order.TotalPrice = x.TotalPrice;
-                            if (x.Amount == 0)
-                            {
-                                Items.Remove(x);
-                            }
-                            action(order);
+                            MessageBox.Show("cant put a negative number");
                         }
                     }
                 }
@@ -93,12 +101,24 @@ namespace PL
             }
         }
         private void Items_listview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //if the action is null- we came from tracking window as customer and we cant update the items
         {
             if (action == null)
             {
-                Items_listview.SelectedItem= null;
+                Items_listview.SelectedItem = null;//it doesnt let you select an item
                 Items_listview.SelectedIndex = -1;
             }
+        }
+        private void Items_listview_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (action != null)
+            {
+                selectItem_label.Visibility = Visibility.Visible;
+            }
+        }
+        private void Items_listview_MouseLeave(object sender, MouseEventArgs e)
+        {
+            selectItem_label.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -5,7 +5,7 @@
     <ID>300001</ID>
     <Price>975</Price>
     <Category>Cat</Category>
-    <InStock>46</InStock>
+    <InStock>43</InStock>
   </Product>
   <Product>
     <Name>Cockatiel</Name>
@@ -89,20 +89,20 @@
     <Name>poodle</Name>
     <Category>Dog</Category>
     <Price>755</Price>
-    <InStock>2</InStock>
-  </Product>
-  <Product>
-    <ID>330000</ID>
-    <Name>fluffy rabbit</Name>
-    <Category>Rabbit</Category>
-    <Price>60</Price>
-    <InStock>0</InStock>
+    <InStock>25</InStock>
   </Product>
   <Product>
     <ID>300022</ID>
     <Name>clown fish</Name>
     <Category>Fish</Category>
     <Price>100</Price>
+    <InStock>5</InStock>
+  </Product>
+  <Product>
+    <ID>300030</ID>
+    <Name>green parrot</Name>
+    <Category>Parrot</Category>
+    <Price>50</Price>
     <InStock>5</InStock>
   </Product>
 </ArrayOfProduct>
