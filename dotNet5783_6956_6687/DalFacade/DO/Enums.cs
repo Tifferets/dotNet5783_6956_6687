@@ -5,5 +5,4 @@
 public enum Category
 {
     Dog, Cat, Parrot, Rabbit , Fish
-    //Cat, Dog, Fish, Parrot, Rabbit
 }

@@ -27,15 +27,15 @@ namespace PL
         {
             Items = new List<OrderItem>()
         };
-       // ProductItem ProductItem = new ProductItem();
-        Products ProductItem= new Products();
+
+        Products ProductItem = new Products();//inotifiableproperty
         public ProductItemWindow()
         {
             InitializeComponent();
         }
-        public ProductItemWindow(BO.Cart cart, Products p1, Action<BO.Cart, Products>? action) :this() //ctor
+        public ProductItemWindow(BO.Cart cart, Products p1, Action<BO.Cart, Products>? action) : this() //ctor
         {
-            this.action= action;
+            this.action = action;
             Cart = cart;
             ProductItem = new Products()//builds new productitem- the pl one
             {
@@ -49,14 +49,13 @@ namespace PL
             ProductOtemGrid.DataContext = ProductItem;// displays the info to the screeen
         }
 
-        private void addToCart_Click(object sender, RoutedEventArgs e)//butten to add one to the cart
+        private void addToCart_Click(object sender, RoutedEventArgs e)//butten to add a product item one to the cart
         {
             if (Cart == null) return;//if the cart is null
             try
             {
-                if(ProductItem.InStock == true)// if there is enough in stock we can add it  
+                if (ProductItem.InStock == true)// if there is enough in stock we can add it  
                 {
-                   // bl?.Product.UpdateAmountOfProduct(ProductItem.ID, -1);//takes one out of the stock
                     ProductItem.Amount++;//add to the amount 
                     bl?.Cart.AddProductToCart(Cart, ProductItem.ID);//adds it to our cart 
                     action(Cart, ProductItem);
@@ -77,7 +76,7 @@ namespace PL
             this.Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)//button to take a single product item out of the cart
         {
             if (Cart == null) return;//if the cart is null
             try
@@ -86,7 +85,7 @@ namespace PL
                 {
                     ProductItem.Amount--;//add to the amount 
                     bl?.Product.UpdateAmountOfProduct(ProductItem.ID, -1);
-                    Cart =  bl?.Cart.UpdateAmountOfProductInCart(Cart, ProductItem.ID, ProductItem.Amount);//adds it to our cart 
+                    Cart = bl?.Cart.UpdateAmountOfProductInCart(Cart, ProductItem.ID, ProductItem.Amount);//adds it to our cart 
                     action(Cart, ProductItem);
                 }
                 else

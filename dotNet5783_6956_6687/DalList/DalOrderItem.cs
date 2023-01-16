@@ -33,14 +33,7 @@ internal class DalOrderItem:IOrderItem
     public void Delete(int orderItemid)
     {
         (DataSource.OrderItemList ?? throw new NullException()).Remove(GetSingle(x => x.Value.OrderItemID == orderItemid));// deletes the order item
-        //foreach (OrderItem? item in DataSource.OrderItemList ?? throw new NullException())//goes through the list looking for the order.
-        //{
-        //    if (item?.OrderItemID ==orderItemid)
-        //    {
-        //        DataSource.OrderItemList.Remove(item);
-        //        break;
-        //    }
-        //}
+       
     }
     /// <summary>
     /// method gets an order item and updates its details
@@ -51,16 +44,6 @@ internal class DalOrderItem:IOrderItem
         Delete(orderItem.OrderItemID);//deletes it
         DataSource.OrderItemList.Add(orderItem);//adds it
         DataSource.OrderItemList =DataSource.OrderItemList.OrderByDescending(x=> -x?.OrderItemID).ToList(); //sorts by id 
-        //int count = 0;
-        //foreach (OrderItem? item in DataSource.OrderItemList ?? throw new NullException())//goes through the list looking for the order.
-        //{
-        //    if (item?.OrderItemID != orderItem.OrderItemID) count++;
-        //    if (item?.OrderItemID == orderItem.OrderItemID)
-        //    {
-        //        DataSource.OrderItemList[count] = orderItem;
-        //        break;
-        //    }
-        //}
     }
     /// <summary>
     /// method returns the list 
@@ -76,12 +59,6 @@ internal class DalOrderItem:IOrderItem
         var result = (from OrderItem? item in DataSource.OrderItemList ?? throw new NullException()
                       where func(item)
                       select item);
-        //List<OrderItem?> result = new List<OrderItem?>();
-        //foreach (var item in (DataSource.OrderItemList ?? throw new NullException()))
-        //{
-        //    if (func(item))//if the id is good
-        //        result.Add(item);//adds to list 
-        //}
         return result;
     }
     public OrderItem? GetSingle(Func<OrderItem?, bool>? func) => DataSource.OrderItemList.First(func ?? throw new NullException()); // return a product with this id

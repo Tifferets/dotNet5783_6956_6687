@@ -43,15 +43,19 @@ namespace PL
             else if (TrackOrder.IsChecked == true)
             {
                 int value;
-                int.TryParse(Interaction.InputBox("Please Enter Order ID To Track An Order", "Tracking Order ID", "100000"), out value);//displays an inputbox and gets the id
+                int.TryParse(Interaction.InputBox("Please Enter Order ID To Track An Order", "Tracking Order ID", "100000"), out value);
+                //displays an inputbox and gets the id
                 try
                 {
                     if (value != 0)//making sure there is text
                     {
-                        OrderTracking? orderTracking = bl?.Order.OrderStatus(value);
-                        if (orderTracking != null)//checking thet there is an order with the id
+                        if (bl?.Order.GetOrderInfo(value) != null)//checks that the order exiests
                         {
-                            new TrackOrder_Window(value).ShowDialog();//opens the window with the id
+                            OrderTracking? orderTracking = bl?.Order.OrderStatus(value);
+                            if (orderTracking != null)//checking thet there is an order with the id
+                            {
+                                new TrackOrder_Window(value).ShowDialog();//opens the window with the id
+                            }
                         }
                     }
                 }

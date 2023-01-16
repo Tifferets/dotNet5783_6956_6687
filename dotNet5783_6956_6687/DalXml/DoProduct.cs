@@ -11,7 +11,7 @@ namespace Dal;
 
 public class DoProduct : IProduct
 {
-    static XElement? productRoot ;
+    static XElement? productRoot;
     static string dir = @"..\xml\";
     string FPath = @"Product.xml";
     public DoProduct()
@@ -28,23 +28,23 @@ public class DoProduct : IProduct
     }
     private void Save(IEnumerable<Product> products)//saves ower list into the xml file
     {
-        try 
+        try
         {
             productRoot = new XElement("Products", from p in products
                                                    select new XElement("Product", new XElement("ID", p.ID),
- 
+
                                                    new XElement("Name", p.Name),
- 
+
                                                    new XElement("Category", p.Category),
- 
+
                                                    new XElement("InStock", p.InStock),
- 
+
                                                    new XElement("Price", p.Price)));
 
-            productRoot.Save(dir+FPath);
+            productRoot.Save(dir + FPath);
         }
         catch (Exception ex)
-        { 
+        {
             throw ex;
         }
     }
@@ -63,29 +63,29 @@ public class DoProduct : IProduct
     public Product? GetSingle(Func<Product?, bool> func)//gets a single product from the file
     {
         LoadData();
-        IEnumerable<Product> products;
+      //  IEnumerable<Product> products;
         try
         {
-          products = (from p in productRoot?.Elements()
-                            let newproduct = new DO.Product()
-                            {
-                                ID = Convert.ToInt32(p.Element("ID").Value),
-                                Name = p.Element("Name").Value,
-                                InStock = Convert.ToInt32(p.Element("InStock").Value),
-                                Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
-                                Price = Convert.ToInt32(p.Element("Price").Value),
-                            }
-                            where func == null ? true : func(newproduct)
-                            select newproduct).ToList();
+         Product? product = (from p in productRoot?.Elements()
+                        let newproduct = new DO.Product()
+                        {
+                            ID = Convert.ToInt32(p.Element("ID").Value),
+                            Name = p.Element("Name").Value,
+                            InStock = Convert.ToInt32(p.Element("InStock").Value),
+                            Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
+                            Price = Convert.ToDouble(p.Element("Price").Value),
+                        }
+                        where func == null ? true : func(newproduct)
+                        select newproduct).FirstOrDefault();
 
             productRoot.Save(dir + FPath);
-            return  products.Cast<Product?>().FirstOrDefault(func);    
+            return product;//.Cast<Product?>().FirstOrDefault(func);
         }
-        catch 
+        catch
         {
             throw new Exception("cant get single");
         }
-    } 
+    }
     public IEnumerable<Product?> GetAll(Func<Product?, bool> func = null)//gets a function and returns all the product that the function returns true to them, which is all the products
     {
         try
@@ -99,7 +99,7 @@ public class DoProduct : IProduct
                             Name = p.Element("Name").Value,
                             InStock = Convert.ToInt32(p.Element("InStock").Value),
                             Category = (DO.Category)Enum.Parse(typeof(DO.Category), p.Element("Category").Value),
-                            Price = Convert.ToInt32(p.Element("Price").Value),
+                            Price = Convert.ToDouble(p.Element("Price").Value),
                         }
                         where func == null ? true : func(newproduct)
                         orderby (newproduct.ID)
@@ -113,12 +113,12 @@ public class DoProduct : IProduct
     {
         if (product.ID < 300000 || product.ID > 400000)
             throw new WrongIdException();
-        if(product.Name == null)
+        if (product.Name == null)
             throw new NoNameException();
         try
         {
             LoadData();
-            XElement ID = new XElement("ID",product.ID);
+            XElement ID = new XElement("ID", product.ID);
             XElement Name = new XElement("Name", product.Name);
             XElement Category = new XElement("Category", product.Category);
             XElement Price = new XElement("Price", product.Price);
@@ -126,7 +126,7 @@ public class DoProduct : IProduct
             productRoot.Add(new XElement("Product", ID, Name, Category, Price, InStock));//adding all the info
             productRoot.Save(dir + FPath);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception("Cant add product");
         }
@@ -139,8 +139,8 @@ public class DoProduct : IProduct
             LoadData();
             XElement? product;
             product = (from p in productRoot.Elements()//gets the one to delete
-                     where Convert.ToInt32(p.Element("ID").Value) == id
-                     select p).FirstOrDefault();
+                       where Convert.ToInt32(p.Element("ID").Value) == id
+                       select p).FirstOrDefault();
             product?.Remove();//deleates it
             productRoot.Save(dir + FPath);//saves the rest of the products
         }
@@ -155,8 +155,8 @@ public class DoProduct : IProduct
         {
             LoadData();
             XElement? productElment = (from p in productRoot.Elements()//gets one to update 
-                                      where Convert.ToInt32(p.Element("ID").Value) == product.ID
-                                      select p).FirstOrDefault();
+                                       where Convert.ToInt32(p.Element("ID").Value) == product.ID
+                                       select p).FirstOrDefault();
             if (productElment != null)//if there is one to update 
             {
                 productElment.Element("Name").Value = product.Name;
@@ -167,9 +167,9 @@ public class DoProduct : IProduct
             }
             else throw new Exception("Cant Update this Product");
         }
-        catch(Exception ex) 
+        catch (Exception ex)
         {
-            throw(ex);  
+            throw (ex);
         }
     }
 }

@@ -15,7 +15,7 @@ internal class BoProduct : BlApi.IProduct
     /// <returns></returns>
     public IEnumerable<BO.ProductForList?> GetproductForListByCategory(BO.Category category)
     {
-        //List<BO.ProductForList> products = new List<BO.ProductForList>();//new list
+        
         try
         {
             var result = from item in (dal?.product.GetAll() ?? throw new BO.NullException())//gets a list of product and returns all that have the category
@@ -25,13 +25,12 @@ internal class BoProduct : BlApi.IProduct
                          {
                              ID = (int)item?.ID,
                              Name = item?.Name,
-                             //InStock = gtz,
-                             //Amount = item?.InStock ?? 0,
                              Price = item?.Price,
                              Category = (BO.Category)item?.Category
                          };
 
             return result;
+            //List<BO.ProductForList> products = new List<BO.ProductForList>();//new list
             //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes over all products
             //{
             //    if ((BO.Category)item.Category == category)//checks if the category is the same
@@ -60,37 +59,33 @@ internal class BoProduct : BlApi.IProduct
             throw new BO.errorException();
         }
     }
-
-
     public IEnumerable<BO.ProductForList> GetListOfProducts()
     {
         try
         {
-            //var result = from item in (dal?.product.GetAll() ?? throw new BO.NullException())//gets a list of product and returns all that have the category
-            //             let gtz = item.Value.InStock > 0
-            //             select new BO.ProductForList()
-            //             {
-            //                 ID = (int)item?.ID,
-            //                 Name = item?.Name,
-            //                 //InStock = gtz,
-            //                 //Amount = item?.InStock ?? 0,
-            //                 Price = item?.Price,
-            //                 Category = (BO.Category)item?.Category
-            //             };
+            var result = from item in (dal?.product.GetAll() ?? throw new BO.NullException())//gets a list of product and returns all that have the category
+                         let gtz = item.Value.InStock > 0
+                         select new BO.ProductForList()
+                         {
+                             ID = (int)item?.ID,
+                             Name = item?.Name,
+                             Price = item?.Price,
+                             Category = (BO.Category)item?.Category
+                         };
 
-            //return result;
-            List<BO.ProductForList> products = new List<BO.ProductForList>();
-            foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
-            {
-                bool flag = false;
-                if (item.InStock > 0)
-                {
-                    flag = true;
-                }
-                BO.ProductForList productForList = new BO.ProductForList() { ID = item.ID, Name = item.Name, Price = item.Price, Category = (BO.Category)item.Category };
-                products.Add(productForList);
-            }
-            return products;
+            return result;
+            //List<BO.ProductForList> products = new List<BO.ProductForList>();
+            //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
+            //{
+            //    bool flag = false;
+            //    if (item.InStock > 0)
+            //    {
+            //        flag = true;
+            //    }
+            //    BO.ProductForList productForList = new BO.ProductForList() { ID = item.ID, Name = item.Name, Price = item.Price, Category = (BO.Category)item.Category };
+            //    products.Add(productForList);
+            //}
+            //return products;
         }
         catch (Exception)
         {
@@ -99,17 +94,16 @@ internal class BoProduct : BlApi.IProduct
     }
 
     /// <summary>
-    /// gets id, if its positive gets product from system, builds a product and returnds it, throws exception if cant get the product from system
+    /// gets id, if its correct format gets product from dal/data source builds a product and returnds it, throws exception if cant get the product from system
     /// </summary>
     /// <param name="Id"></param>
     /// <returns></returns>
-    public BO.ProductForList GetProductForList(int Id)
+    public BO.ProductForList GetProductForList(int Id)//wec use this function for admin list view
     {
         if (Id >= 300000 && Id < 400000)
         {
             try
             {
-
                 var product = dal?.product.GetSingle(x => x?.ID == Id);
                 return new BO.ProductForList
                 {
@@ -117,7 +111,6 @@ internal class BoProduct : BlApi.IProduct
                     Name = product?.Name,
                     Category = (BO.Category)product?.Category,
                     Price = product?.Price ?? 0,
-
                 };
             }
             catch
@@ -130,13 +123,19 @@ internal class BoProduct : BlApi.IProduct
             throw new BO.doesNotExistException();
         }
     }
+    /// <summary>
+    /// gets an id checks if its correct and returns a product
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.CantGetException"></exception>
+    /// <exception cref="BO.doesNotExistException"></exception>
     public BO.Product GetProductbyID(int Id)
     {
         if (Id >= 300000 && Id < 400000)
         {
             try
             {
-
                 var product = dal?.product.GetSingle(x => x?.ID == Id);
                 return new BO.Product
                 {
@@ -145,7 +144,6 @@ internal class BoProduct : BlApi.IProduct
                     Category = (BO.Category)product?.Category,
                     Price = product?.Price ?? 0,
                     InStock =product?.InStock ?? 0,
-
                 };
 
                 // BO.Product product = new BO.Product();
@@ -171,10 +169,11 @@ internal class BoProduct : BlApi.IProduct
             throw new BO.doesNotExistException();
     }
     /// <summary>
-    /// gets id, if its positive gets product item from system, builds a product and returnds it, throws exception if cant get the product item from system
+    /// returns a list of all the product items- for catalog
     /// </summary>
-    /// <param name="Id"></param>
     /// <returns></returns>
+    /// <exception cref="BO.NullException"></exception>
+    /// <exception cref="BO.errorException"></exception>
     public IEnumerable<ProductItem> GetlListOfProductItem()
     {
         try
@@ -198,48 +197,13 @@ internal class BoProduct : BlApi.IProduct
             throw new BO.errorException();
         }
     }
-
-    public BO.ProductItem ProductItemBuild(int Id)//has different stuff in both papers returns a product ieme
-    {
-        if (Id >= 300000 && Id < 400000)
-        {
-            try
-            {
-                var productItem = (dal?.product.GetAll() ?? throw new BO.NullException()).FirstOrDefault(x => x?.ID == Id);
-                return new ProductItem
-                {
-                    ID = Id,
-                    Name= productItem?.Name,
-                    Category= (BO.Category)productItem?.Category,
-                    Amount= 0,
-                    Price= productItem?.Price ?? 0,
-                    Instock= productItem?.InStock > 0,
-                };
-            }
-            catch
-            {
-                throw new BO.doesNotExistException();
-            }
-          
-            ////BO.ProductItem productItem = new();
-            //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
-            //{
-            //    if (item.ID == Id)
-            //    {
-            //        productItem.ID = Id;
-            //        productItem.Name = item.Name;
-            //        productItem.Category = (BO.Category)item.Category;
-            //        productItem.Amount = item.InStock;
-            //    }
-            //}
-            //return productItem;
-        }
-        else
-        {
-            throw new BO.doesNotExistException();
-        }
-
-    }
+    /// <summary>
+    /// gets id and returns a single product item
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.doesNotExistException"></exception>
+  
     /// <summary>
     /// function adds a product, checks if the data is right and adds the product to the system if it can otherwise throws exeption
     /// </summary>
@@ -252,16 +216,9 @@ internal class BoProduct : BlApi.IProduct
             {
                 throw new BO.alreadyExistException();
             }
-            //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
-            //{
-            //    if (item.ID == product.Id)
-            //    {
-            //        throw new BO.alreadyExistException();
-            //    }
-            //}
             try
             {
-                dal?.product.Add(convert(product));
+                int? id = dal?.product.Add(convert(product));
             }
             catch
             {
@@ -364,7 +321,7 @@ internal class BoProduct : BlApi.IProduct
     /// <param name="product"></param>
     public void UpdateProduct(BO.Product product)
     {
-        //IEnumerable<DO.Product> productList = dalList.product.GetAll();
+
         if (checkDataIsGood(product))
         {
             try
@@ -382,6 +339,12 @@ internal class BoProduct : BlApi.IProduct
         }
 
     }
+    /// <summary>
+    /// updates the aamount in stock of a product
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="amount"></param>
+    /// <exception cref="BO.CantUpDateException"></exception>
     public void UpdateAmountOfProduct(int id, int amount)
     {
          try
@@ -404,9 +367,9 @@ internal class BoProduct : BlApi.IProduct
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public BO.ProductItem GetProductItem(int id)//didnt get CART CAUSE DIDNT SEE USE FOR IT
+    public BO.ProductItem GetProductItem(int id)//
     {
-        if (id < 300000)
+        if (id >= 300000 && id < 400000)
         {
             throw new BO.errorException();
         }
@@ -434,4 +397,45 @@ internal class BoProduct : BlApi.IProduct
             throw new BO.errorException();
         }
     }
+    //public BO.ProductItem ProductItemBuild(int Id)//has different stuff in both papers returns a product ieme
+    //{
+    //    if (Id >= 300000 && Id < 400000)
+    //    {
+    //        try
+    //        {
+    //            var productItem = (dal?.product.GetAll() ?? throw new BO.NullException()).FirstOrDefault(x => x?.ID == Id);
+    //            return new ProductItem
+    //            {
+    //                ID = Id,
+    //                Name = productItem?.Name,
+    //                Category = (BO.Category)productItem?.Category,
+    //                Amount = 0,
+    //                Price = productItem?.Price ?? 0,
+    //                Instock = productItem?.InStock > 0,
+    //            };
+    //        }
+    //        catch
+    //        {
+    //            throw new BO.doesNotExistException();
+    //        }
+
+    //        ////BO.ProductItem productItem = new();
+    //        //foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))
+    //        //{
+    //        //    if (item.ID == Id)
+    //        //    {
+    //        //        productItem.ID = Id;
+    //        //        productItem.Name = item.Name;
+    //        //        productItem.Category = (BO.Category)item.Category;
+    //        //        productItem.Amount = item.InStock;
+    //        //    }
+    //        //}
+    //        //return productItem;
+    //    }
+    //    else
+    //    {
+    //        throw new BO.doesNotExistException();
+    //    }
+
+    //}
 }

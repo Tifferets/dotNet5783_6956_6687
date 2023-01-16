@@ -17,5 +17,4 @@ public static class Extention
             + ": " + item.GetValue(t, null);
         return str;
     }
-
 }

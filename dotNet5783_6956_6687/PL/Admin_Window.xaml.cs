@@ -52,8 +52,6 @@ namespace PL
             OrderForList ofl1= new OrderForList() { ID= order.ID , AmountOfItems= order.Items.Count, CustomerName= order.CustomerName, Status= order.Status, TotalPrice= order.TotalPrice};
             orderForLists[index] = ofl1;
         }
-        // private void addOrder(OrderForList orderForList) => orderForLists.Add(orderForList);
-        //private void Button_Click_1(object sender, RoutedEventArgs e) => new OrderWindow(addOrder).ShowDialog();//opens order window
         private void MouseDoubleClickedProduct(object sender, MouseButtonEventArgs e)
         {
             if (ProductListview.SelectedIndex >= 0)
@@ -62,13 +60,10 @@ namespace PL
                 Product product = bl?.Product.GetProductbyID(p1.ID);
                 if (product != null)
                 {
-                    //ProductWindow productWindow = new ProductWindow(p1);
-                    //productWindow.ShowDialog();
                     new ProductWindow(updateProduct, product).ShowDialog();
 
                 }
             }
-
         }
 
         private void MouseDoubleClickedOrder(object sender, MouseButtonEventArgs e)

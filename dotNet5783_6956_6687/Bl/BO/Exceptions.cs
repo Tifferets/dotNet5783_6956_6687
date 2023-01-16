@@ -14,7 +14,7 @@ public class NullException : Exception
 }
 public class doesNotExistException : Exception
 {
-    public override string Message => "does not exist";
+    public override string Message => "Item does not exist";
     public override string ToString()
     {
         return Message;
@@ -55,7 +55,7 @@ public class errorException : Exception
 }
 public class WrongIDException : Exception
 {
-    public override string Message => "Wrong ID entered";
+    public override string Message => "Wrong ID format entered";
     public override string ToString()
     {
         return Message;
@@ -64,7 +64,7 @@ public class WrongIDException : Exception
 
 public class WrongDataException : Exception
 {
-    public override string Message => "Data entered is not right";
+    public override string Message => "Information entered is not correct";
     public override string ToString()
     {
         return Message;
@@ -99,7 +99,7 @@ public class CantGetException : Exception
 
 public class NoMoreInStockException : Exception
 {
-    public override string Message => "No more in stock";
+    public override string Message => "No more in stock, sorry";
     public override string ToString()
     {
         return Message;
@@ -141,7 +141,7 @@ public class MissingCustomersInfoException : Exception
 }
 public class WrongAmountException : Exception
 {
-    public override string Message => "Wrong Amount";
+    public override string Message => "Wrong Amount, please try again";
     public override string ToString()
     {
         return Message;

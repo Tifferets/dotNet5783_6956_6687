@@ -56,6 +56,11 @@ namespace PL.PlProduct
                     MessageBox.Show("please select a category");
                     return;
                 }
+                if (Price_Textbox.Text.Count(c => c == '.') > 1 )
+                {
+                    MessageBox.Show("Price not right");
+                    return;
+                }
                 BO.Product product = new BO.Product()//creating a new product
                 {
                     Id = int.Parse(Id_Textbox.Text),

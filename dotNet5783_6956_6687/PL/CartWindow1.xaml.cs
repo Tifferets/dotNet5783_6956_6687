@@ -32,6 +32,8 @@ public partial class CartWindow1 : Window
     public CartWindow1()
     {
         InitializeComponent();
+        Remove_btn.MouseEnter += Button_MouseEnter;
+        Change_btn.MouseLeave += Remove_btn_MouseLeave;
     }
     public CartWindow1(BO.Cart cart, Action<BO.Cart, Products>? action) :this()
     {
@@ -90,7 +92,7 @@ public partial class CartWindow1 : Window
                     ID = orderItem.ProductID,
                     Amount = 0,
                 };
-                action(cart1, productItem);
+                action(cart1, productItem);// goes to now order window and updates the amount there
             }
         }
         catch(Exception ex)//if theres a problem
@@ -119,7 +121,7 @@ public partial class CartWindow1 : Window
                         ID = orderItem.ProductID,
                         Amount = amount,
                     };
-                    action(cart1, productItem);
+                    action(cart1, productItem);// goes to now order window and updates the amount there
                 }
             }
         }
@@ -129,4 +131,13 @@ public partial class CartWindow1 : Window
         }
     }
 
+    private void Button_MouseEnter(object sender, MouseEventArgs e)
+    {
+        SelectItem_lable.Visibility = Visibility.Visible;
+    }
+
+    private void Remove_btn_MouseLeave(object sender, MouseEventArgs e)
+    {
+        SelectItem_lable.Visibility = Visibility.Collapsed;
+    }
 }

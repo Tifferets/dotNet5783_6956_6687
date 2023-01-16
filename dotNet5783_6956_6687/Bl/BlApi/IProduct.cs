@@ -21,7 +21,7 @@ public interface IProduct
     /// </summary>
     /// <param name="Id"></param>
     /// <returns></returns>
-    public ProductItem ProductItemBuild(int Id);
+    //public ProductItem ProductItemBuild(int Id);
     /// <summary>
     /// checks if the data is right and adds the product to the system if it can otherwise throws exeption
     /// </summary>

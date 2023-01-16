@@ -26,7 +26,7 @@ public partial class CustomerInfoWindow : Window
     private BlApi.IBl? bl = BlApi.Factory.Get();
     BO.Cart cart1 = new BO.Cart();
     Checkout checkout = new Checkout();
-    
+
     public CustomerInfoWindow()
     {
         InitializeComponent();
@@ -45,7 +45,11 @@ public partial class CustomerInfoWindow : Window
             bool good = Email_TextBox.Text.Contains('@');//makes sure is a correct email
             if (Address_TextBox.Text == "" || Email_TextBox.Text == "" || Name_TextBox.Text == "" || Email_TextBox.Text == "Customer@gmail.com")
                 MessageBox.Show("add missing data");
-            // if( good != true)//wrong email
+            if (Email_TextBox.Text.Count(c => c == '@') > 1)
+            {
+                MessageBox.Show("Email address not right");
+                return;
+            }
             else
             {
                 BO.Cart cart = new BO.Cart()//creats the  customers cart
@@ -60,8 +64,7 @@ public partial class CustomerInfoWindow : Window
                 bl?.Cart.confirmCart(cart);
                 checkout.Checkedout = true;
                 MessageBox.Show("Thank you and have a nice day");
-            //    Admin_Window objEP = new Admin_Window();
-              CloseAllWindows();//closes all the window
+                CloseAllWindows();//closes all the window
 
             }
         }
@@ -84,10 +87,5 @@ public partial class CustomerInfoWindow : Window
     {
         for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
             App.Current.Windows[intCounter].Close();
-    }
-
-    private void CheckOut_button_Checked(object sender, RoutedEventArgs e)
-    {
-
     }
 }

@@ -5,7 +5,7 @@
     <ID>300001</ID>
     <Price>975</Price>
     <Category>Cat</Category>
-    <InStock>46</InStock>
+    <InStock>37</InStock>
   </Product>
   <Product>
     <Name>Cockatiel</Name>
@@ -33,7 +33,7 @@
     <ID>300005</ID>
     <Price>32</Price>
     <Category>Dog</Category>
-    <InStock>34</InStock>
+    <InStock>4</InStock>
   </Product>
   <Product>
     <Name>Persian Cat</Name>
@@ -47,14 +47,14 @@
     <ID>300007</ID>
     <Price>12</Price>
     <Category>Parrot</Category>
-    <InStock>4</InStock>
+    <InStock>2</InStock>
   </Product>
   <Product>
     <Name>Lionhead Rabbit</Name>
     <ID>300008</ID>
     <Price>133</Price>
     <Category>Rabbit</Category>
-    <InStock>3</InStock>
+    <InStock>1</InStock>
   </Product>
   <Product>
     <Name> Betta</Name>
@@ -78,25 +78,11 @@
     <InStock>6</InStock>
   </Product>
   <Product>
-    <ID>355046</ID>
-    <Name>bihk</Name>
-    <Category>Dog</Category>
-    <Price>454</Price>
-    <InStock>41</InStock>
-  </Product>
-  <Product>
     <ID>300000</ID>
     <Name>poodle</Name>
     <Category>Dog</Category>
     <Price>755</Price>
-    <InStock>2</InStock>
-  </Product>
-  <Product>
-    <ID>330000</ID>
-    <Name>fluffy rabbit</Name>
-    <Category>Rabbit</Category>
-    <Price>60</Price>
-    <InStock>0</InStock>
+    <InStock>24</InStock>
   </Product>
   <Product>
     <ID>300022</ID>
@@ -106,24 +92,45 @@
     <InStock>5</InStock>
   </Product>
   <Product>
-    <ID>322222</ID>
-    <Name>half dog</Name>
+    <ID>300030</ID>
+    <Name>green parrot</Name>
+    <Category>Parrot</Category>
+    <Price>50</Price>
+    <InStock>5</InStock>
+  </Product>
+  <Product>
+    <ID>300016</ID>
+    <Name>Chihuahua</Name>
     <Category>Dog</Category>
-    <Price>53</Price>
+    <Price>1550</Price>
+    <InStock>1</InStock>
+  </Product>
+  <Product>
+    <ID>300017</ID>
+    <Name>Siberian Husky</Name>
+    <Category>Dog</Category>
+    <Price>2000</Price>
+    <InStock>14</InStock>
+  </Product>
+  <Product>
+    <ID>300018</ID>
+    <Name>Border Collie</Name>
+    <Category>Dog</Category>
+    <Price>1845</Price>
+    <InStock>8</InStock>
+  </Product>
+  <Product>
+    <ID>300019</ID>
+    <Name>RagDoll cat</Name>
+    <Category>Cat</Category>
+    <Price>150.157</Price>
     <InStock>6</InStock>
   </Product>
   <Product>
-    <ID>362626</ID>
-    <Name>dogfish</Name>
-    <Category>Fish</Category>
-    <Price>36</Price>
-    <InStock>68</InStock>
-  </Product>
-  <Product>
-    <ID>355556</ID>
-    <Name>elephant fish</Name>
-    <Category>Fish</Category>
-    <Price>32.6</Price>
-    <InStock>5</InStock>
+    <ID>300556</ID>
+    <Name>poodle</Name>
+    <Category>Dog</Category>
+    <Price>567</Price>
+    <InStock>3</InStock>
   </Product>
 </ArrayOfProduct>
