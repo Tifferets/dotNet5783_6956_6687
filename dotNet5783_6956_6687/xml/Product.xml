@@ -78,13 +78,6 @@
     <InStock>6</InStock>
   </Product>
   <Product>
-    <ID>355046</ID>
-    <Name>bihk</Name>
-    <Category>Dog</Category>
-    <Price>454</Price>
-    <InStock>41</InStock>
-  </Product>
-  <Product>
     <ID>300000</ID>
     <Name>poodle</Name>
     <Category>Dog</Category>
@@ -104,5 +97,26 @@
     <Category>Parrot</Category>
     <Price>50</Price>
     <InStock>5</InStock>
+  </Product>
+  <Product>
+    <ID>300016</ID>
+    <Name>Chihuahua</Name>
+    <Category>Dog</Category>
+    <Price>1550</Price>
+    <InStock>2</InStock>
+  </Product>
+  <Product>
+    <ID>300017</ID>
+    <Name>Siberian Husky</Name>
+    <Category>Dog</Category>
+    <Price>2000</Price>
+    <InStock>14</InStock>
+  </Product>
+  <Product>
+    <ID>300018</ID>
+    <Name>Border Collie</Name>
+    <Category>Dog</Category>
+    <Price>1845</Price>
+    <InStock>9</InStock>
   </Product>
 </ArrayOfProduct>
