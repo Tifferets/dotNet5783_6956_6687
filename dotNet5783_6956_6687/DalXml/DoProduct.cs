@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using DalApi;
 using DO;
-
+/////
 namespace Dal;
 
 public class DoProduct : IProduct
