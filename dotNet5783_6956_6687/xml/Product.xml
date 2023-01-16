@@ -5,7 +5,7 @@
     <ID>300001</ID>
     <Price>975</Price>
     <Category>Cat</Category>
-    <InStock>41</InStock>
+    <InStock>37</InStock>
   </Product>
   <Product>
     <Name>Cockatiel</Name>
@@ -33,7 +33,7 @@
     <ID>300005</ID>
     <Price>32</Price>
     <Category>Dog</Category>
-    <InStock>10</InStock>
+    <InStock>4</InStock>
   </Product>
   <Product>
     <Name>Persian Cat</Name>
@@ -118,5 +118,19 @@
     <Category>Dog</Category>
     <Price>1845</Price>
     <InStock>8</InStock>
+  </Product>
+  <Product>
+    <ID>300019</ID>
+    <Name>RagDoll cat</Name>
+    <Category>Cat</Category>
+    <Price>150.157</Price>
+    <InStock>6</InStock>
+  </Product>
+  <Product>
+    <ID>300556</ID>
+    <Name>poodle</Name>
+    <Category>Dog</Category>
+    <Price>567</Price>
+    <InStock>3</InStock>
   </Product>
 </ArrayOfProduct>
