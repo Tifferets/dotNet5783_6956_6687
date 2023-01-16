@@ -10,7 +10,7 @@ public class DalConfigException : Exception
 
 public class doesNotExistException : Exception
 {
-    public override string Message => "does not exist";
+    public override string Message => "Item does not exist";
     public override string ToString()
     {
         return Message;
@@ -26,7 +26,7 @@ public class NullException : Exception
 }
 public class CantDeleteException : Exception
 {
-    public override string Message => "can't delete this product";
+    public override string Message => "Sorry, can't delete this product";
     public override string ToString()
     {
         return Message;
@@ -60,7 +60,7 @@ public class NoNameException : Exception
 }
 public class EmptyListException : Exception
 {//used in xml tools
-    public override string Message => "Empty List";
+    public override string Message => "Empty is List";
     public override string ToString()
     {
         return Message;
@@ -76,7 +76,7 @@ public class CantGetListFromXMLException : Exception
 }
 public class CouldntAddException : Exception
 {//used in xml tools
-    public override string Message => "Couldnt add product";
+    public override string Message => "Couldn't add product";
     public override string ToString()
     {
         return Message;

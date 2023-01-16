@@ -216,4 +216,13 @@
     <ShipDate xsi:nil="true" />
     <DeliveryDate xsi:nil="true" />
   </Order>
+  <Order>
+    <ID>100060</ID>
+    <CustomerName>Adina</CustomerName>
+    <CustomerEmail>adina@gmail.com</CustomerEmail>
+    <CustomerAddress>Givat Shaul</CustomerAddress>
+    <OrderDate>2023-01-16T13:59:40.1791355+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
 </ArrayOfOrder>

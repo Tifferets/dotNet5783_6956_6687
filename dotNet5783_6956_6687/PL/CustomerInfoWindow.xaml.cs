@@ -26,7 +26,7 @@ public partial class CustomerInfoWindow : Window
     private BlApi.IBl? bl = BlApi.Factory.Get();
     BO.Cart cart1 = new BO.Cart();
     Checkout checkout = new Checkout();
-    
+
     public CustomerInfoWindow()
     {
         InitializeComponent();
@@ -59,8 +59,7 @@ public partial class CustomerInfoWindow : Window
                 bl?.Cart.confirmCart(cart);
                 checkout.Checkedout = true;
                 MessageBox.Show("Thank you and have a nice day");
-            //    Admin_Window objEP = new Admin_Window();
-              CloseAllWindows();//closes all the window
+                CloseAllWindows();//closes all the window
 
             }
         }

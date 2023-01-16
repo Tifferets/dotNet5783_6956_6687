@@ -33,7 +33,7 @@
     <ID>300005</ID>
     <Price>32</Price>
     <Category>Dog</Category>
-    <InStock>34</InStock>
+    <InStock>10</InStock>
   </Product>
   <Product>
     <Name>Persian Cat</Name>
