@@ -11,20 +11,20 @@
             <ImageBrush ImageSource="/Untitled Design (1).png"/>
         </Grid.Background>
 
-        <GroupBox Header="Choose An Option:" Margin="234,140,234,139" Opacity="5" >
+        <GroupBox Header="Choose An Option:" Margin="210,98,234,100" Opacity="5" >
             <GroupBox.Background>
                 <ImageBrush/>
             </GroupBox.Background>
-            <StackPanel  Height="89" Margin="41,0,51,0" Opacity="5">
+            <StackPanel  Height="127" Margin="41,0,51,0" Opacity="5">
                 <StackPanel.Background>
                     <ImageBrush/>
                 </StackPanel.Background>
-                <RadioButton x:Name ="Admin" Content="Admin" Height="35" IsChecked="True" Opacity="5">
+                <RadioButton x:Name ="Admin" Content="Admin" Height="35"  Opacity="5">
                     <RadioButton.Background>
                         <ImageBrush/>
                     </RadioButton.Background>
                 </RadioButton>
-                <RadioButton x:Name ="NewOrder" Content="New Order" Height="35" Margin="0,0,-11,0" Opacity="5">
+                <RadioButton x:Name ="NewOrder" Content="New Order" Height="35"  Opacity="5">
                     <RadioButton.Background>
                         <ImageBrush/>
                     </RadioButton.Background>
@@ -34,11 +34,16 @@
                         <ImageBrush/>
                     </RadioButton.Background>
                 </RadioButton>
+                <RadioButton x:Name ="simulator" Content="Simulator" Height="35"  Opacity="5">
+                    <RadioButton.Background>
+                        <ImageBrush/>
+                    </RadioButton.Background>
+                </RadioButton>
 
             </StackPanel>
         </GroupBox>
 
-        <Button x:Name="Next_button" Content="Next" Click="Next_button_Click" FontSize="25" Margin="290,330,290,46" >
+        <Button x:Name="Next_button" Content="Next" Click="Next_button_Click" FontSize="25" Margin="290,366,290,10" >
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
@@ -62,6 +67,7 @@
                 </EventTrigger>
             </TextBlock.Triggers>
         </TextBlock>
+        
 
     </Grid>
 </Window>

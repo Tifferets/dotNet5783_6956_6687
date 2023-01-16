@@ -1,0 +1,36 @@
+﻿<Window x:Class="PL.SimulatorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="SimulatorWindow" Height="450" Width="800">
+    <Grid>
+        <Button Content="start simulator" HorizontalAlignment="Left" Margin="544,390,0,0" VerticalAlignment="Top"/>
+        <Button Content="stop simulator" HorizontalAlignment="Left" Margin="662,390,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="Orders_DataGrid" HorizontalAlignment="Left" Height="370" Margin="25,30,0,0" VerticalAlignment="Top" Width="495" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="IdColumn" Header="ID" Binding="{Binding ID}" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="customerNameColumn" Header="customer Name" Binding="{Binding customerName}" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="AmountOfItmsColumn" Header="Amount of Pets" Binding="{Binding AmountOfItems}" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="TotalPriceColumn" Header="Total Price" Binding="{Binding TotalPrice}" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="StatusColumn" Header="Status" Binding="{Binding Status}" IsReadOnly="True" />
+                <DataGridTemplateColumn Header="Track Order">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="infoButton" Content="Watch Order Tracking"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Track Order">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ProgressBar x:Name="infoButton"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
