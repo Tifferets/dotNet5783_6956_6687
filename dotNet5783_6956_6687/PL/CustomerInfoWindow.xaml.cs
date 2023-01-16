@@ -45,7 +45,6 @@ public partial class CustomerInfoWindow : Window
             bool good = Email_TextBox.Text.Contains('@');//makes sure is a correct email
             if (Address_TextBox.Text == "" || Email_TextBox.Text == "" || Name_TextBox.Text == "" || Email_TextBox.Text == "Customer@gmail.com")
                 MessageBox.Show("add missing data");
-            // if( good != true)//wrong email
             else
             {
                 BO.Cart cart = new BO.Cart()//creats the  customers cart
@@ -84,10 +83,5 @@ public partial class CustomerInfoWindow : Window
     {
         for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
             App.Current.Windows[intCounter].Close();
-    }
-
-    private void CheckOut_button_Checked(object sender, RoutedEventArgs e)
-    {
-
     }
 }

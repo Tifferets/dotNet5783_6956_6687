@@ -26,7 +26,7 @@
     <ID>300004</ID>
     <Price>189</Price>
     <Category>Fish</Category>
-    <InStock>0</InStock>
+    <InStock>5</InStock>
   </Product>
   <Product>
     <Name>golden retriever</Name>
