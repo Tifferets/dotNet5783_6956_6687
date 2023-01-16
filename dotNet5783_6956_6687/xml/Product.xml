@@ -105,4 +105,25 @@
     <Price>100</Price>
     <InStock>5</InStock>
   </Product>
+  <Product>
+    <ID>322222</ID>
+    <Name>half dog</Name>
+    <Category>Dog</Category>
+    <Price>53</Price>
+    <InStock>6</InStock>
+  </Product>
+  <Product>
+    <ID>362626</ID>
+    <Name>dogfish</Name>
+    <Category>Fish</Category>
+    <Price>36</Price>
+    <InStock>68</InStock>
+  </Product>
+  <Product>
+    <ID>355556</ID>
+    <Name>elephant fish</Name>
+    <Category>Fish</Category>
+    <Price>32.6</Price>
+    <InStock>5</InStock>
+  </Product>
 </ArrayOfProduct>
