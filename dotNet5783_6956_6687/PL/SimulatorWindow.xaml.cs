@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,8 @@ namespace PL
     public partial class SimulatorWindow : Window
     {
         BackgroundWorker simulator_bgw;
+        private ObservableCollection<OrderForList> orderForLists { get; set; }
+        private BlApi.IBl? bl = BlApi.Factory.Get();
         public SimulatorWindow()
         {
             InitializeComponent();
@@ -65,6 +69,8 @@ namespace PL
             {
                 simulator_bgw.CancelAsync();// Cancel the asynchronous operation- cancle the thread
             }
+            orderForLists = new ObservableCollection<OrderForList>(bl.Order.GetOrderList());
+
         }
     }
 }

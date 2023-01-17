@@ -5,32 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="SimulatorWindow" Height="450" Width="800">
+        Title="SimulatorWindow" Height="600" Width="1000">
     <Grid>
-        <Button Content="start simulator" HorizontalAlignment="Left" Margin="526,363,0,0" VerticalAlignment="Top" Height="47" Width="98" Click="Button_Click"/>
-        <Button Content="stop simulator" HorizontalAlignment="Left" Margin="659,363,0,0" VerticalAlignment="Top" Height="47" Width="83" Click="Button_Click_1"/>
-        <DataGrid x:Name="Orders_DataGrid" HorizontalAlignment="Left" Height="285" Margin="25,30,0,0" VerticalAlignment="Top" Width="655"  AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="IdColumn" Header="ID" Binding="{Binding ID}" IsReadOnly="True" Width="2*" />
-                <DataGridTextColumn x:Name="customerNameColumn" Header="customer Name" Binding="{Binding customerName}" IsReadOnly="True" Width="2*"/>
-                <DataGridTextColumn x:Name="AmountOfItmsColumn" Header="Amount of Pets" Binding="{Binding AmountOfItems}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn x:Name="TotalPriceColumn" Header="Total Price" Binding="{Binding TotalPrice}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn x:Name="StatusColumn" Header="Status" Binding="{Binding Status}" IsReadOnly="True" Width="2*"/>
-                <DataGridTemplateColumn Header="Track Order" Width="2*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button x:Name="infoButton" Content="Watch Order Tracking"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Track Order" Width="2*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ProgressBar x:Name="infoButton"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Button Content="start simulator" HorizontalAlignment="Left" Margin="662,346,0,0" VerticalAlignment="Top"/>
+        <Button Content="stop simulator" HorizontalAlignment="Left" Margin="662,390,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="Orders_DataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="349" Margin="25,30,0,0" VerticalAlignment="Top" Width="526" ItemsSource="{Binding Source={StaticResource orderForLists}}">
+        <DataGrid.Columns>
+            <DataGridTextColumn x:Name="IdColumn" Header="ID" Binding="{Binding ID}" IsReadOnly="True" />
+            <DataGridTextColumn x:Name="customerNameColumn" Header="customer Name" Binding="{Binding customerName}" IsReadOnly="True" />
+            <DataGridTextColumn x:Name="AmountOfItmsColumn" Header="Amount of Pets" Binding="{Binding AmountOfItems}" IsReadOnly="True" />
+            <DataGridTextColumn x:Name="TotalPriceColumn" Header="Total Price" Binding="{Binding TotalPrice}" IsReadOnly="True" />
+            <DataGridTextColumn x:Name="StatusColumn" Header="Status" Binding="{Binding Status}" IsReadOnly="True" />
+            <DataGridTemplateColumn Header="Track Order">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button x:Name="infoButton" Content="Watch Order Tracking"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Progress">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <ProgressBar x:Name="infoButton"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+</DataGrid>
     </Grid>
 </Window>
