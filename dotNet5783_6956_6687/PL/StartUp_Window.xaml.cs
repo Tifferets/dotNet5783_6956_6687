@@ -64,6 +64,10 @@ namespace PL
                     MessageBox.Show(ex.Message);
                 }
             }
+            else if(simulator.IsChecked == true)
+            {
+                new SimulatorWindow().Show();//opens a new window
+            }
         }
     }
 }
