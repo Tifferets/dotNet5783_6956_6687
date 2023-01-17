@@ -34,6 +34,8 @@ namespace PL
             simulator_bgw.WorkerReportsProgress= true;
         }
 
+       
+
         private void Simulator_bgw_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             throw new NotImplementedException();
