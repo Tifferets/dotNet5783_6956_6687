@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,13 @@ namespace PL
     /// </summary>
     public partial class SimulatorWindow : Window
     {
+        private ObservableCollection<OrderForList> orderForLists { get; set; }
+        private BlApi.IBl? bl = BlApi.Factory.Get();
         public SimulatorWindow()
         {
             InitializeComponent();
+            orderForLists = new ObservableCollection<OrderForList>(bl.Order.GetOrderList());
+
         }
     }
 }

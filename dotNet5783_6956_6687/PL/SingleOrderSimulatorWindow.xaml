@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="SingleOrderSimulatorWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid HorizontalAlignment="Left" Height="345" Margin="43,62,0,0" VerticalAlignment="Top" Width="357">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                
+            </Grid.RowDefinitions>
+        </Grid>
     </Grid>
 </Window>
