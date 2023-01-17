@@ -31,7 +31,7 @@ internal class BoOrder : IOrder
                 foreach (DO.OrderItem oitem in (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()))//loop to count the amount of products and total price
                 {
                     amount++;
-                    price += oitem.Price;
+                    price += oitem.Price* oitem.Amount;
                 }
                 OrderForlist.Add(new BO.OrderForList
                 {
@@ -97,6 +97,7 @@ internal class BoOrder : IOrder
                     Status = (BO.OrderStatus)System.Enum.Parse(typeof(BO.OrderStatus), stauss.ToString()),//converting to enum
                     Items = orderitemList,
                     TotalPrice = (double)totalprice,
+                    wasChanged= false,
                 };
             }
             catch
