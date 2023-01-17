@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <None Remove="BackGround_All.png" />
-    <None Remove="petstore.jpg" />
     <None Remove="Untitled Design %281%29.png" />
   </ItemGroup>
 
@@ -25,7 +24,6 @@
 
   <ItemGroup>
     <Content Include="BackGround_All.png" />
-    <Resource Include="petstore.jpg" />
     <Resource Include="Untitled Design (1).png" />
   </ItemGroup>
 

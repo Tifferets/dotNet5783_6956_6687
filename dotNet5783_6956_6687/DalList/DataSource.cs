@@ -76,7 +76,7 @@ internal static class DataSource
                 order.DeliveryDate = order.ShipDate?.Add(new TimeSpan(rand.Next(1, 2), 0, 0, 0));//from one to 2 days later
             }
             else
-                order.ShipDate = null;
+                order.DeliveryDate = null;
             Orderlist.Add(order);
            
         }// Product

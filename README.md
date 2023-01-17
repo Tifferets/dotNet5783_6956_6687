@@ -6,9 +6,14 @@ we need to give this in soon:)
 stage0 final commit
 
 Bounes that we did:
-1. TryParse
-2. reflection to string properties 
-3. Style
-4. Event Trigger
-5. Update order for maneger
-6. Data Trigger
+1. TryParse - BlTest/DalTest (1)
+2. reflection to string properties - Exceptions DO (1)
+3. Update order for maneger - BoOrder (3)
+4. Event Trigger -StartUp_Window line 57 (4)
+6. Data Trigger -OrderWindow line 62
+7. Style -App.xaml 
+
+
+Bounes that we did not asked for:
+1.
+2.

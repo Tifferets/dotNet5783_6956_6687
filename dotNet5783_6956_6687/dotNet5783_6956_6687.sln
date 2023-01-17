@@ -21,15 +21,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csproj", "{FBC825F3-7F2C-4D05-9DB2-0DBE625C25A5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{3F19F6BB-57A9-437E-8D8E-BD814F10CB59}"
-	ProjectSection(ProjectDependencies) = postProject
-		{163E7F3F-160C-4FB9-9820-19734FB9F941} = {163E7F3F-160C-4FB9-9820-19734FB9F941}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{6E643F39-953F-41C6-A086-DC0587396482}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "initilizing_it", "initilizing_it\initilizing_it.csproj", "{3ECEF56E-3FBA-44D4-88F5-14C7E9AC9715}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulator", "Simulator\Simulator.csproj", "{163E7F3F-160C-4FB9-9820-19734FB9F941}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "initilizing_it", "initilizing_it\initilizing_it.csproj", "{3ECEF56E-3FBA-44D4-88F5-14C7E9AC9715}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -149,18 +144,6 @@ Global
 		{3ECEF56E-3FBA-44D4-88F5-14C7E9AC9715}.Release|x64.Build.0 = Release|Any CPU
 		{3ECEF56E-3FBA-44D4-88F5-14C7E9AC9715}.Release|x86.ActiveCfg = Release|Any CPU
 		{3ECEF56E-3FBA-44D4-88F5-14C7E9AC9715}.Release|x86.Build.0 = Release|Any CPU
-		{163E7F3F-160C-4FB9-9820-19734FB9F941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{163E7F3F-160C-4FB9-9820-19734FB9F941}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{163E7F3F-160C-4FB9-9820-19734FB9F941}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{163E7F3F-160C-4FB9-9820-19734FB9F941}.Debug|x64.Build.0 = Debug|Any CPU
-		{163E7F3F-160C-4FB9-9820-19734FB9F941}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{163E7F3F-160C-4FB9-9820-19734FB9F941}.Debug|x86.Build.0 = Debug|Any CPU
-		{163E7F3F-160C-4FB9-9820-19734FB9F941}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{163E7F3F-160C-4FB9-9820-19734FB9F941}.Release|Any CPU.Build.0 = Release|Any CPU
-		{163E7F3F-160C-4FB9-9820-19734FB9F941}.Release|x64.ActiveCfg = Release|Any CPU
-		{163E7F3F-160C-4FB9-9820-19734FB9F941}.Release|x64.Build.0 = Release|Any CPU
-		{163E7F3F-160C-4FB9-9820-19734FB9F941}.Release|x86.ActiveCfg = Release|Any CPU
-		{163E7F3F-160C-4FB9-9820-19734FB9F941}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

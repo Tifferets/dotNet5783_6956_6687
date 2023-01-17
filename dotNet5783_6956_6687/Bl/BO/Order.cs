@@ -41,6 +41,7 @@ public class Order
     /// Total Price -BO
     /// </summary>
     public double TotalPrice { get; set; }
+    public bool wasChanged { get; set; }
 
     public override string ToString() => $@"
 Order ID: {ID}
