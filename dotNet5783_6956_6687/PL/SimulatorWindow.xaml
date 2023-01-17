@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="SimulatorWindow" Height="600" Width="1000">
+        Title="SimulatorWindow" Height="600" Width="1000" >
+    
     <Grid>
+        
         <Button Content="start simulator" HorizontalAlignment="Left" Margin="662,346,0,0" VerticalAlignment="Top"/>
         <Button Content="stop simulator" HorizontalAlignment="Left" Margin="662,390,0,0" VerticalAlignment="Top"/>
         <DataGrid x:Name="Orders_DataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="349" Margin="25,30,0,0" VerticalAlignment="Top" Width="526" ItemsSource="{Binding Source={StaticResource orderForLists}}">

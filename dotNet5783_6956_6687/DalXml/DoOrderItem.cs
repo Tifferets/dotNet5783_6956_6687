@@ -26,18 +26,25 @@ public class DoOrderItem : IOrderItem
         }
         catch
         {
-            throw new Exception("couldnt add");
+            //throw new Exception("couldnt add");
+            throw new DalApi.CouldntAddOrderItemException();
         }
     }
     public void Delete(int orderitemID)//gets an orderitem id and deletes the orderitem
     {
-        List<OrderItem> OrderItemList = Dal.XMLTools.LoadListFromXML<DO.OrderItem>(orderItem); //gets all the orders
-        OrderItem or = OrderItemList.FirstOrDefault(x => x.OrderItemID == orderitemID);//or is A copy of the order we  want to delete
-        OrderItemList.Remove(or);//removes the order from the list
-        Dal.XMLTools.SaveListToXML(OrderItemList, orderItem);//saves the list into xml file
-
+        try
+        {
+            List<OrderItem> OrderItemList = Dal.XMLTools.LoadListFromXML<DO.OrderItem>(orderItem); //gets all the orders
+            OrderItem or = OrderItemList.FirstOrDefault(x => x.OrderItemID == orderitemID);//or is A copy of the order we  want to delete
+            OrderItemList.Remove(or);//removes the order from the list
+            Dal.XMLTools.SaveListToXML(OrderItemList, orderItem);//saves the list into xml file
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
     }
-    public void Update(OrderItem orderItem1)//gets an orderite and updates it in the list
+    public void Update(OrderItem orderItem1)//gets an orderitem and updates it in the list
     {
         try
         {
@@ -50,7 +57,8 @@ public class DoOrderItem : IOrderItem
         }
         catch (Exception ex)
         {
-            throw new Exception("cant update");
+            //throw new Exception("cant update");
+            throw new DalApi.CantUpdateOrderItemException();
         }
     }
 
@@ -77,7 +85,8 @@ public class DoOrderItem : IOrderItem
         }
         catch (Exception ex)
         {
-            throw new Exception("cant get a single order");
+            //throw new Exception("cant get a single order");
+            throw new DalApi.CantGetSingleException();
         }
 
     }

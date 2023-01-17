@@ -29,7 +29,8 @@ public class XMLTools
         }
         catch (Exception ex)
         {
-            throw new("Cant Save List To XML Exception");
+            //throw  new("Cant Save List To XML Exception");
+            throw new DalApi.CantSaveListToXMLException();
         }
     }
     public static List<T> LoadListFromXML<T>(string path)
@@ -66,7 +67,8 @@ public static class Config
         }
         catch (Exception ex)
         {
-            throw new Exception("cant load");
+            //throw new Exception("cant load");
+            throw new DalApi.CantLoadException();
         }
     }
     static Config()
