@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="StartUp_Window" Height="450" Width="800">
+        Title="StartUp_Window" Height="450" Width="800" Icon="favicon (1).ico" >
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="329*"/>
+            <ColumnDefinition Width="471*"/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="/Untitled Design (1).png"/>
         </Grid.Background>
 
-        <GroupBox Header="Choose An Option:" Margin="210,98,234,100" Opacity="5" >
+        <GroupBox Header="Choose An Option:" Margin="210,98,234,100" Opacity="5" Grid.ColumnSpan="2" >
             <GroupBox.Background>
                 <ImageBrush/>
             </GroupBox.Background>
@@ -43,13 +47,13 @@
             </StackPanel>
         </GroupBox>
 
-        <Button x:Name="Next_button" Content="Next" Click="Next_button_Click" FontSize="25" Margin="290,366,290,10" >
+        <Button x:Name="Next_button" Content="Next" Click="Next_button_Click" FontSize="25" Margin="290,366,290,10" Grid.ColumnSpan="2" >
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
         </Button>
 
-        <TextBlock Name="Welcome" Text="WELCOME TO ADOPT A PET" HorizontalAlignment="Center" FontSize="50" Height="84" Margin="0,38,0,0" VerticalAlignment="Top" Width="646" >
+        <TextBlock Name="Welcome" Text="WELCOME TO ADOPT A PET" HorizontalAlignment="Left" FontSize="50" Height="84" Margin="77,38,0,0" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="2" >
             <TextBlock.Background>
                 <ImageBrush/>
             </TextBlock.Background>
@@ -67,7 +71,7 @@
                 </EventTrigger>
             </TextBlock.Triggers>
         </TextBlock>
-        
+
 
     </Grid>
 </Window>

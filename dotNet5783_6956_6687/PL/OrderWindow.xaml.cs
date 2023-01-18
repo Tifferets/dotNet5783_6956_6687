@@ -39,12 +39,17 @@ namespace PL
         {
             if (action != null)
                 this.action = action;
+            else
+            {
+                delivery.Visibility= Visibility.Collapsed;
+                shipping.Visibility= Visibility.Collapsed;
+            }
             order = mydata;
             Orderpl.TotalPrice = order.TotalPrice;
             Order_Grid.DataContext = mydata;
             var lst = from x in mydata?.Items
                       select new OrderItemPL() { ID = x.ID, ProductID = x.ProductID, Amount = x.Amount, Name = x.Name, Price = x.Price, TotalPrice = x.TotalPrice };
-           // OrderStatus_comboBox.ItemsSource = OrderStatus.GetValues(typeof(PL.OrderStatus));//combobox source 
+            // OrderStatus_comboBox.ItemsSource = OrderStatus.GetValues(typeof(PL.OrderStatus));//combobox source 
             Items = new ObservableCollection<OrderItemPL>(lst.ToList());// mydata.Items);
             Items_listview.DataContext = Items;
             Items_listview.SelectionChanged += Items_listview_SelectionChanged;
@@ -119,6 +124,16 @@ namespace PL
         private void Items_listview_MouseLeave(object sender, MouseEventArgs e)
         {
             selectItem_label.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            order = bl.Order.UpdateShippingDate(order.ID);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            order = bl.Order.UpdateDeliveryDate(order.ID);
         }
     }
 }
