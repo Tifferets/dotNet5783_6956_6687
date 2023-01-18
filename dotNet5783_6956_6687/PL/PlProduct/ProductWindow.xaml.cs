@@ -58,7 +58,8 @@ namespace PL.PlProduct
                 }
                 if (Price_Textbox.Text.Count(c => c == '.') > 1 )
                 {
-                    MessageBox.Show("Price not right");
+                    Price_Textbox.Text.
+                    MessageBox.Show("Price not right\a");
                     return;
                 }
                 BO.Product product = new BO.Product()//creating a new product
