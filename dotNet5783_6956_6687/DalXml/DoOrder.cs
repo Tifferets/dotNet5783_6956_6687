@@ -36,7 +36,7 @@ public class DoOrder:IOrder
         }
         catch (Exception ex)
         {
-            throw new CouldntAddException();
+            throw new errorException();
         }
 
 

@@ -101,7 +101,7 @@ internal class BoOrder : BlApi.IOrder
                     TotalPrice = (double)totalprice,
                     wasChanged = false,
                 };
-                
+
             }
             catch
             {
@@ -115,7 +115,7 @@ internal class BoOrder : BlApi.IOrder
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
-    public BO.Order UpdateShippingDate(int orderId)
+    public BO.Order UpdateShippingDate(int orderId, DateTime? dateTime)
     {
         if (orderId < 100000 || orderId >= 200000)
         {
@@ -128,11 +128,12 @@ internal class BoOrder : BlApi.IOrder
             {
                 throw new BO.AlreadyShippedException();
             }
-            order.ShipDate = DateTime.Now;// DateTime.Now;
+            if (dateTime != null) { order.ShipDate = dateTime; }
+            else order.ShipDate = DateTime.Now;// DateTime.Now;
             dal?.order.Update(order);
             return GetOrderInfo(orderId);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw (ex);
         }
@@ -142,7 +143,7 @@ internal class BoOrder : BlApi.IOrder
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
-    public BO.Order UpdateDeliveryDate(int orderId)
+    public BO.Order UpdateDeliveryDate(int orderId, DateTime? dateTime )
     {
         if (orderId < 100000)
         {
@@ -159,7 +160,8 @@ internal class BoOrder : BlApi.IOrder
             {
                 throw new BO.AlreadyShippedException();
             }
-            order.DeliveryDate = DateTime.Now;
+            if (dateTime != null) order.DeliveryDate = dateTime;
+            else order.DeliveryDate = DateTime.Now;
             dal?.order.Update(order);
             return GetOrderInfo(orderId);
         }
@@ -324,19 +326,19 @@ internal class BoOrder : BlApi.IOrder
             throw new BO.errorException();
         }
     }
-   public int? LastTouched()
+    public int? LastTouched()
     {//return an id of the order with the last touched date othewise return null
         try
         {
             List<BO.Order> orderedlist = (from x in dal?.order.GetAll()
-                                          orderby x?.ShipDate != null  ? x?.ShipDate: x?.OrderDate
-                                          where x?.DeliveryDate == null 
-                                        select new BO.Order()
-                                        {
-                                            ID = x.Value.ID,
-                                            OrderDate = x?.OrderDate,
-                                            ShipDate = x?.ShipDate,
-                                        }).ToList();
+                                          orderby x?.ShipDate != null ? x?.ShipDate : x?.OrderDate
+                                          where x?.DeliveryDate == null
+                                          select new BO.Order()
+                                          {
+                                              ID = x.Value.ID,
+                                              OrderDate = x?.OrderDate,
+                                              ShipDate = x?.ShipDate,
+                                          }).ToList();
             if (orderedlist.Count == 0)
                 return null;
             return orderedlist.First().ID;
@@ -360,6 +362,6 @@ internal class BoOrder : BlApi.IOrder
         }
         catch
         { throw new BO.errorException(); }
-        
+
     }
 }

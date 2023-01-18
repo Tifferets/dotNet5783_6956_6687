@@ -45,7 +45,7 @@ public partial class CustomerInfoWindow : Window
             bool good = Email_TextBox.Text.Contains('@');//makes sure is a correct email
             if (Address_TextBox.Text == "" || Email_TextBox.Text == "" || Name_TextBox.Text == "" || Email_TextBox.Text == "Customer@gmail.com")
                 MessageBox.Show("add missing data");
-            if (Email_TextBox.Text.Count(c => c == '@') > 1 || good==false)
+            if (Email_TextBox.Text.Count(c => c == '@') > 1 || good == false)
             {
                 MessageBox.Show("Email address not right");
                 return;
@@ -86,6 +86,9 @@ public partial class CustomerInfoWindow : Window
     private void CloseAllWindows()
     {
         for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+        {
+            //if (App.Current.Windows[intCounter].Name != PL.SimulatorWindow)
             App.Current.Windows[intCounter].Close();
+        }
     }
 }
