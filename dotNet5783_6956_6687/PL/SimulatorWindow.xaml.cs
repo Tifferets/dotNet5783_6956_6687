@@ -136,7 +136,7 @@ namespace PL
                         order = bl?.Order.UpdateDeliveryDate(order.ID, time);
                         //presentage = 100;
                         int random = rand.Next(3, 10);
-                        Thread.Sleep(random* 1000);
+                        Thread.Sleep(random * 1000);
                         if (simulator_bgw.WorkerReportsProgress == true)
                             simulator_bgw.ReportProgress(order.ID);//we are sending the status and presentage
                                                                    //  }
