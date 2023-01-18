@@ -86,6 +86,10 @@ public partial class CustomerInfoWindow : Window
     private void CloseAllWindows()
     {
         for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+        {
+         if(!(App.Current.Windows[intCounter] is SimulatorWindow ))
             App.Current.Windows[intCounter].Close();
+        }
+        //App.Current.Windows.Equals(SimulatorWindow)
     }
 }
