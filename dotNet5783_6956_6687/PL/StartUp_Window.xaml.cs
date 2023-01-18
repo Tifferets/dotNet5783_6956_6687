@@ -24,6 +24,7 @@ namespace PL
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
         BO.Cart cart = new BO.Cart();
+        bool isopen = false;//checks if the simulater is open
 
         public StartUp_Window()
         {
@@ -66,7 +67,18 @@ namespace PL
             }
             else if(simulator.IsChecked == true)
             {
-                new SimulatorWindow().Show();//opens a new window
+                if (isopen == false)
+                { 
+                    SimulatorWindow simwin = new SimulatorWindow();
+                    simwin.Show();//opens a new window
+                    isopen = true;
+                }
+                else
+                {
+                    isopen = false;
+                    //simwin
+                }
+
             }
         }
     }

@@ -17,7 +17,7 @@
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="Width" Value="Auto"/>
         </Style>
-        <ControlTemplate x:Key="MyButtonTemplate" TargetType="Button">
+        <ControlTemplate x:Key="MyButtonTemplate" TargetType="Button" >
             <Grid>
                 <Rectangle Fill="{TemplateBinding Background}"/>
                 <ContentPresenter/>
