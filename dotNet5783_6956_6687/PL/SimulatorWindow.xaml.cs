@@ -120,11 +120,11 @@ namespace PL
                         try
                         {
                             time = time.AddDays(1);
-                            order = bl?.Order.UpdateShippingDate(order.ID);
+                            order = bl?.Order.UpdateShippingDate(order.ID, time);
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         int random = rand.Next(3, 10);
-                        Thread.Sleep(random + 000);
+                        Thread.Sleep(random *1000);
                         if (simulator_bgw.WorkerReportsProgress == true)
                             simulator_bgw.ReportProgress(order.ID);//we are sending the status and presentage
                                                                    // presentage = rand.Next(25, 50);
@@ -133,10 +133,10 @@ namespace PL
                     {
                         order.Status = BO.OrderStatus.delivered;
                         time = time.AddDays(1);
-                        order = bl?.Order.UpdateDeliveryDate(order.ID);
+                        order = bl?.Order.UpdateDeliveryDate(order.ID, time);
                         //presentage = 100;
                         int random = rand.Next(3, 10);
-                        Thread.Sleep(random + 000);
+                        Thread.Sleep(random* 1000);
                         if (simulator_bgw.WorkerReportsProgress == true)
                             simulator_bgw.ReportProgress(order.ID);//we are sending the status and presentage
                                                                    //  }
@@ -180,7 +180,7 @@ namespace PL
         {
             if (simulator_bgw.IsBusy != true) //if its not in the middle of working
             {
-                MessageBox.Show("starting");
+               // MessageBox.Show("starting");
                 simulator_bgw.RunWorkerAsync();
             }
         }
@@ -191,7 +191,7 @@ namespace PL
             {
                 simulator_bgw.CancelAsync();// Cancel the asynchronous operation- cancle the thread
             }
-            // orderForLists = new ObservableCollection<OrderForList>(bl.Order.GetOrderList());
+            
         }
 
         private void infoButton_Click(object sender, RoutedEventArgs e)
@@ -232,10 +232,6 @@ namespace PL
 
     }
 }
-//public enum OrderStatus
-//{
-//    ordered, shipped, delivered
-//}
 public class OrderPl : INotifyPropertyChanged
 {
     public string CustomerName { get; set; }

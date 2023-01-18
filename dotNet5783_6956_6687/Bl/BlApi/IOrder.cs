@@ -19,13 +19,13 @@ public interface IOrder
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
-    public Order UpdateShippingDate(int orderId);
+    public Order UpdateShippingDate(int orderId, DateTime? dateTime = null);
     /// <summary>
     /// updates the delivery date - for the admin
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
-    public Order UpdateDeliveryDate(int orderId);
+    public Order UpdateDeliveryDate(int orderId, DateTime? dateTime = null);
     /// <summary>
     /// the function gets an order id and returns the status of the order- for admin
     /// </summary>
