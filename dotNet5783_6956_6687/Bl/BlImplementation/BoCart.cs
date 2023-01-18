@@ -81,7 +81,7 @@ internal class BoCart : ICart
                 }
             }
         }
-        catch (Exception ex) { throw new CouldntAddProductException(); }//if nothing worked
+        catch (Exception ex) { throw new BO.CouldntAddProductException(); }//if nothing worked
         return cart;
     }
     //    {

@@ -56,7 +56,8 @@ public class DoProduct : IProduct
         }
         catch
         {
-            throw new Exception("file upload product not successful");
+            //throw new Exception("file upload product not successful");
+            throw new DalApi.FileUploadProductNotSuccessfulException();
         }
     }
 
@@ -83,7 +84,8 @@ public class DoProduct : IProduct
         }
         catch
         {
-            throw new Exception("cant get single");
+            //throw new Exception("cant get single");
+            throw new DalApi.CantGetSingleException();
         }
     }
     public IEnumerable<Product?> GetAll(Func<Product?, bool> func = null)//gets a function and returns all the product that the function returns true to them, which is all the products
@@ -107,7 +109,10 @@ public class DoProduct : IProduct
             return products.Cast<Product?>();
         }
         catch
-        { throw new Exception("Can not get list of all products"); }
+        {
+            //throw new Exception("Can not get list of all products");
+            throw new DalApi.CantGetListOfAllProducts();
+        }
     }
     public int Add(Product product)//gets a product and adds it to the xml file
     {
@@ -128,7 +133,8 @@ public class DoProduct : IProduct
         }
         catch (Exception ex)
         {
-            throw new Exception("Cant add product");
+            //throw new Exception("Cant add product");
+            throw new DalApi.CantAddProductException();
         }
         return product.ID;
     }
@@ -146,7 +152,8 @@ public class DoProduct : IProduct
         }
         catch
         {
-            throw new Exception("Cant delete product");
+            //throw new Exception("Cant delete product");
+            throw new DalApi.CantDeleteProductException();
         }
     }
     public void Update(Product product)//gets a product in its newer version and replaces it with its old version
@@ -165,7 +172,7 @@ public class DoProduct : IProduct
                 productElment.Element("InStock").Value = product.InStock.ToString();
                 productRoot.Save(dir + FPath);
             }
-            else throw new Exception("Cant Update this Product");
+            else throw new DalApi.CantUpdateProductException();// Exception("Cant Update this Product");
         }
         catch (Exception ex)
         {
