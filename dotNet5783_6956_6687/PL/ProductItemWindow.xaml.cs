@@ -22,22 +22,22 @@ namespace PL
     public partial class ProductItemWindow : Window
     {
         private BlApi.IBl? bl = BlApi.Factory.Get();
-        Action<BO.Cart, Products>? action;
+        Action<BO.Cart, Inotify>? action;
         BO.Cart Cart = new BO.Cart()
         {
             Items = new List<OrderItem>()
         };
 
-        Products ProductItem = new Products();//inotifiableproperty
+        Inotify ProductItem = new Inotify();//inotifiableproperty
         public ProductItemWindow()
         {
             InitializeComponent();
         }
-        public ProductItemWindow(BO.Cart cart, Products p1, Action<BO.Cart, Products>? action) : this() //ctor
+        public ProductItemWindow(BO.Cart cart, Inotify p1, Action<BO.Cart, Inotify>? action) : this() //ctor
         {
             this.action = action;
             Cart = cart;
-            ProductItem = new Products()//builds new productitem- the pl one
+            ProductItem = new Inotify()//builds new productitem- the pl one
             {
                 ID = p1.ID,
                 Name = p1.Name,

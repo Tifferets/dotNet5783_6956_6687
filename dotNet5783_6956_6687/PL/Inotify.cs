@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,10 @@ using System.Windows.Automation;
 using System.Windows.Data;
 using System.Windows.Navigation;
 
-namespace PL.PlProduct;
+namespace PL;
 
-public class Products : INotifyPropertyChanged
+
+public class Inotify : INotifyPropertyChanged
 {
     private int Id;
     private double price;
@@ -264,3 +266,4 @@ public class OrderPL : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
+

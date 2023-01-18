@@ -6,24 +6,33 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="SimulatorWindow" Height="600" Width="1000">
+    <Window.Resources>
+        <local:StatusToColor x:Key="statusToColor"/>
+    </Window.Resources>
     <Grid>
-        <Button Content="start simulator" HorizontalAlignment="Left" Margin="662,346,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
-        <Button Content="stop simulator" HorizontalAlignment="Left" Margin="662,390,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <DataGrid x:Name="Orders_DataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="349" Margin="25,30,0,0" VerticalAlignment="Top" Width="526" ItemsSource="{Binding}">
+        <Button Content="start simulator" HorizontalAlignment="Left" Margin="662,408,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
+        <Button Content="stop simulator" HorizontalAlignment="Left" Margin="662,456,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <DataGrid x:Name="Orders_DataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="349" Margin="25,30,0,0" VerticalAlignment="Top" Width="880" ItemsSource="{Binding}" CanUserResizeColumns="False"  CanUserReorderColumns="False" CanUserAddRows="False">
         <DataGrid.Columns>
-            <DataGridTextColumn x:Name="IdColumn" Header="ID" Binding="{Binding ID}" IsReadOnly="True" />
-            <DataGridTextColumn x:Name="customerNameColumn" Header="customer Name" Binding="{Binding customerName}" IsReadOnly="True" />
-            <DataGridTextColumn x:Name="AmountOfItmsColumn" Header="Amount of Pets" Binding="{Binding AmountOfItems}" IsReadOnly="True" />
-            <DataGridTextColumn x:Name="TotalPriceColumn" Header="Total Price" Binding="{Binding TotalPrice}" IsReadOnly="True" />
-            <DataGridTextColumn x:Name="StatusColumn" Header="Status" Binding="{Binding Status}" IsReadOnly="True" />
-            <DataGridTemplateColumn Header="Track Order">
+            <DataGridTextColumn x:Name="IdColumn" Header="ID" Binding="{Binding ID}" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn x:Name="customerNameColumn" Header="customer Name" Binding="{Binding CustomerName}" IsReadOnly="True" Width="*" />
+                <DataGridTextColumn x:Name="AmountOfItmsColumn" Header="Amount of Pets" Binding="{Binding AmountOfItems}" IsReadOnly="True" Width="*" />
+                <DataGridTextColumn x:Name="TotalPriceColumn" Header="Total Price" Binding="{Binding TotalPrice}" IsReadOnly="True" Width="*"/>
+                <DataGridTemplateColumn x:Name="StatusColumn" Header="Status"  IsReadOnly="True"  Width="*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Status}" Background ="{Binding Status, Converter={StaticResource statusToColor}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Track Order" Width="2*">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button x:Name="infoButton" Content="Watch Order Tracking"/>
+                            <Button x:Name="infoButton" Content="Watch Order Tracking" Click="infoButton_Click" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="Progress">
+                <DataGridTemplateColumn Header="Progress"  Width="2*" >
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <ProgressBar x:Name="infoButton"/>

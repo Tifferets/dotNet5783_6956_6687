@@ -1,13 +1,15 @@
 ﻿using BlApi;
 using BO;
+using DalApi;
 using DO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
 
 namespace BlImplementation;
 
-internal class BoOrder : IOrder
+internal class BoOrder : BlApi.IOrder
 {
     private static DalApi.IDal? dal = DalApi.Factory.Get();
     //private BO.OrderStatus ordered;
@@ -31,7 +33,7 @@ internal class BoOrder : IOrder
                 foreach (DO.OrderItem oitem in (dal?.order.GetAllOrderItems(item.ID) ?? throw new BO.NullException()))//loop to count the amount of products and total price
                 {
                     amount++;
-                    price += oitem.Price* oitem.Amount;
+                    price += oitem.Price * oitem.Amount;
                 }
                 OrderForlist.Add(new BO.OrderForList
                 {
@@ -97,8 +99,9 @@ internal class BoOrder : IOrder
                     Status = (BO.OrderStatus)System.Enum.Parse(typeof(BO.OrderStatus), stauss.ToString()),//converting to enum
                     Items = orderitemList,
                     TotalPrice = (double)totalprice,
-                    wasChanged= false,
+                    wasChanged = false,
                 };
+                
             }
             catch
             {
@@ -129,9 +132,9 @@ internal class BoOrder : IOrder
             dal?.order.Update(order);
             return GetOrderInfo(orderId);
         }
-        catch
+        catch(Exception ex)
         {
-            throw new BO.errorException();
+            throw (ex);
         }
     }
     /// <summary>
@@ -266,5 +269,97 @@ internal class BoOrder : IOrder
         }
         catch (Exception ex) { throw new CantUpDateOrderException(); }
     }
-}
 
+
+    public IEnumerable<BO.Order?> GetAllOrders()
+    {
+        List<BO.Order?> Orderlist = new List<BO.Order>();
+        try
+        {
+            foreach (var x in dal.order.GetAll())
+            {
+                List<BO.OrderItem> orderitemList = new List<BO.OrderItem>();//list of orderitems
+                double totalprice = 0;
+                var orderitems = from DO.OrderItem item in dal?.order.GetAllOrderItems(x.Value.ID) ?? throw new BO.NullException()
+                                     //let totalPrice = dal?.order.GetAllOrderItems(item.OrderID).Sum(x => x?.ProductID)
+                                     // let amountOfitems = dal?.order.GetAllOrderItems(item.OrderID).Count()
+                                 let product = dal?.product.GetSingle(x => x?.ID == item.ProductID)//the product by id
+                                 select new BO.OrderItem //adding to the list
+                                 {
+                                     ID = item.OrderItemID,
+                                     ProductID = item.ProductID,
+                                     Name = product?.Name,
+                                     Price = item.Price,
+                                     Amount = item.Amount,
+                                     TotalPrice = item.Amount * item.Price,
+                                 };
+                foreach (BO.OrderItem item in orderitems)//adding all the items to the list
+                {
+                    orderitemList.Add(item);
+                    totalprice += item.TotalPrice;
+                }
+                BO.OrderTracking orderTracking = OrderStatus(x.Value.ID);
+                string statusee = status(orderTracking)!;
+                BO.OrderStatus stauss = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), statusee);//converting to enum type
+                Orderlist.Add(new BO.Order()
+                {
+
+                    ID = x.Value.ID,
+                    CustomerName = x?.CustomerName,
+                    CustomerAddress = x?.CustomerAddress,
+                    CustomerEmail = x?.CustomerEmail,
+                    OrderDate = x?.OrderDate,
+                    ShipDate = x?.ShipDate,
+                    DeliveryDate = x?.DeliveryDate,
+                    Status = (BO.OrderStatus)System.Enum.Parse(typeof(BO.OrderStatus), stauss.ToString()),//converting to enum
+                    Items = orderitemList,
+                    TotalPrice = (double)totalprice,
+                    wasChanged = false,
+                });
+            }
+            return Orderlist;
+        }
+        catch (Exception)
+        {
+            throw new BO.errorException();
+        }
+    }
+   public int? LastTouched()
+    {//return an id of the order with the last touched date othewise return null
+        try
+        {
+            List<BO.Order> orderedlist = (from x in dal?.order.GetAll()
+                                          orderby x?.ShipDate != null  ? x?.ShipDate: x?.OrderDate
+                                          where x?.DeliveryDate == null 
+                                        select new BO.Order()
+                                        {
+                                            ID = x.Value.ID,
+                                            OrderDate = x?.OrderDate,
+                                            ShipDate = x?.ShipDate,
+                                        }).ToList();
+            if (orderedlist.Count == 0)
+                return null;
+            return orderedlist.First().ID;
+            //List<BO.Order> shippedList = (from x in dal?.order.GetAll()
+            //                            where x?.DeliveryDate == null
+            //                            select new BO.Order()
+            //                            {
+            //                                ID = x.Value.ID,
+            //                                OrderDate = x?.OrderDate,
+            //                                ShipDate = x?.ShipDate,
+            //                            }).ToList();
+            //if (orderedlist.Count == 0 && shippedList.Count == 0)
+            //    return null;
+            //BO.Order minorder = orderedlist.MinBy(x => x.OrderDate);
+            //BO.Order minship = shippedList.MinBy(x => x.ShipDate);
+            //if (minorder.OrderDate <= minship.ShipDate)
+            //{
+            //    return minorder.ID;
+            //}
+            //return minship.ID;
+        }
+        catch
+        { throw new BO.errorException(); }
+        
+    }
+}

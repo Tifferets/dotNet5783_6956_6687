@@ -27,15 +27,15 @@ public partial class CartWindow1 : Window
     private BlApi.IBl? bl = BlApi.Factory.Get();
     private ObservableCollection<OrderItem> OrderItemList { get; set; }//for the listview
     private BO.Cart cart1 = new BO.Cart();
-    private PL.PlProduct.Cart cart2 = new PL.PlProduct.Cart();
-    Action<BO.Cart, Products>? action;
+    private PL.Cart cart2 = new PL.Cart();
+    Action<BO.Cart, Inotify>? action;
     public CartWindow1()
     {
         InitializeComponent();
         Remove_btn.MouseEnter += Button_MouseEnter;
         Change_btn.MouseLeave += Remove_btn_MouseLeave;
     }
-    public CartWindow1(BO.Cart cart, Action<BO.Cart, Products>? action) :this()
+    public CartWindow1(BO.Cart cart, Action<BO.Cart, Inotify>? action) :this()
     {
         this.action = action;
         cart1 = cart;
@@ -87,7 +87,7 @@ public partial class CartWindow1 : Window
                 OrderItemList = new ObservableCollection<OrderItem>(cart1.Items);
                 Products_DataGrid.DataContext = OrderItemList;
                 cart2.TotalPrice = cart1.TotalPrice;//updates the total price of the cart
-                Products productItem = new Products()
+                Inotify productItem = new Inotify()
                 {
                     ID = orderItem.ProductID,
                     Amount = 0,
@@ -116,7 +116,7 @@ public partial class CartWindow1 : Window
                     OrderItemList = new ObservableCollection<OrderItem>(cart1.Items);
                     Products_DataGrid.DataContext = OrderItemList;
                     cart2.TotalPrice = cart1.TotalPrice;
-                    Products productItem = new Products()
+                    Inotify productItem = new Inotify()
                     {
                         ID = orderItem.ProductID,
                         Amount = amount,
