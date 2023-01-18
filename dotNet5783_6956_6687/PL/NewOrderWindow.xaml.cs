@@ -34,8 +34,8 @@ namespace PL
         public ObservableCollection<IGrouping<BO.Category, ProductItem>> CatergoryGroup { get; set; }
         private BO.Cart Cart = new BO.Cart();
 
-        private Products ProductItem;
-        public NewOrderWindow(BO.Cart cart = null, Products productItem = null) : this()
+        private Inotify ProductItem;
+        public NewOrderWindow(BO.Cart cart = null, Inotify productItem = null) : this()
         {
             this.refresh(cart, productItem);
         }
@@ -83,7 +83,7 @@ namespace PL
                 {
 
                     ProductItem? p1 = ProductItemWindow_listView.SelectedItem as ProductItem;//get the selected item
-                    ProductItem = new Products()//convert it to pl product item
+                    ProductItem = new Inotify()//convert it to pl product item
                     {
                         ID = p1.ID,
                         Name = p1.Name,
@@ -105,7 +105,7 @@ namespace PL
                 }
             }
         }
-        private void refresh(BO.Cart cart, Products productItem)//func that refreshes the datacontext of window gets inotifiableproperty type
+        private void refresh(BO.Cart cart, Inotify productItem)//func that refreshes the datacontext of window gets inotifiableproperty type
         {
             if (productItem != null)//if the product item isnt null we want to update it in our CO
             {

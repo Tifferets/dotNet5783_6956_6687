@@ -154,7 +154,7 @@ internal class Program
             DeliveryDate= null, OrderDate= null, ShipDate = null, 
             Items= orderItems,
         };
-        while (choice1 > 0 && choice1 < 6)
+        while (choice1 > 0 && choice1 < 7)
         {
             switch (choice1)
             {
@@ -186,6 +186,9 @@ internal class Program
                     Console.WriteLine("enter orders id");
                     int.TryParse(Console.ReadLine(), out id1);
                     Console.WriteLine(bl?.Order.OrderStatus(id1));//prints order traking details
+                    break;
+                    case 6:
+                    Console.WriteLine(bl.Order.LastTouched());
                     break;
                 default:
                     throw new BO.errorException();

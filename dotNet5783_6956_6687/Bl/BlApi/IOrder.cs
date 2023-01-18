@@ -38,5 +38,10 @@ public interface IOrder
     /// </summary>
     /// <param name="order"></param>
     public void UpdateOrder(BO.Order order, int newAmount,BO.OrderItem orderItem1);
-
+    public IEnumerable<BO.Order?> GetAllOrders();
+    /// <summary>
+    /// returns an id of the order with the last touched date othewise return null
+    /// </summary>
+    /// <returns></returns>
+    public int? LastTouched();
 }
