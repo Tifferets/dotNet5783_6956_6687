@@ -32,13 +32,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Progress"  Width="2*" >
+                <!--<DataGridTemplateColumn Header="Progress"  Width="2*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ProgressBar x:Name="infoButton"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -10,19 +10,19 @@ Bounes that we did:
 2. reflection to string properties - Exceptions DO (1)
 3. Update order for maneger - BoOrder (3)
 4. Event Trigger -StartUp_Window line 57 (4)
-6. Data Trigger -OrderWindow line 62
+6. Data Trigger -OrderWindow line 62 (1)
 7. property trigger - app(1)
-8. Style -App.xaml 
-7. Style -App.xaml 
-8. window icon (1)
+8. Style -App.xaml (1)
+9. window icon (1)
+
 
 
 Bounes that we did not asked for:
-WE ARE DONE!!!!!!!!!!!!!!!!
 1. adds a beep when pressed start/stop in simulater
-2.
+2. Control templat - App.xaml
 
 
 
 
 Rachelli Adler 213836687
+Tifferet Sonnenberg 212886956 tiffsonnenberg@gmail.com
