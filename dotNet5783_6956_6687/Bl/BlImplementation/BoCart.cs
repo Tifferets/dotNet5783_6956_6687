@@ -84,78 +84,7 @@ internal class BoCart : ICart
         catch (Exception ex) { throw new BO.CouldntAddProductException(); }//if nothing worked
         return cart;
     }
-    //    {
-    //        BO.Product p = dal.product.GetAll().FirstOrDefault(x => x.Value.ID == productId);//p is the product that we want to add
-    //        if (p == null || p.InStock < orderItem.Amount) //if the product doesnt exist or there is not enough left
-    //            throw new BO.NoMoreInStockException();
-    //        else
-    //        {
-    //            orderItem.Amount = orderItem.Amount + 1;//updates the amount
-    //            orderItem.TotalPrice = orderItem.Price * orderItem.Amount;//updates the price
-    //            cart.TotalPrice = cart.TotalPrice + orderItem.Price;//updates the final price of the cart
-    //            List<BO.OrderItem>? temp = cart.Items.Where(x => x.ProductID != productId).ToList();//take all the products but the product that we updated
-    //            temp.Add(orderItem);//addes orderitem to the cart
-    //                                // cart.Items = cart.Items.Add(orderItem);//addes orderitem to the cart
-    //        }
-
-    //}
-    //else//if the product doesnt exist
-    //{
-
-    //}
-
-    //bool flag = false;
-    //if (productId < 300000 || productId > 499999)//checking product id
-    //    throw new WrongIDException();
-    //foreach (BO.OrderItem? item in (cart.Items ?? throw new BO.NullException()))//goes through all the items in the cart
-    //{
-    //    if (item?.ProductID == productId)//checking if the product already exists in the cart
-    //    {
-    //        flag = true;
-
-
-    //        foreach (DO.Product? item1 in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
-    //        {
-    //            if (item1?.ID == productId && item1?.InStock > 0)//if it exists and has enough in stock
-    //            {
-    //                item.Amount = item.Amount + 1;//addes 1 more of the product to the cart
-    //                item.TotalPrice = item.TotalPrice + item.Price;
-    //                cart.TotalPrice = item.TotalPrice;
-    //                break;
-    //            }
-    //            else
-    //                throw new NoMoreInStockException();
-    //        }
-    //        break;
-    //    }
-    //}
-    //if (flag == false)//if the product does not exists in the cart
-    //{
-    //    foreach (DO.Product item in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the products that exist in general
-    //    {
-    //        if (item.ID == productId)//if it exists and has aenough in stock
-    //        {
-    //            if (item.InStock > 0)
-    //            {
-    //                double price = item.Price;
-    //                cart.TotalPrice = price + cart.TotalPrice;
-    //                //BO.OrderItem newItem = new BO.OrderItem()//creats a new orderitem
-    //                //{
-    //                //    ProductID = productId,
-    //                //    ID = item.ID,
-    //                //    Name = item.Name,
-    //                //    Price = item.Price,
-    //                //    TotalPrice = item.Price,
-    //                //    Amount = 1
-    //                //};
-    //                //cart.TotalPrice = newItem.TotalPrice + cart.TotalPrice;
-    //            }
-    //            else
-    //                throw new NoMoreInStockException();//if the product already exists in the cart but the amount is 0
-    //        }
-    //    }
-    //}
-
+    
 
     /// <summary>
     /// update an amount of a product in the cart
@@ -210,32 +139,7 @@ internal class BoCart : ICart
             }
 
             return cart;
-            //foreach (BO.OrderItem? item in cart.Items)
-            //{
-            //    if (item?.ProductID == productId)
-            //    {
-            //        if (newAmount == 0)
-            //        {
-            //            lst.Remove(item);//removes the orderitem from lst
-            //            cart.Items = lst;//updates the cart
-            //            break;
-            //        }
-            //        if (newAmount > item.Amount)//wanted more
-            //        {
-            //            dif = newAmount - item.Amount;
-            //            cart.TotalPrice = cart.TotalPrice + dif * item.Price;
-            //            item.Amount = newAmount;
-            //            break;
-            //        }
-            //        if (newAmount < item.Amount)//wanted less
-            //        {
-            //            dif = newAmount - item.Amount;
-            //            cart.TotalPrice = cart.TotalPrice - dif * item.Price;
-            //            item.Amount = newAmount;
-            //            break;
-            //        }
-            //    }
-            //}
+          
 
         }
         catch (Exception)
@@ -250,62 +154,13 @@ internal class BoCart : ICart
     /// <param name="name"></param>
     ///<param name="address"></param>
     /// <param name="email"></param>
-    public void confirmCart(Cart cart)//, string name, string address, string email)
+    public int confirmCart(Cart cart)//, string name, string address, string email)
     {
-        //if(cart.CustomerName == null || cart.CustomerAddress ==null||    !cart.CustomerEmail.Contains('@')
-        //    throw new MissingCustomersInfoException();
-        //foreach (OrderItem item in cart.Items)
-        //{
-        //    DO.Product? product = dal?.product.GetAll().FirstOrDefault(x => x.Value.ID == item.ProductID);
-        //    if (product == null)
-        //        throw new BO.CouldntFindProductException();
-        //    else
-        //    {
-        //        if(product?.InStock < item.Amount)
-        //            throw new BO.NoMoreInStockException();
-        //        if(item.Amount <=0 )
-        //            throw new BO.errorException();
-
-        //    }
-        //}
-        ////if alls good
-
-        //DO.Order order = new DO.Order()
-        //{
-        //    DeliveryDate =null,
-        //    ShipDate=null,
-
-        //    CustomerAddress = cart.CustomerAddress,
-        //    CustomerEmail = cart.CustomerEmail,
-        //    CustomerName = cart.CustomerName,
-        //    OrderDate = DateTime.Now,
-        //};
-        //try
-        //{
-
-        //    order.ID = dal?.order.Add(order) ?? 0;
-
-        //}
-        //catch (Exception ex) { throw new BO.errorException(); }
-        //foreach (OrderItem item in cart.Items)
-        //{
-        //    DO.OrderItem orderItem = new DO.OrderItem()
-        //    {
-        //        Amount = item.Amount,
-        //        Price = item.Price,
-        //        ProductID = item.ProductID,
-        //        OrderID = order.ID,
-        //        OrderItemID = item.ID
-        //    };
-
-        //    orderItem.OrderItemID = (int)dal?.orderItem.Add(orderItem);
-        //}
-
+      
         bool checkIfWorked = true;
+        DO.Order order = new DO.Order();
         try
         {
-            // if (name == null || address == null || CheckEmail(email) == false)//makes sure all the customers info is correct
-            //  throw new MissingCustomersInfoException();
             if (cart.Items == null)
                 throw new BO.NoItemsInCartException();
 
@@ -316,7 +171,6 @@ internal class BoCart : ICart
                 if (item?.Amount < 0)
                     throw new WrongAmountException();
 
-                // DO.Product product = dal?.product.GetAll().FirstOrDefault(x => x.ID == item.ID);
                 foreach (DO.Product? item1 in (dal?.product.GetAll() ?? throw new BO.NullException()))//goes through all the product looking for the product in the cart
                 {
                     if (item1?.ID == item?.ProductID)
@@ -333,7 +187,7 @@ internal class BoCart : ICart
             }
             if (flag == true)
             {
-                DO.Order order = new DO.Order()
+                order = new DO.Order()
                 {
                     CustomerAddress = cart.CustomerAddress,
                     CustomerEmail = cart.CustomerEmail,
@@ -365,17 +219,6 @@ internal class BoCart : ICart
                 }
                 foreach (BO.OrderItem? item in cart.Items)//goes through all the orderitems in cart
                 {
-                    //DO.OrderItem orderItem = new DO.OrderItem()//creats a new order item
-                    //{
-                    //    Amount = item.Amount,
-                    //    OrderID = id,
-                    //    OrderItemID = item.ID,
-                    //    Price = item.Price,
-                    //    ProductID = item.ProductID,
-                    //};
-
-                    // foreach (DO.Product p in dal?.product.GetAll()?? throw new BO.NullException())//goes through all the products in do
-                    //   {
                     DO.Product? p = dal?.product.GetAll().ToList().FirstOrDefault(x => x.Value.ID == item?.ProductID);
 
                     if (p != null)
@@ -391,20 +234,7 @@ internal class BoCart : ICart
                         };
                         dal?.product.Update(product);
                     }
-                    //if (p.ID == item?.ProductID)//if its the product then change the amount in stock
-                    //{
-                    //    DO.Product product = new DO.Product()
-                    //    {
-                    //        ID = p.ID,
-                    //        Price = p.Price,
-                    //        Name = p.Name,
-                    //        Category = p.Category,
-                    //        InStock = p.InStock - item.Amount,
-                    //    };
-                    //    dal?.product.Update(p);
-                    //    break;
-                    //}
-                    //   }
+                  
                 }
             }
         }
@@ -416,6 +246,7 @@ internal class BoCart : ICart
         }
         if (checkIfWorked == true)
             Console.WriteLine("cart confirmed");
+        return order.ID;
     }
     private bool CheckEmail(string email)//returns true if the email is proper else returns false
     {

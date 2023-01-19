@@ -26,15 +26,15 @@
             </ListView.View>
         </ListView>
         <Label x:Name="product_label" Grid.Column="1" Content="Products"  FontSize="35" VerticalAlignment="Top" Width="172" Height="48" HorizontalAlignment="Center" Margin="0,22,0,0" />
-        <ListView x:Name="ProductListview" Grid.Column="1" ItemsSource = "{Binding}" MouseDoubleClick="MouseDoubleClickedProduct" Margin="0,83,0,83" Grid.RowSpan="3" >
+        <ListView x:Name="ProductListview" Grid.Column="1" ItemsSource = "{Binding}" MouseDoubleClick="MouseDoubleClickedProduct" Height="334" VerticalAlignment="Center" Grid.Row="1" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add Product" HorizontalAlignment="Left" Margin="51,16,0,0" Grid.Row="2" VerticalAlignment="Top" Height="63" Width="149" Grid.Column="1" Click="Button_Click" />
-        <Button Grid.Column="1" Content="Remove Product" HorizontalAlignment="Left" Height="63" Margin="239,16,0,0" Grid.Row="2" VerticalAlignment="Top" Width="151" Click="Button_Click_1"/>
+        <Button Content="Add Product" HorizontalAlignment="Left" Margin="51,16,0,0" Grid.Row="2" VerticalAlignment="Top" Height="50" Width="140" Grid.Column="1" Click="Button_Click" />
+        <Button Grid.Column="1" Content="Remove Product" HorizontalAlignment="Left" Height="50" Margin="239,16,0,0" Grid.Row="2" VerticalAlignment="Top" Width="140" Click="Button_Click_1"/>
 
 
     </Grid>

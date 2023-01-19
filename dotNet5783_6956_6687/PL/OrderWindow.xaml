@@ -48,10 +48,10 @@
         <ListView x:Name="Items_listview" HorizontalAlignment="Left" Height="396" Margin="690,213,0,0" VerticalAlignment="Top" Width="441" ItemsSource = "{Binding}" SelectionChanged="Items_listview_SelectionChanged" MouseEnter="Items_listview_MouseEnter" MouseLeave="Items_listview_MouseLeave" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID " DisplayMemberBinding ="{Binding ID}" Width="50"/>
+                    <GridViewColumn Header="ID " DisplayMemberBinding ="{Binding ID}" Width="100"/>
                     <GridViewColumn Header="Name " DisplayMemberBinding ="{Binding Name}" Width="100"/>
                     <GridViewColumn Header="Price" DisplayMemberBinding ="{Binding Price}" Width="50"/>
-                    <GridViewColumn Header="Amount" DisplayMemberBinding ="{Binding Amount}" Width="50"/>
+                    <GridViewColumn Header="Amount" DisplayMemberBinding ="{Binding Amount}" Width="70"/>
                     <GridViewColumn Header="Total Price" DisplayMemberBinding ="{Binding TotalPrice}" Width="100"/>
                 </GridView>
             </ListView.View>
@@ -70,8 +70,8 @@
         </Button>
         <Label x:Name="selectItem_label" Content="Select an item to update:" HorizontalAlignment="Left" Height="23" Margin="693,185,0,0" VerticalAlignment="Top" Width="438" FontWeight="Thin" FontSize="12" Visibility="Collapsed"/>
 
-        <Button x:Name="delivery" Content="Update delivery Date" HorizontalAlignment="Left" Height="56" Margin="971,104,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_2"/>
-        <Button x:Name="shipping" Content="Update Shipping Date" HorizontalAlignment="Left" Height="56" Margin="861,104,0,0" VerticalAlignment="Top" Width="260" Click="Button_Click_1"/>
+        <Button x:Name="delivery" Content="Update delivery Date" HorizontalAlignment="Left" Height="84" Margin="941,76,0,0" VerticalAlignment="Top" Width="220" Click="Button_Click_2" />
+        <Button x:Name="shipping" Content="Update Shipping Date" HorizontalAlignment="Left" Height="84" Margin="941,76,0,0" VerticalAlignment="Top" Width="220" Click="Button_Click_1" />
 
     </Grid>
 </Window>

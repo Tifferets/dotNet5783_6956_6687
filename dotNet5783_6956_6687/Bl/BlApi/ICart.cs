@@ -24,5 +24,5 @@ public interface ICart
     /// <param name="name"></param>
     /// <param name="address"></param>
     /// <param name="email"></param>
-    public void confirmCart(Cart cart);//, string name, string address, string email);
+    public int confirmCart(Cart cart);//, string name, string address, string email);
 }

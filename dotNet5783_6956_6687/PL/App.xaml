@@ -27,8 +27,9 @@
     
 
         <Style TargetType="Button">
-            <Style.Resources Background="FloralWhite"/>
-            <Setter Property="FontSize" Value="15" ></Setter>
+            <!--<Style.Resources Background="FloralWhite"/>-->
+            <Setter Property="Background" Value="#d8f2ee"/>
+            <Setter Property="FontSize" Value="15"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="FontSize" Value="20"/>

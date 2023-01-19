@@ -61,9 +61,9 @@ public partial class CustomerInfoWindow : Window
                     TotalPrice = cart1.TotalPrice,
 
                 };
-                bl?.Cart.confirmCart(cart);
-                checkout.Checkedout = true;
-                MessageBox.Show("Thank you and have a nice day");
+                int? id =  bl?.Cart.confirmCart(cart);
+                string message = "Thank you, your order number is: " + id.ToString();
+                MessageBox.Show(message);
                 CloseAllWindows();//closes all the window
 
             }
