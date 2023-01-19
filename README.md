@@ -11,6 +11,8 @@ Bounes that we did:
 3. Update order for maneger - BoOrder (3)
 4. Event Trigger -StartUp_Window line 57 (4)
 6. Data Trigger -OrderWindow line 62
+7. property trigger - app(1)
+8. Style -App.xaml 
 7. Style -App.xaml 
 8. window icon (1)
 
@@ -21,3 +23,8 @@ Bounes that we did not asked for:
 WE ARE DONE!!!!!!!!!!!!!!!!
 1. adds a beep when pressed start/stop in simulater
 2.
+
+
+
+
+Rachelli Adler 213836687
