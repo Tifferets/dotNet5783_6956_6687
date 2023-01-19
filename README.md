@@ -1,9 +1,7 @@
-hello how are you doing today?
-# dotNet5783_6956_6687
-welcome world!
-this is so cool!
-we need to give this in soon:)
-stage0 final commit
+Rachelli Adler 213836687 adlerachelli@gmail.com
+Tifferet Sonnenberg 212886956 tiffsonnenberg@gmail.com
+
+
 
 Bounes that we did:
 1. TryParse - BlTest/DalTest (1)
@@ -20,9 +18,15 @@ Bounes that we did:
 Bounes that we did not asked for:
 1. adds a beep when pressed start/stop in simulater
 2. Control templat - App.xaml
+3. used region -initilize it.program
 
 
 
 
-Rachelli Adler 213836687
-Tifferet Sonnenberg 212886956 tiffsonnenberg@gmail.com
+hello how are you doing today?
+# dotNet5783_6956_6687
+welcome world!
+this is so cool!
+we need to give this in soon:)
+stage0 final commit
+
