@@ -15,7 +15,7 @@
             <ImageBrush ImageSource="/Untitled Design (1).png"/>
         </Grid.Background>
 
-        <GroupBox Header="Choose An Option:" Margin="210,98,234,100" Opacity="5" Grid.ColumnSpan="2" >
+        <GroupBox Header="Choose An Option:" Margin="210,98,236,122" Opacity="5" Grid.ColumnSpan="2" >
             <GroupBox.Background>
                 <ImageBrush/>
             </GroupBox.Background>
@@ -47,13 +47,13 @@
             </StackPanel>
         </GroupBox>
 
-        <Button x:Name="Next_button" Content="Next" Click="Next_button_Click" FontSize="25" Margin="290,366,290,10" Grid.ColumnSpan="2">
+        <Button x:Name="Next_button" Content="Next" Click="Next_button_Click" FontSize="25" Margin="277,317,303,59" Grid.ColumnSpan="2"  >
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
         </Button>
 
-        <TextBlock Name="Welcome" Text="WELCOME TO ADOPT A PET" HorizontalAlignment="Left" FontSize="50" Height="84" Margin="77,38,0,0" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="2" >
+        <TextBlock Name="Welcome" Text="WELCOME TO ADOPT A PET" HorizontalAlignment="Left" FontSize="50" Height="84" Margin="77,14,0,0" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="2" >
             <TextBlock.Background>
                 <ImageBrush/>
             </TextBlock.Background>

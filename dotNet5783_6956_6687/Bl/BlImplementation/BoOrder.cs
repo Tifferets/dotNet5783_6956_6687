@@ -99,7 +99,7 @@ internal class BoOrder : BlApi.IOrder
                     Status = (BO.OrderStatus)System.Enum.Parse(typeof(BO.OrderStatus), stauss.ToString()),//converting to enum
                     Items = orderitemList,
                     TotalPrice = (double)totalprice,
-                    wasChanged = false,
+                    
                 };
 
             }
@@ -316,7 +316,7 @@ internal class BoOrder : BlApi.IOrder
                     Status = (BO.OrderStatus)System.Enum.Parse(typeof(BO.OrderStatus), stauss.ToString()),//converting to enum
                     Items = orderitemList,
                     TotalPrice = (double)totalprice,
-                    wasChanged = false,
+                    
                 });
             }
             return Orderlist;

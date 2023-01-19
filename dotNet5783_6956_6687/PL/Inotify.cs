@@ -112,6 +112,19 @@ public class Inotify : INotifyPropertyChanged
 
 public class Cart : INotifyPropertyChanged
 {
+    public string? CustomerName { get; set; }
+    /// <summary>
+    /// the customers email
+    /// </summary>
+    public string? CustomerEmail { get; set; }
+    /// <summary>
+    /// Customer Address in cart BO
+    /// </summary>
+    public string? CustomerAddress { get; set; }
+    /// <summary>
+    /// list of order items BO-cart
+    /// </summary>
+    public List<BO.OrderItem> Items { get; set; }
     private double totalprice;
     public double TotalPrice
     {
@@ -247,6 +260,39 @@ public class OrderItemPL : INotifyPropertyChanged
 public class OrderPL : INotifyPropertyChanged
 {
     private double totalprice;
+    public int ID { get; set; }
+    /// <summary>
+    /// Customer Name -BO
+    /// </summary>
+    public string? CustomerName { get; set; }
+    /// <summary>
+    /// Customer Email BO
+    /// </summary>
+    public string? CustomerEmail { get; set; }
+    /// <summary>
+    /// Customer Address -BO
+    /// </summary>
+    public string? CustomerAddress { get; set; }
+    /// <summary>
+    /// Order Date -BO
+    /// </summary>
+    public DateTime? OrderDate { get; set; }
+    /// <summary>
+    /// Ship Date -BO
+    /// </summary>
+    public DateTime? _shipDate { get; set; }
+    /// <summary>
+    /// Delivery Date -BO
+    /// </summary>
+    public DateTime? _deliveryDate { get; set; }
+    /// <summary>
+    /// Status- from Enum OrderStatus -BO
+    /// </summary>
+    public BO.OrderStatus Status { get; set; }
+    /// <summary>
+    /// list of Order Item_BO
+    /// </summary>
+    public List<BO.OrderItem> Items { get; set; }
     public double TotalPrice
     {
         get { return totalprice; }
@@ -256,6 +302,32 @@ public class OrderPL : INotifyPropertyChanged
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs("TotalPrice"));
+            }
+        }
+
+    }
+    public DateTime? ShipDate
+    {
+        get { return _shipDate; }
+        set
+        {
+            _shipDate = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("ShipDate"));
+            }
+        }
+
+    }
+    public DateTime? DeliveryDate
+    {
+        get { return _deliveryDate; }
+        set
+        {
+            _deliveryDate = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("DeliveryDate"));
             }
         }
 

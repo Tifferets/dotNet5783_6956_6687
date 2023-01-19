@@ -17,12 +17,14 @@
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="Width" Value="Auto"/>
         </Style>
-        <ControlTemplate x:Key="MyButtonTemplate" TargetType="Button" >
+        <ControlTemplate x:Key="MyBackgroundTemplate" TargetType="Window" >
             <Grid>
                 <Rectangle Fill="{TemplateBinding Background}"/>
                 <ContentPresenter/>
+                
             </Grid>
         </ControlTemplate>
+    
 
         <Style TargetType="Button">
                 <Setter Property="FontSize" Value="15"></Setter>

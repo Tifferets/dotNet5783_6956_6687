@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
 
-        Title="NewOrderWindow" Height="450" Width="800">
+        Title="NewOrderWindow" Height="450" Width="800" Template="{StaticResource MyBackgroundTemplate}" Background="#d8f2ee">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="391*"/>

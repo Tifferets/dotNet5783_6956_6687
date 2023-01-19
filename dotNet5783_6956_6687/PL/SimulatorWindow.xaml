@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="SimulatorWindow" Height="600" Width="1000">
+        Title="SimulatorWindow" Height="600" Width="1000" Template="{StaticResource MyBackgroundTemplate}" Background="#d8f2ee">
     <Window.Resources>
         <local:StatusToColor x:Key="statusToColor"/>
     </Window.Resources>
