@@ -27,10 +27,12 @@
     
 
         <Style TargetType="Button">
-                <Setter Property="FontSize" Value="15"></Setter>
+            <Style.Resources Background="FloralWhite"/>
+            <Setter Property="FontSize" Value="15" ></Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="FontSize" Value="20"/>
+
                 </Trigger>
             </Style.Triggers>
         </Style>

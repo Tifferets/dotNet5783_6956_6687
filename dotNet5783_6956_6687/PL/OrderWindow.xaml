@@ -71,7 +71,7 @@
         <Label x:Name="selectItem_label" Content="Select an item to update:" HorizontalAlignment="Left" Height="23" Margin="693,185,0,0" VerticalAlignment="Top" Width="438" FontWeight="Thin" FontSize="12" Visibility="Collapsed"/>
 
         <Button x:Name="delivery" Content="Update delivery Date" HorizontalAlignment="Left" Height="56" Margin="971,104,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_2"/>
-        <Button x:Name="shipping" Content="Update Shipping Date" HorizontalAlignment="Left" Height="56" Margin="971,104,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_1"/>
+        <Button x:Name="shipping" Content="Update Shipping Date" HorizontalAlignment="Left" Height="56" Margin="861,104,0,0" VerticalAlignment="Top" Width="260" Click="Button_Click_1"/>
 
     </Grid>
 </Window>

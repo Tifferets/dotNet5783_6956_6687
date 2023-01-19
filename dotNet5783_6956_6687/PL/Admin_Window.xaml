@@ -33,8 +33,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add Product" HorizontalAlignment="Left" Margin="51,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="51" Width="128" Grid.Column="1" Click="Button_Click" />
-        <Button Grid.Column="1" Content="Remove Product" HorizontalAlignment="Left" Height="51" Margin="200,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="128" Click="Button_Click_1"/>
+        <Button Content="Add Product" HorizontalAlignment="Left" Margin="51,16,0,0" Grid.Row="2" VerticalAlignment="Top" Height="63" Width="149" Grid.Column="1" Click="Button_Click" />
+        <Button Grid.Column="1" Content="Remove Product" HorizontalAlignment="Left" Height="63" Margin="239,16,0,0" Grid.Row="2" VerticalAlignment="Top" Width="151" Click="Button_Click_1"/>
 
 
     </Grid>

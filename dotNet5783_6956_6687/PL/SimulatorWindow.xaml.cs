@@ -97,7 +97,7 @@ namespace PL
             while (orderForLists.Any(x => (OrderStatus)x.Status != OrderStatus.delivered))
             {
                 Thread.Sleep(2000);
-                
+                orderForLists = new ObservableCollection<OrderForList>(bl?.Order.GetOrderList());
                 if (simulator_bgw.CancellationPending == true) // simulator was stoped 
                 {
                     e.Cancel = true;
