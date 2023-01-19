@@ -120,8 +120,11 @@ namespace PL
                     {
                         try
                         {
-                            time = time.AddDays(1);
-                            order = bl?.Order.UpdateShippingDate(order.ID, time);
+                            time = time.AddHours(5);
+                            if(time.Day - order.OrderDate?.Day >= 1)//it take 1 day to ship
+                                order = bl?.Order.UpdateShippingDate(order.ID, time);
+                            else
+                                continue;
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         int random = rand.Next(3, 10);
@@ -134,7 +137,9 @@ namespace PL
                     {
                         order.Status = BO.OrderStatus.delivered;
                         time = time.AddDays(1);
-                        order = bl?.Order.UpdateDeliveryDate(order.ID, time);
+                        if (time.Day - order.ShipDate?.Day >= 3)//it takes 3 days to deliver
+                            order = bl?.Order.UpdateDeliveryDate(order.ID, time);
+                        else continue;
                         //presentage = 100;
                         int random = rand.Next(3, 10);
                         Thread.Sleep(random * 1000);
@@ -179,6 +184,7 @@ namespace PL
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            Console.Beep();
             if (simulator_bgw.IsBusy != true) //if its not in the middle of working
             {
                // MessageBox.Show("starting");
@@ -188,6 +194,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Console.Beep();
             if (simulator_bgw.WorkerSupportsCancellation == true)//if it supports canclation
             {
                 simulator_bgw.CancelAsync();// Cancel the asynchronous operation- cancle the thread

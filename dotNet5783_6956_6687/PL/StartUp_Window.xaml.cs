@@ -33,13 +33,15 @@ namespace PL
 
         private void Next_button_Click(object sender, RoutedEventArgs e)
         {
+                
             if (Admin.IsChecked == true)
             {
-                new Admin_Window().ShowDialog();
+                new Admin_Window().Show();
             }
             else if (NewOrder.IsChecked == true)
             {
                 new NewOrderWindow(cart).ShowDialog();
+
             }
             else if (TrackOrder.IsChecked == true)
             {
@@ -75,7 +77,9 @@ namespace PL
                 }
                 else
                 {
-                    isopen = false;
+                  //  simwin
+                   // App.Current.Windows[]
+                   // isopen = false;
                     //simwin
                 }
 

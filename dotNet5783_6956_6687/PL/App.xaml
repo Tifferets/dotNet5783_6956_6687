@@ -25,6 +25,25 @@
             </Grid>
         </ControlTemplate>
     
+
+        <Style TargetType="Button">
+                <Setter Property="FontSize" Value="20"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontSize" Value="30"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+  
+        <!--<ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Backgrounds.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="{StaticResource BackgroundImage}"/>
+        </Style>-->
+
     </Application.Resources>
 
 

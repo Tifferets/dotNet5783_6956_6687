@@ -34,7 +34,18 @@
             <Label x:Name="message_lable" Grid.Column="1" Content="ID range 300000-399999" HorizontalAlignment="Center" Margin="0,33,0,0" VerticalAlignment="Top" Width="120" FontWeight="Normal" FontSize="10" Grid.RowSpan="2"/>
         </Grid>
 
-        <Button x:Name= "AddProduct_Button" Content= "Add" HorizontalAlignment= "Left" Margin= "639,109,0,0" VerticalAlignment= "Top" Click= "AddProduct_Button_Click" Height="38" Width="93"/>
+        <Button x:Name= "AddProduct_Button" Content= "Add" HorizontalAlignment= "Left" Margin= "639,109,0,0" VerticalAlignment= "Top" Click= "AddProduct_Button_Click" Height="38" Width="93">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="20"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="FontSize" Value="30"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
         <Button x:Name="UpdateProduct_button" Content="Update" HorizontalAlignment="Left" Margin="639,174,0,0" VerticalAlignment="Top" Click="UpdateProduct_button_Click" Height="38" Width="90" />
 

@@ -58,6 +58,7 @@ namespace PL.PlProduct
                 }
                 if (Price_Textbox.Text.Count(c => c == '.') > 1 )
                 {
+                    
                     MessageBox.Show("Price not right");
                     return;
                 }
