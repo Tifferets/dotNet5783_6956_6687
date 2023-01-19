@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Admin_Window" Height="500" Width="800" Template="{StaticResource MyBackgroundTemplate}" Background="#edcceb">
+        Title="Admin_Window" Height="500" Width="800" Template="{StaticResource MyBackgroundTemplate}" Background="#d8f2ee">
 
     <Grid x:Name="AdminGrid">
         <Grid.RowDefinitions>

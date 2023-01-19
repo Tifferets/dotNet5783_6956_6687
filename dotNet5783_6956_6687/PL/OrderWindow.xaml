@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="OrderWindow" Height="700" Width="1200">
+        Title="OrderWindow" Height="700" Width="1200" Template="{StaticResource MyBackgroundTemplate}" Background="#d8f2ee">
     <Grid>
         <Grid x:Name="Order_Grid" HorizontalAlignment="Left" Height="533" Margin="38,0,0,0" VerticalAlignment="Center" Width="626" >
             <Grid.ColumnDefinitions>
