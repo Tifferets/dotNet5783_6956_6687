@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Admin_Window" Height="500" Width="800">
+        Title="Admin_Window" Height="500" Width="800" Template="{StaticResource MyBackgroundTemplate}" Background="#edcceb">
 
     <Grid x:Name="AdminGrid">
         <Grid.RowDefinitions>
@@ -26,17 +26,16 @@
             </ListView.View>
         </ListView>
         <Label x:Name="product_label" Grid.Column="1" Content="Products"  FontSize="35" VerticalAlignment="Top" Width="172" Height="48" HorizontalAlignment="Center" Margin="0,22,0,0" />
-        <ListView x:Name="ProductListview" Grid.Column="1" Grid.Row="1" ItemsSource = "{Binding}" MouseDoubleClick="MouseDoubleClickedProduct" Height="323" >
+        <ListView x:Name="ProductListview" Grid.Column="1" ItemsSource = "{Binding}" MouseDoubleClick="MouseDoubleClickedProduct" Margin="0,83,0,83" Grid.RowSpan="3" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add Product" HorizontalAlignment="Left" Margin="51,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="51" Width="128" Grid.Column="1" Click="Button_Click"
-                Template="{StaticResource MyButtonTemplate}" Background="LightPink"/>
-        <Button Grid.Column="1" Content="Remove Product" HorizontalAlignment="Left" Height="51" Margin="200,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="128" Click="Button_Click_1"
-         Template="{StaticResource MyButtonTemplate}" Background="LightPink"/>
+        <Button Content="Add Product" HorizontalAlignment="Left" Margin="51,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="51" Width="128" Grid.Column="1" Click="Button_Click" />
+        <Button Grid.Column="1" Content="Remove Product" HorizontalAlignment="Left" Height="51" Margin="200,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="128" Click="Button_Click_1"/>
+
 
     </Grid>
 

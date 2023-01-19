@@ -12,8 +12,10 @@ Bounes that we did:
 4. Event Trigger -StartUp_Window line 57 (4)
 6. Data Trigger -OrderWindow line 62
 7. Style -App.xaml 
+8. window icon (1)
 
 
 Bounes that we did not asked for:
 1.
 2.
+WE ARE DONE!!!!!!!!!!!!!!!!

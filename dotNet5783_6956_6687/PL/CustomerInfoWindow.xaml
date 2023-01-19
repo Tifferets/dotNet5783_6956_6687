@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CustomerInfoWindow" Height="450" Width="800">
+        Title="CustomerInfoWindow" Height="450" Width="800" Template="{StaticResource MyBackgroundTemplate}" Background="#d8f2ee">
     <Grid>
 
         <Grid Margin="159,37,154,217">

@@ -48,6 +48,7 @@ namespace PL
             simulator_bgw.WorkerSupportsCancellation = true;
             simulator_bgw.WorkerReportsProgress = true;
             this.DataContext = orderForLists;
+           
         }
 
 

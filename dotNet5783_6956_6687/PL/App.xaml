@@ -17,22 +17,13 @@
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="Width" Value="Auto"/>
         </Style>
-        <ControlTemplate x:Key="MyButtonTemplate" TargetType="Button" >
+        <ControlTemplate x:Key="MyBackgroundTemplate" TargetType="Window" >
             <Grid>
                 <Rectangle Fill="{TemplateBinding Background}"/>
                 <ContentPresenter/>
+                
             </Grid>
         </ControlTemplate>
-        
-        <!--<ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Backgrounds.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-        <Style TargetType="Window">
-            <Setter Property="Background" Value="{StaticResource BackgroundImage}"/>
-        </Style>-->
-
     </Application.Resources>
 
 

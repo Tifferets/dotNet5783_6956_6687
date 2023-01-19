@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="TrackOrder_Window" Height="347" Width="500">
+        Title="TrackOrder_Window" Height="347" Width="500" Template="{StaticResource MyBackgroundTemplate}" Background="#d8f2ee">
     <Grid x:Name="TrackOrder_Grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="54*"/>
