@@ -183,6 +183,7 @@ namespace PL
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            Console.Beep();
             if (simulator_bgw.IsBusy != true) //if its not in the middle of working
             {
                // MessageBox.Show("starting");
@@ -192,6 +193,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Console.Beep();
             if (simulator_bgw.WorkerSupportsCancellation == true)//if it supports canclation
             {
                 simulator_bgw.CancelAsync();// Cancel the asynchronous operation- cancle the thread

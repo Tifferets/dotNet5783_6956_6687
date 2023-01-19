@@ -15,5 +15,5 @@ Bounes that we did:
 
 
 Bounes that we did not asked for:
-1.
+1. adds a beep when pressed start/stop in simulater
 2.

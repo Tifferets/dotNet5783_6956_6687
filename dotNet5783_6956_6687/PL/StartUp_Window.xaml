@@ -47,7 +47,7 @@
             </StackPanel>
         </GroupBox>
 
-        <Button x:Name="Next_button" Content="Next" Click="Next_button_Click" FontSize="25" Margin="290,366,290,10" Grid.ColumnSpan="2" >
+        <Button x:Name="Next_button" Content="Next" Click="Next_button_Click" FontSize="25" Margin="290,366,290,10" Grid.ColumnSpan="2">
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>

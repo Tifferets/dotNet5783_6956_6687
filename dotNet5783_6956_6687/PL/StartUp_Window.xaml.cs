@@ -33,6 +33,7 @@ namespace PL
 
         private void Next_button_Click(object sender, RoutedEventArgs e)
         {
+                
             if (Admin.IsChecked == true)
             {
                 new Admin_Window().Show();
