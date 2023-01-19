@@ -153,6 +153,7 @@ namespace PL
             Orderpl.ShipDate = order?.ShipDate;
             delivery.Visibility = Visibility.Visible;
             shipping.Visibility = Visibility.Collapsed;
+            Items_listview.SelectedIndex = -1;
 
         }
 
@@ -161,6 +162,7 @@ namespace PL
             order = bl?.Order.UpdateDeliveryDate(order.ID);
             Orderpl.DeliveryDate = order?.DeliveryDate;
             delivery.Visibility = Visibility.Collapsed;
+            Items_listview.SelectedIndex = -1;
         }
     }
 }
