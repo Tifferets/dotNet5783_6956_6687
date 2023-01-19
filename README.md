@@ -18,8 +18,6 @@ Bounes that we did:
 
 
 Bounes that we did not asked for:
-1.
-2.
 WE ARE DONE!!!!!!!!!!!!!!!!
 1. adds a beep when pressed start/stop in simulater
 2.
