@@ -137,7 +137,7 @@ namespace PL
         }
         private void Items_listview_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (action != null)
+            if (action != null && Orderpl.ShipDate == null)
             {
                 selectItem_label.Visibility = Visibility.Visible;
             }
