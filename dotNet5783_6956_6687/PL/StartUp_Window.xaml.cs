@@ -33,7 +33,7 @@ namespace PL
 
         private void Next_button_Click(object sender, RoutedEventArgs e)
         {
-                
+
             if (Admin.IsChecked == true)
             {
                 new Admin_Window().Show();
@@ -67,21 +67,22 @@ namespace PL
                     MessageBox.Show(ex.Message);
                 }
             }
-            else if(simulator.IsChecked == true)
+            else if (simulator.IsChecked == true)
             {
-                if (isopen == false)
-                { 
+                //for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+                //{
+                //    if ((App.Current.Windows[intCounter] is SimulatorWindow))
+                //    { isopen = true; break; }
+                //    else isopen= false;
+                //}
+                //if (isopen == false)
+                //{
                     SimulatorWindow simwin = new SimulatorWindow();
+                    
                     simwin.Show();//opens a new window
-                    isopen = true;
-                }
-                else
-                {
-                  //  simwin
-                   // App.Current.Windows[]
-                   // isopen = false;
-                    //simwin
-                }
+                //    isopen = true;
+                //    simulator.IsChecked = false;
+                //}
 
             }
         }

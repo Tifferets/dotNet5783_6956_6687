@@ -109,7 +109,7 @@ public partial class CartWindow1 : Window
             if (orderItem != null)
         {
                 int amount;
-                int.TryParse(Interaction.InputBox("Please enter new amount", "Chang product amount in cart", ""), out amount);//displays an inputbox and gets the id
+                int.TryParse(Interaction.InputBox("Please enter new amount", "ChangE product amount in cart", ""), out amount);//displays an inputbox and gets the id
                 if (amount > 0)//making sure there is text
                 {
                     cart1 = bl?.Cart.UpdateAmountOfProductInCart(cart1, orderItem.ProductID, amount);//updates the amount of the product in the cart

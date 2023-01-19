@@ -33,27 +33,22 @@ namespace PL
         private BlApi.IBl? bl = BlApi.Factory.Get();
         Order? order = new();
         DateTime time = DateTime.Now;
-        OrderPl orderPl = new OrderPl();
+       // OrderPl orderPl = new OrderPl();
         internal static readonly Random rand = new Random();//to generat random
         public SimulatorWindow()
         {
             InitializeComponent();
-            // var orderForLists1 = (from x in bl?.Order.GetOrderList()
-            //                    select new OrderForListPl() { ID = x.ID, AmountOfItems = x.AmountOfItems, CustomerName = x.CustomerName, TotalPrice = x.TotalPrice, Status = (BO.OrderStatus)order.Status });
             orderForLists = new ObservableCollection<OrderForList>(bl?.Order.GetOrderList());
             simulator_bgw = new BackgroundWorker();
-            simulator_bgw.DoWork += Simulator_bgw_DoWork;
+            simulator_bgw.DoWork += Simulator_bgw_DoWork;//signing up to all events 
             simulator_bgw.ProgressChanged += Simulator_bgw_ProgressChanged;
             simulator_bgw.RunWorkerCompleted += Simulator_bgw_RunWorkerCompleted;
             simulator_bgw.WorkerSupportsCancellation = true;
             simulator_bgw.WorkerReportsProgress = true;
             this.DataContext = orderForLists;
-           
+
         }
-
-
-
-        private void Simulator_bgw_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+        private void Simulator_bgw_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)//when we finish the thread
         {
             if (e.Cancelled == true)
             {
@@ -65,35 +60,29 @@ namespace PL
             }
         }
 
-        private void Simulator_bgw_ProgressChanged(object? sender, ProgressChangedEventArgs e)
+        private void Simulator_bgw_ProgressChanged(object? sender, ProgressChangedEventArgs e)//chenges the status 
         {
-            //orderPl.ID = order.ID;
-            //orderPl.DeliveryDate = order.DeliveryDate;
-            //orderPl.ShipDate = order.ShipDate;
-            //orderPl.OrderDate = order.OrderDate;
-            //orderPl.Status = (BO.OrderStatus)order.Status;
-            //orderPl.CustomerAddress = order.CustomerAddress!;
-            //orderPl.CustomerEmail = order.CustomerEmail!;
-            //orderPl.CustomerName = order.CustomerName!;
-            //orderPl.Items = order.Items;
-            //orderPl.TotalPrice = order.TotalPrice;
-            //orderPl.wasChanged = order.wasChanged;
-            // MessageBox.Show(orderPl.Status.ToString());
-            //  var allOrders = bl?.Order.GetAllOrders().OrderBy(x => x?.OrderDate).ToList();
-         
-            var item = orderForLists.FirstOrDefault(x => x.ID == e.ProgressPercentage);
-            int index = orderForLists.IndexOf(item);
-            OrderForList ofl1 = new OrderForList() { ID = item.ID, AmountOfItems = item.AmountOfItems, CustomerName = item.CustomerName, Status = item.Status + 1, TotalPrice = item.TotalPrice };
-            orderForLists[index] = ofl1;
-            orderForLists = new ObservableCollection<OrderForList>(bl?.Order.GetOrderList());
-            this.DataContext = orderForLists;
-
-            Thread.Sleep(1000);
-            // Thread.Sleep(5000);
+            try
+            {
+                var item = orderForLists.FirstOrDefault(x => x.ID == e.ProgressPercentage);
+                int index = orderForLists.IndexOf(item);
+                OrderForList ofl1 = new OrderForList() { ID = item.ID, AmountOfItems = item.AmountOfItems, CustomerName = item.CustomerName, Status = item.Status + 1, TotalPrice = item.TotalPrice };
+                orderForLists[index] = ofl1;
+                orderForLists = new ObservableCollection<OrderForList>(bl?.Order.GetOrderList());//reloading the list
+                this.DataContext = orderForLists;
+                Thread.Sleep(1000);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                if (simulator_bgw.WorkerSupportsCancellation == true)
+                {
+                    simulator_bgw.CancelAsync();// Cancel the asynchronous operation- cancle the thread
+                }
+            }
         }
         private void Simulator_bgw_DoWork(object? sender, DoWorkEventArgs e)
         {
-            // int presentage = 0;
             while (orderForLists.Any(x => (OrderStatus)x.Status != OrderStatus.delivered))
             {
                 Thread.Sleep(2000);
@@ -105,9 +94,9 @@ namespace PL
                 }
                 else  //we want to start changing stuff
                 {
-                   
-                    int? id = bl?.Order.LastTouched();
-                    if (id == null)
+
+                    int? id = bl?.Order.LastTouched();//gets the order that has been edited the last
+                    if (id == null)//if they have all been deliverd we wait to see if another came in
                     {
                         Thread.Sleep(1000);
                         continue;
@@ -120,18 +109,19 @@ namespace PL
                     {
                         try
                         {
-                            time = time.AddHours(5);
-                            if(time.Day - order.OrderDate?.Day >= 1)//it take 1 day to ship
-                                order = bl?.Order.UpdateShippingDate(order.ID, time);
+                            time = time.AddHours(5);//adding time
+                            if (time.Day - order.OrderDate?.Day >= 1)//it take 1 day to ship out
+                                order = bl?.Order.UpdateShippingDate(order.ID, time);//updateing to the background time
+                                                                                     //not to now because we want to see real changes in the date and not just all today
                             else
                                 continue;
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        int random = rand.Next(3, 10);
-                        Thread.Sleep(random *1000);
+                        int random = rand.Next(3, 10);//generting time to sllep
+                        Thread.Sleep(random * 1000);
                         if (simulator_bgw.WorkerReportsProgress == true)
-                            simulator_bgw.ReportProgress(order.ID);//we are sending the status and presentage
-                                                                   // presentage = rand.Next(25, 50);
+                            simulator_bgw.ReportProgress(order.ID);//we are sending the id we just changed
+                                                                  
                     }
                     else if (order?.Status == BO.OrderStatus.shipped)//shipped
                     {
@@ -140,69 +130,40 @@ namespace PL
                         if (time.Day - order.ShipDate?.Day >= 3)//it takes 3 days to deliver
                             order = bl?.Order.UpdateDeliveryDate(order.ID, time);
                         else continue;
-                        //presentage = 100;
+                        
                         int random = rand.Next(3, 10);
                         Thread.Sleep(random * 1000);
                         if (simulator_bgw.WorkerReportsProgress == true)
-                            simulator_bgw.ReportProgress(order.ID);//we are sending the status and presentage
-                                                                   //  }
-                                                                   //else //this way it stops at some point
-                                                                   //  {
-                                                                   // order = bl?.Order.GetOrderInfo(allOrders[0].FirstOrDefault().ID);//the order we want to update now
-                                                                   //order = bl.Order.UpdateShippingDate(order.ID);//updating the id
-                                                                   // presentage = rand.Next(50, 85);
-                                                                   // order.wasChanged = true;//checks if it was already updated
-                                                                   //    continue;
-
+                            simulator_bgw.ReportProgress(order.ID);//we are sending the id
                     }
-
-                    //if (allOrders[0].Key == (BO.OrderStatus)OrderStatus.ordered)
-                    //{
-                    //    order = bl?.Order.GetOrderInfo(allOrders[0].FirstOrDefault().ID);//the order we want to update now
-                    //    try { order = bl?.Order.UpdateShippingDate(order.ID); }//updating the id}
-                    //       catch (Exception ex) { MessageBox.Show(ex.Message); }
-                    //    presentage = rand.Next(25, 50);
-                    //}
-                    //else if (allOrders[0].Key == (BO.OrderStatus)OrderStatus.shipped)
-                    //{
-                    //    if (order.wasChanged)//we already updated it once
-                    //    {
-                    //        order = bl?.Order.GetOrderInfo(allOrders[0].FirstOrDefault().ID);//the order we want to update now
-                    //        order.Status = BO.OrderStatus.delivered;
-                    //        presentage = 100;
-                    //    }
-                    //    else //this way it stops at some point
-                    //    {
-                    //        order = bl?.Order.GetOrderInfo(allOrders[0].FirstOrDefault().ID);//the order we want to update now
-                    //                                                                         //order = bl.Order.UpdateShippingDate(order.ID);//updating the id
-                    //        presentage = rand.Next(50, 85);
-                    //        order.wasChanged = true;//checks if it was already updated
-                    //    }
                 }
 
             }
         }
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_2(object sender, RoutedEventArgs e)//start sim
         {
             Console.Beep();
             if (simulator_bgw.IsBusy != true) //if its not in the middle of working
             {
-               // MessageBox.Show("starting");
                 simulator_bgw.RunWorkerAsync();
+            }
+            else
+            {
+                MessageBox.Show("You Cant Run Twice");
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)// it supports canclation
         {
             Console.Beep();
-            if (simulator_bgw.WorkerSupportsCancellation == true)//if it supports canclation
+            if (simulator_bgw.WorkerSupportsCancellation == true)
             {
                 simulator_bgw.CancelAsync();// Cancel the asynchronous operation- cancle the thread
             }
-            
+
         }
 
-        private void infoButton_Click(object sender, RoutedEventArgs e)
+        private void infoButton_Click(object sender, RoutedEventArgs e)//button that displays tracking info 
         {
             OrderForList orderFor = (OrderForList)Orders_DataGrid.SelectedItem;
             if (orderFor != null)
@@ -217,11 +178,10 @@ namespace PL
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            BO.OrderStatus Status = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), value.ToString()!);// ; (Category)Enum.Parse(typeof(Category), Category)
-
+            BO.OrderStatus Status = (BO.OrderStatus)Enum.Parse(typeof(BO.OrderStatus), value.ToString()!);
             if (Status == BO.OrderStatus.ordered)
             {
-                return Brushes.DeepSkyBlue; 
+                return Brushes.DeepSkyBlue;
             }
             if (Status == BO.OrderStatus.shipped)
             {
@@ -229,7 +189,7 @@ namespace PL
             }
             else
             {
-                return Brushes.DeepPink; 
+                return Brushes.DeepPink;
             }
 
         }
@@ -240,75 +200,61 @@ namespace PL
 
     }
 }
-public class OrderPl : INotifyPropertyChanged
-{
-    public string CustomerName { get; set; }
-    public int ID { get; set; }
-    public string CustomerEmail { get; set; }
-    public string CustomerAddress { get; set; }
-    public DateTime? OrderDate { get; set; }
-    public DateTime? ShipDate { get; set; }
-    public DateTime? DeliveryDate { get; set; }
-    public double TotalPrice { get; set; }
-    public List<BO.OrderItem> Items { get; set; }
-    public bool wasChanged { get; set; }
-    private OrderStatus _status;
-    public OrderStatus Status
-    {
-        get { return _status; }
-        set
-        {
-            _status = value;
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs("Status"));
-            }
-        }
-    }
-    public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+//public class OrderPl : INotifyPropertyChanged
+//{
+//    public string CustomerName { get; set; }
+//    public int ID { get; set; }
+//    public string CustomerEmail { get; set; }
+//    public string CustomerAddress { get; set; }
+//    public DateTime? OrderDate { get; set; }
+//    public DateTime? ShipDate { get; set; }
+//    public DateTime? DeliveryDate { get; set; }
+//    public double TotalPrice { get; set; }
+//    public List<BO.OrderItem> Items { get; set; }
 
-    //    public override string ToString() => $@"
-    //Order ID: {ID}
-    //Customers name: {CustomerName}
-    //Customers email:{CustomerEmail}
-    //Customers address:{CustomerAddress}
-    //Order date: {OrderDate}
-    //Shipping date: {ShipDate}
-    //Delivery date:{DeliveryDate}
-    //Stasus:{Status}
-    //Items:{string.Join('\n', Items)}
-    //Total price:{TotalPrice}
+//    private OrderStatus _status;
+//    public OrderStatus Status
+//    {
+//        get { return _status; }
+//        set
+//        {
+//            _status = value;
+//            if (PropertyChanged != null)
+//            {
+//                PropertyChanged(this, new PropertyChangedEventArgs("Status"));
+//            }
+//        }
+//    }
+//    public event PropertyChangedEventHandler PropertyChanged;
+//    protected void OnPropertyChanged(string propertyName)
+//    {
+//        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+//    }
+//}
+//public class OrderForListPl : INotifyPropertyChanged
+//{
+//    public int ID { get; set; }
+//    public string CustomerName { get; set; }
 
-    //";
-}
-public class OrderForListPl : INotifyPropertyChanged
-{
-    public int ID { get; set; }
-    public string CustomerName { get; set; }
+//    public int AmountOfItems { get; set; }
+//    public double TotalPrice { get; set; }
 
-    public int AmountOfItems { get; set; }
-    public double TotalPrice { get; set; }
-
-    private OrderStatus _status;
-    public OrderStatus Status
-    {
-        get { return _status; }
-        set
-        {
-            _status = value;
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs("Status"));
-            }
-        }
-    }
-    public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-}
+//    private OrderStatus _status;
+//    public OrderStatus Status
+//    {
+//        get { return _status; }
+//        set
+//        {
+//            _status = value;
+//            if (PropertyChanged != null)
+//            {
+//                PropertyChanged(this, new PropertyChangedEventArgs("Status"));
+//            }
+//        }
+//    }
+//    public event PropertyChangedEventHandler PropertyChanged;
+//    protected void OnPropertyChanged(string propertyName)
+//    {
+//        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+//    }
+//}
