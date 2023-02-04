@@ -10,8 +10,7 @@
 	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	  <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-	  <ApplicationIcon>favicon (1).ico</ApplicationIcon>
-	  <!--<ApplicationIcon>favicon (1).ico</ApplicationIcon>-->
+	  
 
   </PropertyGroup>
 
@@ -26,7 +25,7 @@
 
   <ItemGroup>
     <Content Include="BackGround_All.png" />
-    <Content Include="favicon (1).ico" />
+    <Resource Include="favicon (1).ico" />
     <Resource Include="Untitled Design (1).png" />
   </ItemGroup>
 
