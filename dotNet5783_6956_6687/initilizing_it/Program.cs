@@ -10,6 +10,7 @@ public class hi
 {
     public class program
     {
+        #region initializes details
         internal static readonly Random rand = new Random();//to generat random 
         internal static List<Order?> Orderlist = new List<Order?>();
         internal static List<OrderItem?> OrderItemList = new List<OrderItem?>();
@@ -47,13 +48,6 @@ public class hi
             Productlist.Add(p1);
         }
 
-        /// <summary>
-        /// default constructor
-        /// </summary>
-        static program()
-        {
-            s_Initialize();
-        }
         /// <summary>
         /// adds products to the lists
         /// </summary>
@@ -125,6 +119,19 @@ public class hi
 
             }
         }
+
+        #endregion
+
+
+
+        /// <summary>
+        /// default constructor
+        /// </summary>
+        static program()
+        {
+            s_Initialize();//in region
+        }
+  
         /// <summary>
         /// class to generat IDs
         /// </summary>
