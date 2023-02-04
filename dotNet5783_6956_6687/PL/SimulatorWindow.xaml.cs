@@ -117,7 +117,7 @@ namespace PL
                                 continue;
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        int random = rand.Next(3, 10);//generting time to sllep
+                        int random = rand.Next(3, 7);//generting time to sllep
                         Thread.Sleep(random * 1000);
                         if (simulator_bgw.WorkerReportsProgress == true)
                             simulator_bgw.ReportProgress(order.ID);//we are sending the id we just changed
@@ -131,7 +131,7 @@ namespace PL
                             order = bl?.Order.UpdateDeliveryDate(order.ID, time);
                         else continue;
                         
-                        int random = rand.Next(3, 10);
+                        int random = rand.Next(3, 7);
                         Thread.Sleep(random * 1000);
                         if (simulator_bgw.WorkerReportsProgress == true)
                             simulator_bgw.ReportProgress(order.ID);//we are sending the id
