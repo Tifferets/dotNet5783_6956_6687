@@ -13,8 +13,6 @@ Bounes that we did:
 8. Style -App.xaml (1)
 9. window icon (1)
 
-
-
 Bounes that we did not asked for:
 1. adds a beep when pressed start/stop in simulater
 2. Control templat - App.xaml
